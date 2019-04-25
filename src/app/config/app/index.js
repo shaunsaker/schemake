@@ -1,9 +1,9 @@
 // TODO: Customise all of this
 const app = {
-  name: 'NextJS Simple Boilerplate',
-  url: 'https://github.com/AuxStudio/nextjs-simple-boilerplate',
+  name: 'Schemake',
+  url: 'https://schemake.com',
   contactDetails: {
-    email: 'sakershaun@gmail.com',
+    email: 'shaun@schemake.com',
     tel: '+27833771130',
     address: 'Cape Town',
   },
