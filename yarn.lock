@@ -1208,7 +1208,7 @@
     pkg-up "^2.0.0"
     through2 "^2.0.3"
 
-"@google-cloud/firestore@github:googleapis/nodejs-firestore":
+"@google-cloud/firestore@googleapis/nodejs-firestore":
   version "1.2.0"
   resolved "https://codeload.github.com/googleapis/nodejs-firestore/tar.gz/89afaeb81441fb558c10eb62b2c585f8b645e3e9"
   dependencies:
