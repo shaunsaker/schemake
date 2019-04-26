@@ -1,6 +1,6 @@
 import css from 'styled-jsx/css';
 
-import { rhythm, sizes } from '../../static/styles/styleConstants';
+import { colors, rhythm, sizes } from '../../static/styles/styleConstants';
 
 const styles = css`
   .container {
@@ -8,14 +8,15 @@ const styles = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: ${colors.secondary};
     padding: ${rhythm.vt * 2}px ${rhythm.hz}px;
   }
 
   .content-container {
     max-width: ${sizes.maxContentWidth}px;
+    width: 100%;
     display: flex;
-    align-items: center;
+    justify-content: space-between;
   }
 `;
 

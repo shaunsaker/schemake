@@ -1,24 +1,14 @@
 import React from 'react';
 
-import styles from './styles';
+import links from './links';
 
-import Typography from '../Typography';
+import FooterBar from './FooterBar';
 
-const FooterBar = () => {
-  return (
-    <div className="container">
-      <div className="content-container">
-        <Typography type="small" color="white">
-          Footer
-        </Typography>
-      </div>
-
-      <style jsx>{styles}</style>
-    </div>
-  );
+const FooterBarContainer = () => {
+  return <FooterBar links={links} />;
 };
 
-FooterBar.propTypes = {};
-FooterBar.defaultProps = {};
+FooterBarContainer.propTypes = {};
+FooterBarContainer.defaultProps = {};
 
-export default FooterBar;
+export default FooterBarContainer;
