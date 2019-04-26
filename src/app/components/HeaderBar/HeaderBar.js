@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Toolbar as ToolBar } from '@material-ui/core';
+import { AppBar, Toolbar as ToolBar, ButtonBase } from '@material-ui/core';
 import Link from 'next/link';
 
 import muiStyles from './muiStyles';
@@ -32,13 +32,13 @@ const HeaderBar = ({ text, avatar }) => {
     );
 
     avatarComponent = (
-      <button type="button" onClick={avatar.handleClick} className="avatar-button">
-        <Avatar id="avatar" text={avatar.text} />
+      <ButtonBase onClick={avatar.handleClick}>
+        <Avatar id="avatar">{avatar.text}</Avatar>
 
         {menuComponent}
 
         <style jsx>{styles}</style>
-      </button>
+      </ButtonBase>
     );
   }
 

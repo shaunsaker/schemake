@@ -17,13 +17,6 @@ const styles = css`
     display: flex;
     justify-content: flex-end;
   }
-
-  .avatar-button {
-    cursor: pointer;
-    background: none;
-    border: none;
-    outline: none;
-  }
 `;
 
 export default styles;

@@ -3,4 +3,4 @@ import { storiesOf } from '@storybook/react';
 
 import Avatar from '..';
 
-storiesOf('Components|Avatar', module).add('default', () => <Avatar text="SS" />);
+storiesOf('Components|Avatar', module).add('default', () => <Avatar>SS</Avatar>);

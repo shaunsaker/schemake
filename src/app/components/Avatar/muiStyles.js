@@ -2,7 +2,7 @@ import { colors } from '../../static/styles/styleConstants';
 
 const muiStyles = {
   container: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.accent,
   },
 };
 
