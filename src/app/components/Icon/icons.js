@@ -1,7 +1,8 @@
 import React from 'react';
-import { MoreVert } from '@material-ui/icons';
+import { Add, MoreVert } from '@material-ui/icons';
 
 const icons = {
+  add: (props) => <Add {...props} />,
   menu: (props) => <MoreVert {...props} />,
 };
 
