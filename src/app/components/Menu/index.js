@@ -4,10 +4,12 @@ import { Menu, MenuItem } from '@material-ui/core';
 
 import styles from './styles';
 
-const MenuComponent = ({ items, isOpen, handleClick, handleClose }) => {
+const MenuComponent = ({ items, anchorElID, isOpen, handleClick, handleClose }) => {
+  const anchorEl = document.getElementById(anchorElID);
+
   return (
     <div>
-      <Menu open={isOpen} onClose={handleClose}>
+      <Menu anchorEl={anchorEl} open={isOpen} onClose={handleClose}>
         {items.map((item) => {
           return (
             <MenuItem key={item.name} disabled={item.disabled} onClick={() => handleClick(item)}>
@@ -29,6 +31,7 @@ MenuComponent.propTypes = {
       disabled: PropTypes.bool,
     }),
   ),
+  anchorElID: PropTypes.string,
   isOpen: PropTypes.bool,
   handleClick: PropTypes.func,
   handleClose: PropTypes.bool,

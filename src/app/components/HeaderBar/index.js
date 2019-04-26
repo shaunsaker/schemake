@@ -1,56 +1,87 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Toolbar as ToolBar } from '@material-ui/core';
-import Link from 'next/link';
+import { connect } from 'react-redux';
 
-import muiStyles from './muiStyles';
-import styles from './styles';
+import avatarMenuItems from './avatarMenuItems';
 
-import Typography from '../Typography';
-import Avatar from '../Avatar';
+import HeaderBar from './HeaderBar';
 
-const HeaderBar = ({ text, avatar }) => {
-  const textComponent = text && (
-    <Typography type="paragraph" color="white" bold>
-      {text}
+export class HeaderBarContainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-      <style jsx>{styles}</style>
-    </Typography>
-  );
-  const avatarComponent = avatar && (
-    <button type="button" onClick={avatar.handleClick} className="avatar-button">
-      <Avatar text={avatar.text} />
+    this.onAvatarClick = this.onAvatarClick.bind(this);
+    this.onAvatarMenuItemClick = this.onAvatarMenuItemClick.bind(this);
+    this.onAvatarMenuClose = this.onAvatarMenuClose.bind(this);
+    this.setIsMenuOpen = this.setIsMenuOpen.bind(this);
 
-      <style jsx>{styles}</style>
-    </button>
-  );
+    this.state = {
+      isMenuOpen: false,
+    };
+  }
 
-  return (
-    <AppBar position="fixed" style={muiStyles.wrapper}>
-      <ToolBar style={muiStyles.container}>
-        <div className="logo-image-container">
-          <Link href="/">
-            <img src="/static/images/logo.png" alt="Pep Logo" className="logo-image" />
-          </Link>
-        </div>
-
-        {textComponent}
-
-        <div className="avatar-container">{avatarComponent}</div>
-      </ToolBar>
-
-      <style jsx>{styles}</style>
-    </AppBar>
-  );
-};
-
-HeaderBar.propTypes = {
-  text: PropTypes.string,
-  avatar: PropTypes.shape({
+  static propTypes = {
+    /*
+     * Parent
+     */
     text: PropTypes.string,
-    handleClick: PropTypes.func,
-  }),
-};
-HeaderBar.defaultProps = {};
 
-export default HeaderBar;
+    /*
+     * Connect
+     */
+    avatarText: PropTypes.string,
+  };
+
+  static defaultProps = {};
+
+  onAvatarClick() {
+    console.log('clicked');
+  }
+
+  onAvatarMenuItemClick(item) {
+    console.log('clicked', item);
+  }
+
+  onAvatarMenuClose() {
+    console.log('clicked');
+  }
+
+  setIsMenuOpen(isMenuOpen) {
+    this.setState({
+      isMenuOpen,
+    });
+  }
+
+  render() {
+    const { isMenuOpen } = this.state;
+    const { text, avatarText } = this.props;
+    const avatar = avatarText && {
+      text: avatarText,
+      menu: {
+        items: avatarMenuItems,
+        isOpen: isMenuOpen,
+        handleClick: this.onAvatarMenuItemClick,
+        handleClose: this.onAvatarMenuClose,
+      },
+      handleClick: this.onAvatarClick,
+    };
+
+    return <HeaderBar text={text} avatar={avatar} />;
+  }
+}
+
+const mapStateToProps = (state) => {
+  const { user } = state;
+
+  /*
+   * Show the user's avatar if they are logged in
+   */
+  const shouldShowAvatar = user.uid && !user.isAnonymous;
+  const avatarText = shouldShowAvatar && user.email.slice(0, 2);
+
+  return {
+    avatarText,
+  };
+};
+
+export default connect(mapStateToProps)(HeaderBarContainer);
