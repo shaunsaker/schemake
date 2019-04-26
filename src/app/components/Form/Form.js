@@ -12,11 +12,27 @@ const Form = ({
   children,
   submitButtonText,
   disabled,
+  secondaryButton,
+  center,
   handleChange,
   handleSubmit,
 }) => {
+  const secondaryButtonComponent = secondaryButton && (
+    <div className="secondary-button-container">
+      <PrimaryButton
+        secondary
+        disabled={secondaryButton.disabled}
+        handleClick={secondaryButton.handleClick}
+      >
+        {secondaryButton.text}
+      </PrimaryButton>
+
+      <style jsx>{styles}</style>
+    </div>
+  );
+
   return (
-    <form onSubmit={handleSubmit} className="container">
+    <form onSubmit={handleSubmit} className={`container ${center ? 'center' : ''}`}>
       {fields.map((field) => {
         const {
           name,
@@ -71,9 +87,13 @@ const Form = ({
 
       {footerComponent}
 
-      <PrimaryButton type="submit" disabled={disabled}>
-        {submitButtonText}
-      </PrimaryButton>
+      <div className="buttons-container">
+        <PrimaryButton type="submit" disabled={disabled}>
+          {submitButtonText}
+        </PrimaryButton>
+
+        {secondaryButtonComponent}
+      </div>
 
       {children}
 
@@ -120,6 +140,12 @@ Form.propTypes = {
   children: PropTypes.node,
   submitButtonText: PropTypes.string,
   disabled: PropTypes.bool,
+  secondaryButton: PropTypes.shape({
+    text: PropTypes.string,
+    disabled: PropTypes.bool,
+    handleClick: PropTypes.func,
+  }),
+  center: PropTypes.bool,
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
 };

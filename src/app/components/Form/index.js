@@ -33,6 +33,8 @@ export class FormContainer extends React.Component {
     children: PropTypes.node,
     submitButtonText: PropTypes.string,
     disabled: PropTypes.bool,
+    secondaryButton: PropTypes.shape({}),
+    center: PropTypes.bool,
     handleChange: PropTypes.func,
     handleSubmit: PropTypes.func,
   };
@@ -141,7 +143,15 @@ export class FormContainer extends React.Component {
 
   render() {
     const { fieldIndicesWithErrors, values } = this.state;
-    const { fields, footerComponent, children, submitButtonText, disabled } = this.props;
+    const {
+      fields,
+      footerComponent,
+      children,
+      submitButtonText,
+      disabled,
+      secondaryButton,
+      center,
+    } = this.props;
     let newFields = cloneObject(fields); // clone the object so that we don't mutate fields (will cause Form not to update)
 
     /*
@@ -175,12 +185,15 @@ export class FormContainer extends React.Component {
       <Form
         fields={newFields}
         footerComponent={footerComponent}
-        children={children}
         submitButtonText={submitButtonText}
         disabled={disabled}
+        secondaryButton={secondaryButton}
+        center={center}
         handleChange={this.onChange}
         handleSubmit={this.onSubmit}
-      />
+      >
+        {children}
+      </Form>
     );
   }
 }

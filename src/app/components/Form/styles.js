@@ -10,12 +10,15 @@ const styles = css`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
     max-width: ${sizes.maxContentWidth}px;
     margin: 0 auto;
     padding: ${rhythm.vt * 2}px ${rhythm.hz}px;
     background-color: ${colors.lightGrey};
     border-radius: ${borderRadius}px;
+  }
+
+  .center {
+    align-items: center;
   }
 
   .input-container {
@@ -27,6 +30,14 @@ const styles = css`
 
   .footer-text-container {
     margin-bottom: ${rhythm.vt}px;
+  }
+
+  .buttons-container {
+    display: flex;
+  }
+
+  .secondary-button-container {
+    margin-left: ${rhythm.hz / 2}px;
   }
 `;
 
