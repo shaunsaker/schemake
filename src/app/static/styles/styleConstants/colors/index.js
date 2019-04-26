@@ -1,12 +1,12 @@
-const primaryColor = 'rgba(38, 50, 56, 1.0)';
+const secondaryColor = 'rgba(38, 50, 56, 1.0)';
 
 const colors = {
-  primary: primaryColor,
-  secondary: '#FF5722',
+  primary: '#FF5722',
+  secondary: secondaryColor,
   accent: '#FFB300',
-  primaryText: primaryColor,
+  primaryText: secondaryColor,
   secondaryText: 'rgba(38, 50, 56, 0.8)',
-  lightGrey: '#CAE5FF',
+  lightGrey: 'rgba(38, 50, 56, 0.033)',
   transBlack: 'rgba(0, 0, 0, 0.67)',
   transWhite: 'rgba(255, 255, 255, 0.67)',
   green: '#4caf50',

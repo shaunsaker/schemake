@@ -2,7 +2,7 @@ import { colors } from '../../static/styles/styleConstants';
 
 const styles = {
   wrapper: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.secondary,
     zIndex: 1,
   },
   container: {

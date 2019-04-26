@@ -9,6 +9,7 @@ import PrimaryButton from '../PrimaryButton';
 const Form = ({
   fields,
   footerComponent,
+  children,
   submitButtonText,
   disabled,
   handleChange,
@@ -74,6 +75,8 @@ const Form = ({
         {submitButtonText}
       </PrimaryButton>
 
+      {children}
+
       <style jsx>{styles}</style>
     </form>
   );
@@ -114,6 +117,7 @@ Form.propTypes = {
     }),
   ).isRequired,
   footerComponent: PropTypes.node,
+  children: PropTypes.node,
   submitButtonText: PropTypes.string,
   disabled: PropTypes.bool,
   handleChange: PropTypes.func,

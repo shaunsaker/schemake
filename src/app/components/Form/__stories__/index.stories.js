@@ -16,5 +16,14 @@ storiesOf('Components|Form', module).add('default', () => (
       </div>
     }
     submitButtonText="LOG IN"
-  />
+  >
+    <div style={styles.signUpTextContainer}>
+      <Typography type="paragraph" style={styles.signUpText}>
+        Don&apos;t have an account yet?
+        <Typography type="link" style={styles.signUpLinkText}>
+          Sign up
+        </Typography>
+      </Typography>
+    </div>
+  </Form>
 ));

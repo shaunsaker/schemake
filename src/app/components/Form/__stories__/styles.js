@@ -2,8 +2,16 @@ import { rhythm } from '../../../static/styles/styleConstants';
 
 const styles = {
   forgotPasswordTextContainer: {
-    alignSelf: 'flex-start',
     marginBottom: rhythm.vt,
+  },
+  signUpTextContainer: {
+    marginTop: rhythm.vt,
+  },
+  signUpText: {
+    display: 'flex',
+  },
+  signUpLinkText: {
+    marginLeft: rhythm.vt / 4,
   },
 };
 

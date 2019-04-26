@@ -6,7 +6,7 @@ const styles = {
   },
 
   background: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.secondary,
   },
 };
 
