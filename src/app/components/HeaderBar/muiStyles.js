@@ -1,11 +1,13 @@
+import { colors } from '../../static/styles/styleConstants';
+
 const styles = {
   wrapper: {
-    backgroundColor: '#FFF',
+    backgroundColor: colors.primary,
     zIndex: 1,
   },
   container: {
-    justifyContent: 'center',
     minHeight: 64,
+    justifyContent: 'space-between',
   },
 };
 

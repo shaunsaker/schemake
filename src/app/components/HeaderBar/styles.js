@@ -1,18 +1,28 @@
 import css from 'styled-jsx/css';
 
 const styles = css`
-  .cancel-button-container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
+  .logo-image-container {
+    flex: 1;
     display: flex;
     align-items: center;
   }
 
   .logo-image {
-    width: 64px;
+    height: 48px;
     cursor: pointer;
+  }
+
+  .avatar-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .avatar-button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
   }
 `;
 
