@@ -53,6 +53,7 @@ const Form = ({
                 max,
                 pattern,
               }}
+              variant="outlined"
             >
               {options &&
                 options.map((option) => {
