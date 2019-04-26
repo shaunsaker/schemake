@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import Headerbar from '..';
 
-const avatar = { src: '/static/images/test-avatar.png', alt: 'Avatar', handleClick: null };
+const avatar = { text: 'SS', handleClick: null };
 
 storiesOf('Components|Headerbar', module)
   .add('default', () => <Headerbar text="PROJECT NAME" avatar={avatar} />)

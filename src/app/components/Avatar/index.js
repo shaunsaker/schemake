@@ -4,13 +4,12 @@ import { Avatar } from '@material-ui/core';
 
 import muiStyles from './muiStyles';
 
-const AvatarComponent = ({ src, alt }) => {
-  return <Avatar src={src} alt={alt} style={muiStyles.image} />;
+const AvatarComponent = ({ text }) => {
+  return <Avatar style={muiStyles.container}>{text}</Avatar>;
 };
 
 AvatarComponent.propTypes = {
-  src: PropTypes.string,
-  alt: PropTypes.string,
+  text: PropTypes.string,
 };
 AvatarComponent.defaultProps = {};
 

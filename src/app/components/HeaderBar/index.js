@@ -19,7 +19,7 @@ const HeaderBar = ({ text, avatar }) => {
   );
   const avatarComponent = avatar && (
     <button type="button" onClick={avatar.handleClick} className="avatar-button">
-      <Avatar src={avatar.src} alt={avatar.alt} />
+      <Avatar text={avatar.text} />
 
       <style jsx>{styles}</style>
     </button>
@@ -47,8 +47,7 @@ const HeaderBar = ({ text, avatar }) => {
 HeaderBar.propTypes = {
   text: PropTypes.string,
   avatar: PropTypes.shape({
-    src: PropTypes.string,
-    alt: PropTypes.string,
+    text: PropTypes.string,
     handleClick: PropTypes.func,
   }),
 };

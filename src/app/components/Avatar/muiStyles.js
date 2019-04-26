@@ -1,9 +1,8 @@
-const size = 48;
+import { colors } from '../../static/styles/styleConstants';
 
 const muiStyles = {
-  image: {
-    width: size,
-    height: size,
+  container: {
+    backgroundColor: colors.primary,
   },
 };
 
