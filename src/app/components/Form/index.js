@@ -40,7 +40,7 @@ export class FormContainer extends React.Component {
   };
 
   static defaultProps = {
-    submitButtonText: 'Submit',
+    submitButtonText: 'SUBMIT',
   };
 
   onChange(event) {

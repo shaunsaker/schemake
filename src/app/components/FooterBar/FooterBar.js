@@ -27,10 +27,12 @@ const FooterBar = ({ links }) => {
 };
 
 FooterBar.propTypes = {
-  links: PropTypes.shape({
-    name: PropTypes.string,
-    href: PropTypes.string,
-  }),
+  links: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      href: PropTypes.string,
+    }),
+  ),
 };
 FooterBar.defaultProps = {};
 

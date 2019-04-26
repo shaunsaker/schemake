@@ -149,8 +149,6 @@ Form.propTypes = {
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
 };
-Form.defaultProps = {
-  submitButtonText: 'Submit',
-};
+Form.defaultProps = {};
 
 export default Form;
