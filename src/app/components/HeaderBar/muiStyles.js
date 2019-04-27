@@ -8,6 +8,7 @@ const styles = {
   container: {
     minHeight: 64,
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
   },
 };
 

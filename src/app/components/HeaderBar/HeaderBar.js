@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Toolbar as ToolBar, ButtonBase } from '@material-ui/core';
+import { AppBar, Toolbar as ToolBar } from '@material-ui/core';
 import Link from 'next/link';
 
 import muiStyles from './muiStyles';
 import styles from './styles';
+import { colors } from '../../static/styles/styleConstants';
 
 import Typography from '../Typography';
-import Avatar from '../Avatar';
+import IconButton from '../IconButton';
 import Menu from '../Menu';
 
-const HeaderBar = ({ text, avatar }) => {
+const HeaderBar = ({ text, actions }) => {
   const textComponent = text && (
     <Typography type="paragraph" color="white" bold>
       {text}
@@ -18,29 +19,6 @@ const HeaderBar = ({ text, avatar }) => {
       <style jsx>{styles}</style>
     </Typography>
   );
-  let avatarComponent;
-
-  if (avatar) {
-    const menuComponent = avatar.menu && (
-      <Menu
-        items={avatar.menu.items}
-        anchorElID="avatar"
-        isOpen={avatar.menu.isMenuOpen}
-        handleClick={avatar.menu.handleClick}
-        handleClose={avatar.menu.handleClose}
-      />
-    );
-
-    avatarComponent = (
-      <ButtonBase onClick={avatar.handleClick}>
-        <Avatar id="avatar">{avatar.text}</Avatar>
-
-        {menuComponent}
-
-        <style jsx>{styles}</style>
-      </ButtonBase>
-    );
-  }
 
   return (
     <AppBar position="fixed" style={muiStyles.wrapper}>
@@ -53,7 +31,37 @@ const HeaderBar = ({ text, avatar }) => {
 
         {textComponent}
 
-        <div className="avatar-container">{avatarComponent}</div>
+        <div className="actions-wrapper">
+          <div className="actions-container">
+            {actions &&
+              actions.map((action) => {
+                const id = `icon-button-${action.iconName}`;
+                const menuComponent = action.menu && (
+                  <Menu
+                    items={action.menu.items}
+                    anchorElID={id}
+                    isOpen={action.menu.isOpen}
+                    handleClick={action.menu.handleClick}
+                    handleClose={action.menu.handleClose}
+                  />
+                );
+
+                return (
+                  <div key={id} className="action-container">
+                    <IconButton
+                      id={id}
+                      iconName={action.iconName}
+                      tooltip={action.tooltip}
+                      handleClick={action.handleClick}
+                      color={colors.transWhite}
+                    />
+
+                    {menuComponent}
+                  </div>
+                );
+              })}
+          </div>
+        </div>
       </ToolBar>
 
       <style jsx>{styles}</style>
@@ -63,16 +71,19 @@ const HeaderBar = ({ text, avatar }) => {
 
 HeaderBar.propTypes = {
   text: PropTypes.string,
-  avatar: PropTypes.shape({
-    text: PropTypes.string,
-    handleClick: PropTypes.func,
-    menu: PropTypes.shape({
-      items: PropTypes.arrayOf(PropTypes.shape({})),
-      isOpen: PropTypes.bool,
+  actions: PropTypes.arrayOf(
+    PropTypes.shape({
+      iconName: PropTypes.string,
+      tooltip: PropTypes.string,
       handleClick: PropTypes.func,
-      handleClose: PropTypes.func,
+      menu: PropTypes.shape({
+        items: PropTypes.arrayOf(PropTypes.shape({})),
+        isOpen: PropTypes.bool.isRequired,
+        handleClick: PropTypes.func,
+        handleClose: PropTypes.func,
+      }),
     }),
-  }),
+  ),
 };
 HeaderBar.defaultProps = {};
 

@@ -4,10 +4,10 @@ import { IconButton, Tooltip } from '@material-ui/core';
 
 import Icon from '../Icon';
 
-const IconButtonComponent = ({ iconName, tooltip, color }) => {
+const IconButtonComponent = ({ iconName, tooltip, color, handleClick }) => {
   return (
     <Tooltip title={tooltip}>
-      <IconButton style={{ color }}>
+      <IconButton onClick={handleClick} style={{ color }}>
         <Icon name={iconName} />
       </IconButton>
     </Tooltip>
@@ -18,6 +18,7 @@ IconButtonComponent.propTypes = {
   iconName: PropTypes.string,
   tooltip: PropTypes.string.isRequired,
   color: PropTypes.string,
+  handleClick: PropTypes.func,
 };
 IconButtonComponent.defaultProps = {};
 

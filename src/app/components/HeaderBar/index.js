@@ -29,7 +29,7 @@ export class HeaderBarContainer extends React.Component {
     /*
      * Connect
      */
-    avatarText: PropTypes.string,
+    shouldShowAvatar: PropTypes.bool,
   };
 
   static defaultProps = {};
@@ -54,19 +54,10 @@ export class HeaderBarContainer extends React.Component {
 
   render() {
     const { isMenuOpen } = this.state;
-    const { text, avatarText } = this.props;
-    const avatar = avatarText && {
-      text: avatarText,
-      menu: {
-        items: avatarMenuItems,
-        isOpen: isMenuOpen,
-        handleClick: this.onAvatarMenuItemClick,
-        handleClose: this.onAvatarMenuClose,
-      },
-      handleClick: this.onAvatarClick,
-    };
+    const { text, shouldShowAvatar } = this.props;
+    // TODO: Actions
 
-    return <HeaderBar text={text} avatar={avatar} />;
+    return <HeaderBar text={text} />;
   }
 }
 
@@ -77,10 +68,9 @@ const mapStateToProps = (state) => {
    * Show the user's avatar if they are logged in
    */
   const shouldShowAvatar = user.uid && !user.isAnonymous;
-  const avatarText = shouldShowAvatar && user.email.slice(0, 2);
 
   return {
-    avatarText,
+    shouldShowAvatar,
   };
 };
 
