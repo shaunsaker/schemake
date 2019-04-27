@@ -9,7 +9,7 @@ import Typography from '../Typography';
 import Icon from '../Icon';
 import Menu from '../Menu';
 
-const ListItem = ({ avatarText, title, description, menu, handleMenuIconClick }) => {
+const DashboardListItem = ({ avatarText, title, description, menu, handleMenuIconClick }) => {
   const menuAnchorElID = 'menu-button';
   const menuComponent = menu && <Menu {...menu} anchorElID="menu-button" />;
 
@@ -42,13 +42,13 @@ const ListItem = ({ avatarText, title, description, menu, handleMenuIconClick })
   );
 };
 
-ListItem.propTypes = {
+DashboardListItem.propTypes = {
   avatarText: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
   menu: PropTypes.shape({}),
   handleMenuIconClick: PropTypes.func,
 };
-ListItem.defaultProps = {};
+DashboardListItem.defaultProps = {};
 
-export default ListItem;
+export default DashboardListItem;
