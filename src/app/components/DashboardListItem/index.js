@@ -4,7 +4,7 @@ import { Card, ButtonBase } from '@material-ui/core';
 
 import styles from './styles';
 
-import Avatar from '../Avatar';
+import TextAvatar from '../TextAvatar';
 import Typography from '../Typography';
 import Icon from '../Icon';
 import Menu from '../Menu';
@@ -17,7 +17,7 @@ const DashboardListItem = ({ avatarText, title, description, menu, handleMenuIco
     <Card>
       <div className="container">
         <div className="avatar-container">
-          <Avatar>{avatarText}</Avatar>
+          <TextAvatar>{avatarText}</TextAvatar>
         </div>
 
         <div className="text-container">
