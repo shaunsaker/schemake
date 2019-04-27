@@ -1,13 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import styles from './styles';
 
+import Layout from '../../../components/Layout';
+
 const Blank = () => {
   return (
-    <div>
+    <Layout>
+      <div className="container">
+        <div />
+      </div>
+
       <style jsx>{styles}</style>
-    </div>
+    </Layout>
   );
 };
 

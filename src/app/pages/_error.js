@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Error from '../layouts/Error';
+import Error from '../layouts/pages/Error';
 
 const Page = (props) => {
   return <Error {...props} />;

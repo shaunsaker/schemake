@@ -2,8 +2,8 @@ import React from 'react';
 
 import styles from './styles';
 
-import Layout from '../../components/Layout';
-import Typography from '../../components/Typography';
+import Layout from '../../../components/Layout';
+import Typography from '../../../components/Typography';
 
 const Error = () => {
   return (

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import styles from './styles';
 
-import Layout from '../../components/Layout';
-import Typography from '../../components/Typography';
+import Layout from '../../../components/Layout';
+import Typography from '../../../components/Typography';
 
 const Home = () => {
   return (
