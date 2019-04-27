@@ -1,6 +1,6 @@
 {
-  "name": "Schemake",
-  "short_name": "Schemake",
+  "name": "schemake",
+  "short_name": "schemake",
   "theme_color": "#ff5722",
   "background_color": "#263238",
   "display": "browser",

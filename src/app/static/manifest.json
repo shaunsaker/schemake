@@ -1,6 +1,6 @@
 {
-  "name": "Schemake",
-  "short_name": "Schemake",
+  "name": "schemake",
+  "short_name": "schemake",
   "icons": [
     {
       "src": "/static/icons/icon-72x72.png",

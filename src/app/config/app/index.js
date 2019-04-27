@@ -1,6 +1,6 @@
 // TODO: Customise all of this
 const app = {
-  name: 'Schemake',
+  name: 'schemake',
   url: 'https://schemake.com',
   contactDetails: {
     email: 'shaun@schemake.com',

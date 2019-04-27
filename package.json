@@ -1,5 +1,5 @@
 {
-  "name": "Schemake",
+  "name": "schemake",
   "version": "0.0.1",
   "description": "Create a graphical representation of your Firestore schema",
   "main": "index.js",

@@ -1,4 +1,4 @@
-# Schemake
+# schemake
 
 Create a graphical representation of your Firestore schema.
 
