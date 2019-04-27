@@ -16,14 +16,10 @@ const styles = css`
     cursor: pointer;
   }
 
-  .actions-wrapper {
+  .action-panel-container {
     flex: 1;
     display: flex;
     justify-content: flex-end;
-  }
-
-  .actions-container {
-    display: flex;
   }
 `;
 

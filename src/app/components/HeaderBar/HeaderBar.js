@@ -8,8 +8,7 @@ import styles from './styles';
 import { colors } from '../../static/styles/styleConstants';
 
 import Typography from '../Typography';
-import IconButton from '../IconButton';
-import Menu from '../Menu';
+import ActionPanel from '../ActionPanel';
 
 const HeaderBar = ({ text, actions }) => {
   const textComponent = text && (
@@ -31,36 +30,8 @@ const HeaderBar = ({ text, actions }) => {
 
         {textComponent}
 
-        <div className="actions-wrapper">
-          <div className="actions-container">
-            {actions &&
-              actions.map((action) => {
-                const id = `icon-button-${action.iconName}`;
-                const menuComponent = action.menu && (
-                  <Menu
-                    items={action.menu.items}
-                    anchorElID={id}
-                    isOpen={action.menu.isOpen}
-                    handleClick={action.menu.handleClick}
-                    handleClose={action.menu.handleClose}
-                  />
-                );
-
-                return (
-                  <div key={id} className="action-container">
-                    <IconButton
-                      id={id}
-                      iconName={action.iconName}
-                      tooltip={action.tooltip}
-                      handleClick={action.handleClick}
-                      color={colors.transWhite}
-                    />
-
-                    {menuComponent}
-                  </div>
-                );
-              })}
-          </div>
+        <div className="action-panel-container">
+          <ActionPanel actions={actions} iconColor={colors.transWhite} />
         </div>
       </ToolBar>
 
