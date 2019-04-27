@@ -4,11 +4,17 @@ import { Avatar } from '@material-ui/core';
 
 import muiStyles from './muiStyles';
 
-const TextAvatar = ({ children }) => {
-  return <Avatar style={muiStyles.container}>{children}</Avatar>;
+const TextAvatar = ({ small, children }) => {
+  const styles = {
+    ...muiStyles.container,
+    ...(small && muiStyles.small),
+  };
+
+  return <Avatar style={styles}>{children}</Avatar>;
 };
 
 TextAvatar.propTypes = {
+  small: PropTypes.bool,
   children: PropTypes.string,
 };
 TextAvatar.defaultProps = {};
