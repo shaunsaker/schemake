@@ -12,7 +12,7 @@ const styles = css`
   }
 
   .logo-image {
-    height: 48px;
+    width: 175px;
     cursor: pointer;
   }
 
