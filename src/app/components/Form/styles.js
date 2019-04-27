@@ -2,8 +2,6 @@ import css from 'styled-jsx/css';
 
 import { rhythm, sizes } from '../../static/styles/styleConstants';
 
-const borderRadius = rhythm.vt / 4;
-
 const styles = css`
   .container {
     align-self: stretch;
@@ -22,7 +20,7 @@ const styles = css`
     margin-bottom: ${rhythm.vt}px;
     width: 100%;
     background-color: white;
-    border-radius: ${borderRadius}px;
+    border-radius: ${sizes.borderRadius}px;
   }
 
   .footer-text-container {
