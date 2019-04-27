@@ -1,6 +1,6 @@
 import css from 'styled-jsx/css';
 
-import { colors, rhythm, sizes } from '../../static/styles/styleConstants';
+import { rhythm, sizes } from '../../static/styles/styleConstants';
 
 const borderRadius = rhythm.vt / 4;
 
@@ -12,9 +12,6 @@ const styles = css`
     justify-content: center;
     max-width: ${sizes.maxContentWidth}px;
     margin: 0 auto;
-    padding: ${rhythm.vt * 2}px ${rhythm.hz}px;
-    background-color: ${colors.lightGrey};
-    border-radius: ${borderRadius}px;
   }
 
   .center {
