@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import { Button } from '@material-ui/core';
 
 import styles from './styles';
 
@@ -13,9 +14,11 @@ const FooterBar = ({ links }) => {
         {links.map((link) => {
           return (
             <Link href={link.href}>
-              <Typography type="link" color="white" style={{ textDecorationLine: 'none' }}>
-                {link.name}
-              </Typography>
+              <Button style={{ textTransform: 'none' }}>
+                <Typography type="link" color="white" style={{ textDecorationLine: 'none' }}>
+                  {link.name}
+                </Typography>
+              </Button>
             </Link>
           );
         })}
