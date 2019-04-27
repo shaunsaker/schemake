@@ -17,7 +17,7 @@ const styles = css`
     flex: 1;
   }
 
-  .menu-icon-container {
+  .menu-button-container {
     align-self: flex-start;
   }
 `;

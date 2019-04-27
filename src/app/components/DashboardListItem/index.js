@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, ButtonBase } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 
 import styles from './styles';
 
 import TextAvatar from '../TextAvatar';
 import Typography from '../Typography';
-import Icon from '../Icon';
+import IconButton from '../IconButton';
 import Menu from '../Menu';
 
-const DashboardListItem = ({ avatarText, title, description, menu, handleMenuIconClick }) => {
+const DashboardListItem = ({ avatarText, title, description, menu, handleMenuButtonClick }) => {
   const menuAnchorElID = 'menu-button';
   const menuComponent = menu && <Menu {...menu} anchorElID="menu-button" />;
 
@@ -25,13 +25,15 @@ const DashboardListItem = ({ avatarText, title, description, menu, handleMenuIco
             {title}
           </Typography>
 
-          <Typography type="paragraph">{description}</Typography>
+          <Typography type="paragraph" secondary>
+            {description}
+          </Typography>
         </div>
 
-        <div className="menu-icon-container">
-          <ButtonBase id={menuAnchorElID} onClick={handleMenuIconClick}>
-            <Icon name="menu" />
-          </ButtonBase>
+        <div className="menu-button-container">
+          <div id={menuAnchorElID}>
+            <IconButton iconName="menu" tooltip="Toggle menu" handleClick={handleMenuButtonClick} />
+          </div>
 
           {menuComponent}
         </div>
@@ -47,7 +49,7 @@ DashboardListItem.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   menu: PropTypes.shape({}),
-  handleMenuIconClick: PropTypes.func,
+  handleMenuButtonClick: PropTypes.func,
 };
 DashboardListItem.defaultProps = {};
 

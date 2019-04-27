@@ -12,6 +12,6 @@ storiesOf('Components|DashboardListItem', module).add('default', () => (
     avatarText={avatarText}
     title={title}
     description={description}
-    handleMenuIconClick={null}
+    handleMenuButtonClick={null}
   />
 ));

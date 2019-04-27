@@ -5,6 +5,7 @@ import { colors } from '../styleConstants';
 const theme = createMuiTheme({
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    color: colors.primaryText,
   },
   palette: {
     primary: {

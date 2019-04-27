@@ -1,10 +1,9 @@
 import css from 'styled-jsx/css'; // eslint-disable-line
 
-import { colors, rhythm, sizes } from '../../static/styles/styleConstants';
+import { rhythm, sizes } from '../../static/styles/styleConstants';
 
 const styles = css`
   .container {
-    background-color: ${colors.lightGrey};
     padding: ${rhythm.vt / 2}px ${rhythm.hz / 2}px;
     border-radius: ${sizes.borderRadius}px;
   }
@@ -24,6 +23,7 @@ const styles = css`
   }
 
   .menu-button-container {
+    align-self: flex-start;
   }
 
   .note-text-container {
