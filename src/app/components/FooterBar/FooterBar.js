@@ -13,7 +13,7 @@ const FooterBar = ({ links }) => {
       <div className="content-container">
         {links.map((link) => {
           return (
-            <Link href={link.href}>
+            <Link key={link.href} href={link.href}>
               <Button style={{ textTransform: 'none' }}>
                 <Typography type="link" color="white" style={{ textDecorationLine: 'none' }}>
                   {link.name}
