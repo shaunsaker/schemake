@@ -8,7 +8,14 @@ import Typography from '../Typography';
 import Form from '../Form';
 import PrimaryButton from '../PrimaryButton';
 
-const ModalComponent = ({ title, description, form, isOpen, handleClose }) => {
+const ModalComponent = ({
+  title,
+  description,
+  form,
+  isOpen,
+  disableBackdropClick,
+  handleClose,
+}) => {
   const descriptionComponent = description && (
     <Typography type="paragraph" center>
       {description}
@@ -29,7 +36,7 @@ const ModalComponent = ({ title, description, form, isOpen, handleClose }) => {
 
   return (
     <Fragment>
-      <Modal open={isOpen} onClose={handleClose} style={{ outline: 'none' }}>
+      <Modal open={isOpen} onClose={handleClose} disableBackdropClick={disableBackdropClick}>
         <div className="container">
           <Card>
             <div className="content-container">
@@ -59,6 +66,7 @@ ModalComponent.propTypes = {
   description: PropTypes.string,
   form: PropTypes.shape({}),
   isOpen: PropTypes.bool,
+  disableBackdropClick: PropTypes.bool,
   handleClose: PropTypes.func,
 };
 ModalComponent.defaultProps = {};
