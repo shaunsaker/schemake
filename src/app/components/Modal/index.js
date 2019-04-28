@@ -6,6 +6,7 @@ import styles from './styles';
 
 import Typography from '../Typography';
 import Form from '../Form';
+import PrimaryButton from '../PrimaryButton';
 
 const ModalComponent = ({ title, description, form, isOpen, handleClose }) => {
   const descriptionComponent = description && (
@@ -19,12 +20,13 @@ const ModalComponent = ({ title, description, form, isOpen, handleClose }) => {
   );
 
   const formComponent = form && (
-    <Form
-      fields={form.fields}
-      center
-      secondaryButton={{ text: 'CANCEL', handleClick: handleClose }}
-      handleSubmit={form.handleSubmit}
-    />
+    <Form {...form} center secondaryButton={{ text: 'CANCEL', handleClick: handleClose }} />
+  );
+
+  const closeButtonComponent = !form && (
+    <div className="close-button-container">
+      <PrimaryButton handleClick={handleClose}>CLOSE</PrimaryButton>
+    </div>
   );
 
   return (
@@ -40,6 +42,8 @@ const ModalComponent = ({ title, description, form, isOpen, handleClose }) => {
               {descriptionComponent}
 
               {formComponent}
+
+              {closeButtonComponent}
             </div>
           </Card>
         </div>
@@ -53,10 +57,7 @@ const ModalComponent = ({ title, description, form, isOpen, handleClose }) => {
 ModalComponent.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
-  form: PropTypes.shape({
-    fields: PropTypes.arrayOf(PropTypes.shape({})),
-    handleSubmit: PropTypes.func,
-  }),
+  form: PropTypes.shape({}),
   isOpen: PropTypes.bool,
   handleClose: PropTypes.func,
 };

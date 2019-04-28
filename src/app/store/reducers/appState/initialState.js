@@ -4,6 +4,8 @@ const initialState = {
     message: null,
     variant: null,
   },
+  isLoading: false,
+  isSaving: false,
 };
 
 export default initialState;

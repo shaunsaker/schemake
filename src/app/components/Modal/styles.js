@@ -19,6 +19,10 @@ const styles = css`
   .description-text-container {
     margin-bottom: ${rhythm.vt}px;
   }
+
+  .close-button-container {
+    text-align: center;
+  }
 `;
 
 export default styles;

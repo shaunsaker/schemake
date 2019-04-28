@@ -28,6 +28,16 @@ export default function reducer(state = initialState, action = {}) {
       });
       return newState;
 
+    case 'SET_IS_LOADING':
+      newState = cloneObject(state);
+      newState.isLoading = action.payload.isLoading;
+      return newState;
+
+    case 'SET_IS_SAVING':
+      newState = cloneObject(state);
+      newState.isSaving = action.payload.isSaving;
+      return newState;
+
     default:
       return state;
   }
