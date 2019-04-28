@@ -20,7 +20,7 @@ export class ModalsHandler extends React.Component {
      * Store
      */
     modals: PropTypes.shape({
-      showModal: PropTypes.bool,
+      isOpen: PropTypes.bool,
       key: PropTypes.string,
       props: PropTypes.shape({}),
     }).isRequired,
@@ -43,17 +43,17 @@ export class ModalsHandler extends React.Component {
 
   render() {
     const { modals } = this.props;
-    const { key, showModal } = modals;
+    const { key, isOpen } = modals;
 
     return (
       <Fragment>
         <ForgotPasswordModal
-          isOpen={showModal && key === 'forgotPasswordModal'}
+          isOpen={isOpen && key === 'forgotPasswordModal'}
           handleClose={this.onClose}
         />
 
         <SendFeedbackModal
-          isOpen={showModal && key === 'sendFeedbackModal'}
+          isOpen={isOpen && key === 'sendFeedbackModal'}
           handleClose={this.onClose}
         />
       </Fragment>

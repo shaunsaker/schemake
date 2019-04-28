@@ -1,5 +1,5 @@
 const initialState = {
-  showModal: false,
+  isOpen: false,
   key: null,
   props: null,
 };
