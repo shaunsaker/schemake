@@ -1,3 +1,4 @@
+import createUserWithEmailAndPassword from './createUserWithEmailAndPassword';
 import getAuth from './getAuth';
 import getPhoneAuthCredential from './getPhoneAuthCredential';
 import linkWithCredential from './linkWithCredential';
@@ -8,6 +9,7 @@ import signInWithPhoneNumber from './signInWithPhoneNumber';
 import signOut from './signOut';
 
 export {
+  createUserWithEmailAndPassword,
   getAuth,
   getPhoneAuthCredential,
   linkWithCredential,
@@ -19,6 +21,7 @@ export {
 };
 
 export default {
+  createUserWithEmailAndPassword,
   getAuth,
   getPhoneAuthCredential,
   linkWithCredential,

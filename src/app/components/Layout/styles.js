@@ -21,8 +21,9 @@ const styles = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0 ${rhythm.hz / 2}px;
+    padding: 0 ${rhythm.hz * 2}px;
     background-color: white;
+    align-items: stretch;
   }
 
   .footer-container {

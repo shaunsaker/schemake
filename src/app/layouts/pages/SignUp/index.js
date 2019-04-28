@@ -3,20 +3,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Router from 'next/router';
 
-import { modals, routes } from '../../../config';
+import { routes } from '../../../config';
 import fields from './fields';
 
-import Login from './Login';
+import SignUp from './SignUp';
 
-export class LoginContainer extends React.Component {
+export class SignUpContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onForgotPassword = this.onForgotPassword.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.setIsLoading = this.setIsLoading.bind(this);
-    this.signOutUser = this.signOutUser.bind(this);
-    this.signInWithEmail = this.signInWithEmail.bind(this);
+    this.createUserWithEmailAndPassword = this.createUserWithEmailAndPassword.bind(this);
     this.redirectToProjects = this.redirectToProjects.bind(this);
 
     this.state = {};
@@ -27,7 +25,7 @@ export class LoginContainer extends React.Component {
      * Store
      */
     dispatch: PropTypes.func,
-    uid: PropTypes.string,
+    isAnonymous: PropTypes.bool,
     hasError: PropTypes.bool,
     isLoading: PropTypes.bool,
   };
@@ -36,18 +34,19 @@ export class LoginContainer extends React.Component {
 
   componentDidUpdate(prevProps) {
     /*
-     * If there is a user
-     * And if there was not a user
+     * If the user is no longer anonymous
+     * And they were anonymous
      */
-    const { uid } = this.props;
+    // FIXME: This won't work if I'm already signed in and I sign in again
+    const { isAnonymous } = this.props;
 
-    if (uid && !prevProps.uid) {
+    if (!isAnonymous && prevProps.isAnonymous) {
       this.redirectToProjects();
     }
 
     /*
      * If there is an error
-     * And there was not an error
+     * And there was not an error previously
      */
     const { hasError } = this.props;
 
@@ -56,21 +55,9 @@ export class LoginContainer extends React.Component {
     }
   }
 
-  onForgotPassword() {
-    const { dispatch } = this.props;
-
-    dispatch({
-      type: 'TOGGLE_MODAL',
-      payload: {
-        key: modals.forgotPasswordModal.key,
-      },
-    });
-  }
-
   onSubmit({ email, password }) {
     this.setIsLoading(true);
-    this.signOutUser();
-    this.signInWithEmail({ email, password });
+    this.createUserWithEmailAndPassword({ email, password });
   }
 
   setIsLoading(isLoading) {
@@ -84,26 +71,11 @@ export class LoginContainer extends React.Component {
     });
   }
 
-  signOutUser() {
+  createUserWithEmailAndPassword({ email, password }) {
     const { dispatch } = this.props;
 
     dispatch({
-      type: 'signOut',
-      meta: {
-        nextActions: [
-          {
-            type: 'SIGN_OUT_USER',
-          },
-        ],
-      },
-    });
-  }
-
-  signInWithEmail({ email, password }) {
-    const { dispatch } = this.props;
-
-    dispatch({
-      type: 'signInWithEmail',
+      type: 'createUserWithEmailAndPassword',
       payload: {
         email,
         password,
@@ -126,7 +98,7 @@ export class LoginContainer extends React.Component {
     const { isLoading } = this.props;
 
     return (
-      <Login
+      <SignUp
         fields={fields}
         disabled={isLoading}
         handleForgotPassword={this.onForgotPassword}
@@ -138,15 +110,15 @@ export class LoginContainer extends React.Component {
 
 function mapStateToProps(state) {
   const { user, appState } = state;
-  const { uid } = user;
+  const { isAnonymous } = user;
   const { systemMessage, isLoading } = appState;
   const hasError = systemMessage.variant === 'error' ? true : false;
 
   return {
-    uid,
+    isAnonymous,
     hasError,
     isLoading,
   };
 }
 
-export default connect(mapStateToProps)(LoginContainer);
+export default connect(mapStateToProps)(SignUpContainer);
