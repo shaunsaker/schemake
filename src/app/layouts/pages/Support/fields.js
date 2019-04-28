@@ -1,15 +1,20 @@
 const fields = [
   {
-    type: 'text',
     name: 'name',
+    type: 'text',
     label: 'Name',
     required: true,
   },
   {
-    type: 'text',
+    name: 'email',
+    type: 'email',
+    label: 'Email Address',
+    required: true,
+  },
+  {
     name: 'message',
+    type: 'text',
     label: 'Message',
-    multiline: true,
     required: true,
   },
 ];

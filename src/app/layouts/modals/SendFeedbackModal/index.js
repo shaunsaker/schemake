@@ -58,8 +58,8 @@ export class SendFeedbackModalContainer extends React.Component {
     }
   }
 
-  onSubmit({ message }) {
-    this.saveFeedback(message);
+  onSubmit(form) {
+    this.saveFeedback(form);
   }
 
   onClose() {
@@ -67,11 +67,11 @@ export class SendFeedbackModalContainer extends React.Component {
     this.closeModal();
   }
 
-  saveFeedback(message) {
+  saveFeedback(form) {
     const { saveDocument } = this.props;
     const url = `feedback/${createUID()}`;
     const document = {
-      message,
+      ...form,
     };
 
     saveDocument({ url, document });
