@@ -15,8 +15,12 @@ const styles = css`
     margin-bottom: ${rhythm.vt}px;
   }
 
-  .signup-text-container {
+  .footer-text-container {
     margin-top: ${rhythm.vt}px;
+  }
+
+  .signup-text-container {
+    display: inline-block;
   }
 `;
 

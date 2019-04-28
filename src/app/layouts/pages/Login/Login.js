@@ -34,13 +34,15 @@ const Login = ({ fields, handleForgotPassword, handleSubmit }) => {
           submitButtonText="LOG IN"
           handleSubmit={handleSubmit}
         >
-          <div className="signup-text-container">
+          <div className="footer-text-container">
             <Typography type="paragraph">
               Don&apos;t have an account yet?
               <Link href={routes.signUp.href}>
-                <PrimaryButton text small>
-                  <Typography type="link">Sign up</Typography>
-                </PrimaryButton>
+                <div className="signup-text-container">
+                  <PrimaryButton text small>
+                    <Typography type="link">Sign up</Typography>
+                  </PrimaryButton>
+                </div>
               </Link>
             </Typography>
           </div>
