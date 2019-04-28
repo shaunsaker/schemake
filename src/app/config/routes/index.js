@@ -23,6 +23,11 @@ const routes = {
     description: SEO.description,
     href: '/signup',
   },
+  projects: {
+    title: getTitle('Projects'),
+    description: SEO.description,
+    href: '/dashboard/projects',
+  },
   support: {
     title: getTitle('Support'),
     description: SEO.description,

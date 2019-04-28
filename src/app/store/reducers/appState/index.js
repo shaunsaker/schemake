@@ -28,6 +28,11 @@ export default function reducer(state = initialState, action = {}) {
       });
       return newState;
 
+    case 'RESET_PENDING_TRANSACTIONS':
+      newState = cloneObject(state);
+      newState.pendingTransactions = initialState.pendingTransactions;
+      return newState;
+
     case 'SET_IS_LOADING':
       newState = cloneObject(state);
       newState.isLoading = action.payload.isLoading;

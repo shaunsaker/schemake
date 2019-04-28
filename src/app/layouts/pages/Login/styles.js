@@ -2,6 +2,8 @@ import css from 'styled-jsx/css';
 
 import { rhythm } from '../../../static/styles/styleConstants';
 
+const signUpTextMargin = 5;
+
 const styles = css`
   .container {
     padding: ${rhythm.vt * 4}px 0;
@@ -16,11 +18,12 @@ const styles = css`
   }
 
   .footer-text-container {
-    margin-top: ${rhythm.vt}px;
+    margin-top: ${rhythm.vt + signUpTextMargin}px;
+    display: flex;
   }
 
   .signup-text-container {
-    display: inline-block;
+    margin-top: -${signUpTextMargin}px;
   }
 `;
 
