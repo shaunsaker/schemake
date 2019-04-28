@@ -36,7 +36,7 @@ const PrimaryButton = ({
   const buttonComponent = (
     <Button
       type={type}
-      variant={ghost ? 'outlined' : text ? '' : 'contained'}
+      variant={ghost ? 'outlined' : text ? 'text' : 'contained'}
       color={secondary ? 'secondary' : 'primary'}
       size={small ? 'small' : 'large'}
       style={style}
