@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { modals } from '../../config';
+
 import Layout from './Layout';
 
 export class LayoutContainer extends React.Component {
@@ -33,7 +35,7 @@ export class LayoutContainer extends React.Component {
     dispatch({
       type: 'TOGGLE_MODAL',
       payload: {
-        key: 'sendFeedbackModal',
+        key: modals.sendFeedbackModal.key,
       },
     });
   }
