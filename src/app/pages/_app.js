@@ -11,7 +11,6 @@ import { global, theme } from '../static/styles';
 import configureStore from '../store';
 
 import Head from '../components/Head';
-import DevInfo from '../components/DevInfo';
 
 import AnalyticsHandler from '../handlers/AnalyticsHandler';
 import AuthHandler from '../handlers/AuthHandler';
@@ -67,8 +66,6 @@ export class TheApp extends App {
                   <DataSyncingHandler />
 
                   <LoadingHandler />
-
-                  <DevInfo />
                 </SystemMessageHandler>
               </PersistGate>
             </Provider>

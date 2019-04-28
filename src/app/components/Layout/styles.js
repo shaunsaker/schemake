@@ -27,6 +27,20 @@ const styles = css`
 
   .footer-container {
   }
+
+  .send-feedback-button-container {
+    position: fixed;
+    bottom: ${rhythm.vt}px;
+    right: ${rhythm.vt}px;
+    z-index: 2;
+  }
+
+  .dev-info-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+  }
 `;
 
 export default styles;

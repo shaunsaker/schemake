@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 
+import { routes } from '../../config';
 import styles from './styles';
 
 import HeaderBar from '../HeaderBar';
 import FooterBar from '../FooterBar';
+import PrimaryButton from '../PrimaryButton';
+import DevInfo from '../DevInfo';
 
 const Layout = ({ children }) => {
   return (
@@ -15,6 +19,18 @@ const Layout = ({ children }) => {
 
       <div className="footer-container">
         <FooterBar />
+      </div>
+
+      <div className="dev-info-container">
+        <DevInfo />
+      </div>
+
+      <div className="send-feedback-button-container">
+        <Link href={routes.support.href}>
+          <PrimaryButton small accent>
+            SEND FEEDBACK
+          </PrimaryButton>
+        </Link>
       </div>
 
       <style jsx>{styles}</style>
