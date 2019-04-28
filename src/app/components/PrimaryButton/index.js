@@ -16,13 +16,14 @@ const PrimaryButton = ({
   accent,
   small,
   ghost,
+  text,
   children,
   disabled,
   handleClick,
 }) => {
   const style = {
     ...styles.container,
-    ...(!secondary && !ghost && !disabled && { color: 'white' }),
+    ...(!secondary && !ghost && !disabled && !text && { color: 'white' }),
     ...(accent && { backgroundColor: colors.accent }),
   };
 
@@ -35,7 +36,7 @@ const PrimaryButton = ({
   const buttonComponent = (
     <Button
       type={type}
-      variant={ghost ? 'outlined' : 'contained'}
+      variant={ghost ? 'outlined' : text ? '' : 'contained'}
       color={secondary ? 'secondary' : 'primary'}
       size={small ? 'small' : 'large'}
       style={style}
@@ -63,6 +64,7 @@ PrimaryButton.propTypes = {
   accent: PropTypes.bool,
   small: PropTypes.bool,
   ghost: PropTypes.bool,
+  text: PropTypes.bool,
   children: PropTypes.node,
   disabled: PropTypes.bool,
   handleClick: PropTypes.func,
