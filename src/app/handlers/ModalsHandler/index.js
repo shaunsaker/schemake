@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import ForgotPasswordModal from '../../layouts/modals/ForgotPasswordModal';
 import SendFeedbackModal from '../../layouts/modals/SendFeedbackModal';
 
 export class ModalsHandler extends React.Component {
@@ -46,6 +47,11 @@ export class ModalsHandler extends React.Component {
 
     return (
       <Fragment>
+        <ForgotPasswordModal
+          isOpen={showModal && key === 'forgotPasswordModal'}
+          handleClose={this.onClose}
+        />
+
         <SendFeedbackModal
           isOpen={showModal && key === 'sendFeedbackModal'}
           handleClose={this.onClose}

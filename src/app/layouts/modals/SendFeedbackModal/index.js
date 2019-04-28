@@ -16,6 +16,7 @@ export class SendFeedbackModalContainer extends React.Component {
     this.onClose = this.onClose.bind(this);
     this.saveFeedback = this.saveFeedback.bind(this);
     this.setShowThankYouMessage = this.setShowThankYouMessage.bind(this);
+    this.closeModal = this.closeModal.bind(this);
 
     this.state = {};
   }
@@ -59,9 +60,7 @@ export class SendFeedbackModalContainer extends React.Component {
   }
 
   onClose() {
-    const { handleClose } = this.props;
-
-    handleClose();
+    this.closeModal();
   }
 
   saveFeedback(message) {
@@ -78,6 +77,12 @@ export class SendFeedbackModalContainer extends React.Component {
     this.setState({
       showThankYouMessage,
     });
+  }
+
+  closeModal() {
+    const { handleClose } = this.props;
+
+    handleClose();
   }
 
   render() {
@@ -101,7 +106,6 @@ export class SendFeedbackModalContainer extends React.Component {
         description={description}
         form={form}
         isOpen={isOpen}
-        showThankYouMessage={showThankYouMessage}
         handleClose={this.onClose}
       />
     );

@@ -13,11 +13,11 @@ const styles = css`
   }
 
   .content-container {
-    padding: ${rhythm.vt}px ${rhythm.hz}px;
+    padding: ${rhythm.vt * 2}px ${rhythm.hz}px;
   }
 
-  .description-text-container {
-    margin-bottom: ${rhythm.vt}px;
+  .text-container {
+    margin-bottom: ${rhythm.vt * 2}px;
   }
 
   .close-button-container {

@@ -51,14 +51,22 @@ export class LoginContainer extends React.Component {
      * And there was not an error
      */
     const { hasError } = this.props;
-    console.log(hasError, prevProps.hasError);
 
     if (hasError && !prevProps.hasError) {
       this.setIsLoading(false);
     }
   }
 
-  onForgotPassword() {}
+  onForgotPassword() {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'TOGGLE_MODAL',
+      payload: {
+        key: 'forgotPasswordModal',
+      },
+    });
+  }
 
   onSubmit({ email, password }) {
     this.setIsLoading(true);

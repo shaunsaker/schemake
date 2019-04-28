@@ -10,13 +10,9 @@ import PrimaryButton from '../PrimaryButton';
 
 const ModalComponent = ({ title, description, form, isOpen, handleClose }) => {
   const descriptionComponent = description && (
-    <div className="description-text-container">
-      <Typography type="paragraph" center>
-        {description}
-      </Typography>
-
-      <style jsx>{styles}</style>
-    </div>
+    <Typography type="paragraph" center>
+      {description}
+    </Typography>
   );
 
   const formComponent = form && (
@@ -26,6 +22,8 @@ const ModalComponent = ({ title, description, form, isOpen, handleClose }) => {
   const closeButtonComponent = !form && (
     <div className="close-button-container">
       <PrimaryButton handleClick={handleClose}>CLOSE</PrimaryButton>
+
+      <style jsx>{styles}</style>
     </div>
   );
 
@@ -35,11 +33,13 @@ const ModalComponent = ({ title, description, form, isOpen, handleClose }) => {
         <div className="container">
           <Card>
             <div className="content-container">
-              <Typography type="heading" center gutterBottom>
-                {title}
-              </Typography>
+              <div className="text-container">
+                <Typography type="heading" center gutterBottom>
+                  {title}
+                </Typography>
 
-              {descriptionComponent}
+                {descriptionComponent}
+              </div>
 
               {formComponent}
 

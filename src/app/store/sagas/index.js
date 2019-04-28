@@ -5,6 +5,7 @@ import {
   getAuth,
   getPhoneAuthCredential,
   linkWithCredential,
+  sendPasswordResetEmail,
   signInAnonymously,
   signInWithEmail,
   signInWithPhoneNumber,
@@ -37,6 +38,10 @@ export default function* sagas() {
   yield takeEvery('getAuth', eventChannelSaga, { service: getAuth });
   yield takeEvery('getPhoneAuthCredential', genericSaga, { service: getPhoneAuthCredential });
   yield takeEvery('linkWithCredential', genericSaga, { service: linkWithCredential });
+  yield takeEvery('sendPasswordResetEmail', genericSaga, {
+    service: sendPasswordResetEmail,
+    shouldTrackEvent: false,
+  });
   yield takeEvery('signInAnonymously', genericSaga, {
     service: signInAnonymously,
     shouldTrackEvent: false,
