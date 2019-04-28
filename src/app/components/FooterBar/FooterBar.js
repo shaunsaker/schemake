@@ -14,11 +14,13 @@ const FooterBar = ({ links }) => {
         {links.map((link) => {
           return (
             <Link key={link.href} href={link.href}>
-              <PrimaryButton text small>
-                <Typography type="link" color="white" style={{ textDecorationLine: 'none' }}>
-                  {link.name}
-                </Typography>
-              </PrimaryButton>
+              <div>
+                <PrimaryButton text small>
+                  <Typography type="link" color="white" style={{ textDecorationLine: 'none' }}>
+                    {link.name}
+                  </Typography>
+                </PrimaryButton>
+              </div>
             </Link>
           );
         })}
