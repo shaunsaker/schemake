@@ -6,7 +6,6 @@ const signUpTextMargin = 5;
 
 const styles = css`
   .container {
-    padding: ${rhythm.vt * 4}px 0;
   }
 
   .text-container {

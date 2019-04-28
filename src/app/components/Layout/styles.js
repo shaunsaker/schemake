@@ -21,7 +21,7 @@ const styles = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0 ${rhythm.hz * 2}px;
+    padding: ${rhythm.vt * 2}px ${rhythm.hz}px;
     background-color: white;
     align-items: stretch;
   }
@@ -31,8 +31,8 @@ const styles = css`
 
   .send-feedback-button-container {
     position: fixed;
-    bottom: ${rhythm.vt / 2}px;
-    right: ${rhythm.vt / 2}px;
+    bottom: ${rhythm.vt}px;
+    right: ${rhythm.vt}px;
     z-index: 2;
   }
 
@@ -41,6 +41,12 @@ const styles = css`
     bottom: 0;
     left: 0;
     z-index: 2;
+  }
+
+  @media (min-width: ${sizes.maxContentWidth}px) {
+    .content-container {
+      padding: ${rhythm.vt * 4}px ${rhythm.hz * 2}px;
+    }
   }
 `;
 
