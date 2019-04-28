@@ -13,6 +13,16 @@ const routes = {
     description: SEO.description,
     href: '/',
   },
+  login: {
+    title: getTitle('Login'),
+    description: SEO.description,
+    href: '/login',
+  },
+  signUp: {
+    title: getTitle('Sign Up'),
+    description: SEO.description,
+    href: '/signup',
+  },
 };
 
 export default routes;

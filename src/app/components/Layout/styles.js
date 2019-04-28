@@ -1,6 +1,6 @@
 import css from 'styled-jsx/css';
 
-import { rhythm, sizes } from '../../static/styles/styleConstants';
+import { colors, rhythm, sizes } from '../../static/styles/styleConstants';
 
 const styles = css`
   .container {
@@ -8,7 +8,8 @@ const styles = css`
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 64px 0 64px; /* Header and Footer heights */
+    padding: 64px 0 0; /* Header height */
+    background-color: ${colors.lightGrey};
   }
 
   .content-container {
@@ -21,19 +22,10 @@ const styles = css`
     justify-content: center;
     align-items: center;
     padding: 0 ${rhythm.hz / 2}px;
+    background-color: white;
   }
 
   .footer-container {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-
-  @media (min-width: ${sizes.maxContentWidth}px) {
-    .content-container {
-      padding: 0;
-    }
   }
 `;
 
