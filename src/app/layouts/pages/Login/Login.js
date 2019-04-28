@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { Button } from '@material-ui/core';
 
 import { routes } from '../../../config';
 import styles from './styles';
@@ -9,6 +8,7 @@ import styles from './styles';
 import Layout from '../../../components/Layout';
 import Typography from '../../../components/Typography';
 import Form from '../../../components/Form';
+import PrimaryButton from '../../../components/PrimaryButton';
 
 const Login = ({ fields, handleForgotPassword, handleSubmit }) => {
   return (
@@ -26,9 +26,9 @@ const Login = ({ fields, handleForgotPassword, handleSubmit }) => {
           fields={fields}
           footerComponent={
             <div className="forgot-password-text-container">
-              <Button onClick={handleForgotPassword} style={{ textTransform: 'none' }}>
+              <PrimaryButton text small handleClick={handleForgotPassword}>
                 <Typography type="link">Forgot your password?</Typography>
-              </Button>
+              </PrimaryButton>
             </div>
           }
           submitButtonText="LOG IN"
@@ -38,9 +38,9 @@ const Login = ({ fields, handleForgotPassword, handleSubmit }) => {
             <Typography type="paragraph">
               Don&apos;t have an account yet?
               <Link href={routes.signUp.href}>
-                <Button style={{ textTransform: 'none' }}>
+                <PrimaryButton text small>
                   <Typography type="link">Sign up</Typography>
-                </Button>
+                </PrimaryButton>
               </Link>
             </Typography>
           </div>
