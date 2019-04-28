@@ -15,10 +15,12 @@ export class SendFeedbackModalContainer extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onClose = this.onClose.bind(this);
     this.saveFeedback = this.saveFeedback.bind(this);
-    this.setShowThankYouMessage = this.setShowThankYouMessage.bind(this);
+    this.setHasSuccess = this.setHasSuccess.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
-    this.state = {};
+    this.state = {
+      hasSuccess: false,
+    };
   }
 
   static propTypes = {
@@ -47,11 +49,12 @@ export class SendFeedbackModalContainer extends React.Component {
     /*
      * If we were saving and are not anymore
      * And we don't have an error
+     * And the modal is open
      */
-    const { hasPendingTransactions, hasError } = this.props;
+    const { hasPendingTransactions, hasError, isOpen } = this.props;
 
-    if (!hasPendingTransactions && prevProps.hasPendingTransactions && !hasError) {
-      this.setShowThankYouMessage(true);
+    if (!hasPendingTransactions && prevProps.hasPendingTransactions && !hasError && isOpen) {
+      this.setHasSuccess(true);
     }
   }
 
@@ -60,6 +63,7 @@ export class SendFeedbackModalContainer extends React.Component {
   }
 
   onClose() {
+    this.setHasSuccess(false);
     this.closeModal();
   }
 
@@ -73,9 +77,9 @@ export class SendFeedbackModalContainer extends React.Component {
     saveDocument({ url, document });
   }
 
-  setShowThankYouMessage(showThankYouMessage) {
+  setHasSuccess(hasSuccess) {
     this.setState({
-      showThankYouMessage,
+      hasSuccess,
     });
   }
 
@@ -86,7 +90,7 @@ export class SendFeedbackModalContainer extends React.Component {
   }
 
   render() {
-    const { showThankYouMessage } = this.state;
+    const { hasSuccess } = this.state;
     const { isOpen, isSaving } = this.props;
     const isDisabled = isSaving;
     let title = 'Send Feedback';
@@ -94,7 +98,7 @@ export class SendFeedbackModalContainer extends React.Component {
       "We value feedback so much. If you have any suggestions for improvements or if you think you've found a bug, please let use know. We'd love to hear from you!";
     let form = { fields, disabled: isDisabled, handleSubmit: this.onSubmit };
 
-    if (showThankYouMessage) {
+    if (hasSuccess) {
       title = 'Thank you';
       description = 'Your feedback was submitted successfully.';
       form = null;

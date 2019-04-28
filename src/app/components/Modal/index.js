@@ -21,7 +21,7 @@ const ModalComponent = ({ title, description, form, isOpen, disabled, handleClos
 
   const closeButtonComponent = !form && (
     <div className="close-button-container">
-      <PrimaryButton disabled={!disabled} handleClick={handleClose}>
+      <PrimaryButton disabled={disabled} handleClick={handleClose}>
         CLOSE
       </PrimaryButton>
 

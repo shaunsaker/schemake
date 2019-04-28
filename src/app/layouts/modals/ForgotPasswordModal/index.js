@@ -44,10 +44,11 @@ export class ForgotPasswordModalContainer extends React.Component {
      * If we aren't loading
      * And we were loading
      * And we don't have an error
+     * And the modal isOpen
      */
-    const { isLoading, hasError } = this.props;
+    const { isLoading, hasError, isOpen } = this.props;
 
-    if (!isLoading && prevProps.isLoading && !hasError && !prevProps.hasError) {
+    if (!isLoading && prevProps.isLoading && !hasError && !prevProps.hasError && isOpen) {
       // TODO: Test this once SignUp implemented
       this.setHasSuccess();
     }
@@ -68,6 +69,7 @@ export class ForgotPasswordModalContainer extends React.Component {
   }
 
   onClose() {
+    this.setHasSuccess(false);
     this.closeModal();
   }
 
