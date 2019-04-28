@@ -125,6 +125,7 @@ export class ForgotPasswordModalContainer extends React.Component {
         description={description}
         form={form}
         isOpen={isOpen}
+        disableBackdropClick={isFormDisabled}
         handleClose={this.onClose}
       />
     );
