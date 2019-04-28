@@ -23,6 +23,11 @@ const routes = {
     description: SEO.description,
     href: '/signup',
   },
+  support: {
+    title: getTitle('Support'),
+    description: SEO.description,
+    href: '/support',
+  },
 };
 
 export default routes;
