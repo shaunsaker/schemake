@@ -26,6 +26,12 @@ const HeaderBar = ({ text, actions }) => {
           <Link href="/">
             <img src="/static/images/logo.png" alt="Pep Logo" className="logo-image" />
           </Link>
+
+          <div className="alpha-text-container">
+            <Typography type="small" color={colors.transWhite}>
+              ALPHA
+            </Typography>
+          </div>
         </div>
 
         {textComponent}
