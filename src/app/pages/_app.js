@@ -17,6 +17,7 @@ import AuthHandler from '../handlers/AuthHandler';
 import DataSyncingHandler from '../handlers/DataSyncingHandler';
 import ErrorHandler from '../handlers/ErrorHandler';
 import LoadingHandler from '../handlers/LoadingHandler';
+import ModalsHandler from '../handlers/ModalsHandler';
 import SystemMessageHandler from '../handlers/SystemMessageHandler';
 
 export class TheApp extends App {
@@ -66,6 +67,8 @@ export class TheApp extends App {
                   <DataSyncingHandler />
 
                   <LoadingHandler />
+
+                  <ModalsHandler />
                 </SystemMessageHandler>
               </PersistGate>
             </Provider>

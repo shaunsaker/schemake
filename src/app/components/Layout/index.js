@@ -1,46 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
+import { connect } from 'react-redux';
 
-import { routes } from '../../config';
-import styles from './styles';
+import Layout from './Layout';
 
-import HeaderBar from '../HeaderBar';
-import FooterBar from '../FooterBar';
-import PrimaryButton from '../PrimaryButton';
-import DevInfo from '../DevInfo';
+export class LayoutContainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-const Layout = ({ children }) => {
-  return (
-    <div className="container">
-      <HeaderBar />
+    this.onSendFeedbackClick = this.onSendFeedbackClick.bind(this);
 
-      <div className="content-container">{children}</div>
+    this.state = {};
+  }
 
-      <div className="footer-container">
-        <FooterBar />
-      </div>
+  static propTypes = {
+    /*
+     * Parent
+     */
+    children: PropTypes.node,
 
-      <div className="dev-info-container">
-        <DevInfo />
-      </div>
+    /*
+     * Store
+     */
+    dispatch: PropTypes.func,
+  };
 
-      <div className="send-feedback-button-container">
-        <Link href={routes.support.href}>
-          <PrimaryButton small accent>
-            SEND FEEDBACK
-          </PrimaryButton>
-        </Link>
-      </div>
+  static defaultProps = {};
 
-      <style jsx>{styles}</style>
-    </div>
-  );
-};
+  onSendFeedbackClick() {
+    const { dispatch } = this.props;
 
-Layout.propTypes = {
-  children: PropTypes.node,
-};
-Layout.defaultProps = {};
+    dispatch({
+      type: 'TOGGLE_MODAL',
+      payload: {
+        key: 'sendFeedbackModal',
+      },
+    });
+  }
 
-export default Layout;
+  render() {
+    const { children } = this.props;
+
+    return <Layout handleSendFeedbackClick={this.onSendFeedbackClick}>{children}</Layout>;
+  }
+}
+
+export default connect()(LayoutContainer);

@@ -30,8 +30,8 @@ const styles = css`
 
   .send-feedback-button-container {
     position: fixed;
-    bottom: ${rhythm.vt}px;
-    right: ${rhythm.vt}px;
+    bottom: ${rhythm.vt / 2}px;
+    right: ${rhythm.vt / 2}px;
     z-index: 2;
   }
 

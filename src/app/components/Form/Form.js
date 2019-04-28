@@ -48,6 +48,7 @@ const Form = ({
           min,
           max,
           pattern,
+          multiline,
         } = field;
 
         return (
@@ -55,6 +56,7 @@ const Form = ({
             <TextField
               name={name}
               type={type}
+              multiline={multiline}
               value={value}
               label={label}
               required={required}
@@ -134,6 +136,7 @@ Form.propTypes = {
       min: PropTypes.string,
       max: PropTypes.string,
       pattern: PropTypes.string,
+      multiline: PropTypes.bool,
     }),
   ).isRequired,
   footerComponent: PropTypes.node,

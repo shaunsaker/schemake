@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { Button } from '@material-ui/core';
 
 import styles from './styles';
 
 import Typography from '../Typography';
+import PrimaryButton from '../PrimaryButton';
 
 const FooterBar = ({ links }) => {
   return (
@@ -14,11 +14,11 @@ const FooterBar = ({ links }) => {
         {links.map((link) => {
           return (
             <Link key={link.href} href={link.href}>
-              <Button style={{ textTransform: 'none' }}>
+              <PrimaryButton text small>
                 <Typography type="link" color="white" style={{ textDecorationLine: 'none' }}>
                   {link.name}
                 </Typography>
-              </Button>
+              </PrimaryButton>
             </Link>
           );
         })}
