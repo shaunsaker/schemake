@@ -88,11 +88,11 @@ export class SendFeedbackModalContainer extends React.Component {
   render() {
     const { showThankYouMessage } = this.state;
     const { isOpen, isSaving } = this.props;
-    const isFormDisabled = isSaving;
+    const isDisabled = isSaving;
     let title = 'Send Feedback';
     let description =
       "We value feedback so much. If you have any suggestions for improvements or if you think you've found a bug, please let use know. We'd love to hear from you!";
-    let form = { fields, disabled: isFormDisabled, handleSubmit: this.onSubmit };
+    let form = { fields, disabled: isDisabled, handleSubmit: this.onSubmit };
 
     if (showThankYouMessage) {
       title = 'Thank you';
@@ -106,7 +106,7 @@ export class SendFeedbackModalContainer extends React.Component {
         description={description}
         form={form}
         isOpen={isOpen}
-        disableBackdropClick={isFormDisabled}
+        disabled={isDisabled}
         handleClose={this.onClose}
       />
     );

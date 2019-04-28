@@ -8,14 +8,7 @@ import Typography from '../Typography';
 import Form from '../Form';
 import PrimaryButton from '../PrimaryButton';
 
-const ModalComponent = ({
-  title,
-  description,
-  form,
-  isOpen,
-  disableBackdropClick,
-  handleClose,
-}) => {
+const ModalComponent = ({ title, description, form, isOpen, disabled, handleClose }) => {
   const descriptionComponent = description && (
     <Typography type="paragraph" center>
       {description}
@@ -28,7 +21,9 @@ const ModalComponent = ({
 
   const closeButtonComponent = !form && (
     <div className="close-button-container">
-      <PrimaryButton handleClick={handleClose}>CLOSE</PrimaryButton>
+      <PrimaryButton disabled={!disabled} handleClick={handleClose}>
+        CLOSE
+      </PrimaryButton>
 
       <style jsx>{styles}</style>
     </div>
@@ -36,7 +31,7 @@ const ModalComponent = ({
 
   return (
     <Fragment>
-      <Modal open={isOpen} onClose={handleClose} disableBackdropClick={disableBackdropClick}>
+      <Modal open={isOpen} onClose={handleClose} disableBackdropClick={disabled}>
         <div className="container">
           <Card>
             <div className="content-container">
@@ -66,7 +61,7 @@ ModalComponent.propTypes = {
   description: PropTypes.string,
   form: PropTypes.shape({}),
   isOpen: PropTypes.bool,
-  disableBackdropClick: PropTypes.bool,
+  disabled: PropTypes.bool,
   handleClose: PropTypes.func,
 };
 ModalComponent.defaultProps = {};

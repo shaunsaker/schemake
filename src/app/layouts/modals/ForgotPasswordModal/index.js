@@ -108,10 +108,10 @@ export class ForgotPasswordModalContainer extends React.Component {
   render() {
     const { hasSuccess } = this.state;
     const { isOpen, isLoading } = this.props;
-    const isFormDisabled = isLoading;
+    const isDisabled = isLoading;
     let title = 'Forgot your password?';
     let description = "Enter your email address and we'll send you a password reset email.";
-    let form = { fields, disabled: isFormDisabled, handleSubmit: this.onSubmit };
+    let form = { fields, disabled: isDisabled, handleSubmit: this.onSubmit };
 
     if (hasSuccess) {
       title = 'Great Success';
@@ -125,7 +125,7 @@ export class ForgotPasswordModalContainer extends React.Component {
         description={description}
         form={form}
         isOpen={isOpen}
-        disableBackdropClick={isFormDisabled}
+        disabled={isDisabled}
         handleClose={this.onClose}
       />
     );
