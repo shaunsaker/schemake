@@ -96,15 +96,13 @@ export class SignUpContainer extends React.Component {
 
   render() {
     const { isLoading } = this.props;
+    const form = {
+      fields,
+      disabled: isLoading,
+      handleSubmit: this.onSubmit,
+    };
 
-    return (
-      <SignUp
-        fields={fields}
-        disabled={isLoading}
-        handleForgotPassword={this.onForgotPassword}
-        handleSubmit={this.onSubmit}
-      />
-    );
+    return <SignUp form={form} />;
   }
 }
 

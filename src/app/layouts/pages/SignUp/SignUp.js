@@ -10,7 +10,7 @@ import Typography from '../../../components/Typography';
 import Form from '../../../components/Form';
 import PrimaryButton from '../../../components/PrimaryButton';
 
-const SignUp = ({ fields, disabled, handleSubmit }) => {
+const SignUp = ({ form }) => {
   return (
     <Layout>
       <div className="container">
@@ -23,10 +23,10 @@ const SignUp = ({ fields, disabled, handleSubmit }) => {
         </div>
 
         <Form
-          fields={fields}
+          fields={form.fields}
           submitButtonText="SIGN UP"
-          disabled={disabled}
-          handleSubmit={handleSubmit}
+          disabled={form.disabled}
+          handleSubmit={form.handleSubmit}
         >
           <div className="footer-text-container">
             <Typography type="paragraph">Already have an account?</Typography>
@@ -48,10 +48,11 @@ const SignUp = ({ fields, disabled, handleSubmit }) => {
 };
 
 SignUp.propTypes = {
-  fields: PropTypes.arrayOf(PropTypes.shape({})),
-  disabled: PropTypes.bool,
-  handleForgotPassword: PropTypes.func,
-  handleSubmit: PropTypes.func,
+  form: PropTypes.shape({
+    fields: PropTypes.arrayOf(PropTypes.shape({})),
+    disabled: PropTypes.bool,
+    handleSubmit: PropTypes.func,
+  }),
 };
 SignUp.defaultProps = {};
 
