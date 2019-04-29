@@ -10,7 +10,7 @@ import Typography from '../../../components/Typography';
 import Form from '../../../components/Form';
 import PrimaryButton from '../../../components/PrimaryButton';
 
-const Login = ({ fields, disabled, handleForgotPassword, handleSubmit }) => {
+const Login = ({ form, handleForgotPassword }) => {
   return (
     <Layout>
       <div className="container">
@@ -23,7 +23,7 @@ const Login = ({ fields, disabled, handleForgotPassword, handleSubmit }) => {
         </div>
 
         <Form
-          fields={fields}
+          fields={form.fields}
           footerComponent={
             <div className="forgot-password-text-container">
               <PrimaryButton text small handleClick={handleForgotPassword}>
@@ -32,8 +32,8 @@ const Login = ({ fields, disabled, handleForgotPassword, handleSubmit }) => {
             </div>
           }
           submitButtonText="LOG IN"
-          disabled={disabled}
-          handleSubmit={handleSubmit}
+          disabled={form.disabled}
+          handleSubmit={form.handleSubmit}
         >
           <div className="footer-text-container">
             <Typography type="paragraph">Don&apos;t have an account yet?</Typography>
@@ -55,10 +55,12 @@ const Login = ({ fields, disabled, handleForgotPassword, handleSubmit }) => {
 };
 
 Login.propTypes = {
-  fields: PropTypes.arrayOf(PropTypes.shape({})),
-  disabled: PropTypes.bool,
+  form: PropTypes.shape({
+    fields: PropTypes.arrayOf(PropTypes.shape({})),
+    disabled: PropTypes.bool,
+    handleSubmit: PropTypes.func,
+  }),
   handleForgotPassword: PropTypes.func,
-  handleSubmit: PropTypes.func,
 };
 Login.defaultProps = {};
 

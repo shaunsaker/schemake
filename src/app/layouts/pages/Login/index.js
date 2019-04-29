@@ -124,15 +124,13 @@ export class LoginContainer extends React.Component {
 
   render() {
     const { isLoading } = this.props;
+    const form = {
+      fields,
+      disabled: isLoading,
+      handleSubmit: this.onSubmit,
+    };
 
-    return (
-      <Login
-        fields={fields}
-        disabled={isLoading}
-        handleForgotPassword={this.onForgotPassword}
-        handleSubmit={this.onSubmit}
-      />
-    );
+    return <Login form={form} handleForgotPassword={this.onForgotPassword} />;
   }
 }
 
