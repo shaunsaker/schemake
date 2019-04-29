@@ -1,4 +1,3 @@
-// TODO: Customise all of this
 const app = {
   name: 'schemake',
   url: 'https://schemake.com',
