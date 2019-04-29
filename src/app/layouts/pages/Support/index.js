@@ -34,6 +34,7 @@ export class SupportContainer extends React.Component {
      * Store
      */
     hasError: PropTypes.bool,
+    isModalOpen: PropTypes.bool,
   };
 
   static defaultProps = {};
@@ -41,10 +42,11 @@ export class SupportContainer extends React.Component {
   componentDidUpdate(prevProps) {
     /*
      * If we were saving but aren't anymore and we don't or didn't have an error
+     * Only if a modal is not open
      */
-    const { isSaving, hasError } = this.props;
+    const { isSaving, hasError, isModalOpen } = this.props;
 
-    if (!isSaving && prevProps.isSaving && !hasError && !prevProps.hasError) {
+    if (!isSaving && prevProps.isSaving && !hasError && !prevProps.hasError && !isModalOpen) {
       this.setHasSuccess(true);
     }
   }
@@ -97,12 +99,14 @@ export class SupportContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { appState } = state;
+  const { appState, modals } = state;
   const { systemMessage } = appState;
   const hasError = systemMessage.variant === 'error' ? true : false;
+  const isModalOpen = modals.isOpen;
 
   return {
     hasError,
+    isModalOpen,
   };
 }
 
