@@ -4,6 +4,7 @@ import { createUID } from 'js-simple-utils';
 import { connect } from 'react-redux';
 
 import fields from './fields';
+import { copy } from '../../../config';
 
 import SendFeedbackModal from './SendFeedbackModal';
 import withSaveDocument from '../../../enhancers/withSaveDocument';
@@ -94,13 +95,12 @@ export class SendFeedbackModalContainer extends React.Component {
     const { isOpen, isSaving } = this.props;
     const isDisabled = isSaving;
     let title = 'Send Feedback';
-    let description =
-      "We value feedback so much. If you have any suggestions for improvements or if you think you've found a bug, please let use know. We'd love to hear from you!";
+    let { description } = copy.feedback.default;
     let form = { fields, disabled: isDisabled, handleSubmit: this.onSubmit };
 
     if (hasSuccess) {
-      title = 'Thank you';
-      description = 'Your feedback was submitted successfully.';
+      title = copy.feedback.success.title; // eslint-disable-line
+      description = copy.feedback.success.description; // eslint-disable-line
       form = null;
     }
 

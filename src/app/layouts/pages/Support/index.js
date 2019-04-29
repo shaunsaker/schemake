@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { createUID } from 'js-simple-utils';
 
 import fields from './fields';
+import { copy } from '../../../config';
 
 import Support from './Support';
 import withSaveDocument from '../../../enhancers/withSaveDocument';
@@ -76,8 +77,7 @@ export class SupportContainer extends React.Component {
     const { hasSuccess } = this.state;
     const { isSaving } = this.props;
     let title = 'Support';
-    let description =
-      'Have any feedback, questions or issues? Get in touch with us and we promise to respond as quickly as possible.'; // FIXME: Message needs work
+    let { description } = copy.support.default;
     let form = {
       fields,
       disabled: isSaving,
@@ -85,8 +85,8 @@ export class SupportContainer extends React.Component {
     };
 
     if (hasSuccess) {
-      title = 'Great Success';
-      description = 'Your message was submitted successfully.';
+      title = copy.support.success.title; // eslint-disable-line
+      description = copy.support.success.description; // eslint-disable-line
       form = null;
     }
 
