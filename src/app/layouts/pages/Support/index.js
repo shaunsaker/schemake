@@ -28,18 +28,22 @@ export class SupportContainer extends React.Component {
      */
     saveDocument: PropTypes.func,
     isSaving: PropTypes.bool,
+
+    /*
+     * Store
+     */
+    hasError: PropTypes.bool,
   };
 
   static defaultProps = {};
 
   componentDidUpdate(prevProps) {
     /*
-     * If we were saving but aren't anymore
+     * If we were saving but aren't anymore and we don't or didn't have an error
      */
-    const { isSaving } = this.props;
-    // TODO: Test error
+    const { isSaving, hasError } = this.props;
 
-    if (!isSaving && prevProps.isSaving) {
+    if (!isSaving && prevProps.isSaving && !hasError && !prevProps.hasError) {
       this.setHasSuccess(true);
     }
   }
