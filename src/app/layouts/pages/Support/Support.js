@@ -6,15 +6,18 @@ import styles from './styles';
 import Layout from '../../../components/Layout';
 import Typography from '../../../components/Typography';
 import Form from '../../../components/Form';
+import PrimaryButton from '../../../components/PrimaryButton';
 
-const Support = ({ title, description, form }) => {
-  const formComponent = form && (
+const Support = ({ title, description, form, handleReset }) => {
+  const formComponent = form ? (
     <Form
       fields={form.fields}
       submitButtonText="SUBMIT"
       disabled={form.disabled}
       handleSubmit={form.handleSubmit}
     />
+  ) : (
+    <PrimaryButton handleClick={handleReset}>RESET</PrimaryButton>
   );
 
   return (
@@ -44,6 +47,7 @@ Support.propTypes = {
     disabled: PropTypes.bool,
     handleSubmit: PropTypes.func,
   }),
+  handleReset: PropTypes.func,
 };
 Support.defaultProps = {};
 

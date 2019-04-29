@@ -13,6 +13,7 @@ export class SupportContainer extends React.Component {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
+    this.onReset = this.onReset.bind(this);
     this.saveForm = this.saveForm.bind(this);
     this.setHasSuccess = this.setHasSuccess.bind(this);
 
@@ -45,6 +46,10 @@ export class SupportContainer extends React.Component {
 
   onSubmit(form) {
     this.saveForm(form);
+  }
+
+  onReset() {
+    this.setHasSuccess(false);
   }
 
   saveForm(form) {
@@ -81,7 +86,9 @@ export class SupportContainer extends React.Component {
       form = null;
     }
 
-    return <Support title={title} description={description} form={form} />;
+    return (
+      <Support title={title} description={description} form={form} handleReset={this.onReset} />
+    );
   }
 }
 
