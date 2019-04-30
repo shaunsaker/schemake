@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 
-import { routes } from '../../../config';
+import { app, routes } from '../../../config';
 import styles from './styles';
 
 import Layout from '../../../components/Layout';
@@ -16,7 +16,7 @@ const SignUp = ({ form }) => {
       <div className="container">
         <div className="text-container">
           <Typography type="title" gutterBottom>
-            Create a schemake account
+            Create a {app.name} account
           </Typography>
 
           <Typography type="paragraph">Enter your email address and password.</Typography>

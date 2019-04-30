@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 
-import { routes } from '../../../config';
+import { app, routes } from '../../../config';
 import styles from './styles';
 
 import Layout from '../../../components/Layout';
@@ -16,7 +16,7 @@ const Login = ({ form, handleForgotPassword }) => {
       <div className="container">
         <div className="text-container">
           <Typography type="title" gutterBottom>
-            Log in to schemake
+            Log in to {app.name}
           </Typography>
 
           <Typography type="paragraph">Enter your email address and password.</Typography>
