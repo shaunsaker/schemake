@@ -8,7 +8,9 @@ import styles from './styles';
 import Layout from '../../../components/Layout';
 import Typography from '../../../components/Typography';
 import TabBar from '../../../components/TabBar';
+import General from '../../../layouts/tabs/profile/General';
 
+// TODO: Add tabs
 const Profile = ({ dateText, currentTabIndex, tabs, handleTabClick }) => {
   return (
     <Layout>
@@ -30,7 +32,7 @@ const Profile = ({ dateText, currentTabIndex, tabs, handleTabClick }) => {
         <div className="tabs-container">
           <SwipeableViews index={currentTabIndex} onChangeIndex={handleTabClick}>
             <div className="tab-container">
-              <div />
+              <General />
             </div>
 
             <div className="tab-container">

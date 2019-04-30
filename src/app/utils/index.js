@@ -1,5 +1,9 @@
-const utils = {};
+import getDateTime from './getDateTime';
 
-export {};
+const utils = {
+  getDateTime,
+};
+
+export { getDateTime };
 
 export default utils;
