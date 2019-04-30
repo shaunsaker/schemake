@@ -15,7 +15,7 @@ export class SignUpContainer extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.setIsLoading = this.setIsLoading.bind(this);
     this.createUserWithEmailAndPassword = this.createUserWithEmailAndPassword.bind(this);
-    this.redirectToProjects = this.redirectToProjects.bind(this);
+    this.redirectToDashboard = this.redirectToDashboard.bind(this);
 
     this.state = {};
   }
@@ -40,7 +40,7 @@ export class SignUpContainer extends React.Component {
     const { isAnonymous } = this.props;
 
     if (!isAnonymous && prevProps.isAnonymous) {
-      this.redirectToProjects();
+      this.redirectToDashboard();
     }
 
     /*
@@ -82,8 +82,8 @@ export class SignUpContainer extends React.Component {
     });
   }
 
-  redirectToProjects() {
-    Router.push(routes.projects.href);
+  redirectToDashboard() {
+    Router.push(routes.dashboard.href);
   }
 
   render() {

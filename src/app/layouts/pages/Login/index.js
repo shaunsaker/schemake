@@ -16,7 +16,7 @@ export class LoginContainer extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.setIsLoading = this.setIsLoading.bind(this);
     this.signInWithEmail = this.signInWithEmail.bind(this);
-    this.redirectToProjects = this.redirectToProjects.bind(this);
+    this.redirectToDashboard = this.redirectToDashboard.bind(this);
 
     this.state = {};
   }
@@ -43,7 +43,7 @@ export class LoginContainer extends React.Component {
     const { uid, isAnonymous } = this.props;
 
     if (uid && !isAnonymous && prevProps.isAnonymous) {
-      this.redirectToProjects();
+      this.redirectToDashboard();
     }
 
     /*
@@ -75,7 +75,7 @@ export class LoginContainer extends React.Component {
     const { userEmail } = this.props;
 
     if (userEmail === email) {
-      this.redirectToProjects();
+      this.redirectToDashboard();
     } else {
       this.setIsLoading(true);
       this.signInWithEmail({ email, password });
@@ -105,8 +105,8 @@ export class LoginContainer extends React.Component {
     });
   }
 
-  redirectToProjects() {
-    Router.push(routes.projects.href);
+  redirectToDashboard() {
+    Router.push(routes.dashboard.href);
   }
 
   render() {
