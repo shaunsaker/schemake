@@ -33,6 +33,11 @@ const routes = {
     description: SEO.description,
     href: '/support',
   },
+  profile: {
+    title: getTitle('Profile'),
+    description: SEO.description,
+    href: '/profile',
+  },
 };
 
 export default routes;

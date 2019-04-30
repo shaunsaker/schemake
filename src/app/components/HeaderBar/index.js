@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Router from 'next/router';
 
-import avatarMenuItems from './avatarMenuItems';
+import { routes } from '../../config';
+import userMenuItems from './userMenuItems';
 
 import HeaderBar from './HeaderBar';
 
@@ -10,13 +12,15 @@ export class HeaderBarContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onAvatarClick = this.onAvatarClick.bind(this);
-    this.onAvatarMenuItemClick = this.onAvatarMenuItemClick.bind(this);
-    this.onAvatarMenuClose = this.onAvatarMenuClose.bind(this);
-    this.setIsMenuOpen = this.setIsMenuOpen.bind(this);
+    this.onUserIconClick = this.onUserIconClick.bind(this);
+    this.onUserMenuItemClick = this.onUserMenuItemClick.bind(this);
+    this.onUserMenuClose = this.onUserMenuClose.bind(this);
+    this.setIsUserMenuOpen = this.setIsUserMenuOpen.bind(this);
+    this.redirectToProfilePage = this.redirectToProfilePage.bind(this);
+    this.signOutUser = this.signOutUser.bind(this);
 
     this.state = {
-      isMenuOpen: false,
+      isUserMenuOpen: false,
     };
   }
 
@@ -29,35 +33,85 @@ export class HeaderBarContainer extends React.Component {
     /*
      * Connect
      */
-    shouldShowAvatar: PropTypes.bool,
+    dispatch: PropTypes.func,
+    shouldShowUserIcon: PropTypes.bool,
   };
 
   static defaultProps = {};
 
-  onAvatarClick() {
-    console.log('clicked');
+  onUserIconClick() {
+    const { isUserMenuOpen } = this.state;
+
+    this.setIsUserMenuOpen(!isUserMenuOpen);
   }
 
-  onAvatarMenuItemClick(item) {
-    console.log('clicked', item);
+  onUserMenuItemClick(item) {
+    this.setIsUserMenuOpen(false);
+
+    // FIXME: This is not a very declarative approach
+    if (item.name === 'Profile') {
+      this.redirectToProfilePage();
+    } else if (item.name === 'Sign Out') {
+      this.signOutUser();
+    }
   }
 
-  onAvatarMenuClose() {
-    console.log('clicked');
+  onUserMenuClose() {
+    this.setIsUserMenuOpen(false);
   }
 
-  setIsMenuOpen(isMenuOpen) {
+  setIsUserMenuOpen(isUserMenuOpen) {
     this.setState({
-      isMenuOpen,
+      isUserMenuOpen,
+    });
+  }
+
+  redirectToProfilePage() {
+    Router.push(routes.profile.href);
+  }
+
+  signOutUser() {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'signOut',
+      meta: {
+        nextActions: [
+          {
+            type: 'signInAnonymously',
+            meta: {
+              nextActions: [
+                {
+                  type: 'SIGN_IN_USER',
+                },
+              ],
+            },
+          },
+        ],
+      },
     });
   }
 
   render() {
-    const { isMenuOpen } = this.state;
-    const { text, shouldShowAvatar } = this.props;
-    // TODO: Actions
+    const { isUserMenuOpen } = this.state;
+    const { text, shouldShowUserIcon } = this.props;
+    const actions = [];
 
-    return <HeaderBar text={text} />;
+    if (shouldShowUserIcon) {
+      actions.push({
+        iconName: 'account-circle',
+        tooltip: 'Toggle user menu',
+        handleClick: this.onUserIconClick,
+        menu: {
+          items: userMenuItems,
+          isOpen: isUserMenuOpen,
+          handleClick: this.onUserMenuItemClick,
+          handleClose: this.onUserMenuClose,
+        },
+      });
+    }
+
+    return <HeaderBar text={text} actions={actions} />;
   }
 }
 
@@ -67,10 +121,10 @@ const mapStateToProps = (state) => {
   /*
    * Show the user's avatar if they are logged in
    */
-  const shouldShowAvatar = user.uid && !user.isAnonymous;
+  const shouldShowUserIcon = user.uid && !user.isAnonymous;
 
   return {
-    shouldShowAvatar,
+    shouldShowUserIcon,
   };
 };
 

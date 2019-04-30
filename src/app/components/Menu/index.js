@@ -35,7 +35,7 @@ MenuComponent.propTypes = {
   anchorElID: PropTypes.string,
   isOpen: PropTypes.bool,
   handleClick: PropTypes.func,
-  handleClose: PropTypes.bool,
+  handleClose: PropTypes.func,
 };
 MenuComponent.defaultProps = {};
 
