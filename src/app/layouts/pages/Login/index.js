@@ -15,7 +15,6 @@ export class LoginContainer extends React.Component {
     this.onForgotPassword = this.onForgotPassword.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.setIsLoading = this.setIsLoading.bind(this);
-    this.signOutUser = this.signOutUser.bind(this);
     this.signInWithEmail = this.signInWithEmail.bind(this);
     this.redirectToProjects = this.redirectToProjects.bind(this);
 
@@ -28,20 +27,22 @@ export class LoginContainer extends React.Component {
      */
     dispatch: PropTypes.func,
     uid: PropTypes.string,
+    isAnonymous: PropTypes.bool,
     hasError: PropTypes.bool,
     isLoading: PropTypes.bool,
+    userEmail: PropTypes.string,
   };
 
   static defaultProps = {};
 
   componentDidUpdate(prevProps) {
     /*
-     * If there is a user
+     * If there is a user and the user is no longer anonymous
      * And if there was not a user
      */
-    const { uid } = this.props;
+    const { uid, isAnonymous } = this.props;
 
-    if (uid && !prevProps.uid) {
+    if (uid && !isAnonymous && prevProps.isAnonymous) {
       this.redirectToProjects();
     }
 
@@ -68,9 +69,17 @@ export class LoginContainer extends React.Component {
   }
 
   onSubmit({ email, password }) {
-    this.setIsLoading(true);
-    this.signOutUser();
-    this.signInWithEmail({ email, password });
+    /*
+     * If the user is already signed in with the same email
+     */
+    const { userEmail } = this.props;
+
+    if (userEmail === email) {
+      this.redirectToProjects();
+    } else {
+      this.setIsLoading(true);
+      this.signInWithEmail({ email, password });
+    }
   }
 
   setIsLoading(isLoading) {
@@ -84,21 +93,6 @@ export class LoginContainer extends React.Component {
     });
   }
 
-  signOutUser() {
-    const { dispatch } = this.props;
-
-    dispatch({
-      type: 'signOut',
-      meta: {
-        nextActions: [
-          {
-            type: 'SIGN_OUT_USER',
-          },
-        ],
-      },
-    });
-  }
-
   signInWithEmail({ email, password }) {
     const { dispatch } = this.props;
 
@@ -107,13 +101,6 @@ export class LoginContainer extends React.Component {
       payload: {
         email,
         password,
-      },
-      meta: {
-        nextActions: [
-          {
-            type: 'SIGN_IN_USER',
-          },
-        ],
       },
     });
   }
@@ -136,14 +123,17 @@ export class LoginContainer extends React.Component {
 
 function mapStateToProps(state) {
   const { user, appState } = state;
-  const { uid } = user;
+  const { uid, isAnonymous } = user;
   const { systemMessage, isLoading } = appState;
   const hasError = systemMessage.variant === 'error' ? true : false;
+  const userEmail = user.email;
 
   return {
     uid,
+    isAnonymous,
     hasError,
     isLoading,
+    userEmail,
   };
 }
 

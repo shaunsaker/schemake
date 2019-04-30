@@ -37,7 +37,6 @@ export class SignUpContainer extends React.Component {
      * If the user is no longer anonymous
      * And they were anonymous
      */
-    // FIXME: This won't work if I'm already signed in and I sign in again
     const { isAnonymous } = this.props;
 
     if (!isAnonymous && prevProps.isAnonymous) {
@@ -79,13 +78,6 @@ export class SignUpContainer extends React.Component {
       payload: {
         email,
         password,
-      },
-      meta: {
-        nextActions: [
-          {
-            type: 'SIGN_IN_USER',
-          },
-        ],
       },
     });
   }
