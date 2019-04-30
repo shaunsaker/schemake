@@ -45,10 +45,6 @@ const styles = css.global`
   button:disabled, button:disabled > .clickable {
     cursor: not-allowed;
   }
-
-  button:focus, .button:focus, a:focus, input:focus, select:focus, div[role='button']:focus {
-    outline: 2px solid ${colors.secondary};
-  }
 `;
 
 export default styles;
