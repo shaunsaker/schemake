@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import Profile from './Profile';
 
+import withRouteCondom from '../../../enhancers/withRouteCondom';
+
 export class ProfileContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -24,4 +26,4 @@ function mapStateToProps(state) {
   return {};
 }
 
-export default connect(mapStateToProps)(ProfileContainer);
+export default withRouteCondom(connect(mapStateToProps)(ProfileContainer));

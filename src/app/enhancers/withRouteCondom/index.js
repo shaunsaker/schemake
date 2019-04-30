@@ -33,12 +33,36 @@ export default (ComposedComponent) => {
       }
     }
 
+    componentDidUpdate(prevProps) {
+      /*
+       * If the user signed out
+       * Redirect them to the login page
+       */
+      const { isValidUser } = this.props;
+
+      if (!isValidUser && prevProps.isValidUser) {
+        this.redirectToLoginPage();
+      }
+    }
+
     redirectToLoginPage() {
       Router.push(routes.login.href); // FIXME: Should we replace route rather
     }
 
     render() {
-      return <ComposedComponent {...this.props} />;
+      /*
+       * Hide the page while mounting
+       */
+      const { isValidUser } = this.props;
+      const containerStyles = {
+        visibility: isValidUser ? 'visible' : 'hidden',
+      };
+
+      return (
+        <div style={containerStyles}>
+          <ComposedComponent {...this.props} />
+        </div>
+      );
     }
   }
 
