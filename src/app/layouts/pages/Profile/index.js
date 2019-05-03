@@ -54,7 +54,8 @@ export class ProfileContainer extends React.Component {
 
 function mapStateToProps(state) {
   const { user } = state;
-  const createdTime = (user.createdAt && Number(user.createdAt)) || user.metadata.creationTime;
+  const createdTime =
+    (user.createdAt && Number(user.createdAt)) || (user.metadata && user.metadata.creationTime);
   const createdDate = new Date(createdTime);
   const dateText = getDateTime(createdDate);
   const dateTextString = `on ${dateText}`;
