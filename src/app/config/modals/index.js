@@ -1,4 +1,7 @@
 const modals = {
+  editProfileModal: {
+    key: 'editProfileModal',
+  },
   forgotPasswordModal: {
     key: 'forgotPasswordModal',
   },

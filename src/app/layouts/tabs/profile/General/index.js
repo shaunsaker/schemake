@@ -17,6 +17,11 @@ export class GeneralContainer extends React.Component {
 
   static propTypes = {
     /*
+     * Parent
+     */
+    handleEditProfileClick: PropTypes.func,
+
+    /*
      * Connect
      */
     userData: PropTypes.shape({}),
@@ -46,9 +51,9 @@ export class GeneralContainer extends React.Component {
   }
 
   render() {
-    const { userData } = this.props;
+    const { userData, handleEditProfileClick } = this.props;
 
-    return <General {...userData} />;
+    return <General {...userData} handleEditProfileClick={handleEditProfileClick} />;
   }
 }
 

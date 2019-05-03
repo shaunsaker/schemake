@@ -55,6 +55,7 @@ export class SendFeedbackModalContainer extends React.Component {
     const { hasPendingTransactions, hasError, isOpen } = this.props;
 
     if (!hasPendingTransactions && prevProps.hasPendingTransactions && !hasError && isOpen) {
+      // TODO: Failed on error
       this.setHasSuccess(true);
     }
   }

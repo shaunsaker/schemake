@@ -64,38 +64,30 @@ export default (ComposedComponent) => {
     saveDocument({ url, document, storeKey }) {
       const { dispatch, uid, state } = this.props;
       const dataInStore = storeKey && state[storeKey].data;
-      let newDocument;
-      let actionType;
+      let newDocument = {
+        ...document,
+        uid,
+      };
 
       /*
-       * If data already exists
-       * We should update the document
-       * Else we should create a new document
+       * If there is data in the store
+       * attach dateModified
+       * else attach dateCreated
        */
       if (dataInStore) {
-        actionType = 'updateDocument';
-
         newDocument = {
-          ...document,
-
-          // Meta data
-          uid,
+          ...newDocument,
           dateModified: Date.now(),
         };
       } else {
-        actionType = 'setDocument';
-
         newDocument = {
-          ...document,
-
-          // Meta data
-          uid,
+          ...newDocument,
           dateCreated: Date.now(),
         };
       }
 
       dispatch({
-        type: actionType,
+        type: 'setDocument',
         payload: {
           url,
           document: newDocument,

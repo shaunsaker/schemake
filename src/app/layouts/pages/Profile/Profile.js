@@ -8,10 +8,9 @@ import styles from './styles';
 import Layout from '../../../components/Layout';
 import Typography from '../../../components/Typography';
 import TabBar from '../../../components/TabBar';
-import General from '../../../layouts/tabs/profile/General';
+import General from '../../tabs/profile/General';
 
-// TODO: Add tabs
-const Profile = ({ dateText, currentTabIndex, tabs, handleTabClick }) => {
+const Profile = ({ dateText, currentTabIndex, tabs, handleTabClick, handleEditProfileClick }) => {
   return (
     <Layout>
       <div className="container">
@@ -32,7 +31,7 @@ const Profile = ({ dateText, currentTabIndex, tabs, handleTabClick }) => {
         <div className="tabs-container">
           <SwipeableViews index={currentTabIndex} onChangeIndex={handleTabClick}>
             <div className="tab-container">
-              <General />
+              <General handleEditProfileClick={handleEditProfileClick} />
             </div>
 
             <div className="tab-container">
@@ -52,6 +51,7 @@ Profile.propTypes = {
   currentTabIndex: PropTypes.number,
   tabs: PropTypes.arrayOf(PropTypes.shape({})),
   handleTabClick: PropTypes.func,
+  handleEditProfileClick: PropTypes.func,
 };
 Profile.defaultProps = {};
 
