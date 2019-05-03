@@ -4,6 +4,7 @@ import { logEvent } from '../../services/analytics';
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  getEmailAuthCredential,
   getPhoneAuthCredential,
   linkWithCredential,
   sendPasswordResetEmail,
@@ -40,6 +41,7 @@ export default function* sagas() {
     service: createUserWithEmailAndPassword,
   });
   yield takeEvery('getAuth', eventChannelSaga, { service: getAuth });
+  yield takeEvery('getEmailAuthCredential', genericSaga, { service: getEmailAuthCredential });
   yield takeEvery('getPhoneAuthCredential', genericSaga, { service: getPhoneAuthCredential });
   yield takeEvery('linkWithCredential', genericSaga, { service: linkWithCredential });
   yield takeEvery('sendPasswordResetEmail', genericSaga, {

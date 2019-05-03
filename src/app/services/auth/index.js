@@ -1,5 +1,6 @@
 import createUserWithEmailAndPassword from './createUserWithEmailAndPassword';
 import getAuth from './getAuth';
+import getEmailAuthCredential from './getEmailAuthCredential';
 import getPhoneAuthCredential from './getPhoneAuthCredential';
 import linkWithCredential from './linkWithCredential';
 import sendPasswordResetEmail from './sendPasswordResetEmail';
@@ -11,6 +12,7 @@ import signOut from './signOut';
 export {
   createUserWithEmailAndPassword,
   getAuth,
+  getEmailAuthCredential,
   getPhoneAuthCredential,
   linkWithCredential,
   sendPasswordResetEmail,
@@ -23,6 +25,7 @@ export {
 export default {
   createUserWithEmailAndPassword,
   getAuth,
+  getEmailAuthCredential,
   getPhoneAuthCredential,
   linkWithCredential,
   sendPasswordResetEmail,

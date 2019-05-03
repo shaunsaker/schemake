@@ -7,6 +7,17 @@ export class AuthHandler extends React.Component {
     super(props);
 
     this.signInAnonymously = this.signInAnonymously.bind(this);
+
+    this.getAuthAction = {
+      type: 'getAuth',
+      meta: {
+        nextActions: [
+          {
+            type: 'SIGN_IN_USER',
+          },
+        ],
+      },
+    };
   }
 
   static get propTypes() {
@@ -30,16 +41,7 @@ export class AuthHandler extends React.Component {
   getAuth() {
     const { dispatch } = this.props;
 
-    dispatch({
-      type: 'getAuth',
-      meta: {
-        nextActions: [
-          {
-            type: 'SIGN_IN_USER',
-          },
-        ],
-      },
-    });
+    dispatch(this.getAuthAction);
   }
 
   signInAnonymously() {
@@ -48,11 +50,7 @@ export class AuthHandler extends React.Component {
     dispatch({
       type: 'signInAnonymously',
       meta: {
-        nextActions: [
-          {
-            type: 'SIGN_IN_USER',
-          },
-        ],
+        nextActions: [this.getAuthAction],
       },
     });
   }
