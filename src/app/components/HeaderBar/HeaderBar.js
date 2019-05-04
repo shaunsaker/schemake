@@ -37,7 +37,7 @@ const HeaderBar = ({ text, actions }) => {
         {textComponent}
 
         <div className="action-panel-container">
-          <ActionPanel actions={actions} iconColor={colors.transWhite} />
+          <ActionPanel actions={actions} color={colors.transWhite} />
         </div>
       </ToolBar>
 

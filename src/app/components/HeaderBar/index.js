@@ -120,6 +120,11 @@ export class HeaderBarContainer extends React.Component {
           handleClose: this.onUserMenuClose,
         },
       });
+    } else {
+      actions.push({
+        text: 'Login',
+        href: routes.login.href,
+      });
     }
 
     return <HeaderBar text={text} actions={actions} />;
