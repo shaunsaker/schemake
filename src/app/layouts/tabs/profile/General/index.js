@@ -74,7 +74,8 @@ export class GeneralContainer extends React.Component {
 
 function mapStateToProps(state) {
   const { userData, user } = state;
-  const { uid } = user;
+  const { uid, email } = user;
+  userData.email = email;
 
   return {
     userData,
