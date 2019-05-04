@@ -11,7 +11,9 @@ export default (ComposedComponent) => {
       this.setIsSyncing = this.setIsSyncing.bind(this);
       this.syncData = this.syncData.bind(this);
 
-      this.state = {};
+      this.state = {
+        isSyncing: false,
+      };
     }
 
     static propTypes = {
@@ -26,10 +28,13 @@ export default (ComposedComponent) => {
     static defaultProps = {};
 
     componentDidUpdate(prevProps) {
+      const { isSyncing } = this.state;
+
       /*
        * If we had pendingTransactions and we don't and didn't have an error
        */
-      const { hasPendingTransactions, hasError, isSyncing } = this.props;
+
+      const { hasPendingTransactions, hasError } = this.props;
 
       /*
        * If we are loading and have no more pending transactions, toggle loading back to false
@@ -47,28 +52,13 @@ export default (ComposedComponent) => {
     }
 
     onSyncData(args) {
-      /*
-       * Only sync data if authenticated
-       */
-      const { authenticated, isSyncing } = this.props;
-
-      if (authenticated) {
-        if (!isSyncing) {
-          this.setIsSyncing(true);
-        }
-
-        this.syncData(args);
-      }
+      this.setIsSyncing(true);
+      this.syncData(args);
     }
 
     setIsSyncing(isSyncing) {
-      const { dispatch } = this.props;
-
-      dispatch({
-        type: 'SET_IS_SYNCING',
-        payload: {
-          isSyncing,
-        },
+      this.setState({
+        isSyncing,
       });
     }
 
@@ -100,9 +90,8 @@ export default (ComposedComponent) => {
     const authenticated = uid ? true : false;
     const hasPendingTransactions = appState.pendingTransactions.length ? true : false;
     const hasError = appState.systemMessage.variant === 'error' ? true : false;
-    const { isSyncing } = appState;
 
-    return { authenticated, hasPendingTransactions, hasError, isSyncing };
+    return { authenticated, hasPendingTransactions, hasError };
   }
 
   return connect(mapStateToProps)(withSyncData);
