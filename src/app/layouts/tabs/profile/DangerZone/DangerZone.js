@@ -3,17 +3,23 @@ import PropTypes from 'prop-types';
 
 import styles from './styles';
 
-const DangerZone = () => {
+import PrimaryButton from '../../../../components/PrimaryButton';
+
+const DangerZone = ({ handleDeleteButtonClick }) => {
   return (
     <div className="container">
-      <div />
+      <div className="button-container">
+        <PrimaryButton handleClick={handleDeleteButtonClick}>DELETE YOURSELF</PrimaryButton>
+      </div>
 
       <style jsx>{styles}</style>
     </div>
   );
 };
 
-DangerZone.propTypes = {};
+DangerZone.propTypes = {
+  handleDeleteButtonClick: PropTypes.func,
+};
 DangerZone.defaultProps = {};
 
 export default DangerZone;

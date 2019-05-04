@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { modals } from '../../../../config';
+
 import General from './General';
 
 import withSyncData from '../../../../enhancers/withSyncData';
@@ -10,20 +12,18 @@ export class GeneralContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onEditProfileClick = this.onEditProfileClick.bind(this);
     this.syncUserData = this.syncUserData.bind(this);
+    this.openEditProfileModal = this.openEditProfileModal.bind(this);
 
     this.state = {};
   }
 
   static propTypes = {
     /*
-     * Parent
-     */
-    handleEditProfileClick: PropTypes.func,
-
-    /*
      * Connect
      */
+    dispatch: PropTypes.func,
     userData: PropTypes.shape({}),
     uid: PropTypes.string,
 
@@ -39,6 +39,10 @@ export class GeneralContainer extends React.Component {
     this.syncUserData();
   }
 
+  onEditProfileClick() {
+    this.openEditProfileModal();
+  }
+
   syncUserData() {
     const { uid, syncData } = this.props;
     const url = `users/${uid}`;
@@ -50,10 +54,21 @@ export class GeneralContainer extends React.Component {
     });
   }
 
-  render() {
-    const { userData, handleEditProfileClick } = this.props;
+  openEditProfileModal() {
+    const { dispatch } = this.props;
 
-    return <General {...userData} handleEditProfileClick={handleEditProfileClick} />;
+    dispatch({
+      type: 'TOGGLE_MODAL',
+      payload: {
+        key: modals.editProfileModal.key,
+      },
+    });
+  }
+
+  render() {
+    const { userData } = this.props;
+
+    return <General {...userData} handleEditProfileClick={this.onEditProfileClick} />;
   }
 }
 

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import tabs from './tabs';
 import { getDateTime } from '../../../utils';
-import { modals } from '../../../config';
 
 import Profile from './Profile';
 
@@ -15,7 +14,6 @@ export class ProfileContainer extends React.Component {
     super(props);
 
     this.onTabClick = this.onTabClick.bind(this);
-    this.onEditProfileClick = this.onEditProfileClick.bind(this);
     this.setCurrentTabIndex = this.setCurrentTabIndex.bind(this);
 
     this.state = {
@@ -27,7 +25,6 @@ export class ProfileContainer extends React.Component {
     /*
      * Store
      */
-    dispatch: PropTypes.func,
     dateText: PropTypes.string,
   };
 
@@ -37,24 +34,9 @@ export class ProfileContainer extends React.Component {
     this.setCurrentTabIndex(tabIndex);
   }
 
-  onEditProfileClick() {
-    this.openEditProfileModal();
-  }
-
   setCurrentTabIndex(currentTabIndex) {
     this.setState({
       currentTabIndex,
-    });
-  }
-
-  openEditProfileModal() {
-    const { dispatch } = this.props;
-
-    dispatch({
-      type: 'TOGGLE_MODAL',
-      payload: {
-        key: modals.editProfileModal.key,
-      },
     });
   }
 
@@ -68,7 +50,6 @@ export class ProfileContainer extends React.Component {
         currentTabIndex={currentTabIndex}
         tabs={tabs}
         handleTabClick={this.onTabClick}
-        handleEditProfileClick={this.onEditProfileClick}
       />
     );
   }

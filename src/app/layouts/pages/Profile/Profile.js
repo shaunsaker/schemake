@@ -9,8 +9,9 @@ import Layout from '../../../components/Layout';
 import Typography from '../../../components/Typography';
 import TabBar from '../../../components/TabBar';
 import General from '../../tabs/profile/General';
+import DangerZone from '../../tabs/profile/DangerZone';
 
-const Profile = ({ dateText, currentTabIndex, tabs, handleTabClick, handleEditProfileClick }) => {
+const Profile = ({ dateText, currentTabIndex, tabs, handleTabClick }) => {
   return (
     <Layout>
       <div className="container">
@@ -31,11 +32,11 @@ const Profile = ({ dateText, currentTabIndex, tabs, handleTabClick, handleEditPr
         <div className="tabs-container">
           <SwipeableViews index={currentTabIndex} onChangeIndex={handleTabClick}>
             <div className="tab-container">
-              <General handleEditProfileClick={handleEditProfileClick} />
+              <General />
             </div>
 
             <div className="tab-container">
-              <div />
+              <DangerZone />
             </div>
           </SwipeableViews>
         </div>
