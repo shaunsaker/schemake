@@ -1,6 +1,7 @@
 import { getElapsedDays, getElapsedHours, getPrettyDate } from 'js-simple-utils';
 
 import getElapsedMinutes from '../getElapsedMinutes';
+import getStringPlurality from '../getStringPlurality';
 
 const getDateTime = (date) => {
   const prettyDate = getPrettyDate(date, true);
@@ -16,13 +17,13 @@ const getDateTime = (date) => {
       if (elapsedMinutes === 0) {
         elapsedText = 'less than a minute ago';
       } else {
-        elapsedText = `${elapsedMinutes} minutes ago`;
+        elapsedText = `${elapsedMinutes} minute${getStringPlurality(elapsedMinutes)} ago`;
       }
     } else {
-      elapsedText = `${elapsedHours} hours ago`;
+      elapsedText = `${elapsedHours} hour${getStringPlurality(elapsedHours)} ago`;
     }
   } else {
-    elapsedText = `${elapsedDays} days ago`;
+    elapsedText = `${elapsedDays} day${getStringPlurality(elapsedDays)} ago`;
   }
 
   const dateTime = `${prettyDate} (${elapsedText})`;
