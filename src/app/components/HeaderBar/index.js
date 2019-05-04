@@ -16,7 +16,7 @@ export class HeaderBarContainer extends React.Component {
     this.onUserMenuItemClick = this.onUserMenuItemClick.bind(this);
     this.onUserMenuClose = this.onUserMenuClose.bind(this);
     this.setIsUserMenuOpen = this.setIsUserMenuOpen.bind(this);
-    this.redirectToProfilePage = this.redirectToProfilePage.bind(this);
+    this.redirectToPage = this.redirectToPage.bind(this);
     this.signOutUser = this.signOutUser.bind(this);
 
     this.state = {
@@ -50,9 +50,10 @@ export class HeaderBarContainer extends React.Component {
 
     // FIXME: This is not a very declarative approach
     if (item.name === 'Profile') {
-      this.redirectToProfilePage();
+      this.redirectToPage('profile');
     } else if (item.name === 'Sign Out') {
       this.signOutUser();
+      this.redirectToPage('login');
     }
   }
 
@@ -66,8 +67,8 @@ export class HeaderBarContainer extends React.Component {
     });
   }
 
-  redirectToProfilePage() {
-    Router.push(routes.profile.href);
+  redirectToPage(pageKey) {
+    Router.push(routes[pageKey].href);
   }
 
   signOutUser() {
