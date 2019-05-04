@@ -17,6 +17,7 @@ export class HeaderBarContainer extends React.Component {
     this.onUserMenuClose = this.onUserMenuClose.bind(this);
     this.setIsUserMenuOpen = this.setIsUserMenuOpen.bind(this);
     this.redirectToPage = this.redirectToPage.bind(this);
+    this.cancelSync = this.cancelSync.bind(this);
     this.signOutUser = this.signOutUser.bind(this);
 
     this.state = {
@@ -52,6 +53,7 @@ export class HeaderBarContainer extends React.Component {
     if (item.name === 'Profile') {
       this.redirectToPage('profile');
     } else if (item.name === 'Sign Out') {
+      this.cancelSync();
       this.signOutUser();
       this.redirectToPage('login');
     }
@@ -69,6 +71,14 @@ export class HeaderBarContainer extends React.Component {
 
   redirectToPage(pageKey) {
     Router.push(routes[pageKey].href);
+  }
+
+  cancelSync() {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'CANCEL_SYNC',
+    });
   }
 
   signOutUser() {

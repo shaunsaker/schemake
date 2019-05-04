@@ -1,4 +1,4 @@
-import { call, put, take, all } from 'redux-saga/effects';
+import { call, put, take, takeEvery, all } from 'redux-saga/effects';
 import createUID from 'js-simple-utils/dist/createUID'; // FIXME: export correctly
 
 import createChannel from './createChannel';
@@ -36,9 +36,7 @@ export default function* eventChannelSaga(args, action) {
     // Else just assign the response
     const channel = yield call(createChannel, { service, payload });
 
-    while (true) {
-      const response = yield take(channel);
-
+    yield takeEvery(channel, function* listen(response) {
       // If shouldTrackEvent
       // Remove this pendingTransaction from the store
       if (shouldTrackEvent) {
@@ -59,7 +57,11 @@ export default function* eventChannelSaga(args, action) {
           yield all(nextActions.map((nextAction) => put(nextAction)));
         }
       }
-    }
+    });
+
+    yield take('CANCEL_SYNC');
+
+    channel.close();
   } catch (error) {
     yield onError(error);
   }
