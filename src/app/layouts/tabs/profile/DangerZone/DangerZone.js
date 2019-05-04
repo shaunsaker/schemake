@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
+import { copy } from '../../../../config';
 
 import Typography from '../../../../components/Typography';
 import PrimaryButton from '../../../../components/PrimaryButton';
@@ -11,10 +12,10 @@ const DangerZone = ({ handleDeleteButtonClick }) => {
     <div className="container">
       <div className="text-container">
         <Typography type="heading" gutterBottom>
-          Delete your user account?
+          Delete your user account
         </Typography>
 
-        <Typography type="paragraph">Once you delete your user, there is no going back.</Typography>
+        <Typography type="paragraph">{copy.dangerZone.default.description}</Typography>
       </div>
 
       <div className="button-container">

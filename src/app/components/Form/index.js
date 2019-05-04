@@ -153,33 +153,36 @@ export class FormContainer extends React.Component {
       center,
     } = this.props;
     let newFields = cloneObject(fields); // clone the object so that we don't mutate fields (will cause Form not to update)
+    console.log(this.props);
 
     /*
      * Attach errors and/or values in state
      */
-    newFields = newFields.map((field, index) => {
-      const newField = field;
-      const { name } = field;
-      const value = values[name];
+    newFields = newFields
+      ? newFields.map((field, index) => {
+          const newField = field;
+          const { name } = field;
+          const value = values[name];
 
-      /*
-       * If there is a value in state (used with select inputs)
-       * set it to the field
-       */
-      if (value) {
-        newField.value = value;
-      }
+          /*
+           * If there is a value in state (used with select inputs)
+           * set it to the field
+           */
+          if (value) {
+            newField.value = value;
+          }
 
-      /*
-       * If there is an error in state
-       * set it to the field
-       */
-      if (fieldIndicesWithErrors.includes(index)) {
-        newField.hasError = true;
-      }
+          /*
+           * If there is an error in state
+           * set it to the field
+           */
+          if (fieldIndicesWithErrors.includes(index)) {
+            newField.hasError = true;
+          }
 
-      return newField;
-    });
+          return newField;
+        })
+      : [];
 
     return (
       <Form

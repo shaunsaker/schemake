@@ -25,6 +25,11 @@ const copy = {
     },
     success,
   },
+  dangerZone: {
+    default: {
+      description: 'Once you delete your user, there is no going back.',
+    },
+  },
 };
 
 export default copy;
