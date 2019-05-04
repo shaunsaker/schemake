@@ -1,7 +1,9 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
-const onSupportAdded = functions.firestore.document('_deleteUsers/{uid}').onCreate((snapshot) => {
+const onDeleteUser = functions.firestore.document('_deleteUsers/{uid}').onCreate((snapshot) => {
+  admin.initializeApp({});
+
   const uid = snapshot.id;
 
   admin
@@ -10,13 +12,14 @@ const onSupportAdded = functions.firestore.document('_deleteUsers/{uid}').onCrea
     .then(() => {
       console.log('Successfully deleted user');
 
-      return;
+      return null;
     })
     .catch((error) => {
       console.log('Error deleting user:', error);
 
-      return;
+      return error;
     });
 });
 
-module.exports = onSupportAdded;
+module.exports = onDeleteUser;
+``;
