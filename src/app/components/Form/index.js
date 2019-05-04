@@ -153,7 +153,6 @@ export class FormContainer extends React.Component {
       center,
     } = this.props;
     let newFields = cloneObject(fields); // clone the object so that we don't mutate fields (will cause Form not to update)
-    console.log(this.props);
 
     /*
      * Attach errors and/or values in state

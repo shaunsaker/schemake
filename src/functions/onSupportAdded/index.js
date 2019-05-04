@@ -5,7 +5,7 @@ const config = require('../config');
 
 sgMail.setApiKey(config.sendGridAPIKey); // FIXME: Use .env
 
-const onSupportAdded = functions.firestore.document('support/{supportID}').onCreate((snapshot) => {
+const onSupportAdded = functions.firestore.document('_support/{supportID}').onCreate((snapshot) => {
   const values = snapshot.data();
   const mailOptions = {
     from: `${values.name} <${values.email}>`,

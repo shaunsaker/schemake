@@ -62,7 +62,7 @@ export class SendFeedbackModalContainer extends React.Component {
 
   saveFeedback(form) {
     const { saveDocument } = this.props;
-    const url = `feedback/${createUID()}`;
+    const url = `_feedback/${createUID()}`;
     const document = {
       ...form,
     };
