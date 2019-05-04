@@ -1,4 +1,7 @@
 const modals = {
+  deleteUserModal: {
+    key: 'deleteUserModal',
+  },
   editProfileModal: {
     key: 'editProfileModal',
   },
