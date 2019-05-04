@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 
 /*
  * This enhancer controls how we create and edit documents
- * It also attaches meta data
+ * It also attaches meta data and passes back
+ * isSaving, hasError and hasSuccess states
  */
 export default (ComposedComponent) => {
   class withSaveDocument extends React.Component {
@@ -12,53 +13,80 @@ export default (ComposedComponent) => {
       super(props);
 
       this.onSaveDocument = this.onSaveDocument.bind(this);
-      this.saveDocument = this.saveDocument.bind(this);
       this.setIsSaving = this.setIsSaving.bind(this);
+      this.setHasError = this.setHasError.bind(this);
+      this.setHasSuccess = this.setHasSuccess.bind(this);
+      this.saveDocument = this.saveDocument.bind(this);
 
-      this.state = {};
+      this.state = {
+        isSaving: false,
+        hasError: false,
+        hasSuccess: false,
+      };
     }
 
     static propTypes = {
-      // connect
+      /*
+       * Store
+       */
       dispatch: PropTypes.func,
       state: PropTypes.shape({}),
       uid: PropTypes.string,
       hasPendingTransactions: PropTypes.bool,
-      hasError: PropTypes.bool,
-      isSaving: PropTypes.bool,
+      hasStoreError: PropTypes.bool,
     };
 
     static defaultProps = {};
 
     componentDidUpdate(prevProps) {
-      /*
-       * If we had pendingTransactions and we don't and didn't have an error
-       */
-      const { hasPendingTransactions, hasError, isSaving } = this.props;
+      const { isSaving } = this.state;
 
       /*
-       * If we are saving and have no more pending transactions, toggle loading back to false
+       * If there is a store error while we are saving
        */
-      if (isSaving && !hasPendingTransactions && prevProps.hasPendingTransactions) {
+      const { hasStoreError } = this.props;
+
+      if (isSaving && hasStoreError && !prevProps.hasStoreError) {
+        this.setHasError(true);
         this.setIsSaving(false);
       }
 
       /*
-       * If we are saving &&  had an error, toggle loading back to false
+       * If there are no more pending transactions while we are saving
+       * and there is no internal error
        */
-      if (isSaving && hasError && !prevProps.hasError) {
+      const { hasError } = this.state;
+      const { hasPendingTransactions } = this.props;
+
+      if (isSaving && !hasPendingTransactions && prevProps.hasPendingTransactions && !hasError) {
+        this.setHasSuccess(true);
         this.setIsSaving(false);
       }
     }
 
     onSaveDocument(args) {
-      const { isSaving } = this.props;
-
-      if (!isSaving) {
-        this.setIsSaving(true);
-      }
-
+      this.setIsSaving(true);
+      this.setHasError(false);
+      this.setHasSuccess(false);
       this.saveDocument(args);
+    }
+
+    setIsSaving(isSaving) {
+      this.setState({
+        isSaving,
+      });
+    }
+
+    setHasError(hasError) {
+      this.setState({
+        hasError,
+      });
+    }
+
+    setHasSuccess(hasSuccess) {
+      this.setState({
+        hasSuccess,
+      });
     }
 
     saveDocument({ url, document, storeKey }) {
@@ -95,22 +123,17 @@ export default (ComposedComponent) => {
       });
     }
 
-    setIsSaving(isSaving) {
-      const { dispatch } = this.props;
-
-      dispatch({
-        type: 'SET_IS_SAVING',
-        payload: {
-          isSaving,
-        },
-      });
-    }
-
     render() {
-      const { isSaving } = this.props;
+      const { isSaving, hasError, hasSuccess } = this.state;
 
       return (
-        <ComposedComponent isSaving={isSaving} saveDocument={this.onSaveDocument} {...this.props} />
+        <ComposedComponent
+          isSaving={isSaving}
+          hasError={hasError}
+          hasSuccess={hasSuccess}
+          saveDocument={this.onSaveDocument}
+          {...this.props}
+        />
       );
     }
   }
@@ -118,11 +141,11 @@ export default (ComposedComponent) => {
   function mapStateToProps(state) {
     const { appState, user } = state;
     const { uid } = user;
-    const hasPendingTransactions = appState.pendingTransactions.length ? true : false;
-    const hasError = appState.systemMessage.variant === 'error' ? true : false;
-    const { isSaving } = appState;
+    const { pendingTransactions, systemMessage } = appState;
+    const hasPendingTransactions = pendingTransactions.length ? true : false;
+    const hasStoreError = systemMessage.variant === 'error' ? true : false;
 
-    return { state, uid, hasPendingTransactions, hasError, isSaving };
+    return { state, uid, hasPendingTransactions, hasStoreError };
   }
 
   return connect(mapStateToProps)(withSaveDocument);

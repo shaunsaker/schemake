@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createUID } from 'js-simple-utils';
-import { connect } from 'react-redux';
 
 import fields from './fields';
 import { copy } from '../../../config';
@@ -16,11 +15,11 @@ export class SendFeedbackModalContainer extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onClose = this.onClose.bind(this);
     this.saveFeedback = this.saveFeedback.bind(this);
-    this.setHasSuccess = this.setHasSuccess.bind(this);
+    this.setIsSuccessful = this.setIsSuccessful.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
     this.state = {
-      hasSuccess: false,
+      isSuccessful: false,
     };
   }
 
@@ -36,27 +35,19 @@ export class SendFeedbackModalContainer extends React.Component {
      */
     saveDocument: PropTypes.func,
     isSaving: PropTypes.bool,
-
-    /*
-     * Store
-     */
-    hasPendingTransactions: PropTypes.bool,
-    hasError: PropTypes.bool,
+    hasSuccess: PropTypes.bool,
   };
 
   static defaultProps = {};
 
   componentDidUpdate(prevProps) {
     /*
-     * If we were saving and are not anymore
-     * And we don't have an error
-     * And the modal is open
+     * On success
      */
-    const { hasPendingTransactions, hasError, isOpen } = this.props;
+    const { hasSuccess } = this.props;
 
-    if (!hasPendingTransactions && prevProps.hasPendingTransactions && !hasError && isOpen) {
-      // TODO: Failed on error
-      this.setHasSuccess(true);
+    if (hasSuccess && !prevProps.hasSuccess) {
+      this.setIsSuccessful(true);
     }
   }
 
@@ -65,7 +56,7 @@ export class SendFeedbackModalContainer extends React.Component {
   }
 
   onClose() {
-    this.setHasSuccess(false);
+    this.setIsSuccessful(false);
     this.closeModal();
   }
 
@@ -79,9 +70,9 @@ export class SendFeedbackModalContainer extends React.Component {
     saveDocument({ url, document });
   }
 
-  setHasSuccess(hasSuccess) {
+  setIsSuccessful(isSuccessful) {
     this.setState({
-      hasSuccess,
+      isSuccessful,
     });
   }
 
@@ -92,14 +83,14 @@ export class SendFeedbackModalContainer extends React.Component {
   }
 
   render() {
-    const { hasSuccess } = this.state;
+    const { isSuccessful } = this.state;
     const { isOpen, isSaving } = this.props;
     const isDisabled = isSaving;
     let title = 'Send Feedback';
     let { description } = copy.feedback.default;
     let form = { fields, disabled: isDisabled, handleSubmit: this.onSubmit };
 
-    if (hasSuccess) {
+    if (isSuccessful) {
       title = copy.feedback.success.title; // eslint-disable-line
       description = copy.feedback.success.description; // eslint-disable-line
       form = null;
@@ -118,16 +109,4 @@ export class SendFeedbackModalContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { appState } = state;
-  const { pendingTransactions, systemMessage } = appState;
-  const hasPendingTransactions = pendingTransactions.length ? true : false;
-  const hasError = systemMessage.type === 'error' ? true : false;
-
-  return {
-    hasPendingTransactions,
-    hasError,
-  };
-};
-
-export default withSaveDocument(connect(mapStateToProps)(SendFeedbackModalContainer));
+export default withSaveDocument(SendFeedbackModalContainer);

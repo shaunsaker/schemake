@@ -5,7 +5,6 @@ const initialState = {
     variant: null,
   },
   isLoading: false,
-  isSaving: false,
 };
 
 export default initialState;

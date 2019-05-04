@@ -16,13 +16,12 @@ export class EditProfileModalContainer extends React.Component {
     this.onClose = this.onClose.bind(this);
     this.setValues = this.setValues.bind(this);
     this.saveUser = this.saveUser.bind(this);
-    this.setIsLoading = this.setIsLoading.bind(this);
-    this.setHasSuccess = this.setHasSuccess.bind(this);
+    this.setIsSuccessful = this.setIsSuccessful.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
     this.state = {
       values: props.userData,
-      hasSuccess: false,
+      isSuccessful: false,
     };
   }
 
@@ -38,37 +37,25 @@ export class EditProfileModalContainer extends React.Component {
      */
     saveDocument: PropTypes.func,
     isSaving: PropTypes.bool,
+    hasSuccess: PropTypes.bool,
 
     /*
      * Store
      */
-    dispatch: PropTypes.func,
     uid: PropTypes.string,
     userData: PropTypes.shape({}),
-    hasError: PropTypes.bool,
-    isLoading: PropTypes.bool,
   };
 
   static defaultProps = {};
 
   componentDidUpdate(prevProps) {
     /*
-     * If we are loading and there's an error
+     * On Success
      */
-    const { isLoading, hasError } = this.props;
+    const { hasSuccess } = this.props;
 
-    if (isLoading && hasError && !prevProps.hasError) {
-      this.setIsLoading(false);
-    }
-
-    /*
-     * If we are loading, were saving and aren't anymore => success
-     */
-    const { isSaving } = this.props;
-
-    if (isLoading && !isSaving && prevProps.isSaving) {
-      this.setIsLoading(false);
-      this.setHasSuccess(true);
+    if (hasSuccess && !prevProps.hasSuccess) {
+      this.setIsSuccessful(true);
     }
   }
 
@@ -80,29 +67,17 @@ export class EditProfileModalContainer extends React.Component {
   }
 
   onSubmit(form) {
-    this.setIsLoading(true);
     this.saveUser(form);
   }
 
   onClose() {
-    this.setHasSuccess(false);
+    this.setIsSuccessful(false);
     this.closeModal();
   }
 
   setValues(values) {
     this.setState({
       values,
-    });
-  }
-
-  setIsLoading(isLoading) {
-    const { dispatch } = this.props;
-
-    dispatch({
-      type: 'SET_IS_LOADING',
-      payload: {
-        isLoading,
-      },
     });
   }
 
@@ -117,9 +92,9 @@ export class EditProfileModalContainer extends React.Component {
     saveDocument({ url, document, storeKey });
   }
 
-  setHasSuccess(hasSuccess) {
+  setIsSuccessful(isSuccessful) {
     this.setState({
-      hasSuccess,
+      isSuccessful,
     });
   }
 
@@ -130,14 +105,14 @@ export class EditProfileModalContainer extends React.Component {
   }
 
   render() {
-    const { hasSuccess } = this.state;
-    const { isOpen, isSaving, isLoading } = this.props;
-    const isDisabled = isSaving || isLoading;
+    const { isSuccessful } = this.state;
+    const { isOpen, isSaving } = this.props;
+    const isDisabled = isSaving;
     let title = 'Edit Profile';
-    let description = 'Update your user details';
+    let description = 'Update your details';
     let form = { fields, disabled: isDisabled, handleSubmit: this.onSubmit };
 
-    if (hasSuccess) {
+    if (isSuccessful) {
       title = 'Great success';
       description = 'Your profile has been updated successfully.';
       form = null;
@@ -178,17 +153,12 @@ export class EditProfileModalContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { user, userData, appState } = state;
+  const { user, userData } = state;
   const { uid } = user;
-  const { systemMessage, isLoading } = appState;
-  const hasError = systemMessage.message ? true : false;
 
   return {
     uid,
     userData,
-    systemMessage,
-    hasError,
-    isLoading,
   };
 };
 

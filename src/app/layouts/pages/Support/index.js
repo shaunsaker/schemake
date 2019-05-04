@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { createUID } from 'js-simple-utils';
 
 import fields from './fields';
@@ -16,10 +15,10 @@ export class SupportContainer extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onReset = this.onReset.bind(this);
     this.saveForm = this.saveForm.bind(this);
-    this.setHasSuccess = this.setHasSuccess.bind(this);
+    this.setIsSuccessful = this.setIsSuccessful.bind(this);
 
     this.state = {
-      hasSuccess: false,
+      isSuccessful: false,
     };
   }
 
@@ -29,25 +28,19 @@ export class SupportContainer extends React.Component {
      */
     saveDocument: PropTypes.func,
     isSaving: PropTypes.bool,
-
-    /*
-     * Store
-     */
-    hasError: PropTypes.bool,
-    isModalOpen: PropTypes.bool,
+    hasSuccess: PropTypes.bool,
   };
 
   static defaultProps = {};
 
   componentDidUpdate(prevProps) {
     /*
-     * If we were saving but aren't anymore and we don't or didn't have an error
-     * Only if a modal is not open
+     * On success
      */
-    const { isSaving, hasError, isModalOpen } = this.props;
+    const { hasSuccess } = this.props;
 
-    if (!isSaving && prevProps.isSaving && !hasError && !prevProps.hasError && !isModalOpen) {
-      this.setHasSuccess(true);
+    if (hasSuccess && !prevProps.hasSuccess) {
+      this.setIsSuccessful(true);
     }
   }
 
@@ -56,7 +49,7 @@ export class SupportContainer extends React.Component {
   }
 
   onReset() {
-    this.setHasSuccess(false);
+    this.setIsSuccessful(false);
   }
 
   saveForm(form) {
@@ -69,14 +62,14 @@ export class SupportContainer extends React.Component {
     saveDocument({ url, document });
   }
 
-  setHasSuccess(hasSuccess) {
+  setIsSuccessful(isSuccessful) {
     this.setState({
-      hasSuccess,
+      isSuccessful,
     });
   }
 
   render() {
-    const { hasSuccess } = this.state;
+    const { isSuccessful } = this.state;
     const { isSaving } = this.props;
     let title = 'Support';
     let { description } = copy.support.default;
@@ -86,7 +79,7 @@ export class SupportContainer extends React.Component {
       handleSubmit: this.onSubmit,
     };
 
-    if (hasSuccess) {
+    if (isSuccessful) {
       title = copy.support.success.title; // eslint-disable-line
       description = copy.support.success.description; // eslint-disable-line
       form = null;
@@ -98,16 +91,4 @@ export class SupportContainer extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { appState, modals } = state;
-  const { systemMessage } = appState;
-  const hasError = systemMessage.variant === 'error' ? true : false;
-  const isModalOpen = modals.isOpen;
-
-  return {
-    hasError,
-    isModalOpen,
-  };
-}
-
-export default withSaveDocument(connect(mapStateToProps)(SupportContainer));
+export default withSaveDocument(SupportContainer);

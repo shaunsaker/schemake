@@ -34,7 +34,6 @@ export class SignUpContainer extends React.Component {
     isAnonymous: PropTypes.bool,
     hasError: PropTypes.bool,
     isLoading: PropTypes.bool,
-    isModalOpen: PropTypes.bool,
     uid: PropTypes.string,
 
     /*
@@ -42,6 +41,7 @@ export class SignUpContainer extends React.Component {
      */
     saveDocument: PropTypes.func,
     isSaving: PropTypes.bool,
+    hasSuccess: PropTypes.bool,
   };
 
   static defaultProps = {};
@@ -72,14 +72,11 @@ export class SignUpContainer extends React.Component {
     }
 
     /*
-     * If we are no longer saving
-     * And a modal is not showing
-     * User data was saved
-     * Let's redirect
+     * On save success
      */
-    const { isSaving, isModalOpen } = this.props;
+    const { hasSuccess } = this.props;
 
-    if (!isSaving && prevProps.isSaving && !isModalOpen) {
+    if (hasSuccess && !prevProps.hasSuccess) {
       this.redirectToDashboard();
     }
   }
@@ -146,10 +143,11 @@ export class SignUpContainer extends React.Component {
   }
 
   render() {
-    const { isLoading } = this.props;
+    const { isLoading, isSaving } = this.props;
+    const disabled = isLoading || isSaving;
     const form = {
       fields,
-      disabled: isLoading,
+      disabled,
       handleSubmit: this.onSubmit,
     };
 
@@ -158,17 +156,15 @@ export class SignUpContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { user, appState, modals } = state;
+  const { user, appState } = state;
   const { isAnonymous, uid } = user;
   const { systemMessage, isLoading } = appState;
   const hasError = systemMessage.variant === 'error' ? true : false;
-  const isModelOpen = modals.isOpen ? true : false;
 
   return {
     isAnonymous,
     hasError,
     isLoading,
-    isModelOpen,
     uid,
   };
 }

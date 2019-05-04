@@ -38,11 +38,6 @@ export default function reducer(state = initialState, action = {}) {
       newState.isLoading = action.payload.isLoading;
       return newState;
 
-    case 'SET_IS_SAVING':
-      newState = cloneObject(state);
-      newState.isSaving = action.payload.isSaving;
-      return newState;
-
     default:
       return state;
   }
