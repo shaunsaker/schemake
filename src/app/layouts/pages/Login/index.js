@@ -41,6 +41,7 @@ export class LoginContainer extends React.Component {
      * And if there was not a user
      */
     const { uid, isAnonymous } = this.props;
+    console.log(this.props, prevProps);
 
     if (uid && !isAnonymous && prevProps.isAnonymous) {
       this.redirectToDashboard();
@@ -101,6 +102,13 @@ export class LoginContainer extends React.Component {
       payload: {
         email,
         password,
+      },
+      meta: {
+        nextActions: [
+          {
+            type: 'SIGN_IN_USER',
+          },
+        ],
       },
     });
   }
