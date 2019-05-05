@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { ButtonBase, Card } from '@material-ui/core';
 
 import styles from './styles';
+import { colors } from '../../static/styles/styleConstants';
 
 import Icon from '../Icon';
 import Typography from '../Typography';
@@ -16,7 +17,7 @@ const AddButton = ({ children, handleClick }) => {
             <Icon name="add" size={36} />
           </div>
 
-          <Typography type="paragraph" bold>
+          <Typography type="paragraph" bold color={colors.secondaryText}>
             {children}
           </Typography>
         </div>
