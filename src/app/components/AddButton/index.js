@@ -7,7 +7,7 @@ import styles from './styles';
 import Icon from '../Icon';
 import Typography from '../Typography';
 
-const AddButton = ({ text, handleClick }) => {
+const AddButton = ({ children, handleClick }) => {
   return (
     <ButtonBase onClick={handleClick} style={{ width: '100%' }}>
       <Card style={{ width: '100%' }}>
@@ -17,7 +17,7 @@ const AddButton = ({ text, handleClick }) => {
           </div>
 
           <Typography type="paragraph" bold>
-            {text}
+            {children}
           </Typography>
         </div>
       </Card>
@@ -28,7 +28,7 @@ const AddButton = ({ text, handleClick }) => {
 };
 
 AddButton.propTypes = {
-  text: PropTypes.string,
+  children: PropTypes.node,
   handleClick: PropTypes.func,
 };
 AddButton.defaultProps = {};

@@ -7,6 +7,7 @@ import styles from './styles';
 import Layout from '../../../components/Layout';
 import Typography from '../../../components/Typography';
 import TabBar from '../../../components/TabBar';
+import Projects from '../../tabs/dashboard/Projects';
 
 const Dashboard = ({ currentTabIndex, tabs, handleTabClick }) => {
   return (
@@ -25,7 +26,7 @@ const Dashboard = ({ currentTabIndex, tabs, handleTabClick }) => {
         <div className="tabs-container">
           <SwipeableViews index={currentTabIndex} onChangeIndex={handleTabClick}>
             <div className="tab-container">
-              <div />
+              <Projects />
             </div>
 
             <div className="tab-container">

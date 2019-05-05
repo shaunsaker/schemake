@@ -31,9 +31,11 @@ const General = ({ name, organisation, email, handleEditProfileClick }) => {
         <PrimaryButton handleClick={handleEditProfileClick}>EDIT PROFILE</PrimaryButton>
       </div>
 
-      <div className="profile-list-items-container">
+      <div className="items-container">
         {profileListItems.map((item) => (
-          <ProfileListItem key={item.label} {...item} />
+          <div key={item.label} className="item-container">
+            <ProfileListItem {...item} />
+          </div>
         ))}
       </div>
 

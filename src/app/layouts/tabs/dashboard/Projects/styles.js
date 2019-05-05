@@ -16,6 +16,7 @@ const styles = css`
   }
 
   .item-container {
+    margin: 2px; /* allow box-shadow to come through */
   }
 `;
 
