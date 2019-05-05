@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Router from 'next/router';
 
 import { routes } from '../../config';
+import styles from './styles';
 
 export default (ComposedComponent) => {
   class withRouteCondom extends React.Component {
@@ -54,13 +55,12 @@ export default (ComposedComponent) => {
        * Hide the page while mounting
        */
       const { isValidUser } = this.props;
-      const containerStyles = {
-        visibility: isValidUser ? 'visible' : 'hidden',
-      };
 
       return (
-        <div style={containerStyles}>
+        <div className={`container ${isValidUser ? 'visible' : ''}`}>
           <ComposedComponent {...this.props} />
+
+          <style jsx>{styles}</style>
         </div>
       );
     }
