@@ -52,7 +52,6 @@ Profile.propTypes = {
   currentTabIndex: PropTypes.number,
   tabs: PropTypes.arrayOf(PropTypes.shape({})),
   handleTabClick: PropTypes.func,
-  handleEditProfileClick: PropTypes.func,
 };
 Profile.defaultProps = {};
 
