@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Home from '../../layouts/pages/Home';
+import Dashboard from '../../layouts/pages/Dashboard';
 
 const Page = (props) => {
-  return <Home {...props} />;
+  return <Dashboard {...props} />;
 };
 
 Page.getInitialProps = async () => {

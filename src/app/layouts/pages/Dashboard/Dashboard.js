@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 
 import Layout from '../../../components/Layout';
-import Typography from '../../../components/Typography';
 
-const Home = () => {
+const Dashboard = () => {
   return (
     <Layout>
       <div className="container">
-        <Typography type="title">Hello World</Typography>
+        <div />
       </div>
 
       <style jsx>{styles}</style>
@@ -18,7 +17,7 @@ const Home = () => {
   );
 };
 
-Home.propTypes = {};
-Home.defaultProps = {};
+Dashboard.propTypes = {};
+Dashboard.defaultProps = {};
 
-export default Home;
+export default Dashboard;

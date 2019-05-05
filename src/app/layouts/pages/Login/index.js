@@ -41,9 +41,9 @@ export class LoginContainer extends React.Component {
      * And if there was not a user
      */
     const { uid, isAnonymous } = this.props;
-    console.log(this.props, prevProps);
 
     if (uid && !isAnonymous && prevProps.isAnonymous) {
+      this.setIsLoading(false);
       this.redirectToDashboard();
     }
 
