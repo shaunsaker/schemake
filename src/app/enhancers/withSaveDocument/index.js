@@ -30,7 +30,6 @@ export default (ComposedComponent) => {
        * Store
        */
       dispatch: PropTypes.func,
-      state: PropTypes.shape({}),
       uid: PropTypes.string,
       hasPendingTransactions: PropTypes.bool,
       hasStoreError: PropTypes.bool,
@@ -89,30 +88,16 @@ export default (ComposedComponent) => {
       });
     }
 
-    saveDocument({ url, document, storeKey }) {
-      const { dispatch, uid, state } = this.props;
-      const dataInStore = storeKey && state[storeKey].data;
-      let newDocument = {
+    saveDocument({ url, document }) {
+      const { dispatch, uid } = this.props;
+      const newDocument = {
         ...document,
+
+        /*
+         * Attach meta data
+         */
         uid,
       };
-
-      /*
-       * If there is data in the store
-       * attach dateModified
-       * else attach dateCreated
-       */
-      if (dataInStore) {
-        newDocument = {
-          ...newDocument,
-          dateModified: Date.now(),
-        };
-      } else {
-        newDocument = {
-          ...newDocument,
-          dateCreated: Date.now(),
-        };
-      }
 
       dispatch({
         type: 'setDocument',
@@ -145,7 +130,7 @@ export default (ComposedComponent) => {
     const hasPendingTransactions = pendingTransactions.length ? true : false;
     const hasStoreError = systemMessage.variant === 'error' ? true : false;
 
-    return { state, uid, hasPendingTransactions, hasStoreError };
+    return { uid, hasPendingTransactions, hasStoreError };
   }
 
   return connect(mapStateToProps)(withSaveDocument);

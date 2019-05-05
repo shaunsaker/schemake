@@ -60,7 +60,7 @@ export class ProjectsContainer extends React.Component {
     dispatch({
       type: 'TOGGLE_MODAL',
       payload: {
-        key: modals.addProjectModal.key, // TODO:
+        key: modals.actionProjectModal.key,
       },
     });
   }
@@ -71,6 +71,8 @@ export class ProjectsContainer extends React.Component {
     /*
       TODO: avatarText, title, description, menu, handleMenuButtonClick
     */
+    // TODO: Sort projects by dateModified?
+    // TODO: Sync projects
 
     return <Projects items={projects} handleAddProjectClick={this.onAddProjectClick} />;
   }

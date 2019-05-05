@@ -1,4 +1,7 @@
 const modals = {
+  actionProjectModal: {
+    key: 'actionProjectModal',
+  },
   deleteUserModal: {
     key: 'deleteUserModal',
   },

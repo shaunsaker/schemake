@@ -133,7 +133,10 @@ export class SignUpContainer extends React.Component {
   saveUser(userData) {
     const { saveDocument, uid } = this.props;
     const url = `users/${uid}`;
-    const document = userData;
+    const document = {
+      ...userData,
+      dateCreated: Date.now(),
+    };
 
     saveDocument({ url, document });
   }

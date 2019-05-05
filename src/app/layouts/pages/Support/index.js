@@ -57,6 +57,7 @@ export class SupportContainer extends React.Component {
     const url = `_support/${createUID()}`;
     const document = {
       ...form,
+      dateCreated: Date.now(),
     };
 
     saveDocument({ url, document });

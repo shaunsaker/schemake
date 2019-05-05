@@ -138,7 +138,9 @@ export class DeleteUserModalContainer extends React.Component {
   saveDeleteUser() {
     const { saveDocument, uid } = this.props;
     const url = `_deleteUsers/${uid}`;
-    const document = {}; // empty
+    const document = {
+      dateCreated: Date.now(),
+    };
 
     saveDocument({
       url,

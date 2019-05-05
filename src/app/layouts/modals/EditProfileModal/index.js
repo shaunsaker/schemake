@@ -86,10 +86,10 @@ export class EditProfileModalContainer extends React.Component {
     const url = `users/${uid}`;
     const document = {
       ...form,
+      dateModified: Date.now(),
     };
-    const storeKey = 'userData';
 
-    saveDocument({ url, document, storeKey });
+    saveDocument({ url, document });
   }
 
   setIsSuccessful(isSuccessful) {

@@ -42,7 +42,7 @@ export class ModalsHandler extends React.Component {
 
   render() {
     const { modals } = this.props;
-    const { key, isOpen } = modals;
+    const { key, isOpen, props } = modals;
 
     return (
       <Fragment>
@@ -54,6 +54,7 @@ export class ModalsHandler extends React.Component {
               key={modal.key}
               isOpen={isOpen && key === modal.key}
               handleClose={this.onClose}
+              {...props}
             />
           );
         })}
