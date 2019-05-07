@@ -15,17 +15,13 @@ export class ProfileContainer extends React.Component {
     super(props);
 
     this.onTabClick = this.onTabClick.bind(this);
+    this.getCurrentTabIndex = this.getCurrentTabIndex.bind(this);
+    this.handleRouteChange = this.handleRouteChange.bind(this);
     this.setCurrentTabIndex = this.setCurrentTabIndex.bind(this);
     this.handleSetRoute = this.handleSetRoute.bind(this);
 
-    /*
-     * Get the current tab index from the query params
-     */
-    const { tabID } = getQueryStringParams(window.location.search);
-    const currentTabIndex = tabs.findIndex((tab) => tab.id === tabID);
-
     this.state = {
-      currentTabIndex,
+      currentTabIndex: this.getCurrentTabIndex(),
     };
   }
 
@@ -38,9 +34,39 @@ export class ProfileContainer extends React.Component {
 
   static defaultProps = {};
 
+  componentDidMount() {
+    Router.events.on('routeChangeComplete', this.handleRouteChange);
+  }
+
+  componentWillUnmount() {
+    Router.events.off('routeChangeComplete', this.handleRouteChange);
+  }
+
   onTabClick(tabIndex) {
     this.setCurrentTabIndex(tabIndex);
     this.handleSetRoute(tabIndex);
+  }
+
+  getCurrentTabIndex() {
+    /*
+     * Get the current tab index from the query params
+     */
+    const { tabID } = getQueryStringParams(window.location.search);
+    const currentTabIndex = tabs.findIndex((tab) => tab.id === tabID);
+
+    return currentTabIndex;
+  }
+
+  handleRouteChange() {
+    const { currentTabIndex } = this.state;
+    const tabIndex = this.getCurrentTabIndex();
+
+    /*
+     * If the route's tab indices don't match
+     */
+    if (tabIndex !== currentTabIndex) {
+      this.setCurrentTabIndex(tabIndex);
+    }
   }
 
   setCurrentTabIndex(currentTabIndex) {
