@@ -8,11 +8,6 @@ const getTitle = (page) => {
 };
 
 const routes = {
-  home: {
-    title: getTitle('Home'),
-    description: SEO.description,
-    href: '/',
-  },
   login: {
     title: getTitle('Login'),
     description: SEO.description,
@@ -26,7 +21,7 @@ const routes = {
   dashboard: {
     title: getTitle('Dashboard'),
     description: SEO.description,
-    href: '/dashboard',
+    href: '/dashboard?tabID=projects',
   },
   support: {
     title: getTitle('Support'),
@@ -36,7 +31,7 @@ const routes = {
   profile: {
     title: getTitle('Profile'),
     description: SEO.description,
-    href: '/profile',
+    href: '/profile?tabID=general',
   },
 };
 
