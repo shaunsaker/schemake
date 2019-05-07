@@ -8,6 +8,7 @@ import Layout from '../../../components/Layout';
 import Typography from '../../../components/Typography';
 import TabBar from '../../../components/TabBar';
 import Projects from '../../tabs/dashboard/Projects';
+import Team from '../../tabs/dashboard/Team';
 
 const Dashboard = ({ currentTabIndex, tabs, handleTabClick }) => {
   return (
@@ -30,7 +31,7 @@ const Dashboard = ({ currentTabIndex, tabs, handleTabClick }) => {
             </div>
 
             <div className="tab-container">
-              <div />
+              <Team />
             </div>
           </SwipeableViews>
         </div>

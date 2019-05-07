@@ -7,13 +7,13 @@ import PrimaryButton from '../../../../components/PrimaryButton';
 import DashboardListItem from '../../../../components/DashboardListItem';
 import AddButton from '../../../../components/AddButton';
 
-const addProjectText = 'ADD PROJECT';
+const addButtonText = 'ADD PROJECT';
 
-const Projects = ({ items, handleAddProjectClick }) => {
+const Projects = ({ items, handleAddButtonClick }) => {
   return (
     <div className="container">
       <div className="button-container">
-        <PrimaryButton handleClick={handleAddProjectClick}>{addProjectText}</PrimaryButton>
+        <PrimaryButton handleClick={handleAddButtonClick}>{addButtonText}</PrimaryButton>
       </div>
 
       <div className="items-container">
@@ -25,7 +25,7 @@ const Projects = ({ items, handleAddProjectClick }) => {
           ))}
 
         <div className="item-container">
-          <AddButton handleClick={handleAddProjectClick}>{addProjectText}</AddButton>
+          <AddButton handleClick={handleAddButtonClick}>{addButtonText}</AddButton>
         </div>
       </div>
 
@@ -40,7 +40,7 @@ Projects.propTypes = {
       id: PropTypes.string,
     }),
   ),
-  handleAddProjectClick: PropTypes.func,
+  handleAddButtonClick: PropTypes.func,
 };
 Projects.defaultProps = {};
 
