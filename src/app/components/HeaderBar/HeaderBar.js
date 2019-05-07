@@ -6,6 +6,7 @@ import Link from 'next/link';
 import muiStyles from './muiStyles';
 import styles from './styles';
 import { colors } from '../../static/styles/styleConstants';
+import { routes } from '../../config';
 
 import Typography from '../Typography';
 import ActionPanel from '../ActionPanel';
@@ -23,7 +24,7 @@ const HeaderBar = ({ text, actions }) => {
     <AppBar position="fixed" style={muiStyles.wrapper}>
       <ToolBar style={muiStyles.container}>
         <div className="logo-image-container">
-          <Link href="/">
+          <Link href={routes.dashboard.href}>
             <img src="/static/images/logo.png" alt="Pep Logo" className="logo-image" />
           </Link>
 
