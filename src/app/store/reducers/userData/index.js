@@ -8,7 +8,7 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case 'SET_USER_DATA':
       newState = cloneObject(state);
-      newState = action.payload.data;
+      newState = cloneObject(action.payload.data);
       return newState;
 
     default:
