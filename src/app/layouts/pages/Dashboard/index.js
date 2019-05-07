@@ -49,7 +49,7 @@ export class DashboardContainer extends React.Component {
     const { tabID } = getQueryStringParams(window.location.search);
     const currentTabIndex = tabs.findIndex((tab) => tab.id === tabID);
 
-    return currentTabIndex;
+    return currentTabIndex > -1 ? currentTabIndex : 0;
   }
 
   handleRouteChange() {
