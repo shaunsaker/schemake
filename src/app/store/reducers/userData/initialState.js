@@ -1,11 +1,3 @@
-const initialState = {
-  pendingTransactions: [],
-  systemMessage: {
-    message: null,
-    variant: null,
-  },
-  isLoading: false,
-  isSaving: false,
-};
+const initialState = {};
 
 export default initialState;
