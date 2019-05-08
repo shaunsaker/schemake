@@ -3,6 +3,7 @@ const secondaryColor = 'rgba(38, 50, 56, 1.0)';
 const colors = {
   primary: '#FF5722',
   secondary: secondaryColor,
+  lightSecondary: 'rgba(38, 50, 56, 0.5)',
   accent: '#00A8DD',
   primaryText: secondaryColor,
   secondaryText: 'rgba(38, 50, 56, 0.67)',

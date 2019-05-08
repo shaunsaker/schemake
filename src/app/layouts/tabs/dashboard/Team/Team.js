@@ -18,11 +18,24 @@ const Team = ({ items, handleAddButtonClick }) => {
 
       <div className="items-container">
         {items &&
-          items.map((item) => (
-            <div key={item.id} className="item-container">
-              <DashboardListItem {...item} />
-            </div>
-          ))}
+          items.map((item) => {
+            const { name } = item;
+            const avatarText = name.slice(0, 1);
+            const title = name;
+            const description = '';
+            const menu = null;
+
+            return (
+              <div key={item.id} className="item-container">
+                <DashboardListItem
+                  avatarText={avatarText}
+                  title={title}
+                  description={description}
+                  menu={menu}
+                />
+              </div>
+            );
+          })}
 
         <div className="item-container">
           <AddButton handleClick={handleAddButtonClick}>{addButtonText}</AddButton>

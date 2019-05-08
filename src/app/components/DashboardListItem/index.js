@@ -10,6 +10,7 @@ import IconButton from '../IconButton';
 import Menu from '../Menu';
 
 const DashboardListItem = ({ avatarText, title, description, menu, handleMenuButtonClick }) => {
+  // TODO: Should control it's own menu
   const menuAnchorElID = 'menu-button';
   const menuComponent = menu && <Menu {...menu} anchorElID="menu-button" />;
 

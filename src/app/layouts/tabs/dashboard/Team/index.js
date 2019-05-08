@@ -13,7 +13,7 @@ export class TeamContainer extends React.Component {
     super(props);
 
     this.onAddTeamMemberClick = this.onAddTeamMemberClick.bind(this);
-    this.syncTeam = this.syncTeam.bind(this);
+    this.syncTeams = this.syncTeams.bind(this);
     this.openActionTeamMemberModal = this.openActionTeamMemberModal.bind(this);
 
     this.state = {};
@@ -24,7 +24,7 @@ export class TeamContainer extends React.Component {
      * Connect
      */
     dispatch: PropTypes.func,
-    team: PropTypes.shape({}),
+    teams: PropTypes.arrayOf(PropTypes.shape({})),
     uid: PropTypes.string,
 
     /*
@@ -36,22 +36,24 @@ export class TeamContainer extends React.Component {
   static defaultProps = {};
 
   componentDidMount() {
-    this.syncTeam();
+    this.syncTeams();
   }
 
   onAddTeamMemberClick() {
     this.openActionTeamMemberModal();
   }
 
-  syncTeam() {
-    // const { uid, syncData } = this.props;
-    // const url = `users/${uid}`;
-    // const nextActions = [{ type: 'SET_USER_DATA' }];
-    // syncData({
-    //   url,
-    //   nextActions,
-    // });
-    // TODO:
+  syncTeams() {
+    const { uid, syncData } = this.props;
+    const url = `teams`;
+    const queries = [['users', 'array-contains', uid]];
+    const nextActions = [{ type: 'SET_TEAMS' }];
+
+    syncData({
+      url,
+      queries,
+      nextActions,
+    });
   }
 
   openActionTeamMemberModal() {
@@ -66,24 +68,18 @@ export class TeamContainer extends React.Component {
   }
 
   render() {
-    const { team } = this.props;
+    const { teams } = this.props;
 
-    /*
-      TODO: avatarText, title, description, menu, handleMenuButtonClick
-    */
-    // TODO: Sort team by dateModified?
-    // TODO: Sync team
-
-    return <Team items={team} handleAddProjectClick={this.onAddTeamMemberClick} />;
+    return <Team items={teams} handleAddProjectClick={this.onAddTeamMemberClick} />;
   }
 }
 
 function mapStateToProps(state) {
-  const { team, user } = state;
+  const { teams, user } = state;
   const { uid } = user;
 
   return {
-    team,
+    teams,
     uid,
   };
 }

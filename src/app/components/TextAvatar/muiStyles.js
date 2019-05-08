@@ -4,7 +4,7 @@ const smallSize = 30;
 
 const muiStyles = {
   container: {
-    backgroundColor: colors.accent,
+    backgroundColor: colors.lightSecondary,
   },
 
   small: {
