@@ -9,7 +9,7 @@ const styles = css`
   .button-container {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: ${rhythm.vt}px;
+    margin-bottom: ${rhythm.vt * 2}px;
   }
 
   .items-container {

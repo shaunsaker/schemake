@@ -9,7 +9,8 @@ const styles = css`
   .header-container {
     display: flex;
     justify-content: space-between;
-    margin-bottom: ${rhythm.vt}px;
+    flex-wrap: wrap;
+    margin-bottom: ${rhythm.vt * 2}px;
   }
 
   .items-container {
