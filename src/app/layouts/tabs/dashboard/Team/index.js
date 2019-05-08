@@ -12,11 +12,16 @@ export class TeamContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onSelectTeam = this.onSelectTeam.bind(this);
     this.onAddTeamMemberClick = this.onAddTeamMemberClick.bind(this);
+    this.onRemoveTeamMember = this.onRemoveTeamMember.bind(this);
     this.syncTeams = this.syncTeams.bind(this);
+    this.setSelectedTeamIndex = this.setSelectedTeamIndex.bind(this);
     this.openActionTeamMemberModal = this.openActionTeamMemberModal.bind(this);
 
-    this.state = {};
+    this.state = {
+      selectedTeamIndex: 0,
+    };
   }
 
   static propTypes = {
@@ -39,8 +44,19 @@ export class TeamContainer extends React.Component {
     this.syncTeams();
   }
 
+  onSelectTeam(event) {
+    const teamIndex = event.target.value;
+
+    this.setSelectedTeamIndex(teamIndex);
+  }
+
   onAddTeamMemberClick() {
     this.openActionTeamMemberModal();
+  }
+
+  onRemoveTeamMember(teamMember) {
+    // TODO:
+    console.log(teamMember);
   }
 
   syncTeams() {
@@ -56,6 +72,12 @@ export class TeamContainer extends React.Component {
     });
   }
 
+  setSelectedTeamIndex(selectedTeamIndex) {
+    this.setState({
+      selectedTeamIndex,
+    });
+  }
+
   openActionTeamMemberModal() {
     const { dispatch } = this.props;
 
@@ -68,9 +90,44 @@ export class TeamContainer extends React.Component {
   }
 
   render() {
+    const { selectedTeamIndex } = this.state;
     const { teams } = this.props;
+    const selectedTeam = teams[selectedTeamIndex];
 
-    return <Team items={teams} handleAddProjectClick={this.onAddTeamMemberClick} />;
+    /*
+     * Map the team data to the required UI data
+     */
+    const teamMembers = selectedTeam.users.map((uid) => {
+      const avatarText = 'S'; // TODO:
+      const title = 'Shaun Saker'; // TODO:
+      const description = 'sakershaun@gmail.com'; // TODO:
+      const menu = {
+        items: [
+          {
+            name: `Remove ${title}`,
+            handleClick: () => this.onRemoveTeamMember(uid),
+          },
+        ],
+      };
+
+      return {
+        avatarText,
+        title,
+        description,
+        menu,
+        id: uid,
+      };
+    });
+
+    return (
+      <Team
+        selectedTeamIndex={selectedTeamIndex}
+        teams={teams}
+        teamMembers={teamMembers}
+        handleSelectTeam={this.onSelectTeam}
+        handleAddTeamMember={this.onAddTeamMember}
+      />
+    );
   }
 }
 

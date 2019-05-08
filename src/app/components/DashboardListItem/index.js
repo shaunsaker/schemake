@@ -1,57 +1,58 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from '@material-ui/core';
 
-import styles from './styles';
+import DashboardListItem from './DashboardListItem';
 
-import TextAvatar from '../TextAvatar';
-import Typography from '../Typography';
-import IconButton from '../IconButton';
-import Menu from '../Menu';
+export class DashboardListItemCOntainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-const DashboardListItem = ({ avatarText, title, description, menu, handleMenuButtonClick }) => {
-  // TODO: Should control it's own menu
-  const menuAnchorElID = 'menu-button';
-  const menuComponent = menu && <Menu {...menu} anchorElID="menu-button" />;
+    this.onMenuButtonClick = this.onMenuButtonClick.bind(this);
+    this.onCloseMenu = this.onCloseMenu.bind(this);
+    this.setIsMenuOpen = this.setIsMenuOpen.bind(this);
 
-  return (
-    <Card>
-      <div className="container">
-        <div className="avatar-container">
-          <TextAvatar>{avatarText}</TextAvatar>
-        </div>
+    this.state = {
+      isMenuOpen: false,
+    };
+  }
 
-        <div className="text-container">
-          <Typography type="paragraph" bold gutterBottom>
-            {title}
-          </Typography>
+  static propTypes = {
+    menu: PropTypes.shape({}),
+  };
 
-          <Typography type="paragraph" secondary>
-            {description}
-          </Typography>
-        </div>
+  static defaultProps = {};
 
-        <div className="menu-button-container">
-          <div id={menuAnchorElID}>
-            <IconButton iconName="menu" tooltip="Toggle menu" handleClick={handleMenuButtonClick} />
-          </div>
+  onMenuButtonClick() {
+    this.setIsMenuOpen(true);
+  }
 
-          {menuComponent}
-        </div>
-      </div>
+  onCloseMenu() {
+    this.setIsMenuOpen(false);
+  }
 
-      <style jsx>{styles}</style>
-    </Card>
-  );
-};
+  setIsMenuOpen(isMenuOpen) {
+    this.setState({
+      isMenuOpen,
+    });
+  }
 
-DashboardListItem.propTypes = {
-  avatarText: PropTypes.string,
-  title: PropTypes.string,
-  description: PropTypes.string,
-  menu: PropTypes.shape({}),
-  handleMenuButtonClick: PropTypes.func,
-};
-DashboardListItem.defaultProps = {};
+  render() {
+    const { isMenuOpen } = this.state;
+    const { menu } = this.props;
 
-export default DashboardListItem;
+    if (menu) {
+      menu.isOpen = isMenuOpen;
+      menu.handleClose = this.onCloseMenu;
+    }
+
+    return (
+      <DashboardListItem
+        {...this.props}
+        menu={menu}
+        handleMenuButtonClick={this.onMenuButtonClick}
+      />
+    );
+  }
+}
+
+export default DashboardListItemCOntainer;

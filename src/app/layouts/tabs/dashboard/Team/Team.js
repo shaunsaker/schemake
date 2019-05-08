@@ -3,42 +3,38 @@ import PropTypes from 'prop-types';
 
 import styles from './styles';
 
+import Select from '../../../../components/Select';
 import PrimaryButton from '../../../../components/PrimaryButton';
 import DashboardListItem from '../../../../components/DashboardListItem';
 import AddButton from '../../../../components/AddButton';
 
 const addButtonText = 'ADD TEAM MEMBER';
 
-const Team = ({ items, handleAddButtonClick }) => {
+const Team = ({ selectedTeamIndex, teams, teamMembers, handleSelectTeam, handleAddTeamMember }) => {
   return (
     <div className="container">
-      <div className="button-container">
-        <PrimaryButton handleClick={handleAddButtonClick}>{addButtonText}</PrimaryButton>
+      <div className="header-container">
+        <Select
+          selectedOptionIndex={selectedTeamIndex}
+          options={teams}
+          handleChange={handleSelectTeam}
+        />
+
+        <PrimaryButton handleClick={handleAddTeamMember}>{addButtonText}</PrimaryButton>
       </div>
 
       <div className="items-container">
-        {items &&
-          items.map((item) => {
-            const { name } = item;
-            const avatarText = name.slice(0, 1);
-            const title = name;
-            const description = '';
-            const menu = null;
-
+        {teamMembers &&
+          teamMembers.map((item) => {
             return (
               <div key={item.id} className="item-container">
-                <DashboardListItem
-                  avatarText={avatarText}
-                  title={title}
-                  description={description}
-                  menu={menu}
-                />
+                <DashboardListItem {...item} />
               </div>
             );
           })}
 
         <div className="item-container">
-          <AddButton handleClick={handleAddButtonClick}>{addButtonText}</AddButton>
+          <AddButton handleClick={handleAddTeamMember}>{addButtonText}</AddButton>
         </div>
       </div>
 
@@ -48,12 +44,15 @@ const Team = ({ items, handleAddButtonClick }) => {
 };
 
 Team.propTypes = {
-  items: PropTypes.arrayOf(
+  selectedTeamIndex: PropTypes.number,
+  teams: PropTypes.arrayOf(PropTypes.shape({})),
+  teamMembers: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
     }),
   ),
-  handleAddButtonClick: PropTypes.func,
+  handleSelectTeam: PropTypes.func,
+  handleAddTeamMember: PropTypes.func,
 };
 Team.defaultProps = {};
 

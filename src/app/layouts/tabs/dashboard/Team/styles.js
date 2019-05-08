@@ -6,9 +6,9 @@ const styles = css`
   .container {
   }
 
-  .button-container {
+  .header-container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-bottom: ${rhythm.vt}px;
   }
 
