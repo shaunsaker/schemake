@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Router from 'next/router';
+import { createUID } from 'js-simple-utils';
 
 import { routes } from '../../../config';
 import fields from './fields';
@@ -19,7 +20,8 @@ export class SignUpContainer extends React.Component {
     this.setUserData = this.setUserData.bind(this);
     this.createUserWithEmailAndPassword = this.createUserWithEmailAndPassword.bind(this);
     this.saveUser = this.saveUser.bind(this);
-    this.redirectToDashboard = this.redirectToDashboard.bind(this);
+    this.saveTeam = this.saveTeam.bind(this);
+    this.redirectToPage = this.redirectToPage.bind(this);
 
     this.state = {
       userData: null,
@@ -55,10 +57,9 @@ export class SignUpContainer extends React.Component {
     const { isLoading, isAnonymous } = this.props;
 
     if (isLoading && !isAnonymous && prevProps.isAnonymous) {
-      const { userData } = this.state;
-
       this.setIsLoading(false);
-      this.saveUser(userData);
+      this.saveUser();
+      this.saveTeam();
     }
 
     /*
@@ -77,7 +78,7 @@ export class SignUpContainer extends React.Component {
     const { hasSuccess } = this.props;
 
     if (hasSuccess && !prevProps.hasSuccess) {
-      this.redirectToDashboard();
+      this.redirectToPage('dashboard');
     }
   }
 
@@ -130,7 +131,8 @@ export class SignUpContainer extends React.Component {
     });
   }
 
-  saveUser(userData) {
+  saveUser() {
+    const { userData } = this.state;
     const { saveDocument, uid } = this.props;
     const url = `users/${uid}`;
     const document = {
@@ -141,8 +143,24 @@ export class SignUpContainer extends React.Component {
     saveDocument({ url, document });
   }
 
-  redirectToDashboard() {
-    Router.push(routes.dashboard.href);
+  saveTeam() {
+    const { userData } = this.state;
+    const { saveDocument, uid } = this.props;
+    const url = `teams/${createUID()}`;
+    const { name } = userData;
+    const teamName = `${name}'s team`;
+    const document = {
+      name: teamName,
+      createdBy: uid,
+      dateCreated: Date.now(),
+      users: [uid],
+    };
+
+    saveDocument({ url, document });
+  }
+
+  redirectToPage(page) {
+    Router.push(routes[page].href);
   }
 
   render() {
