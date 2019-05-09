@@ -38,6 +38,11 @@ export default function reducer(state = initialState, action = {}) {
       newState.isLoading = action.payload.isLoading;
       return newState;
 
+    case 'SET_SELECTED_TEAM_INDEX':
+      newState = cloneObject(state);
+      newState.selectedTeamIndex = action.payload.selectedTeamIndex;
+      return newState;
+
     default:
       return state;
   }

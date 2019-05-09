@@ -21,7 +21,7 @@ export class GeneralContainer extends React.Component {
 
   static propTypes = {
     /*
-     * Connect
+     * Store
      */
     dispatch: PropTypes.func,
     userData: PropTypes.shape({}),

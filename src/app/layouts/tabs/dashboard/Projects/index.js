@@ -21,7 +21,7 @@ export class ProjectsContainer extends React.Component {
 
   static propTypes = {
     /*
-     * Connect
+     * Store
      */
     dispatch: PropTypes.func,
     projects: PropTypes.shape({}),

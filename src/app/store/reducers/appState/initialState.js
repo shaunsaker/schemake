@@ -5,6 +5,7 @@ const initialState = {
     variant: null,
   },
   isLoading: false,
+  selectedTeamIndex: 0,
 };
 
 export default initialState;

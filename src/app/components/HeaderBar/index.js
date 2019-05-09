@@ -32,7 +32,7 @@ export class HeaderBarContainer extends React.Component {
     text: PropTypes.string,
 
     /*
-     * Connect
+     * Store
      */
     dispatch: PropTypes.func,
     shouldShowUserIcon: PropTypes.bool,

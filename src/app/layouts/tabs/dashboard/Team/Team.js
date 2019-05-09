@@ -3,22 +3,18 @@ import PropTypes from 'prop-types';
 
 import styles from './styles';
 
-import Select from '../../../../components/Select';
+import TeamSelector from '../../../../components/TeamSelector';
 import PrimaryButton from '../../../../components/PrimaryButton';
 import DashboardListItem from '../../../../components/DashboardListItem';
 import AddButton from '../../../../components/AddButton';
 
 const addButtonText = 'ADD TEAM MEMBER';
 
-const Team = ({ selectedTeamIndex, teams, teamMembers, handleSelectTeam, handleAddTeamMember }) => {
+const Team = ({ teamMembers, handleAddTeamMember }) => {
   return (
     <div className="container">
       <div className="header-container">
-        <Select
-          selectedOptionIndex={selectedTeamIndex}
-          options={teams}
-          handleChange={handleSelectTeam}
-        />
+        <TeamSelector />
 
         <PrimaryButton handleClick={handleAddTeamMember}>{addButtonText}</PrimaryButton>
       </div>
@@ -44,14 +40,11 @@ const Team = ({ selectedTeamIndex, teams, teamMembers, handleSelectTeam, handleA
 };
 
 Team.propTypes = {
-  selectedTeamIndex: PropTypes.number,
-  teams: PropTypes.arrayOf(PropTypes.shape({})),
   teamMembers: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
     }),
   ),
-  handleSelectTeam: PropTypes.func,
   handleAddTeamMember: PropTypes.func,
 };
 Team.defaultProps = {};
