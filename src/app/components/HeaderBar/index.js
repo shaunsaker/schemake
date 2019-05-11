@@ -106,6 +106,7 @@ export class HeaderBarContainer extends React.Component {
   render() {
     const { isUserMenuOpen } = this.state;
     const { text, shouldShowUserIcon } = this.props;
+    const isLoginPage = window.location.pathname.indexOf('login') > -1;
     const actions = [];
 
     if (shouldShowUserIcon) {
@@ -120,7 +121,7 @@ export class HeaderBarContainer extends React.Component {
           handleClose: this.onUserMenuClose,
         },
       });
-    } else {
+    } else if (!isLoginPage) {
       actions.push({
         text: 'Login',
         href: routes.login.href,
