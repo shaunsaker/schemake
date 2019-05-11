@@ -6,7 +6,6 @@ import ActionProjectModal from '../../layouts/modals/ActionProjectModal';
 import DeleteUserModal from '../../layouts/modals/DeleteUserModal';
 import EditProfileModal from '../../layouts/modals/EditProfileModal';
 import ForgotPasswordModal from '../../layouts/modals/ForgotPasswordModal';
-import SendFeedbackModal from '../../layouts/modals/SendFeedbackModal';
 
 const modals = [
   {
@@ -24,10 +23,6 @@ const modals = [
   {
     key: modalsConfig.forgotPasswordModal.key,
     component: (props) => <ForgotPasswordModal {...props} />,
-  },
-  {
-    key: modalsConfig.sendFeedbackModal.key,
-    component: (props) => <SendFeedbackModal {...props} />,
   },
 ];
 
