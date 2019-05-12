@@ -7,8 +7,8 @@ import styles from './styles';
 import Layout from '../../../components/Layout';
 import Typography from '../../../components/Typography';
 import TabBar from '../../../components/TabBar';
-import Projects from '../../tabs/dashboard/Projects';
-import Team from '../../tabs/dashboard/Team';
+import Projects from './Projects';
+import Team from './Team';
 
 const Dashboard = ({ currentTabIndex, tabs, handleTabClick }) => {
   return (

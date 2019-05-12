@@ -8,8 +8,8 @@ import styles from './styles';
 import Layout from '../../../components/Layout';
 import Typography from '../../../components/Typography';
 import TabBar from '../../../components/TabBar';
-import General from '../../tabs/profile/General';
-import DangerZone from '../../tabs/profile/DangerZone';
+import General from './General';
+import DangerZone from './DangerZone';
 
 const Profile = ({ dateText, currentTabIndex, tabs, handleTabClick }) => {
   return (
