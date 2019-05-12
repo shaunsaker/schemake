@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Router from 'next/router';
-import { createUID } from 'js-simple-utils';
 
 import { routes } from '../../../config';
 import fields from './fields';
@@ -137,6 +136,7 @@ export class SignUpContainer extends React.Component {
     const url = `users/${uid}`;
     const document = {
       ...userData,
+      teams: [uid],
       dateCreated: Date.now(),
     };
 
@@ -146,7 +146,7 @@ export class SignUpContainer extends React.Component {
   saveTeam() {
     const { userData } = this.state;
     const { saveDocument, uid } = this.props;
-    const url = `teams/${createUID()}`;
+    const url = `teams/${uid}`;
     const { name } = userData;
     const teamName = `${name}'s team`;
     const document = {
