@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Router from 'next/router';
 
 import { routes } from '../../config';
-import userMenuItems from './userMenuItems';
 
 import HeaderBar from './HeaderBar';
 
@@ -12,9 +11,10 @@ export class HeaderBarContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onUserIconClick = this.onUserIconClick.bind(this);
-    this.onUserMenuItemClick = this.onUserMenuItemClick.bind(this);
-    this.onUserMenuClose = this.onUserMenuClose.bind(this);
+    this.onOpenUserMenu = this.onOpenUserMenu.bind(this);
+    this.onViewProfile = this.onViewProfile.bind(this);
+    this.onSignOut = this.onSignOut.bind(this);
+    this.onCloseUserMenu = this.onCloseUserMenu.bind(this);
     this.setIsUserMenuOpen = this.setIsUserMenuOpen.bind(this);
     this.redirectToPage = this.redirectToPage.bind(this);
     this.cancelSync = this.cancelSync.bind(this);
@@ -40,26 +40,24 @@ export class HeaderBarContainer extends React.Component {
 
   static defaultProps = {};
 
-  onUserIconClick() {
+  onOpenUserMenu() {
     const { isUserMenuOpen } = this.state;
 
     this.setIsUserMenuOpen(!isUserMenuOpen);
   }
 
-  onUserMenuItemClick(item) {
+  onViewProfile() {
     this.setIsUserMenuOpen(false);
-
-    // FIXME: This is not a very declarative approach
-    if (item.name === 'Profile') {
-      this.redirectToPage('profile');
-    } else if (item.name === 'Sign Out') {
-      this.cancelSync();
-      this.signOutUser();
-      this.redirectToPage('login');
-    }
+    this.redirectToPage('profile');
   }
 
-  onUserMenuClose() {
+  onSignOut() {
+    this.cancelSync();
+    this.signOutUser();
+    this.redirectToPage('login');
+  }
+
+  onCloseUserMenu() {
     this.setIsUserMenuOpen(false);
   }
 
@@ -113,12 +111,14 @@ export class HeaderBarContainer extends React.Component {
       actions.push({
         iconName: 'account-circle',
         tooltip: 'Toggle user menu',
-        handleClick: this.onUserIconClick,
+        handleClick: this.onOpenUserMenu,
         menu: {
-          items: userMenuItems,
+          items: [
+            { name: 'Profile', handleClick: this.onViewProfile },
+            { name: 'Sign Out', handleClick: this.onSignOut },
+          ],
           isOpen: isUserMenuOpen,
-          handleClick: this.onUserMenuItemClick,
-          handleClose: this.onUserMenuClose,
+          handleClose: this.onCloseUserMenu,
         },
       });
     } else if (!isLoginPage) {
