@@ -15,6 +15,7 @@ export class TeamContainer extends React.Component {
     this.onAddTeamMemberClick = this.onAddTeamMemberClick.bind(this);
     this.onRemoveTeamMember = this.onRemoveTeamMember.bind(this);
     this.syncTeams = this.syncTeams.bind(this);
+    this.syncTeamUserData = this.syncTeamUserData.bind(this);
     this.openActionTeamMemberModal = this.openActionTeamMemberModal.bind(this);
 
     this.state = {};
@@ -39,7 +40,15 @@ export class TeamContainer extends React.Component {
 
   componentDidMount() {
     this.syncTeams();
+
+    /*
+     * If we have the teams
+     * Go and get the teamUserData
+     */
+    // const {}
   }
+
+  componentDidUpdate(prevProps) {}
 
   onAddTeamMemberClick() {
     this.openActionTeamMemberModal();
@@ -55,6 +64,19 @@ export class TeamContainer extends React.Component {
     const url = `teams`;
     const queries = [['users', 'array-contains', uid]];
     const nextActions = [{ type: 'SET_TEAMS' }];
+
+    syncData({
+      url,
+      queries,
+      nextActions,
+    });
+  }
+
+  syncTeamUserData(teamId) {
+    const { uid, syncData } = this.props;
+    const url = `users`;
+    const queries = [['teams', 'array-contains', teamId]];
+    const nextActions = [{ type: 'SET_TEAM_USER_DATA' }];
 
     syncData({
       url,
