@@ -38,6 +38,7 @@ export class AddTeamMemberModalContainer extends React.Component {
      * Store
      */
     uid: PropTypes.string,
+    name: PropTypes.string,
 
     /*
      * withSaveDocument
@@ -78,13 +79,14 @@ export class AddTeamMemberModalContainer extends React.Component {
   }
 
   saveTeamMember(email) {
-    const { uid, teamId, saveDocument } = this.props;
+    const { uid, teamId, name, saveDocument } = this.props;
     const url = `_invites/${createUId()}`;
     const document = {
       uid,
       dateCreated: Date.now(),
       teamId,
       email,
+      invitee: name,
     };
 
     saveDocument({
@@ -144,11 +146,13 @@ export class AddTeamMemberModalContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { user } = state;
+  const { user, userData } = state;
   const { uid } = user;
+  const { name } = userData;
 
   return {
     uid,
+    name,
   };
 };
 
