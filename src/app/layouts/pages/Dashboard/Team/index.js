@@ -17,7 +17,8 @@ export class TeamContainer extends React.Component {
     this.syncTeams = this.syncTeams.bind(this);
     this.handleSyncTeamUserData = this.handleSyncTeamUserData.bind(this);
     this.syncTeamUserData = this.syncTeamUserData.bind(this);
-    this.openActionTeamMemberModal = this.openActionTeamMemberModal.bind(this);
+    this.getSelectedTeam = this.getSelectedTeam.bind(this);
+    this.openAddTeamMemberModal = this.openAddTeamMemberModal.bind(this);
 
     this.state = {};
   }
@@ -72,12 +73,11 @@ export class TeamContainer extends React.Component {
   }
 
   onAddTeamMember() {
-    this.openActionTeamMemberModal();
+    this.openAddTeamMemberModal();
   }
 
   onRemoveTeamMember(teamMember) {
     // TODO:
-    console.log(teamMember);
   }
 
   syncTeams() {
@@ -94,8 +94,7 @@ export class TeamContainer extends React.Component {
   }
 
   handleSyncTeamUserData() {
-    const { teams, selectedTeamIndex } = this.props;
-    const selectedTeam = teams[selectedTeamIndex];
+    const selectedTeam = this.getSelectedTeam();
     const { id } = selectedTeam;
 
     this.syncTeamUserData(id);
@@ -114,24 +113,44 @@ export class TeamContainer extends React.Component {
     });
   }
 
-  openActionTeamMemberModal() {
+  getSelectedTeam() {
+    const { teams, selectedTeamIndex } = this.props;
+    const selectedTeam = teams[selectedTeamIndex];
+
+    return selectedTeam;
+  }
+
+  openAddTeamMemberModal() {
+    /*
+     * Get the teamId from the selectedTeam
+     */
+    const selectedTeam = this.getSelectedTeam();
+    const { id: teamId } = selectedTeam;
+
+    /*
+     * Dispatch the action
+     */
     const { dispatch } = this.props;
 
     dispatch({
       type: 'TOGGLE_MODAL',
       payload: {
-        key: modals.actionTeamMemberModal.key,
+        key: modals.addTeamMemberModal.key,
+        props: {
+          teamId,
+        },
       },
     });
   }
 
   render() {
-    const { selectedTeamIndex, teams, teamUserData } = this.props;
-    const selectedTeam = teams[selectedTeamIndex];
+    const selectedTeam = this.getSelectedTeam();
 
     /*
      * Map the team data to the required UI data
      */
+    const { teamUserData } = this.props;
+
     const teamMembers = selectedTeam
       ? selectedTeam.users.map((uid) => {
           const userData = teamUserData.length
