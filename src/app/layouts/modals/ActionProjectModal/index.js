@@ -25,7 +25,7 @@ export class ActionProjectModalContainer extends React.Component {
      * Parent
      */
     isOpen: PropTypes.bool,
-    projectID: PropTypes.shape({}), // if this is passed we are editing an existing project
+    projectId: PropTypes.shape({}), // if this is passed we are editing an existing project
     handleClose: PropTypes.func.isRequired,
 
     /*
@@ -63,29 +63,29 @@ export class ActionProjectModalContainer extends React.Component {
   }
 
   saveProject({ name }) {
-    const { saveDocument, projectID } = this.props;
+    const { saveDocument, projectId } = this.props;
     const now = Date.now();
     const document = {
       name,
     };
-    let projectDocumentID;
+    let projectDocumentId;
 
-    if (projectID) {
-      projectDocumentID = projectID;
+    if (projectId) {
+      projectDocumentId = projectId;
       document.dateModified = now;
     } else {
       const { uid } = this.props;
 
-      projectDocumentID = uid;
+      projectDocumentId = uid;
       document.dateCreated = now;
     }
 
     /*
-     * If I am editing then I need to use the projectID
+     * If I am editing then I need to use the projectId
      * Because it might be a team member's project
      */
 
-    const url = `projects/${projectDocumentID}`;
+    const url = `projects/${projectDocumentId}`;
 
     saveDocument({
       url,
@@ -100,9 +100,9 @@ export class ActionProjectModalContainer extends React.Component {
   }
 
   render() {
-    const { isOpen, projectID, isSaving } = this.props;
+    const { isOpen, projectId, isSaving } = this.props;
     const isDisabled = isSaving;
-    const actionText = projectID ? 'Edit' : 'Add';
+    const actionText = projectId ? 'Edit' : 'Add';
     const title = `${actionText} Project`;
     const description = `${actionText} your project's details.`;
     const form = {

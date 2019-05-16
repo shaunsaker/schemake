@@ -5,7 +5,7 @@ import ReactGA from 'react-ga';
 
 import { analytics } from '../../config';
 
-const { trackingID } = analytics;
+const { trackingId } = analytics;
 const isDev = !process.env.REACT_APP_ENV || process.env.REACT_APP_ENV === 'dev';
 
 export class AnalyticsHandler extends React.Component {
@@ -13,7 +13,7 @@ export class AnalyticsHandler extends React.Component {
     super(props);
 
     this.initialiseGA = this.initialiseGA.bind(this);
-    this.setUserID = this.setUserID.bind(this);
+    this.setUserId = this.setUserId.bind(this);
   }
 
   static get propTypes() {
@@ -28,7 +28,7 @@ export class AnalyticsHandler extends React.Component {
     this.initialiseGA();
 
     if (uid) {
-      this.setUserID(uid);
+      this.setUserId(uid);
     }
   }
 
@@ -36,15 +36,15 @@ export class AnalyticsHandler extends React.Component {
     const { uid } = this.props;
 
     if (uid && !prevProps.uid) {
-      this.setUserID(uid);
+      this.setUserId(uid);
     }
   }
 
   initialiseGA() {
-    ReactGA.initialize(trackingID, { debug: isDev });
+    ReactGA.initialize(trackingId, { debug: isDev });
   }
 
-  setUserID(uid) {
+  setUserId(uid) {
     ReactGA.set({ userId: uid });
   }
 

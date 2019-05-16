@@ -51,8 +51,8 @@ export class ProfileContainer extends React.Component {
     /*
      * Get the current tab index from the query params
      */
-    const { tabID } = getQueryStringParams(window.location.search);
-    const currentTabIndex = tabs.findIndex((tab) => tab.id === tabID);
+    const { tabId } = getQueryStringParams(window.location.search);
+    const currentTabIndex = tabs.findIndex((tab) => tab.id === tabId);
 
     return currentTabIndex > -1 ? currentTabIndex : 0;
   }
@@ -77,14 +77,14 @@ export class ProfileContainer extends React.Component {
 
   handleSetRoute(tabIndex) {
     /*
-     * Get the tabID
+     * Get the tabId
      */
-    const tabID = tabs[tabIndex].id;
+    const tabId = tabs[tabIndex].id;
 
     Router.push({
       pathname: window.location.pathname,
       query: {
-        tabID,
+        tabId,
       },
     });
   }

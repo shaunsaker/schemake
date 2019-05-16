@@ -21,7 +21,7 @@ const routes = {
   dashboard: {
     title: getTitle('Dashboard'),
     description: SEO.description,
-    href: '/dashboard?tabID=projects',
+    href: '/dashboard?tabId=projects',
   },
   support: {
     title: getTitle('Support'),
@@ -31,7 +31,7 @@ const routes = {
   profile: {
     title: getTitle('Profile'),
     description: SEO.description,
-    href: '/profile?tabID=general',
+    href: '/profile?tabId=general',
   },
 };
 

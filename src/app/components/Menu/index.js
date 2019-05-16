@@ -4,8 +4,8 @@ import { Menu, MenuItem } from '@material-ui/core';
 
 import muiStyles from './muiStyles';
 
-const MenuComponent = ({ items, anchorElID, isOpen, handleClose }) => {
-  const anchorEl = document.getElementById(anchorElID);
+const MenuComponent = ({ items, anchorElId, isOpen, handleClose }) => {
+  const anchorEl = document.getElementById(anchorElId);
 
   return (
     <Menu anchorEl={anchorEl} open={isOpen} onClose={handleClose}>
@@ -36,7 +36,7 @@ MenuComponent.propTypes = {
       handleClick: PropTypes.func.isRequired,
     }),
   ),
-  anchorElID: PropTypes.string,
+  anchorElId: PropTypes.string,
   isOpen: PropTypes.bool,
   handleClose: PropTypes.func.isRequired,
 };

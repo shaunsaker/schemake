@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createUID } from 'js-simple-utils';
+import { createUId } from 'js-simple-utils';
 
 import fields from './fields';
 import { copy } from '../../../config';
@@ -54,7 +54,7 @@ export class SupportContainer extends React.Component {
 
   saveForm(form) {
     const { saveDocument } = this.props;
-    const url = `_support/${createUID()}`;
+    const url = `_support/${createUId()}`;
     const document = {
       ...form,
       dateCreated: Date.now(),

@@ -17,7 +17,7 @@ const ActionPanel = ({ actions, color }) => {
         const menuComponent = action.menu && (
           <Menu
             items={action.menu.items}
-            anchorElID={id}
+            anchorElId={id}
             isOpen={action.menu.isOpen}
             handleClick={action.menu.handleClick}
             handleClose={action.menu.handleClose}

@@ -10,8 +10,8 @@ import IconButton from '../IconButton';
 import Menu from '../Menu';
 
 const DashboardListItem = ({ avatarText, title, description, menu, handleMenuButtonClick }) => {
-  const menuAnchorElID = 'menu-button';
-  const menuComponent = menu && <Menu {...menu} anchorElID="menu-button" />;
+  const menuAnchorElId = 'menu-button';
+  const menuComponent = menu && <Menu {...menu} anchorElId="menu-button" />;
 
   return (
     <Card>
@@ -31,7 +31,7 @@ const DashboardListItem = ({ avatarText, title, description, menu, handleMenuBut
         </div>
 
         <div className="menu-button-container">
-          <div id={menuAnchorElID}>
+          <div id={menuAnchorElId}>
             <IconButton iconName="menu" tooltip="Toggle menu" handleClick={handleMenuButtonClick} />
           </div>
 
