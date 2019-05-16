@@ -12,9 +12,10 @@ export class TeamContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onAddTeamMemberClick = this.onAddTeamMemberClick.bind(this);
+    this.onAddTeamMember = this.onAddTeamMember.bind(this);
     this.onRemoveTeamMember = this.onRemoveTeamMember.bind(this);
     this.syncTeams = this.syncTeams.bind(this);
+    this.handleSyncTeamUserData = this.handleSyncTeamUserData.bind(this);
     this.syncTeamUserData = this.syncTeamUserData.bind(this);
     this.openActionTeamMemberModal = this.openActionTeamMemberModal.bind(this);
 
@@ -27,8 +28,14 @@ export class TeamContainer extends React.Component {
      */
     dispatch: PropTypes.func,
     selectedTeamIndex: PropTypes.number,
-    teams: PropTypes.arrayOf(PropTypes.shape({})),
+    teams: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        users: PropTypes.arrayOf(PropTypes.string),
+      }),
+    ),
     uid: PropTypes.string,
+    teamUserData: PropTypes.arrayOf(PropTypes.shape({})),
 
     /*
      * withSyncData
@@ -43,14 +50,28 @@ export class TeamContainer extends React.Component {
 
     /*
      * If we have the teams
-     * Go and get the teamUserData
+     * Go and get the teamUserData for the selectedTeam
      */
-    // const {}
+    const { teams } = this.props;
+
+    if (teams.length) {
+      this.handleSyncTeamUserData();
+    }
   }
 
-  componentDidUpdate(prevProps) {}
+  componentDidUpdate(prevProps) {
+    const { teams } = this.props;
 
-  onAddTeamMemberClick() {
+    /*
+     * If teams data has just come in
+     * Go and get the teamUserData for the selectedTeam
+     */
+    if (teams.length && !prevProps.teams.length) {
+      this.handleSyncTeamUserData();
+    }
+  }
+
+  onAddTeamMember() {
     this.openActionTeamMemberModal();
   }
 
@@ -72,8 +93,16 @@ export class TeamContainer extends React.Component {
     });
   }
 
+  handleSyncTeamUserData() {
+    const { teams, selectedTeamIndex } = this.props;
+    const selectedTeam = teams[selectedTeamIndex];
+    const { id } = selectedTeam;
+
+    this.syncTeamUserData(id);
+  }
+
   syncTeamUserData(teamId) {
-    const { uid, syncData } = this.props;
+    const { syncData } = this.props;
     const url = `users`;
     const queries = [['teams', 'array-contains', teamId]];
     const nextActions = [{ type: 'SET_TEAM_USER_DATA' }];
@@ -97,7 +126,7 @@ export class TeamContainer extends React.Component {
   }
 
   render() {
-    const { selectedTeamIndex, teams } = this.props;
+    const { selectedTeamIndex, teams, teamUserData } = this.props;
     const selectedTeam = teams[selectedTeamIndex];
 
     /*
@@ -105,9 +134,13 @@ export class TeamContainer extends React.Component {
      */
     const teamMembers = selectedTeam
       ? selectedTeam.users.map((uid) => {
-          const avatarText = 'S'; // TODO:
-          const title = 'Shaun Saker'; // TODO:
-          const description = 'sakershaun@gmail.com'; // TODO:
+          const userData = teamUserData.length
+            ? teamUserData.filter((item) => item.id === uid)[0]
+            : {};
+          const { name, email } = userData;
+          const avatarText = name && name.slice(0, 1);
+          const title = name;
+          const description = email;
           const menu = {
             items: [
               {
@@ -132,7 +165,7 @@ export class TeamContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { teams, user, appState } = state;
+  const { teams, user, appState, teamUserData } = state;
   const { selectedTeamIndex } = appState;
   const { uid } = user;
 
@@ -140,6 +173,7 @@ function mapStateToProps(state) {
     selectedTeamIndex,
     teams,
     uid,
+    teamUserData,
   };
 }
 
