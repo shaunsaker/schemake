@@ -1,5 +1,5 @@
 import { call, put, take, takeEvery, all } from 'redux-saga/effects';
-import createUId from 'js-simple-utils/dist/createUId'; // FIXME: export correctly
+import createUID from 'js-simple-utils/dist/createUID'; // FIXME: export correctly
 
 import createChannel from './createChannel';
 import onError from '../onError';
@@ -19,7 +19,7 @@ export default function* eventChannelSaga(args, action) {
 
   try {
     const { payload } = action;
-    const eventId = shouldTrackEvent && createUId();
+    const eventId = shouldTrackEvent && createUID();
 
     // If shouldTrackEvent
     // Add a pendingTransaction to the store

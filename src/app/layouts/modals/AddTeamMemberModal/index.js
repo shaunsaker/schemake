@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createUId } from 'js-simple-utils';
+import { createUID } from 'js-simple-utils';
 
 import fields from './fields';
 
@@ -80,7 +80,7 @@ export class AddTeamMemberModalContainer extends React.Component {
 
   saveTeamMember(email) {
     const { uid, teamId, name, saveDocument } = this.props;
-    const url = `_invites/${createUId()}`;
+    const url = `_invites/${createUID()}`;
     const document = {
       uid,
       dateCreated: Date.now(),

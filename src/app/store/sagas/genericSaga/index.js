@@ -1,5 +1,5 @@
 import { call, put, all } from 'redux-saga/effects';
-import createUId from 'js-simple-utils/dist/createUId'; // FIXME: export correctly
+import createUID from 'js-simple-utils/dist/createUID'; // FIXME: export correctly
 
 import onError from '../onError';
 import prepareNextActions from '../prepareNextActions';
@@ -17,7 +17,7 @@ export default function* genericSaga(args, action) {
 
   try {
     const { payload } = action;
-    const eventId = shouldTrackEvent && createUId();
+    const eventId = shouldTrackEvent && createUID();
 
     // If shouldTrackEvent
     // Add a pendingTransaction to the store
