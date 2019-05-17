@@ -1,5 +1,5 @@
 const onDeleteUserAdded = require('./onDeleteUserAdded');
-const onInviteAdded = require('./onDeleteUserAdded');
+const onInviteAdded = require('./onInviteAdded');
 const onSupportAdded = require('./onSupportAdded');
 
 exports.onDeleteUserAdded = onDeleteUserAdded;
