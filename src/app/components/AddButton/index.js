@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ButtonBase, Card } from '@material-ui/core';
+import { ButtonBase } from '@material-ui/core';
 
 import styles from './styles';
 import { colors } from '../../static/styles/styleConstants';
@@ -11,17 +11,15 @@ import Typography from '../Typography';
 const AddButton = ({ children, handleClick }) => {
   return (
     <ButtonBase onClick={handleClick} style={{ width: '100%' }}>
-      <Card style={{ width: '100%' }}>
-        <div className="container">
-          <div className="icon-container">
-            <Icon name="add" size={36} />
-          </div>
-
-          <Typography type="paragraph" bold color={colors.secondaryText}>
-            {children}
-          </Typography>
+      <div className="container">
+        <div className="icon-container">
+          <Icon name="add" size={36} color={colors.secondaryText} />
         </div>
-      </Card>
+
+        <Typography type="paragraph" bold color={colors.secondaryText}>
+          {children}
+        </Typography>
+      </div>
 
       <style jsx>{styles}</style>
     </ButtonBase>
