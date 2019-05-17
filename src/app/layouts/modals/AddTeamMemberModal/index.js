@@ -8,6 +8,7 @@ import fields from './fields';
 import AddTeamMemberModal from './AddTeamMemberModal';
 
 import withSaveDocument from '../../../enhancers/withSaveDocument';
+import withSyncData from '../../../enhancers/withSyncData';
 
 export class AddTeamMemberModalContainer extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export class AddTeamMemberModalContainer extends React.Component {
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onClose = this.onClose.bind(this);
+    this.syncUserData = this.syncUserData.bind(this);
     this.setEmail = this.setEmail.bind(this);
     this.saveTeamMember = this.saveTeamMember.bind(this);
     this.setIsSuccessful = this.setIsSuccessful.bind(this);
@@ -46,9 +48,18 @@ export class AddTeamMemberModalContainer extends React.Component {
     saveDocument: PropTypes.func,
     isSaving: PropTypes.bool,
     hasSuccess: PropTypes.bool,
+
+    /*
+     * withSyncData
+     */
+    syncData: PropTypes.func,
   };
 
   static defaultProps = {};
+
+  componentDidMount() {
+    this.syncUserData();
+  }
 
   componentDidUpdate(prevProps) {
     /*
@@ -70,6 +81,17 @@ export class AddTeamMemberModalContainer extends React.Component {
 
   onClose() {
     this.closeModal();
+  }
+
+  syncUserData() {
+    const { uid, syncData } = this.props;
+    const url = `users/${uid}`;
+    const nextActions = [{ type: 'SET_USER_DATA' }];
+
+    syncData({
+      url,
+      nextActions,
+    });
   }
 
   setEmail(email) {
@@ -156,4 +178,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withSaveDocument(connect(mapStateToProps)(AddTeamMemberModalContainer));
+export default withSyncData(
+  withSaveDocument(connect(mapStateToProps)(AddTeamMemberModalContainer)),
+);
