@@ -149,8 +149,8 @@ export class AddTeamMemberModalContainer extends React.Component {
     if (isSuccessful) {
       const { email } = this.state;
 
-      title = 'Add Team Member Success.';
-      description = `We'll send an invite to ${email} shortly.`;
+      title = 'Great Success.';
+      description = `We'll send an invite to ${email}, inviting them to your team shortly.`;
       form = null;
     }
 
