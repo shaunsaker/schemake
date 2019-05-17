@@ -11,6 +11,7 @@ const styles = css`
   }
 
   .icon-container {
+    margin-top: -2px; /* remove line height */
   }
 `;
 
