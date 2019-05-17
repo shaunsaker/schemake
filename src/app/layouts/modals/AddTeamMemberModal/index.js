@@ -80,6 +80,7 @@ export class AddTeamMemberModalContainer extends React.Component {
   }
 
   onClose() {
+    this.setIsSuccessful(false);
     this.closeModal();
   }
 
