@@ -7,7 +7,7 @@
   "author": "Shaun Saker <sakershaun@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "cp ./src/app/.env.dev ./src/app/.env && next dev ./src/app",
+    "dev": "cp ./src/app/.env.dev ./src/app/.env && next dev ./src/app -p 2412",
     "start": "next start ./src/app",
     "storybook": "start-storybook -p 6006 -s ./src/app",
     "build-storybook": "build-storybook -c .storybook -o ./dist/storybook -s ./dist",
