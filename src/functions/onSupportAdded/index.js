@@ -7,11 +7,14 @@ sgMail.setApiKey(config.sendGridAPIKey); // FIXME: Use .env
 
 const onSupportAdded = functions.firestore.document('_support/{supportId}').onCreate((snapshot) => {
   const values = snapshot.data();
+  const name = values.name;
+  const email = values.email;
+  const message = values.message;
   const mailOptions = {
-    from: `${values.name} <${values.email}>`,
+    from: `${name} <${email}>`,
     to: config.appEmail,
     subject: 'New Support Item',
-    text: values.message,
+    text: message,
   };
 
   return sgMail

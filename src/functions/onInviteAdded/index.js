@@ -6,7 +6,10 @@ const config = require('../config');
 sgMail.setApiKey(config.sendGridAPIKey); // FIXME: Use .env
 
 const onInviteAdded = functions.firestore.document('_invites/{inviteId}').onCreate((snapshot) => {
-  const { email, teamId, invitee } = snapshot.data();
+  const values = snapshot.data();
+  const email = values.email;
+  const teamId = values.teamId;
+  const invitee = values.invitee;
   const mailOptions = {
     from: `${config.appName} <${config.appEmail}>`,
     to: email,
