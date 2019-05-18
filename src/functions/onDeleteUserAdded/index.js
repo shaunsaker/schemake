@@ -1,11 +1,11 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
+admin.initializeApp({});
+
 const onDeleteUserAdded = functions.firestore
   .document('_deleteUsers/{uid}')
   .onCreate((snapshot) => {
-    admin.initializeApp({});
-
     const uid = snapshot.id;
 
     admin

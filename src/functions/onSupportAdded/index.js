@@ -1,16 +1,16 @@
 const functions = require('firebase-functions');
-const sgMail = require('@sendgrid/mail');
+const sendGrid = require('@sendgrid/mail');
 
 const config = require('../config');
 
-sgMail.setApiKey(config.sendGridAPIKey); // FIXME: Use .env
+sendGrid.setApiKey(config.sendGridAPIKey); // FIXME: Use .env
 
 const onSupportAdded = functions.firestore.document('_support/{supportId}').onCreate((snapshot) => {
   const values = snapshot.data();
   const name = values.name;
   const email = values.email;
   const message = values.message;
-  const mailOptions = {
+  const mail = {
     from: {
       name: config.appName,
       email: config.appEmail,
@@ -20,8 +20,8 @@ const onSupportAdded = functions.firestore.document('_support/{supportId}').onCr
     text: message,
   };
 
-  return sgMail
-    .send(mailOptions)
+  return sendGrid
+    .send(mail)
     .then(() => console.log('Email sent successfully'))
     .catch((error) => console.log(error.message));
 });
