@@ -19,7 +19,6 @@ export class SignUpContainer extends React.Component {
     this.setUserData = this.setUserData.bind(this);
     this.createUserWithEmailAndPassword = this.createUserWithEmailAndPassword.bind(this);
     this.saveUser = this.saveUser.bind(this);
-    this.saveTeam = this.saveTeam.bind(this);
     this.redirectToPage = this.redirectToPage.bind(this);
 
     this.state = {
@@ -58,7 +57,6 @@ export class SignUpContainer extends React.Component {
     if (isLoading && !isAnonymous && prevProps.isAnonymous) {
       this.setIsLoading(false);
       this.saveUser();
-      this.saveTeam();
     }
 
     /*
@@ -136,24 +134,7 @@ export class SignUpContainer extends React.Component {
     const url = `users/${uid}`;
     const document = {
       ...userData,
-      teams: [uid],
       dateCreated: Date.now(),
-    };
-
-    saveDocument({ url, document });
-  }
-
-  saveTeam() {
-    const { userData } = this.state;
-    const { saveDocument, uid } = this.props;
-    const url = `teams/${uid}`;
-    const { name } = userData;
-    const teamName = `${name}'s team`;
-    const document = {
-      name: teamName,
-      createdBy: uid,
-      dateCreated: Date.now(),
-      users: [uid],
     };
 
     saveDocument({ url, document });
