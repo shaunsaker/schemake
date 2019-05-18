@@ -19,7 +19,9 @@ const SignUp = ({ form }) => {
             Create a {app.name} account
           </Typography>
 
-          <Typography type="paragraph">Enter your details.</Typography>
+          <Typography type="paragraph">
+            Enter your details below to join <b>{app.name}</b>.
+          </Typography>
         </div>
 
         <Form
