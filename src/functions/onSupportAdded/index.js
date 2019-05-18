@@ -11,7 +11,10 @@ const onSupportAdded = functions.firestore.document('_support/{supportId}').onCr
   const email = values.email;
   const message = values.message;
   const mailOptions = {
-    from: `${name} <${email}>`,
+    from: {
+      name: config.appName,
+      email: config.appEmail,
+    },
     to: config.appEmail,
     subject: 'New Support Item',
     text: message,

@@ -1,11 +1,11 @@
 const config = {
   appName: 'schemake',
-  appEmail: 'sakershaun@gmail.com', // TODO: Update this
+  appEmail: 'shaun@schemake.com',
   unsubscribe: {
     address: 'Blouberg',
     city: 'Cape Town',
     state: 'Western Cape',
-    zip: 7439,
+    zip: '7439,
   },
   appLink: 'https://www.schemake.com',
   sendGridAPIKey: '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',
