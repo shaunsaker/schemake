@@ -14,7 +14,6 @@ import Head from '../components/Head';
 
 import AnalyticsHandler from '../handlers/AnalyticsHandler';
 import AuthHandler from '../handlers/AuthHandler';
-import DataSyncingHandler from '../handlers/DataSyncingHandler';
 import ErrorHandler from '../handlers/ErrorHandler';
 import LoadingHandler from '../handlers/LoadingHandler';
 import ModalsHandler from '../handlers/ModalsHandler';
@@ -63,8 +62,6 @@ export class TheApp extends App {
                   <AnalyticsHandler />
 
                   <AuthHandler />
-
-                  <DataSyncingHandler />
 
                   <LoadingHandler />
 
