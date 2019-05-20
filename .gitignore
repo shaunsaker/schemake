@@ -23,4 +23,4 @@ src/public/sitemap.xml
 firebase-debug.log
 .firebaserc
 credential.json
-
+firestore-debug.log

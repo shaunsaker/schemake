@@ -11,14 +11,19 @@ const onUserAdded = functions.firestore.document('users/{uid}').onCreate(async (
 
   /*
    * Get the user's invites (if any)
+   * NOTE: email has to be defined for this to work
    */
-  const usersInvites = await db.collection('_invites').where('email', '==', email);
+  const userInvites = await db
+    .collection('_invites')
+    .where('email', '==', email)
+    .get();
 
   /*
    * Does the user have invites?
    */
   if (userInvites.length) {
     // TODO:
+    console.log('HERE');
   } else {
     /*
      * New user with no invite
@@ -38,7 +43,7 @@ const onUserAdded = functions.firestore.document('users/{uid}').onCreate(async (
       users: [uid],
     };
 
-    await db.collection('teams').addDocument(document);
+    await db.collection('teams').add(document);
 
     return 'User added to team successfully.';
   }

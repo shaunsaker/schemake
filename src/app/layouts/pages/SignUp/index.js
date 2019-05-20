@@ -80,9 +80,10 @@ export class SignUpContainer extends React.Component {
   }
 
   onSubmit({ name, organisation, email, password }) {
-    this.setIsLoading(true);
-    this.setUserData({ name, organisation, email });
-    this.createUserWithEmailAndPassword({ email, password });
+    // this.setIsLoading(true);
+    // this.setUserData({ name, organisation, email });
+    // this.createUserWithEmailAndPassword({ email, password });
+    this.saveUser({ name, organisation, email, password });
   }
 
   setIsLoading(isLoading) {
@@ -128,8 +129,8 @@ export class SignUpContainer extends React.Component {
     });
   }
 
-  saveUser() {
-    const { userData } = this.state;
+  saveUser(userData) {
+    // const { userData } = this.state;
     const { saveDocument, uid } = this.props;
     const url = `users/${uid}`;
     const document = {

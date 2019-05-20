@@ -7,9 +7,7 @@ sendGrid.setApiKey(config.sendGridAPIKey); // FIXME: Use .env
 
 const onInviteAdded = functions.firestore.document('_invites/{inviteId}').onCreate((snapshot) => {
   const values = snapshot.data();
-  const email = values.email;
-  const teamId = values.teamId;
-  const invitee = values.invitee;
+  const { email, teamId, invitee } = values;
   const mail = {
     from: {
       name: config.appName,

@@ -7,9 +7,7 @@ sendGrid.setApiKey(config.sendGridAPIKey); // FIXME: Use .env
 
 const onSupportAdded = functions.firestore.document('_support/{supportId}').onCreate((snapshot) => {
   const values = snapshot.data();
-  const name = values.name;
-  const email = values.email;
-  const message = values.message;
+  const { name, email, message } = values;
   const mail = {
     from: {
       name: config.appName,
