@@ -1267,9 +1267,9 @@
     lodash.merge "^4.6.1"
     through2 "^3.0.0"
 
-"@google-cloud/firestore@github:googleapis/nodejs-firestore":
+"@google-cloud/firestore@googleapis/nodejs-firestore":
   version "1.3.0"
-  resolved "https://codeload.github.com/googleapis/nodejs-firestore/tar.gz/b4438f751f6ff4484e36ed428c4f7167c61b27e4"
+  resolved "https://codeload.github.com/googleapis/nodejs-firestore/tar.gz/b2e6d0239a3993f84038c3853e2c88c0a3b09903"
   dependencies:
     bun "^0.0.12"
     deep-equal "^1.0.1"
@@ -3932,7 +3932,7 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
 
-body-parser@1.19.0:
+body-parser@1.19.0, body-parser@^1.19.0:
   version "1.19.0"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.19.0.tgz#96b2709e57c9c4e09a6fd66a8fd979844f69f08a"
   dependencies:
@@ -6243,12 +6243,13 @@ firebase-admin@^7.3.0:
     "@google-cloud/firestore" "^1.2.0"
     "@google-cloud/storage" "^2.3.0"
 
-firebase-tools@^6.7.1:
-  version "6.9.2"
-  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-6.9.2.tgz#2cb6da6287d6d0c95256804018644c173be3e6cb"
+firebase-tools@^6.10.0:
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-6.10.0.tgz#ccd21d80ec0100b8a18b79addb5db667d4e31415"
   dependencies:
     JSONStream "^1.2.1"
     archiver "^2.1.1"
+    body-parser "^1.19.0"
     chokidar "^2.1.5"
     cjson "^0.3.1"
     cli-color "^1.2.0"

@@ -1,0 +1,35 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /_feedback/{feedbackId} {
+      allow create: if request.auth.uid != null; // only allow a create if authed
+    }
+    
+    match /_support/{supportId} {
+      allow create: if request.auth.uid != null; // only allow a create if authed
+    }
+    
+    match /users/{userId} {
+    	allow get: if request.auth.uid == userId; // only allow a get on a user's own document
+      allow list: if request.auth.uid != null; // TODO
+      allow create, update: if request.auth.uid == userId; // only allow a write on a user's own document
+    }
+    
+    match /_deleteUsers/{deleteUserId} {
+      allow create: if request.auth.uid == deleteUserId; // only a allow a create once at the requesting user's uid
+    }
+    
+    match /projects/{projectId} {
+      allow create: if request.auth.uid == projectId; // TODO
+    }
+    
+    match /teams/{teamId} {
+      allow create: if request.resource.data.createdBy == request.auth.uid; // only allow a create if the requesting user's uid is attached as createdBy
+      allow list: if request.auth.uid in resource.data.users; // only allow a list if the requesting user's uid is in the users array
+    }
+    
+    match /_invites/{inviteId} {
+    	allow create: if request.resource.data.uid == request.auth.uid;
+      allow list: if request.auth.uid != null;
+    }
+  }
+}
