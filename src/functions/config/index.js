@@ -5,7 +5,7 @@ const config = {
     address: 'Blouberg',
     city: 'Cape Town',
     state: 'Western Cape',
-    zip: '7439,
+    zip: '7439',
   },
   appLink: 'https://www.schemake.com',
   sendGridAPIKey: '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',
