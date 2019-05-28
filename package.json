@@ -97,5 +97,8 @@
     "template": "keepachangelog",
     "unreleased": true,
     "commitLimit": false
+  },
+  "engines": {
+    "node": ">=10"
   }
 }
