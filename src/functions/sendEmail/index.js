@@ -33,14 +33,11 @@ const sendEmail = ({ from, to, template, locals }) => {
     transport,
     views: {
       root,
-    },
-    send: false,
-    juice: true,
-    juiceResources: {
-      webResources: {
-        relativeTo: path.join(root, 'templates'),
+      options: {
+        extension: 'handlebars',
       },
     },
+    send: true,
   });
 
   /*

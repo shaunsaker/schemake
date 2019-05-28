@@ -1,16 +1,15 @@
-const functions = require('firebase-functions');
-
 const config = require('../config');
 const sendEmail = require('../sendEmail');
 
 const emailOptions = {
   from: `${config.appUsername} <${config.appEmail}>`,
   to: 'sakershaun@gmail.com',
-  template: 'invite',
+  template: 'support',
   locals: {
-    invitee: 'Shaun Saker',
-    appLink: config.appLink,
-    signupLink: `${config.appLink}/signup`,
+    name: 'Shaun Saker',
+    email: 'sakershaun@gmail.com',
+    message: 'Hi',
+    appName: 'schemake',
   },
 };
 

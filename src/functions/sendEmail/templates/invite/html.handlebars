@@ -1,0 +1,51 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Schemake Invite</title>
+  <style>
+    body {
+      font-family: 'Roboto', 'Helvetica', sans-serif;
+      padding: 16px 24px;
+      color: rgba(38, 50, 56, 1.0);
+      font-size: 16px;
+    }
+
+    a {
+      color: #00A8DD;
+    }
+
+    .button {
+      background-color: #FF5722;
+      padding: 8px 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Hi,</h1>
+
+  <p>{{invitee}} added you to their team on <a href='{{appLink}}' target="_blank">{{appName}}</a>.</p>
+
+  <p>Follow the link below to join them.</p>
+
+  <br />
+
+  <p><a class='button' href='{{signupLink}}' target='_blank'>Join {{invitee}}</a>.</p>
+
+  <br />
+
+  <p>Cheers,</p>
+
+  <p>Shaun</p>
+</body>
+
+</html>

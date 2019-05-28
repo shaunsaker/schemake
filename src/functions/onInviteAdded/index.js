@@ -12,6 +12,7 @@ const onInviteAdded = functions.firestore.document('_invites/{inviteId}').onCrea
     template: 'invite',
     locals: {
       invitee,
+      appName: config.appName,
     },
   };
 
