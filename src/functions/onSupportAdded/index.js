@@ -8,7 +8,7 @@ const onSupportAdded = functions.firestore.document('_support/{supportId}').onCr
   const { name, email, message } = values;
   const emailOptions = {
     from: `${config.appUsername} <${config.appEmail}>`,
-    to: email,
+    to: config.appEmail,
     template: 'support',
     locals: {
       name,

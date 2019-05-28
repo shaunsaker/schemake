@@ -1,7 +1,7 @@
 const config = {
   appUsername: 'Shaun',
   appName: 'schemake',
-  appEmail: 'shaun@schemake.com',
+  appEmail: 'sakershaun@gmail.com', // TODO: Update this
   appLink: 'https://www.schemake.com',
 };
 
