@@ -13,6 +13,8 @@ const onInviteAdded = functions.firestore.document('_invites/{inviteId}').onCrea
     locals: {
       invitee,
       appName: config.appName,
+      appLink: config.appLink,
+      signupLink: `${config.appLink}/signup`,
     },
   };
 
