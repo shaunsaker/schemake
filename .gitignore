@@ -20,7 +20,7 @@ src/public/robots.txt
 # firebase
 .firebase
 firebase-debug.log
-credential.json
+credentials.json
 firestore-debug.log
 
 # functions
