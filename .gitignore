@@ -16,10 +16,12 @@ settings.json
 out
 dist
 src/public/robots.txt
-src/public/sitemap.xml
 
 # firebase
 .firebase
 firebase-debug.log
 credential.json
 firestore-debug.log
+
+# functions
+__test__
