@@ -21,9 +21,35 @@ const onUserAdded = functions.firestore.document('users/{uid}').onCreate(async (
   /*
    * Does the user have invites?
    */
-  if (userInvites.length) {
-    // TODO:
-    console.log('HERE');
+  if (userInvites.docs.length) {
+    /*
+     * Get the teamId from  the invite
+     */
+    const invite = userInvites.docs[0];
+    const { teamId } = invite.data();
+
+    /*
+     * Get the team document
+     */
+    const teamRef = db.collection('teams').doc(teamId);
+    const team = await teamRef.get();
+    const { users } = team.data();
+
+    /*
+     * Add the users's uid to the team's user's field if it's not already present
+     */
+    if (!users.includes(uid)) {
+      users.push(uid);
+
+      /*
+       * Update the team doc with the new users array
+       */
+      await teamRef.update({ users });
+
+      console.log('User added to existing team successfully.');
+    }
+
+    return;
   } else {
     /*
      * New user with no invite
@@ -34,7 +60,7 @@ const onUserAdded = functions.firestore.document('users/{uid}').onCreate(async (
     const teamName = `${name}'s team`;
 
     /*
-     * Create a new team with id === uid
+     * Create a new team
      */
     const document = {
       name: teamName,
@@ -45,7 +71,9 @@ const onUserAdded = functions.firestore.document('users/{uid}').onCreate(async (
 
     await db.collection('teams').add(document);
 
-    return 'User added to team successfully.';
+    console.log('User added to new team successfully.');
+
+    return;
   }
 });
 
