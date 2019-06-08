@@ -34,8 +34,8 @@
     "db-restore-production": "firestore-backup-restore --restoreAccountCredentials ./src/config/firebase/production/credentials.json --backupPath ./src/database",
     "db-restore-all": "yarn run db-restore-development && yarn run db-restore-production",
     "emulate-funcs": "yarn firebase emulators:start --only firestore,functions",
-    "deploy-funcs-development": "firebase use development && yarn firebase deploy --only functions",
-    "deploy-funcs-production": "firebase use production && yarn firebase deploy --only functions"
+    "deploy-funcs-development": "cp ./src/config/firebase/development/credentials.json ./src/functions/credentials.json && firebase use development && yarn firebase deploy --only functions",
+    "deploy-funcs-production": "cp ./src/config/firebase/production/credentials.json ./src/functions/credentials.json && firebase use production && yarn firebase deploy --only functions"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
