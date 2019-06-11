@@ -28,7 +28,7 @@ const onInviteAdded = functions.firestore
 
     await sendEmail(emailOptions);
 
-    console.log('Email sent successfully');
+    console.log('Email sent successfully', { email, invitee });
 
     /*
      * Check if the person is signed up already
@@ -51,7 +51,7 @@ const onInviteAdded = functions.firestore
 
       await teamRef.update({ users: admin.firestore.FieldValue.arrayUnion(uid) });
 
-      console.log('User added to existing team successfully.');
+      console.log('User added to existing team successfully.', { uid, teamId });
 
       /*
        * Add the teamId to the teams field of the user doc
@@ -60,7 +60,7 @@ const onInviteAdded = functions.firestore
 
       await userRef.update({ teams: admin.firestore.FieldValue.arrayUnion(teamId) });
 
-      console.log('Team added to existing user successfully.');
+      console.log('Team added to existing user successfully.', { uid, teamId });
     }
   });
 

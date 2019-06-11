@@ -36,7 +36,7 @@ const onUserAdded = functions.firestore.document('users/{uid}').onCreate(async (
 
     await teamRef.update({ users: admin.firestore.FieldValue.arrayUnion(uid) });
 
-    console.log('User added to existing team successfully.');
+    console.log('User added to existing team successfully.', { uid, teamId });
 
     /*
      * Add the teamId to the teams field of the user doc
@@ -45,47 +45,43 @@ const onUserAdded = functions.firestore.document('users/{uid}').onCreate(async (
 
     await userRef.update({ teams: admin.firestore.FieldValue.arrayUnion(teamId) });
 
-    console.log('Team added to existing user successfully.');
-
-    return;
-  } else {
-    /*
-     * New user with no invite
-     * Create the team name using the user's name
-     * Add a new field, teams with the teamId, to the user's document
-     */
-
-    const { name } = values;
-    const teamName = `${name}'s team`;
-
-    /*
-     * Create a new team
-     */
-    const document = {
-      name: teamName,
-      createdBy: uid,
-      dateCreated: Date.now(),
-      users: [uid],
-    };
-    const teamId = autoId();
-    const teamRef = db.collection('teams').doc(teamId);
-
-    await teamRef.set(document);
-
-    console.log('User added to new team successfully.');
-
-    /*
-     * Add the teamId to the teams field of the user doc
-     */
-    const userRef = db.collection('users').doc(uid);
-
-    await userRef.update({ teams: admin.firestore.FieldValue.arrayUnion(teamId) });
-
-    console.log('Team added to existing user successfully.');
+    console.log('Team added to existing user successfully.', { uid, teamId });
 
     return;
   }
+  /*
+   * New user with no invite
+   * Create the team name using the user's name
+   * Add a new field, teams with the teamId, to the user's document
+   */
+
+  const { name } = values;
+  const teamName = `${name}'s team`;
+
+  /*
+   * Create a new team
+   */
+  const document = {
+    name: teamName,
+    createdBy: uid,
+    dateCreated: Date.now(),
+    users: [uid],
+  };
+  const teamId = autoId();
+  const teamRef = db.collection('teams').doc(teamId);
+
+  await teamRef.set(document);
+
+  console.log('User added to new team successfully.', { uid, teamId });
+
+  /*
+   * Add the teamId to the teams field of the user doc
+   */
+  const userRef = db.collection('users').doc(uid);
+
+  await userRef.update({ teams: admin.firestore.FieldValue.arrayUnion(teamId) });
+
+  console.log('Team added to existing user successfully.', { uid, teamId });
 });
 
 module.exports = onUserAdded;
-``;

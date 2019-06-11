@@ -11,16 +11,15 @@ const onDeleteUserAdded = functions.firestore
       .auth()
       .deleteUser(uid)
       .then(() => {
-        console.log('Successfully deleted user');
+        console.log('Successfully deleted user', { uid });
 
         return null;
       })
       .catch((error) => {
-        console.log('Error deleting user:', error);
+        console.log('Error deleting user:', error, { uid });
 
         return error;
       });
   });
 
 module.exports = onDeleteUserAdded;
-``;
