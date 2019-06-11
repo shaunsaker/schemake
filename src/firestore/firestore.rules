@@ -24,7 +24,7 @@ service cloud.firestore {
     
     match /teams/{teamId} {
       allow create: if request.resource.data.createdBy == request.auth.uid; // only allow a create if the requesting user's uid is attached as createdBy
-      allow list: if request.auth.uid in resource.data.users; // only allow a list if the requesting user's uid is in the users array
+      allow list: if request.auth.uid != null; // TODO
     }
     
     match /_invites/{inviteId} {
