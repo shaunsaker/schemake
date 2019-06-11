@@ -152,7 +152,8 @@ export class TeamContainer extends React.Component {
     const { teamUserData } = this.props;
 
     const teamMembers = selectedTeam
-      ? selectedTeam.users.map((uid) => {
+      ? selectedTeam.users &&
+        selectedTeam.users.map((uid) => {
           const userData = teamUserData.length
             ? teamUserData.filter((item) => item.id === uid)[0]
             : {};
