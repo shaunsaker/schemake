@@ -18,7 +18,7 @@ export class AddTeamMemberModalContainer extends React.Component {
     this.onClose = this.onClose.bind(this);
     this.syncUserData = this.syncUserData.bind(this);
     this.setEmail = this.setEmail.bind(this);
-    this.saveTeamMember = this.saveTeamMember.bind(this);
+    this.saveInvite = this.saveInvite.bind(this);
     this.setIsSuccessful = this.setIsSuccessful.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
@@ -76,7 +76,7 @@ export class AddTeamMemberModalContainer extends React.Component {
     const { email } = form;
 
     this.setEmail(email);
-    this.saveTeamMember(email);
+    this.saveInvite(email);
   }
 
   onClose() {
@@ -101,7 +101,7 @@ export class AddTeamMemberModalContainer extends React.Component {
     });
   }
 
-  saveTeamMember(email) {
+  saveInvite(email) {
     const { uid, teamId, name, saveDocument } = this.props;
     const url = `_invites/${createUID()}`;
     const document = {
