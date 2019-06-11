@@ -14,7 +14,7 @@ export class SupportContainer extends React.Component {
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onReset = this.onReset.bind(this);
-    this.saveForm = this.saveForm.bind(this);
+    this.saveSupport = this.saveSupport.bind(this);
     this.setIsSuccessful = this.setIsSuccessful.bind(this);
 
     this.state = {
@@ -45,14 +45,14 @@ export class SupportContainer extends React.Component {
   }
 
   onSubmit(form) {
-    this.saveForm(form);
+    this.saveSupport(form);
   }
 
   onReset() {
     this.setIsSuccessful(false);
   }
 
-  saveForm(form) {
+  saveSupport(form) {
     const { saveDocument } = this.props;
     const url = `_support/${createUID()}`;
     const document = {
