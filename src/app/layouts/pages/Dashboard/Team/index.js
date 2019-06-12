@@ -174,8 +174,17 @@ export class TeamContainer extends React.Component {
 
     const { saveDocument } = this.props;
     const url = `teams/${teamId}`;
+    const nextActions = [
+      {
+        type: 'SET_SYSTEM_MESSAGE',
+        payload: {
+          message: 'Team member removed from team successfully.',
+          variant: 'success',
+        },
+      },
+    ];
 
-    saveDocument({ url, document });
+    saveDocument({ url, document, nextActions });
   }
 
   render() {
