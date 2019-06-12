@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -42,24 +42,16 @@ export class ModalsHandler extends React.Component {
 
   render() {
     const { modals } = this.props;
-    const { key, isOpen, props } = modals;
+    const { isOpen } = modals;
 
-    return (
-      <Fragment>
-        {modalComponents.map((modal) => {
-          const Component = modal.component;
+    if (isOpen) {
+      const { key, props } = modals;
+      const Component = modalComponents.filter((item) => item.key === key)[0].component;
 
-          return (
-            <Component
-              key={modal.key}
-              isOpen={isOpen && key === modal.key}
-              handleClose={this.onClose}
-              {...props}
-            />
-          );
-        })}
-      </Fragment>
-    );
+      return <Component key={key} isOpen handleClose={this.onClose} {...props} />;
+    }
+
+    return null;
   }
 }
 
