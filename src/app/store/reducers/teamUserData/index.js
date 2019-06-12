@@ -8,7 +8,14 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case 'SET_TEAM_USER_DATA':
       newState = cloneObject(state);
-      newState = cloneObject(action.payload.data);
+
+      /*
+       * Set the user's data keyed by their uid
+       */
+      const { id } = action.payload.data; // eslint-disable-line
+
+      newState[id] = cloneObject(action.payload.data);
+
       return newState;
 
     default:

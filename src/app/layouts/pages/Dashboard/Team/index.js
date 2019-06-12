@@ -36,7 +36,10 @@ export class TeamContainer extends React.Component {
       }),
     ),
     uid: PropTypes.string,
-    teamUserData: PropTypes.arrayOf(PropTypes.shape({})),
+    teamUserData: PropTypes.shape({
+      name: PropTypes.string,
+      email: PropTypes.string,
+    }),
 
     /*
      * withSyncData
@@ -95,20 +98,21 @@ export class TeamContainer extends React.Component {
 
   handleSyncTeamUserData() {
     const selectedTeam = this.getSelectedTeam();
-    const { id } = selectedTeam;
+    const { users } = selectedTeam;
 
-    this.syncTeamUserData(id);
+    /*
+     * For each uid get that users's data
+     */
+    users.forEach((uid) => this.syncTeamUserData(uid));
   }
 
-  syncTeamUserData(teamId) {
+  syncTeamUserData(uid) {
     const { syncData } = this.props;
-    const url = `users`;
-    const queries = [['teams', 'array-contains', teamId]];
+    const url = `users/${uid}`;
     const nextActions = [{ type: 'SET_TEAM_USER_DATA' }];
 
     syncData({
       url,
-      queries,
       nextActions,
     });
   }
@@ -154,10 +158,8 @@ export class TeamContainer extends React.Component {
     const teamMembers = selectedTeam
       ? selectedTeam.users &&
         selectedTeam.users.map((uid) => {
-          const userData = teamUserData.length
-            ? teamUserData.filter((item) => item.id === uid)[0]
-            : {};
-          const { name, email } = userData;
+          const userData = teamUserData[uid];
+          const { name, email } = userData || {};
           const avatarText = name && name.slice(0, 1);
           const title = name;
           const description = email;
