@@ -70,6 +70,7 @@
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
     "autoprefixer": "^9.4.10",
+    "deep-diff": "^1.0.2",
     "dotenv": "^7.0.0",
     "firebase": "^5.8.6",
     "js-simple-utils": "^1.0.5",

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { diff } from 'deep-diff';
 
 export default (ComposedComponent) => {
   class withSyncData extends React.Component {
@@ -10,31 +11,29 @@ export default (ComposedComponent) => {
       this.onSyncData = this.onSyncData.bind(this);
       this.setIsSyncing = this.setIsSyncing.bind(this);
       this.syncData = this.syncData.bind(this);
+      this.addSyncedTransaction = this.addSyncedTransaction.bind(this);
 
-      this.state = {
-        isSyncing: false,
-      };
+      this.state = {};
     }
 
     static propTypes = {
-      // connect
+      /*
+       * Store
+       */
       dispatch: PropTypes.func,
-      authenticated: PropTypes.bool,
       hasPendingTransactions: PropTypes.bool,
       hasError: PropTypes.bool,
       isSyncing: PropTypes.bool,
+      syncedTransactions: PropTypes.arrayOf(PropTypes.shape({})),
     };
 
     static defaultProps = {};
 
     componentDidUpdate(prevProps) {
-      const { isSyncing } = this.state;
-
       /*
        * If we had pendingTransactions and we don't and didn't have an error
        */
-
-      const { hasPendingTransactions, hasError } = this.props;
+      const { hasPendingTransactions, hasError, isSyncing } = this.props;
 
       /*
        * If we are loading and have no more pending transactions, toggle loading back to false
@@ -51,14 +50,38 @@ export default (ComposedComponent) => {
       }
     }
 
-    onSyncData(args) {
-      this.setIsSyncing(true);
-      this.syncData(args);
+    onSyncData(transaction) {
+      /*
+       * If we have not already synced on this event
+       * Sync it
+       */
+      const { syncedTransactions } = this.props;
+      const hasSyncedOnTransaction = syncedTransactions.filter(
+        (item) => !diff(item, transaction),
+      )[0]
+        ? true
+        : false;
+
+      if (transaction.isUnique || !hasSyncedOnTransaction) {
+        const { isSyncing } = this.props;
+
+        if (!isSyncing) {
+          this.setIsSyncing(true);
+        }
+
+        this.addSyncedTransaction(transaction);
+        this.syncData(transaction);
+      }
     }
 
     setIsSyncing(isSyncing) {
-      this.setState({
-        isSyncing,
+      const { dispatch } = this.props;
+
+      dispatch({
+        type: 'SET_IS_SYNCING',
+        payload: {
+          isSyncing,
+        },
       });
     }
 
@@ -77,6 +100,17 @@ export default (ComposedComponent) => {
       });
     }
 
+    addSyncedTransaction(event) {
+      const { dispatch } = this.props;
+
+      dispatch({
+        type: 'ADD_SYNCED_TRANSACTION',
+        payload: {
+          event,
+        },
+      });
+    }
+
     render() {
       const { isSyncing } = this.props;
 
@@ -85,13 +119,20 @@ export default (ComposedComponent) => {
   }
 
   function mapStateToProps(state) {
-    const { appState, user } = state;
-    const { uid } = user;
-    const authenticated = uid ? true : false;
-    const hasPendingTransactions = appState.pendingTransactions.length ? true : false;
-    const hasError = appState.systemMessage.variant === 'error' ? true : false;
+    const { appState } = state;
 
-    return { authenticated, hasPendingTransactions, hasError };
+    /*
+     * Get the pending transactions that are sync/fetch actions
+     */
+    const hasPendingTransactions = appState.pendingTransactions.filter(
+      (item) => item.action.type === 'sync',
+    ).length
+      ? true
+      : false;
+    const hasError = appState.systemMessage.variant === 'error' ? true : false;
+    const { isSyncing, syncedTransactions } = appState;
+
+    return { hasPendingTransactions, hasError, isSyncing, syncedTransactions };
   }
 
   return connect(mapStateToProps)(withSyncData);
