@@ -38,15 +38,6 @@ const onUserAdded = functions.firestore.document('users/{uid}').onCreate(async (
 
     console.log('User added to existing team successfully.', { uid, teamId });
 
-    /*
-     * Add the teamId to the teams field of the user doc
-     */
-    const userRef = db.collection('users').doc(uid);
-
-    await userRef.update({ teams: admin.firestore.FieldValue.arrayUnion(teamId) });
-
-    console.log('Team added to existing user successfully.', { uid, teamId });
-
     return;
   }
   /*
@@ -73,15 +64,6 @@ const onUserAdded = functions.firestore.document('users/{uid}').onCreate(async (
   await teamRef.set(document);
 
   console.log('User added to new team successfully.', { uid, teamId });
-
-  /*
-   * Add the teamId to the teams field of the user doc
-   */
-  const userRef = db.collection('users').doc(uid);
-
-  await userRef.update({ teams: admin.firestore.FieldValue.arrayUnion(teamId) });
-
-  console.log('Team added to existing user successfully.', { uid, teamId });
 });
 
 module.exports = onUserAdded;

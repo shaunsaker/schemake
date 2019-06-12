@@ -52,15 +52,6 @@ const onInviteAdded = functions.firestore
       await teamRef.update({ users: admin.firestore.FieldValue.arrayUnion(uid) });
 
       console.log('User added to existing team successfully.', { uid, teamId });
-
-      /*
-       * Add the teamId to the teams field of the user doc
-       */
-      const userRef = db.collection('users').doc(uid);
-
-      await userRef.update({ teams: admin.firestore.FieldValue.arrayUnion(teamId) });
-
-      console.log('Team added to existing user successfully.', { uid, teamId });
     }
   });
 
