@@ -8,8 +8,6 @@ import { getDateTime, getQueryStringParams } from '../../../utils';
 
 import Profile from './Profile';
 
-import withRouteCondom from '../../../enhancers/withRouteCondom';
-
 export class ProfileContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -117,4 +115,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouteCondom(connect(mapStateToProps)(ProfileContainer));
+export default connect(mapStateToProps)(ProfileContainer);

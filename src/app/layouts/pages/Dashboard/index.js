@@ -8,8 +8,6 @@ import { getQueryStringParams } from '../../../utils';
 
 import Dashboard from './Dashboard';
 
-import withRouteCondom from '../../../enhancers/withRouteCondom';
-
 export class DashboardContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -97,4 +95,4 @@ function mapStateToProps() {
   return {};
 }
 
-export default withRouteCondom(connect(mapStateToProps)(DashboardContainer));
+export default connect(mapStateToProps)(DashboardContainer);
