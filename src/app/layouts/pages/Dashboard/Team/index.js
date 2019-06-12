@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { createUID } from 'js-simple-utils';
 
 import { modals } from '../../../../config';
 
 import Team from './Team';
 
 import withSyncData from '../../../../enhancers/withSyncData';
+import withSaveDocument from '../../../../enhancers/withSaveDocument';
 
 export class TeamContainer extends React.Component {
   constructor(props) {
@@ -19,6 +21,7 @@ export class TeamContainer extends React.Component {
     this.syncTeamUserData = this.syncTeamUserData.bind(this);
     this.getSelectedTeam = this.getSelectedTeam.bind(this);
     this.openAddTeamMemberModal = this.openAddTeamMemberModal.bind(this);
+    this.saveDeleteTeamMember = this.saveDeleteTeamMember.bind(this);
 
     this.state = {};
   }
@@ -45,6 +48,11 @@ export class TeamContainer extends React.Component {
      * withSyncData
      */
     syncData: PropTypes.func,
+
+    /*
+     * withSaveDocument
+     */
+    saveDocument: PropTypes.func,
   };
 
   static defaultProps = {};
@@ -79,8 +87,8 @@ export class TeamContainer extends React.Component {
     this.openAddTeamMemberModal();
   }
 
-  onRemoveTeamMember(teamMember) {
-    // TODO:
+  onRemoveTeamMember({ uid, teamId }) {
+    this.saveDeleteTeamMember({ uid, teamId });
   }
 
   syncTeams() {
@@ -147,37 +155,63 @@ export class TeamContainer extends React.Component {
     });
   }
 
-  render() {
-    const selectedTeam = this.getSelectedTeam();
+  saveDeleteTeamMember({ uid, teamId }) {
+    const { saveDocument } = this.props;
+    const url = `_deleteUsers/${createUID()}`;
+    const document = {
+      uid,
+      dateCreated: Date.now(),
+      teamId,
+    };
 
+    saveDocument({
+      url,
+      document,
+    });
+  }
+
+  render() {
     /*
      * Map the team data to the required UI data
      */
-    const { teamUserData } = this.props;
+    const { teamUserData, uid } = this.props;
+    const selectedTeam = this.getSelectedTeam();
+    const isCurrentUserAdminOfTeam = selectedTeam.createdBy === uid;
 
     const teamMembers = selectedTeam
       ? selectedTeam.users &&
-        selectedTeam.users.map((uid) => {
-          const userData = teamUserData[uid];
+        selectedTeam.users.map((item) => {
+          const userData = teamUserData[item];
           const { name, email } = userData || {};
           const avatarText = name && name.slice(0, 1);
           const title = name;
           const description = email;
-          const menu = {
-            items: [
-              {
-                name: `Remove ${title}`,
-                handleClick: () => this.onRemoveTeamMember(uid),
-              },
-            ],
-          };
+
+          /*
+           * Only show the menu if the mapped user is not the currentUser
+           * And the current user is the admin
+           */
+          let menu;
+          const isCurrentUser = item === uid;
+
+          if (!isCurrentUser && isCurrentUserAdminOfTeam) {
+            menu = {
+              items: [
+                {
+                  name: `Remove ${title}`,
+                  handleClick: () =>
+                    this.onRemoveTeamMember({ uid: item, teamId: selectedTeam.id }),
+                },
+              ],
+            };
+          }
 
           return {
             avatarText,
             title,
             description,
             menu,
-            id: uid,
+            id: item,
           };
         })
       : [];
@@ -199,4 +233,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withSyncData(connect(mapStateToProps)(TeamContainer));
+export default withSaveDocument(withSyncData(connect(mapStateToProps)(TeamContainer)));

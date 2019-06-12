@@ -11,7 +11,15 @@ import Menu from '../Menu';
 
 const DashboardListItem = ({ avatarText, title, description, menu, handleMenuButtonClick }) => {
   const menuAnchorElId = 'menu-button';
-  const menuComponent = menu && <Menu {...menu} anchorElId="menu-button" />;
+  const menuComponent = menu && (
+    <div className="menu-button-container">
+      <div id={menuAnchorElId}>
+        <IconButton iconName="menu" tooltip="Toggle menu" handleClick={handleMenuButtonClick} />
+      </div>
+
+      <Menu {...menu} anchorElId="menu-button" />
+    </div>
+  );
 
   return (
     <Card>
@@ -30,13 +38,7 @@ const DashboardListItem = ({ avatarText, title, description, menu, handleMenuBut
           </Typography>
         </div>
 
-        <div className="menu-button-container">
-          <div id={menuAnchorElId}>
-            <IconButton iconName="menu" tooltip="Toggle menu" handleClick={handleMenuButtonClick} />
-          </div>
-
-          {menuComponent}
-        </div>
+        {menuComponent}
       </div>
 
       <style jsx>{styles}</style>
