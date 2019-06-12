@@ -87,7 +87,7 @@ export default (ComposedComponent) => {
       });
     }
 
-    saveDocument({ url, document }) {
+    saveDocument({ url, document, nextActions }) {
       const { dispatch } = this.props;
       const newDocument = {
         ...document,
@@ -98,6 +98,9 @@ export default (ComposedComponent) => {
         payload: {
           url,
           document: newDocument,
+        },
+        meta: {
+          nextActions,
         },
       });
     }
