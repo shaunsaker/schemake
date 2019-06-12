@@ -84,6 +84,9 @@ export class HeaderBarContainer extends React.Component {
 
     dispatch({
       type: 'signOut',
+      meta: {
+        nextActions: [{ type: 'SIGN_IN_USER' }],
+      },
     });
   }
 
