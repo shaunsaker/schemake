@@ -193,7 +193,7 @@ export class TeamContainer extends React.Component {
      */
     const { teamUserData, uid } = this.props;
     const selectedTeam = this.getSelectedTeam();
-    const isCurrentUserAdminOfTeam = selectedTeam.createdBy === uid;
+    const isCurrentUserAdminOfTeam = selectedTeam && selectedTeam.createdBy === uid;
 
     const teamMembers = selectedTeam
       ? selectedTeam.users &&
