@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { createUID } from 'js-simple-utils';
 
 import fields from './fields';
-import { copy } from '../../../config';
 
 import Support from './Support';
 import withSaveDocument from '../../../enhancers/withSaveDocument';
@@ -73,7 +72,8 @@ export class SupportContainer extends React.Component {
     const { isSuccessful } = this.state;
     const { isSaving } = this.props;
     let title = 'Support';
-    let { description } = copy.support.default;
+    let description =
+      "We value feedback so much. If you have any questions, suggestions for improvements or if you think you've found a bug, please let use know. We'd love to hear from you!";
     let form = {
       fields,
       disabled: isSaving,
@@ -81,8 +81,8 @@ export class SupportContainer extends React.Component {
     };
 
     if (isSuccessful) {
-      title = copy.support.success.title; // eslint-disable-line
-      description = copy.support.success.description; // eslint-disable-line
+      title = 'Great Success';
+      description = 'Your message was submitted successfully.';
       form = null;
     }
 
