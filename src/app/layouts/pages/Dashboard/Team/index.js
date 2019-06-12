@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createUID } from 'js-simple-utils';
+import { cloneObject } from 'js-simple-utils';
 
 import { modals } from '../../../../config';
 
@@ -21,7 +21,7 @@ export class TeamContainer extends React.Component {
     this.syncTeamUserData = this.syncTeamUserData.bind(this);
     this.getSelectedTeam = this.getSelectedTeam.bind(this);
     this.openAddTeamMemberModal = this.openAddTeamMemberModal.bind(this);
-    this.saveDeleteTeamMember = this.saveDeleteTeamMember.bind(this);
+    this.saveTeam = this.saveTeam.bind(this);
 
     this.state = {};
   }
@@ -88,7 +88,7 @@ export class TeamContainer extends React.Component {
   }
 
   onRemoveTeamMember({ uid, teamId }) {
-    this.saveDeleteTeamMember({ uid, teamId });
+    this.saveTeam({ uid, teamId });
   }
 
   syncTeams() {
@@ -155,19 +155,27 @@ export class TeamContainer extends React.Component {
     });
   }
 
-  saveDeleteTeamMember({ uid, teamId }) {
-    const { saveDocument } = this.props;
-    const url = `_deleteUsers/${createUID()}`;
+  saveTeam({ uid, teamId }) {
+    /*
+     * Remove this uid from the users field of the team
+     */
+    const { selectedTeamIndex, teams } = this.props;
+    const team = teams[selectedTeamIndex];
+    const { users } = team;
+    const userIndex = users.findIndex((item) => item === uid);
+    const newUsers = cloneObject(users);
+
+    newUsers.splice(userIndex);
+
     const document = {
-      uid,
-      dateCreated: Date.now(),
-      teamId,
+      ...team,
+      users: newUsers,
     };
 
-    saveDocument({
-      url,
-      document,
-    });
+    const { saveDocument } = this.props;
+    const url = `teams/${teamId}`;
+
+    saveDocument({ url, document });
   }
 
   render() {
