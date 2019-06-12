@@ -40,10 +40,9 @@ export class LoginContainer extends React.Component {
      * If there is a user and the user is no longer anonymous
      * And if there was not a user
      */
-    const { uid, isAnonymous } = this.props;
+    const { isLoading, hasError } = this.props;
 
-    if (uid && !isAnonymous && prevProps.isAnonymous) {
-      this.setIsLoading(false);
+    if (!isLoading && prevProps.isLoading && !hasError && !prevProps.hasError) {
       this.redirectToDashboard();
     }
 
@@ -51,8 +50,6 @@ export class LoginContainer extends React.Component {
      * If there is an error
      * And there was not an error
      */
-    const { hasError } = this.props;
-
     if (hasError && !prevProps.hasError) {
       this.setIsLoading(false);
     }
@@ -107,6 +104,12 @@ export class LoginContainer extends React.Component {
         nextActions: [
           {
             type: 'SIGN_IN_USER',
+          },
+          {
+            type: 'SET_IS_LOADING',
+            payload: {
+              isLoading: false,
+            },
           },
         ],
       },
