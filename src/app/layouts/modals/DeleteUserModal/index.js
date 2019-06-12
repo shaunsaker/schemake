@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Router from 'next/router';
 
-import { copy, routes } from '../../../config';
+import { routes } from '../../../config';
 
 import DeleteUserModal from './DeleteUserModal';
 
@@ -199,7 +199,8 @@ export class DeleteUserModalContainer extends React.Component {
     const { isOpen, isLoading, isSaving } = this.props;
     const isDisabled = isLoading || isSaving;
     let title = 'Are you sure you want to delete yourself?';
-    let { description } = copy.dangerZone.default;
+    let description =
+      'This action will delete your user account, team and any projects you have created. This action cannot be reversed. Please be certain.';
     let form = {
       fields: [],
       disabled: isDisabled,

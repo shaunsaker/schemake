@@ -12,7 +12,7 @@ const styles = css`
   .button-container {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: ${rhythm.vt}px;
+    margin-top: ${rhythm.vt}px;
   }
 `;
 
