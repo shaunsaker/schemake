@@ -6,9 +6,26 @@ export class AuthHandler extends React.Component {
   constructor(props) {
     super(props);
 
-    this.signInAnonymously = this.signInAnonymously.bind(this);
+    this.getAuth = this.getAuth.bind(this);
+  }
 
-    this.getAuthAction = {
+  static get propTypes() {
+    return {
+      /*
+       * Store
+       */
+      dispatch: PropTypes.func.isRequired,
+    };
+  }
+
+  componentDidMount() {
+    this.getAuth();
+  }
+
+  getAuth() {
+    const { dispatch } = this.props;
+
+    dispatch({
       type: 'getAuth',
       meta: {
         nextActions: [
@@ -16,41 +33,6 @@ export class AuthHandler extends React.Component {
             type: 'SIGN_IN_USER',
           },
         ],
-      },
-    };
-  }
-
-  static get propTypes() {
-    return {
-      // connect
-      dispatch: PropTypes.func.isRequired,
-      authenticated: PropTypes.bool,
-    };
-  }
-
-  componentDidMount() {
-    const { authenticated } = this.props;
-
-    if (!authenticated) {
-      this.signInAnonymously();
-    } else {
-      this.getAuth();
-    }
-  }
-
-  getAuth() {
-    const { dispatch } = this.props;
-
-    dispatch(this.getAuthAction);
-  }
-
-  signInAnonymously() {
-    const { dispatch } = this.props;
-
-    dispatch({
-      type: 'signInAnonymously',
-      meta: {
-        nextActions: [this.getAuthAction],
       },
     });
   }
@@ -60,12 +42,4 @@ export class AuthHandler extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const authenticated = state.user.uid ? true : false;
-
-  return {
-    authenticated,
-  };
-};
-
-export default connect(mapStateToProps)(AuthHandler);
+export default connect()(AuthHandler);

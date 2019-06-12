@@ -1,11 +1,7 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /_feedback/{feedbackId} {
-      allow create: if request.auth.uid != null; // only allow a create if authed
-    }
-    
     match /_support/{supportId} {
-      allow create: if request.auth.uid != null; // only allow a create if authed
+      allow create: if request.resource.data.name != null && request.resource.data.email != null && request.resource.data.message != null; 
     }
     
     match /users/{userId} {
