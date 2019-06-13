@@ -49,12 +49,11 @@ export class SignUpContainer extends React.Component {
   componentDidUpdate(prevProps) {
     /*
      * If we're still loading
-     * If the user is no longer anonymous
-     * And they were anonymous
+     * If the user now has a uid
      */
-    const { isLoading, isAnonymous } = this.props;
+    const { isLoading, uid } = this.props;
 
-    if (isLoading && !isAnonymous && prevProps.isAnonymous) {
+    if (isLoading && uid && !prevProps.uid) {
       this.setIsLoading(false);
       this.saveUser();
     }
@@ -106,24 +105,10 @@ export class SignUpContainer extends React.Component {
     const { dispatch } = this.props;
 
     dispatch({
-      type: 'getEmailAuthCredential',
+      type: 'createUserWithEmailAndPassword',
       payload: {
         email,
         password,
-      },
-      meta: {
-        nextActions: [
-          {
-            type: 'linkWithCredential',
-            meta: {
-              nextActions: [
-                {
-                  type: 'SIGN_IN_USER',
-                },
-              ],
-            },
-          },
-        ],
       },
     });
   }
@@ -159,12 +144,11 @@ export class SignUpContainer extends React.Component {
 
 function mapStateToProps(state) {
   const { user, appState } = state;
-  const { isAnonymous, uid } = user;
+  const { uid } = user;
   const { systemMessage, isLoading } = appState;
   const hasError = systemMessage.variant === 'error' ? true : false;
 
   return {
-    isAnonymous,
     hasError,
     isLoading,
     uid,
