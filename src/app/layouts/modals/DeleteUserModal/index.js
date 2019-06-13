@@ -187,7 +187,7 @@ export class DeleteUserModalContainer extends React.Component {
     const { isSuccessful } = this.state;
     const { isOpen, isLoading, isSaving } = this.props;
     const isDisabled = isLoading || isSaving;
-    let title = 'Are you sure you want to delete yourself?';
+    let title = 'Are you sure you want to delete data?';
     let description =
       'This action will delete your user account, team and any projects you have created. This action cannot be reversed. Please be certain.';
     let form = {
