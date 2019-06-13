@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Select, MenuItem } from '@material-ui/core';
+import { TextField, MenuItem } from '@material-ui/core';
 
 import Typography from '../Typography';
 
 const SelectComponent = ({ selectedOptionIndex, options, handleChange }) => {
   return (
-    <Select value={selectedOptionIndex} onChange={handleChange}>
+    <TextField value={selectedOptionIndex} onChange={handleChange} select variant="outlined">
       {options.map((item, index) => {
         return (
           <MenuItem key={item.name} value={index}>
@@ -14,7 +14,7 @@ const SelectComponent = ({ selectedOptionIndex, options, handleChange }) => {
           </MenuItem>
         );
       })}
-    </Select>
+    </TextField>
   );
 };
 
