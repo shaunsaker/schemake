@@ -53,7 +53,7 @@ export class SupportContainer extends React.Component {
 
   saveSupport(form) {
     const { saveDocument } = this.props;
-    const url = `_support/${createUID()}`;
+    const url = `support/${createUID()}`;
     const document = {
       ...form,
       dateCreated: Date.now(),

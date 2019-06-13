@@ -4,7 +4,7 @@ const config = require('../config');
 const sendEmail = require('../sendEmail');
 
 const onSupportAdded = functions.firestore
-  .document('_support/{supportId}')
+  .document('support/{supportId}')
   .onCreate(async (snapshot) => {
     const values = snapshot.data();
     const { name, email, message } = values;

@@ -7,7 +7,7 @@ const sendEmail = require('../sendEmail');
 const db = admin.firestore();
 
 const onInviteAdded = functions.firestore
-  .document('_invites/{inviteId}')
+  .document('invites/{inviteId}')
   .onCreate(async (snapshot) => {
     /*
      * Send the person their email invite

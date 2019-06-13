@@ -15,7 +15,7 @@ const onUserAdded = functions.firestore.document('users/{uid}').onCreate(async (
    * NOTE: email has to be defined for this to work
    */
   const userInvites = await db
-    .collection('_invites')
+    .collection('invites')
     .where('email', '==', email)
     .get();
 

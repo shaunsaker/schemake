@@ -103,7 +103,7 @@ export class AddTeamMemberModalContainer extends React.Component {
 
   saveInvite(email) {
     const { uid, teamId, name, saveDocument } = this.props;
-    const url = `_invites/${createUID()}`;
+    const url = `invites/${createUID()}`;
     const document = {
       uid,
       dateCreated: Date.now(),

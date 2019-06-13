@@ -1,6 +1,6 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /_support/{supportId} {
+    match /support/{supportId} {
       allow create: if request.resource.data.name != null && request.resource.data.email != null && request.resource.data.message != null; 
     }
     
@@ -23,7 +23,7 @@ service cloud.firestore {
       allow list: if request.auth.uid != null; // TODO:
     }
     
-    match /_invites/{inviteId} {
+    match /invites/{inviteId} {
     	allow create: if request.resource.data.uid == request.auth.uid;
       allow list: if request.auth.uid != null;
     }
