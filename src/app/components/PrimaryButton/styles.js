@@ -4,6 +4,7 @@ const styles = {
   container: {
     textTransform: 'initial',
     fontWeight: '700',
+    height: 42,
   },
 
   spacer: {

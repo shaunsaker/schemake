@@ -1,12 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TextField, MenuItem } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 import Typography from '../Typography';
 
-const SelectComponent = ({ selectedOptionIndex, options, handleChange }) => {
+const styles = {
+  input: {
+    height: 42,
+  },
+};
+
+const SelectComponent = ({ classes, selectedOptionIndex, options, handleChange }) => {
   return (
-    <TextField value={selectedOptionIndex} onChange={handleChange} select variant="outlined">
+    <TextField
+      value={selectedOptionIndex}
+      onChange={handleChange}
+      select
+      variant="outlined"
+      margin="none"
+      InputProps={{
+        classes: { root: classes.input },
+      }}
+    >
       {options.map((item, index) => {
         return (
           <MenuItem key={item.name} value={index}>
@@ -19,10 +35,11 @@ const SelectComponent = ({ selectedOptionIndex, options, handleChange }) => {
 };
 
 SelectComponent.propTypes = {
+  classes: PropTypes.shape({}),
   selectedOptionIndex: PropTypes.number,
   options: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
   handleChange: PropTypes.func,
 };
 SelectComponent.defaultProps = {};
 
-export default SelectComponent;
+export default withStyles(styles)(SelectComponent);
