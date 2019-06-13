@@ -10,7 +10,7 @@ service cloud.firestore {
       allow create, update: if request.auth.uid == userId; // only allow a write on a user's own document
     }
     
-    match /_deleteUsers/{deleteUserId} {
+    match /deleteUsers/{deleteUserId} {
       allow create: if request.auth.uid == deleteUserId; // only a allow a create once at the requesting user's uid
     }
     

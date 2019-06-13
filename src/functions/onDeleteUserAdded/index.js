@@ -5,7 +5,7 @@ const admin = require('../firebase');
 const db = admin.firestore();
 
 const onDeleteUserAdded = functions.firestore
-  .document('_deleteUsers/{uid}')
+  .document('deleteUsers/{uid}')
   .onCreate(async (snapshot) => {
     const { id: uid } = snapshot;
     /*
