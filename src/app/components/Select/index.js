@@ -3,34 +3,49 @@ import PropTypes from 'prop-types';
 import { TextField, MenuItem } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-import Typography from '../Typography';
+import styles from './styles';
 
-const styles = {
+import Typography from '../Typography';
+import TextLoading from '../TextLoading';
+
+const muiStyles = {
   input: {
     height: 42,
   },
 };
 
 const SelectComponent = ({ classes, selectedOptionIndex, options, handleChange }) => {
+  /*
+   * If there are no options
+   * === loading state
+   */
+  const loadingComponent = !options.length && <TextLoading />;
+
   return (
-    <TextField
-      value={selectedOptionIndex}
-      onChange={handleChange}
-      select
-      variant="outlined"
-      margin="none"
-      InputProps={{
-        classes: { root: classes.input },
-      }}
-    >
-      {options.map((item, index) => {
-        return (
-          <MenuItem key={item.name} value={index}>
-            <Typography type="paragraph">{item.name}</Typography>
-          </MenuItem>
-        );
-      })}
-    </TextField>
+    <div className="container">
+      <TextField
+        value={selectedOptionIndex}
+        onChange={handleChange}
+        select
+        variant="outlined"
+        margin="none"
+        InputProps={{
+          classes: { root: classes.input },
+        }}
+      >
+        {options.map((item, index) => {
+          return (
+            <MenuItem key={item.name} value={index}>
+              <Typography type="paragraph">{item.name}</Typography>
+            </MenuItem>
+          );
+        })}
+      </TextField>
+
+      {loadingComponent}
+
+      <style jsx>{styles}</style>
+    </div>
   );
 };
 
@@ -42,4 +57,4 @@ SelectComponent.propTypes = {
 };
 SelectComponent.defaultProps = {};
 
-export default withStyles(styles)(SelectComponent);
+export default withStyles(muiStyles)(SelectComponent);
