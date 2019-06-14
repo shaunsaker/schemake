@@ -26,7 +26,7 @@ const Note = ({ avatarText, username, dateText, noteText, handleMenuButtonClick 
           </div>
 
           <div className="menu-button-container">
-            <IconButton iconName="menu" handleClick={handleMenuButtonClick} />
+            <IconButton iconName="menu" tooltip="Toggle Menu" handleClick={handleMenuButtonClick} />
           </div>
         </div>
 
