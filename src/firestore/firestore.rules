@@ -15,7 +15,7 @@ service cloud.firestore {
     }
     
     match /projects/{projectId} {
-      allow create: if request.auth.uid == projectId; // TODO:
+      allow create: if request.resource.data.createdBy == request.auth.uid; // only allow if the requesting user's uid is attached as createdBy
     }
     
     match /teams/{teamId} {

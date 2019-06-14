@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { createUID } from 'js-simple-utils';
 
 import fields from './fields';
 
@@ -27,11 +28,6 @@ export class ActionProjectModalContainer extends React.Component {
     isOpen: PropTypes.bool,
     projectId: PropTypes.shape({}), // if this is passed we are editing an existing project
     handleClose: PropTypes.func.isRequired,
-
-    /*
-     * Store
-     */
-    uid: PropTypes.string,
 
     /*
      * withSaveDocument
@@ -74,9 +70,7 @@ export class ActionProjectModalContainer extends React.Component {
       projectDocumentId = projectId;
       document.dateModified = now;
     } else {
-      const { uid } = this.props;
-
-      projectDocumentId = uid;
+      projectDocumentId = createUID();
       document.dateCreated = now;
     }
 
@@ -129,12 +123,7 @@ export class ActionProjectModalContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { user } = state;
-  const { uid } = user;
-
-  return {
-    uid,
-  };
+  return {};
 };
 
 export default withSaveDocument(connect(mapStateToProps)(ActionProjectModalContainer));
