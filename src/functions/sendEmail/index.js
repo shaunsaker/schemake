@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 const Email = require('email-templates');
 const path = require('path');
 
-const sendEmail = ({ from, to, template, locals }) => {
+const sendEmail = ({ from, to, template, locals, test }) => {
   /*
    * Setup the transport
    */
@@ -37,7 +37,7 @@ const sendEmail = ({ from, to, template, locals }) => {
         extension: 'handlebars',
       },
     },
-    send: true,
+    send: test ? false : true,
   });
 
   /*
