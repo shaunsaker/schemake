@@ -41,7 +41,7 @@ const sendEmail = ({ from, to, template, locals, test }) => {
     juiceResources: {
       webResources: {
         relativeTo: path.resolve(__dirname, './images'),
-        images: true,
+        images: false,
       },
     },
   });
