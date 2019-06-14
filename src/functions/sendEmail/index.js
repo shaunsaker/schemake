@@ -23,6 +23,8 @@ const sendEmail = ({ from, to, template, locals, test }) => {
    */
   const root = path.join(__dirname, 'templates');
 
+  console.log(path.resolve(__dirname, '..'));
+
   /*
    * Create the email
    */
@@ -38,6 +40,12 @@ const sendEmail = ({ from, to, template, locals, test }) => {
       },
     },
     send: test ? false : true,
+    juiceResources: {
+      webResources: {
+        relativeTo: path.resolve(root, './images'),
+        images: true,
+      },
+    },
   });
 
   /*
