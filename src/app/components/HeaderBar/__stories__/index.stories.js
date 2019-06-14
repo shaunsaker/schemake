@@ -1,10 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import avatarMenuItems from '../avatarMenuItems';
-
 import HeaderBar from '../HeaderBar';
 
+/*
+ * TODO: Move to page where it's being used when ready
+ */
 const actions = [
   {
     iconName: 'add',
@@ -22,7 +23,7 @@ const actions = [
     iconName: 'account-circle',
     tooltip: 'Toggle the account menu',
     menu: {
-      items: avatarMenuItems,
+      items: [],
       isOpen: false,
     },
   },
