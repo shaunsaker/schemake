@@ -4,6 +4,8 @@ import { Menu, MenuItem } from '@material-ui/core';
 
 import muiStyles from './muiStyles';
 
+import Typography from '../Typography';
+
 const MenuComponent = ({ items, anchorElId, isOpen, handleClose }) => {
   const anchorEl = document.getElementById(anchorElId);
 
@@ -20,7 +22,7 @@ const MenuComponent = ({ items, anchorElId, isOpen, handleClose }) => {
             }}
             style={muiStyles.menuItem}
           >
-            {item.name}
+            <Typography type="paragraph">{item.name}</Typography>
           </MenuItem>
         );
       })}
