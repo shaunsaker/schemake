@@ -9,10 +9,11 @@
     <style>
         body {
             font-family: 'Roboto', 'Helvetica', sans-serif;
-            padding: 32px 24px;
             color: rgba(38, 50, 56, 1.0);
             font-size: 16px;
             background-color: rgba(38, 50, 56, 0.05);
+            margin: 0;
+            padding: 32px 0;
         }
 
         .container {
@@ -63,6 +64,16 @@
         img {
             width: 120px;
         }
+
+        @media (min-width: 480px) {
+            body {
+                padding: 64px 0;
+            }
+
+            .container {
+                padding: 64px 48px;
+            }
+        }
     </style>
 </head>
 
@@ -79,7 +90,7 @@
 
         <p>Shaun</p>
 
-        <div class='footer-container'><img src='/logo.png' alt='Schemake logo' /></div>
+        <div class='footer-container'><img src='logo.png' alt='Schemake logo' /></div>
     </div>
 </body>
 
