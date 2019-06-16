@@ -16,7 +16,11 @@ const ModalComponent = ({ title, description, form, isOpen, disabled, handleClos
   );
 
   const formComponent = form && (
-    <Form {...form} center secondaryButton={{ text: 'CANCEL', handleClick: handleClose }} />
+    <Form
+      {...form}
+      center
+      secondaryButton={{ text: 'CANCEL', disabled, handleClick: handleClose }}
+    />
   );
 
   const closeButtonComponent = !form && (

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createUID } from 'js-simple-utils';
 
-import fields from './fields';
-
 import ActionProjectModal from './ActionProjectModal';
 
 import withSaveDocument from '../../../enhancers/withSaveDocument';
@@ -96,27 +94,15 @@ export class ActionProjectModalContainer extends React.Component {
   render() {
     const { isOpen, projectId, isSaving } = this.props;
     const isDisabled = isSaving;
-    const actionText = projectId ? 'Edit' : 'Add';
-    const title = `${actionText} Project`;
-    const description = `${actionText} your project's details.`;
-    const form = {
-      fields,
-      disabled: isDisabled,
-      secondaryButton: {
-        text: 'CANCEL',
-        handleClick: this.onClose,
-      },
-      handleSubmit: this.onSubmit,
-    };
+    const isEditing = projectId && true;
 
     return (
       <ActionProjectModal
-        title={title}
-        description={description}
-        form={form}
         isOpen={isOpen}
-        disabled={isDisabled}
+        isEditing={isEditing}
+        isDisabled={isDisabled}
         handleClose={this.onClose}
+        handleSubmit={this.onSubmit}
       />
     );
   }
