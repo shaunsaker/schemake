@@ -131,38 +131,18 @@ export class AddTeamMemberModalContainer extends React.Component {
   }
 
   render() {
-    const { isSuccessful } = this.state;
+    const { isSuccessful: hasSuccess, email } = this.state;
     const { isOpen, isSaving } = this.props;
-    const isDisabled = isSaving;
-    let title = 'Add Team Member';
-    let description =
-      "Add your team member's email address and we'll send them a link to join your team.";
-    let form = {
-      fields,
-      disabled: isDisabled,
-      secondaryButton: {
-        text: 'CANCEL',
-        handleClick: this.onClose,
-      },
-      handleSubmit: this.onSubmit,
-    };
-
-    if (isSuccessful) {
-      const { email } = this.state;
-
-      title = 'Great Success.';
-      description = `We'll send an invite to ${email}, inviting them to your team shortly.`;
-      form = null;
-    }
+    const isDisabled = isSaving && true;
 
     return (
       <AddTeamMemberModal
-        title={title}
-        description={description}
-        form={form}
         isOpen={isOpen}
-        disabled={isDisabled}
+        hasSuccess={hasSuccess}
+        email={email}
+        isDisabled={isDisabled}
         handleClose={this.onClose}
+        handleSubmit={this.onSubmit}
       />
     );
   }
