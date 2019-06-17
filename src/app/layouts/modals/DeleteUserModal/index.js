@@ -184,37 +184,17 @@ export class DeleteUserModalContainer extends React.Component {
   }
 
   render() {
-    const { isSuccessful } = this.state;
+    const { isSuccessful: hasSuccess } = this.state;
     const { isOpen, isLoading, isSaving } = this.props;
-    const isDisabled = isLoading || isSaving;
-    let title = 'Are you sure you want to delete data?';
-    let description =
-      'This action will delete your user account, team and any projects you have created. This action cannot be reversed. Please be certain.';
-    let form = {
-      fields: [],
-      disabled: isDisabled,
-      secondaryButton: {
-        text: 'CANCEL',
-        handleClick: this.onClose,
-      },
-      handleSubmit: this.onSubmit,
-    };
-
-    if (isSuccessful) {
-      title = "We're sad to see you go :(";
-      description =
-        'Your profile has been scheduled for deletion. Please allow up to an hour for this. We will now sign you out of your account.';
-      form = null;
-    }
+    const isDisabled = (isLoading || isSaving) && true;
 
     return (
       <DeleteUserModal
-        title={title}
-        description={description}
-        form={form}
         isOpen={isOpen}
-        disabled={isDisabled}
+        hasSuccess={hasSuccess}
+        isDisabled={isDisabled}
         handleClose={this.onClose}
+        handleSubmit={this.onSubmit}
       />
     );
   }
