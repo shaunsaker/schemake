@@ -5,7 +5,7 @@ import AddTeamMemberModal from '../AddTeamMemberModal';
 
 const email = 'sakershaun@gmail.com';
 
-storiesOf('Layouts|AddTeamMemberModal', module)
+storiesOf('Modals|AddTeamMemberModal', module)
   .add('default', () => <AddTeamMemberModal isOpen />)
   .add('disabled', () => <AddTeamMemberModal isOpen isDisabled />)
   .add('success', () => <AddTeamMemberModal isOpen hasSuccess email={email} />);
