@@ -108,25 +108,18 @@ export class ForgotPasswordModalContainer extends React.Component {
   }
 
   render() {
+    /*
+     * FIXME: This component's data flow is not consistent with the other modals
+     * Should be using hasSuccess from the data saving event
+     */
     const { hasSuccess } = this.state;
     const { isOpen, isLoading } = this.props;
-    const isDisabled = isLoading;
-    let title = 'Forgot your password?';
-    let description = "Enter your email address and we'll send you a password reset email.";
-    let form = { fields, disabled: isDisabled, handleSubmit: this.onSubmit };
-
-    if (hasSuccess) {
-      title = 'Great Success';
-      description = 'We have sent your password reset email successfully.';
-      form = null;
-    }
+    const isDisabled = isLoading && true;
 
     return (
       <ForgotPasswordModal
-        title={title}
-        description={description}
-        form={form}
         isOpen={isOpen}
+        hasSuccess={hasSuccess}
         disabled={isDisabled}
         handleClose={this.onClose}
       />
