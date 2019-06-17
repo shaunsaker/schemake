@@ -105,23 +105,17 @@ export class EditProfileModalContainer extends React.Component {
   }
 
   render() {
-    const { isSuccessful } = this.state;
+    const { isSuccessful: hasSuccess } = this.state;
     const { isOpen, isSaving } = this.props;
-    const isDisabled = isSaving;
-    let title = 'Edit Profile';
-    let description = 'Update your details';
-    let form = { fields, disabled: isDisabled, handleSubmit: this.onSubmit };
+    const isDisabled = isSaving && true;
+    let newFields;
 
-    if (isSuccessful) {
-      title = 'Great success';
-      description = 'Your profile has been updated successfully.';
-      form = null;
-    } else {
+    if (!hasSuccess) {
       /*
        * Attach the userData to the form
        */
       const { values } = this.state;
-      const newFields = fields.map((item) => {
+      newFields = fields.map((item) => {
         const key = item.name;
         const value = values[key];
         const newField = {
@@ -131,22 +125,16 @@ export class EditProfileModalContainer extends React.Component {
 
         return newField;
       });
-      form = {
-        fields: newFields,
-        disabled: isDisabled,
-        handleChange: this.onChange,
-        handleSubmit: this.onSubmit,
-      };
     }
 
     return (
       <EditProfileModal
-        title={title}
-        description={description}
-        form={form}
         isOpen={isOpen}
+        fields={newFields}
         disabled={isDisabled}
         handleClose={this.onClose}
+        handleChange={this.onChange}
+        handleSubmit={this.onSubmit}
       />
     );
   }
