@@ -5,8 +5,24 @@ import Projects from '../Projects';
 
 const items = [
   {
-    avatarText: 'SS',
+    avatarText: 'S',
     title: 'Schemake',
+    description: 'Last updated by USERNAME on DATE (TIME ago)',
+    menu: {
+      items: [{ name: 'Edit Project' }],
+    },
+  },
+  {
+    avatarText: 'T',
+    title: 'Testy',
+    description: 'Last updated by USERNAME on DATE (TIME ago)',
+    menu: {
+      items: [{ name: 'Edit Project' }],
+    },
+  },
+  {
+    avatarText: 'C',
+    title: 'Changey',
     description: 'Last updated by USERNAME on DATE (TIME ago)',
     menu: {
       items: [{ name: 'Edit Project' }],
