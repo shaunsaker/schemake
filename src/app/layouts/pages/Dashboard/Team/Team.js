@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 
 import styles from './styles';
 
-import TeamSelector from '../../../../components/TeamSelector';
+import Select from '../../../../components/Select';
 import PrimaryButton from '../../../../components/PrimaryButton';
 import DashboardListItem from '../../../../components/DashboardListItem';
 import AddButton from '../../../../components/AddButton';
 
 const addButtonText = 'ADD TEAM MEMBER';
 
-const Team = ({ teamMembers, handleAddTeamMember }) => {
+const Team = ({ selectProps, teamMembers, handleAddTeamMember }) => {
   return (
     <div className="container">
       <div className="header-container">
-        <TeamSelector />
+        <Select {...selectProps} />
 
         <PrimaryButton handleClick={handleAddTeamMember}>{addButtonText}</PrimaryButton>
       </div>
@@ -40,6 +40,7 @@ const Team = ({ teamMembers, handleAddTeamMember }) => {
 };
 
 Team.propTypes = {
+  selectProps: PropTypes.shape({}),
   teamMembers: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,

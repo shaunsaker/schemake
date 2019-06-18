@@ -3,6 +3,15 @@ import { storiesOf } from '@storybook/react';
 
 import Team from '../Team';
 
+const selectProps = {
+  selectedOptionIndex: 0,
+  options: [
+    {
+      name: "Shaun's team",
+    },
+  ],
+};
+
 const teamMembers = [
   {
     avatarText: 'SS',
@@ -31,5 +40,5 @@ const teamMembers = [
 ];
 
 storiesOf('Layouts|Team', module)
-  .add('default', () => <Team teamMembers={teamMembers} />)
-  .add('blank state', () => <Team />);
+  .add('default', () => <Team selectProps={selectProps} teamMembers={teamMembers} />)
+  .add('blank state', () => <Team selectProps={selectProps} />);

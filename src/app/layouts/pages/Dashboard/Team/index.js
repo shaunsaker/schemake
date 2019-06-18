@@ -14,6 +14,8 @@ export class TeamContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onChangeTeam = this.onChangeTeam.bind(this);
+    this.setSelectedTeamIndex = this.setSelectedTeamIndex.bind(this);
     this.onAddTeamMember = this.onAddTeamMember.bind(this);
     this.onRemoveTeamMember = this.onRemoveTeamMember.bind(this);
     this.syncTeams = this.syncTeams.bind(this);
@@ -81,6 +83,23 @@ export class TeamContainer extends React.Component {
     if (teams.length && !prevProps.teams.length) {
       this.handleSyncTeamUserData();
     }
+  }
+
+  onChangeTeam(event) {
+    const index = event.target.value;
+
+    this.setSelectedTeamIndex(index);
+  }
+
+  setSelectedTeamIndex(selectedTeamIndex) {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'SET_SELECTED_TEAM_INDEX',
+      payload: {
+        selectedTeamIndex,
+      },
+    });
   }
 
   onAddTeamMember() {
@@ -189,6 +208,16 @@ export class TeamContainer extends React.Component {
 
   render() {
     /*
+     * Grab selectedTeamIndex and teams from store
+     * Create the select's props
+     */
+    const { selectedTeamIndex, teams } = this.props;
+    const selectProps = {
+      selectedOptionIndex: selectedTeamIndex,
+      options: teams,
+    };
+
+    /*
      * Map the team data to the required UI data
      */
     const { teamUserData, uid } = this.props;
@@ -233,7 +262,13 @@ export class TeamContainer extends React.Component {
         })
       : [];
 
-    return <Team teamMembers={teamMembers} handleAddTeamMember={this.onAddTeamMember} />;
+    return (
+      <Team
+        selectProps={selectProps}
+        teamMembers={teamMembers}
+        handleAddTeamMember={this.onAddTeamMember}
+      />
+    );
   }
 }
 
