@@ -9,7 +9,7 @@ import AddButton from '../../../../components/AddButton';
 
 const addButtonText = 'ADD PROJECT';
 
-const Projects = ({ items, handleAddButtonClick }) => {
+const Projects = ({ items, handleAddButtonClick, handleProjectClick }) => {
   return (
     <div className="container">
       <div className="button-container">
@@ -20,7 +20,7 @@ const Projects = ({ items, handleAddButtonClick }) => {
         {items &&
           items.map((item) => (
             <div key={item.id} className="item-container">
-              <DashboardListItem {...item} />
+              <DashboardListItem {...item} handleClick={() => handleProjectClick(item)} />
             </div>
           ))}
 
@@ -40,6 +40,7 @@ Projects.propTypes = {
       id: PropTypes.string,
     }),
   ),
+  handleProjectClick: PropTypes.func,
   handleAddButtonClick: PropTypes.func,
 };
 Projects.defaultProps = {};

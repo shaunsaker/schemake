@@ -4,6 +4,7 @@ import { rhythm } from '../../static/styles/styleConstants';
 
 const styles = css`
   .container {
+    width: 100%;
     padding: ${rhythm.vt}px ${rhythm.hz}px;
     display: flex;
     align-items: center;
@@ -15,10 +16,16 @@ const styles = css`
 
   .text-container {
     flex: 1;
+    text-align: left;
   }
 
   .menu-button-container {
-    align-self: flex-start;
+    position: absolute;
+    top: 0;
+    right: ${rhythm.hz / 2}px;
+    bottom: 0;
+    display: flex;
+    align-items: center;
   }
 `;
 

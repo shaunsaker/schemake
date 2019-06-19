@@ -9,7 +9,11 @@ const items = [
     title: 'Schemake',
     description: 'Last updated by USERNAME on DATE (TIME ago)',
     menu: {
-      items: [{ name: 'Edit Project' }],
+      items: [
+        { name: 'Open Project' },
+        { name: 'Edit Project Details' },
+        { name: 'Delete Project' },
+      ],
     },
   },
   {
@@ -17,7 +21,11 @@ const items = [
     title: 'Testy',
     description: 'Last updated by USERNAME on DATE (TIME ago)',
     menu: {
-      items: [{ name: 'Edit Project' }],
+      items: [
+        { name: 'Open Project' },
+        { name: 'Edit Project Details' },
+        { name: 'Delete Project' },
+      ],
     },
   },
   {
@@ -25,11 +33,15 @@ const items = [
     title: 'Changey',
     description: 'Last updated by USERNAME on DATE (TIME ago)',
     menu: {
-      items: [{ name: 'Edit Project' }],
+      items: [
+        { name: 'Open Project' },
+        { name: 'Edit Project Details' },
+        { name: 'Delete Project' },
+      ],
     },
   },
 ];
 
 storiesOf('Layouts|Projects', module)
-  .add('default', () => <Projects items={items} />)
+  .add('default', () => <Projects items={items} handleProjectClick={console.log} />)
   .add('blank state', () => <Projects />);

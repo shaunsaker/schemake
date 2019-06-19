@@ -24,6 +24,10 @@ export class DashboardListItemCOntainer extends React.Component {
 
   onMenuButtonClick() {
     this.setIsMenuOpen(true);
+
+    /*
+     * TODO: Call handleMenuButtonClick
+     */
   }
 
   onCloseMenu() {
