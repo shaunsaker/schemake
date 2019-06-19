@@ -9,6 +9,9 @@ import DeleteProjectModal from './DeleteProjectModal';
 
 import withSaveDocument from '../../../enhancers/withSaveDocument';
 
+/*
+ * TODO:
+ */
 export class DeleteProjectModalContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -18,15 +21,12 @@ export class DeleteProjectModalContainer extends React.Component {
     this.setIsLoading = this.setIsLoading.bind(this);
     this.deleteProject = this.deleteProject.bind(this);
     this.saveUser = this.saveUser.bind(this);
-    this.setIsSuccessful = this.setIsSuccessful.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.cancelSync = this.cancelSync.bind(this);
     this.signOut = this.signOut.bind(this);
     this.redirectToPage = this.redirectToPage.bind(this);
 
-    this.state = {
-      isSuccessful: false,
-    };
+    this.state = {};
   }
 
   static propTypes = {
@@ -76,15 +76,6 @@ export class DeleteProjectModalContainer extends React.Component {
       this.setIsLoading(false);
       this.saveUser();
     }
-
-    /*
-     * On success
-     */
-    const { hasSuccess } = this.props;
-
-    if (hasSuccess && !prevProps.hasSuccess) {
-      this.setIsSuccessful(true);
-    }
   }
 
   onSubmit() {
@@ -94,9 +85,9 @@ export class DeleteProjectModalContainer extends React.Component {
   }
 
   onClose() {
-    const { isSuccessful } = this.state;
+    const { hasSuccess } = this.props;
 
-    if (isSuccessful) {
+    if (hasSuccess) {
       /*
        * Cancel sync
        * Sign user out
@@ -149,12 +140,6 @@ export class DeleteProjectModalContainer extends React.Component {
     });
   }
 
-  setIsSuccessful(isSuccessful) {
-    this.setState({
-      isSuccessful,
-    });
-  }
-
   closeModal() {
     const { handleClose } = this.props;
 
@@ -185,8 +170,7 @@ export class DeleteProjectModalContainer extends React.Component {
   }
 
   render() {
-    const { isSuccessful: hasSuccess } = this.state;
-    const { isOpen, isLoading, isSaving } = this.props;
+    const { isOpen, isLoading, isSaving, hasSuccess } = this.props;
     const isDisabled = (isLoading || isSaving) && true;
 
     return (
