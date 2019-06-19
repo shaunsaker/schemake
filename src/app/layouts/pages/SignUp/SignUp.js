@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 
 import { app, routes } from '../../../config';
+import fields from './fields';
 import styles from './styles';
 
 import Layout from '../../../components/Layout';
@@ -10,7 +11,7 @@ import Typography from '../../../components/Typography';
 import Form from '../../../components/Form';
 import PrimaryButton from '../../../components/PrimaryButton';
 
-const SignUp = ({ form }) => {
+const SignUp = ({ isDisabled, handleSubmit }) => {
   return (
     <Layout>
       <div className="container">
@@ -25,10 +26,10 @@ const SignUp = ({ form }) => {
         </div>
 
         <Form
-          fields={form.fields}
+          fields={fields}
           submitButtonText="SIGN UP"
-          disabled={form.disabled}
-          handleSubmit={form.handleSubmit}
+          disabled={isDisabled}
+          handleSubmit={handleSubmit}
         >
           <div className="footer-text-container">
             <Typography type="paragraph">Already have an account?</Typography>
@@ -50,11 +51,8 @@ const SignUp = ({ form }) => {
 };
 
 SignUp.propTypes = {
-  form: PropTypes.shape({
-    fields: PropTypes.arrayOf(PropTypes.shape({})),
-    disabled: PropTypes.bool,
-    handleSubmit: PropTypes.func,
-  }),
+  isDisabled: PropTypes.bool,
+  handleSubmit: PropTypes.func,
 };
 SignUp.defaultProps = {};
 

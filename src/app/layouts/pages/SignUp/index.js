@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Router from 'next/router';
 
 import { routes } from '../../../config';
-import fields from './fields';
 
 import SignUp from './SignUp';
 
@@ -31,7 +30,6 @@ export class SignUpContainer extends React.Component {
      * Store
      */
     dispatch: PropTypes.func,
-    isAnonymous: PropTypes.bool,
     hasError: PropTypes.bool,
     isLoading: PropTypes.bool,
     uid: PropTypes.string,
@@ -131,14 +129,9 @@ export class SignUpContainer extends React.Component {
 
   render() {
     const { isLoading, isSaving } = this.props;
-    const disabled = isLoading || isSaving;
-    const form = {
-      fields,
-      disabled,
-      handleSubmit: this.onSubmit,
-    };
+    const isDisabled = (isLoading || isSaving) && true;
 
-    return <SignUp form={form} />;
+    return <SignUp isDisabled={isDisabled} handleSubmit={this.onSubmit} />;
   }
 }
 
