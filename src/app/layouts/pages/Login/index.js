@@ -26,8 +26,6 @@ export class LoginContainer extends React.Component {
      * Store
      */
     dispatch: PropTypes.func,
-    uid: PropTypes.string,
-    isAnonymous: PropTypes.bool,
     hasError: PropTypes.bool,
     isLoading: PropTypes.bool,
     userEmail: PropTypes.string,
@@ -134,14 +132,11 @@ export class LoginContainer extends React.Component {
 
 function mapStateToProps(state) {
   const { user, appState } = state;
-  const { uid, isAnonymous } = user;
   const { systemMessage, isLoading } = appState;
   const hasError = systemMessage.variant === 'error' ? true : false;
   const userEmail = user.email;
 
   return {
-    uid,
-    isAnonymous,
     hasError,
     isLoading,
     userEmail,
