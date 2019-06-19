@@ -20,7 +20,7 @@ const RemoveTeamMemberModal = ({
   };
 
   if (hasSuccess) {
-    title = 'Bye Bye.';
+    title = `Bye Bye ${name}.`;
     description = `We've removed ${name} from your team.`;
     form = null;
   }
