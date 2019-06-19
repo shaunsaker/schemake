@@ -16,12 +16,10 @@ export class EditProfileModalContainer extends React.Component {
     this.onClose = this.onClose.bind(this);
     this.setValues = this.setValues.bind(this);
     this.saveUser = this.saveUser.bind(this);
-    this.setIsSuccessful = this.setIsSuccessful.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
     this.state = {
       values: props.userData,
-      isSuccessful: false,
     };
   }
 
@@ -48,17 +46,6 @@ export class EditProfileModalContainer extends React.Component {
 
   static defaultProps = {};
 
-  componentDidUpdate(prevProps) {
-    /*
-     * On Success
-     */
-    const { hasSuccess } = this.props;
-
-    if (hasSuccess && !prevProps.hasSuccess) {
-      this.setIsSuccessful(true);
-    }
-  }
-
   onChange(name, value) {
     const { values } = this.state;
     values[name] = value;
@@ -71,7 +58,6 @@ export class EditProfileModalContainer extends React.Component {
   }
 
   onClose() {
-    this.setIsSuccessful(false);
     this.closeModal();
   }
 
@@ -92,12 +78,6 @@ export class EditProfileModalContainer extends React.Component {
     saveDocument({ url, document });
   }
 
-  setIsSuccessful(isSuccessful) {
-    this.setState({
-      isSuccessful,
-    });
-  }
-
   closeModal() {
     const { handleClose } = this.props;
 
@@ -105,8 +85,7 @@ export class EditProfileModalContainer extends React.Component {
   }
 
   render() {
-    const { isSuccessful: hasSuccess } = this.state;
-    const { isOpen, isSaving } = this.props;
+    const { isOpen, isSaving, hasSuccess } = this.props;
     const isDisabled = isSaving && true;
     let newFields;
 
