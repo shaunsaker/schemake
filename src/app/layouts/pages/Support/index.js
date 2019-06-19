@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createUID } from 'js-simple-utils';
 
-import fields from './fields';
-
 import Support from './Support';
 import withSaveDocument from '../../../enhancers/withSaveDocument';
 
@@ -69,25 +67,17 @@ export class SupportContainer extends React.Component {
   }
 
   render() {
-    const { isSuccessful } = this.state;
+    const { isSuccessful: hasSuccess } = this.state;
     const { isSaving } = this.props;
-    let title = 'Support';
-    let description =
-      "We value feedback so much. If you have any questions, suggestions for improvements or if you think you've found a bug, please let use know. We'd love to hear from you!";
-    let form = {
-      fields,
-      disabled: isSaving,
-      handleSubmit: this.onSubmit,
-    };
-
-    if (isSuccessful) {
-      title = 'Great Success';
-      description = 'Your message was submitted successfully.';
-      form = null;
-    }
+    const isDisabled = isSaving && true;
 
     return (
-      <Support title={title} description={description} form={form} handleReset={this.onReset} />
+      <Support
+        hasSuccess={hasSuccess}
+        isDisabled={isDisabled}
+        handleSubmit={this.onSubmit}
+        handleReset={this.onReset}
+      />
     );
   }
 }

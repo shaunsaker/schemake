@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import fields from './fields';
 import styles from './styles';
 
 import Layout from '../../../components/Layout';
@@ -8,17 +9,24 @@ import Typography from '../../../components/Typography';
 import Form from '../../../components/Form';
 import PrimaryButton from '../../../components/PrimaryButton';
 
-const Support = ({ title, description, form, handleReset }) => {
-  const formComponent = form ? (
+const Support = ({ hasSuccess, isDisabled, handleSubmit, handleReset }) => {
+  let title = 'Support';
+  let description =
+    "We value feedback so much. If you have any questions, suggestions for improvements or if you think you've found a bug, please let use know. We'd love to hear from you!";
+  let formComponent = (
     <Form
-      fields={form.fields}
+      fields={fields}
       submitButtonText="SUBMIT"
-      disabled={form.disabled}
-      handleSubmit={form.handleSubmit}
+      disabled={isDisabled}
+      handleSubmit={handleSubmit}
     />
-  ) : (
-    <PrimaryButton handleClick={handleReset}>RESET</PrimaryButton>
   );
+
+  if (hasSuccess) {
+    title = 'Great Success';
+    description = 'Your message was submitted successfully.';
+    formComponent = <PrimaryButton handleClick={handleReset}>RESET</PrimaryButton>;
+  }
 
   return (
     <Layout>
@@ -40,13 +48,9 @@ const Support = ({ title, description, form, handleReset }) => {
 };
 
 Support.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-  form: PropTypes.shape({
-    fields: PropTypes.arrayOf(PropTypes.shape({})),
-    disabled: PropTypes.bool,
-    handleSubmit: PropTypes.func,
-  }),
+  hasSuccess: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  handleSubmit: PropTypes.func,
   handleReset: PropTypes.func,
 };
 Support.defaultProps = {};
