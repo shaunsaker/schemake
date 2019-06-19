@@ -19,7 +19,7 @@ const SendFeedbackModal = ({
   let form = { fields, disabled: isDisabled, handleChange, handleSubmit };
 
   if (hasSuccess) {
-    title = 'Great success';
+    title = 'Great Success';
     description = 'Your profile has been updated successfully.';
     form = null;
   } else if (newFields) {
