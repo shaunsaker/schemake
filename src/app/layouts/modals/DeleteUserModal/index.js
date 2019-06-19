@@ -15,8 +15,6 @@ export class DeleteUserModalContainer extends React.Component {
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onClose = this.onClose.bind(this);
-    this.setIsLoading = this.setIsLoading.bind(this);
-    this.deleteUserData = this.deleteUserData.bind(this);
     this.saveDeleteUser = this.saveDeleteUser.bind(this);
     this.setIsSuccessful = this.setIsSuccessful.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -41,9 +39,6 @@ export class DeleteUserModalContainer extends React.Component {
      */
     dispatch: PropTypes.func,
     uid: PropTypes.string,
-    isLoading: PropTypes.bool,
-    hasPendingTransactions: PropTypes.bool,
-    hasError: PropTypes.bool,
 
     /*
      * withSaveDocument
@@ -56,27 +51,6 @@ export class DeleteUserModalContainer extends React.Component {
   static defaultProps = {};
 
   componentDidUpdate(prevProps) {
-    const { isLoading } = this.props;
-
-    /*
-     * If loading and error
-     */
-    const { hasError } = this.props;
-
-    if (isLoading && hasError && !prevProps.hasError) {
-      this.setIsLoading(false);
-    }
-
-    /*
-     * If loading and no more pending transactions
-     */
-    const { hasPendingTransactions } = this.props;
-
-    if (isLoading && !hasPendingTransactions && prevProps.hasPendingTransactions) {
-      this.setIsLoading(false);
-      this.saveDeleteUser();
-    }
-
     /*
      * On success
      */
@@ -88,8 +62,7 @@ export class DeleteUserModalContainer extends React.Component {
   }
 
   onSubmit() {
-    this.setIsLoading(true);
-    this.deleteUserData();
+    this.saveDeleteUser();
   }
 
   onClose() {
@@ -116,21 +89,6 @@ export class DeleteUserModalContainer extends React.Component {
       type: 'SET_IS_LOADING',
       payload: {
         isLoading,
-      },
-    });
-  }
-
-  deleteUserData() {
-    /*
-     * Delete user data
-     */
-    const { dispatch, uid } = this.props;
-    const url = `users/${uid}`;
-
-    dispatch({
-      type: 'deleteDocument',
-      payload: {
-        url,
       },
     });
   }
@@ -185,8 +143,8 @@ export class DeleteUserModalContainer extends React.Component {
 
   render() {
     const { isSuccessful: hasSuccess } = this.state;
-    const { isOpen, isLoading, isSaving } = this.props;
-    const isDisabled = (isLoading || isSaving) && true;
+    const { isOpen, isSaving } = this.props;
+    const isDisabled = isSaving && true;
 
     return (
       <DeleteUserModal
@@ -201,17 +159,11 @@ export class DeleteUserModalContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { user, appState } = state;
+  const { user } = state;
   const { uid } = user;
-  const { isLoading, pendingTransactions, systemMessage } = appState;
-  const hasPendingTransactions = pendingTransactions.length ? true : false;
-  const hasError = systemMessage.variant === 'error' ? true : false;
 
   return {
     uid,
-    isLoading,
-    hasPendingTransactions,
-    hasError,
   };
 };
 
