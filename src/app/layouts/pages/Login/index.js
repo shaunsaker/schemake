@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Router from 'next/router';
 
 import { modals, routes } from '../../../config';
-import fields from './fields';
 
 import Login from './Login';
 
@@ -120,13 +119,15 @@ export class LoginContainer extends React.Component {
 
   render() {
     const { isLoading } = this.props;
-    const form = {
-      fields,
-      disabled: isLoading,
-      handleSubmit: this.onSubmit,
-    };
+    const isDisabled = isLoading && true;
 
-    return <Login form={form} handleForgotPassword={this.onForgotPassword} />;
+    return (
+      <Login
+        isDisabled={isDisabled}
+        handleForgotPassword={this.onForgotPassword}
+        handleSubmit={this.onSubmit}
+      />
+    );
   }
 }
 

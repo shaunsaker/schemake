@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 
 import { app, routes } from '../../../config';
+import fields from './fields';
 import styles from './styles';
 
 import Layout from '../../../components/Layout';
@@ -10,7 +11,7 @@ import Typography from '../../../components/Typography';
 import Form from '../../../components/Form';
 import PrimaryButton from '../../../components/PrimaryButton';
 
-const Login = ({ form, handleForgotPassword }) => {
+const Login = ({ isDisabled, handleForgotPassword, handleSubmit }) => {
   return (
     <Layout>
       <div className="container">
@@ -23,7 +24,7 @@ const Login = ({ form, handleForgotPassword }) => {
         </div>
 
         <Form
-          fields={form.fields}
+          fields={fields}
           footerComponent={
             <div className="forgot-password-text-container">
               <PrimaryButton text small handleClick={handleForgotPassword}>
@@ -32,8 +33,8 @@ const Login = ({ form, handleForgotPassword }) => {
             </div>
           }
           submitButtonText="LOG IN"
-          disabled={form.disabled}
-          handleSubmit={form.handleSubmit}
+          disabled={isDisabled}
+          handleSubmit={handleSubmit}
         >
           <div className="footer-text-container">
             <Typography type="paragraph">Don&apos;t have an account yet?</Typography>
@@ -55,12 +56,9 @@ const Login = ({ form, handleForgotPassword }) => {
 };
 
 Login.propTypes = {
-  form: PropTypes.shape({
-    fields: PropTypes.arrayOf(PropTypes.shape({})),
-    disabled: PropTypes.bool,
-    handleSubmit: PropTypes.func,
-  }),
+  isDisabled: PropTypes.bool,
   handleForgotPassword: PropTypes.func,
+  handleSubmit: PropTypes.func,
 };
 Login.defaultProps = {};
 

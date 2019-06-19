@@ -2,7 +2,7 @@ import css from 'styled-jsx/css';
 
 import { rhythm } from '../../../static/styles/styleConstants';
 
-const signUpTextMargin = 5;
+const signUpTextMargin = 10;
 
 const styles = css`
   .container {
