@@ -17,11 +17,9 @@ export class AddTeamMemberModalContainer extends React.Component {
     this.syncUserData = this.syncUserData.bind(this);
     this.setEmail = this.setEmail.bind(this);
     this.saveInvite = this.saveInvite.bind(this);
-    this.setIsSuccessful = this.setIsSuccessful.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
     this.state = {
-      isSuccessful: false,
       email: null,
     };
   }
@@ -59,17 +57,6 @@ export class AddTeamMemberModalContainer extends React.Component {
     this.syncUserData();
   }
 
-  componentDidUpdate(prevProps) {
-    /*
-     * On success
-     */
-    const { hasSuccess } = this.props;
-
-    if (hasSuccess && !prevProps.hasSuccess) {
-      this.setIsSuccessful(true);
-    }
-  }
-
   onSubmit(form) {
     const { email } = form;
 
@@ -78,7 +65,6 @@ export class AddTeamMemberModalContainer extends React.Component {
   }
 
   onClose() {
-    this.setIsSuccessful(false);
     this.closeModal();
   }
 
@@ -116,12 +102,6 @@ export class AddTeamMemberModalContainer extends React.Component {
     });
   }
 
-  setIsSuccessful(isSuccessful) {
-    this.setState({
-      isSuccessful,
-    });
-  }
-
   closeModal() {
     const { handleClose } = this.props;
 
@@ -129,8 +109,8 @@ export class AddTeamMemberModalContainer extends React.Component {
   }
 
   render() {
-    const { isSuccessful: hasSuccess, email } = this.state;
-    const { isOpen, isSaving } = this.props;
+    const { email } = this.state;
+    const { isOpen, isSaving, hasSuccess } = this.props;
     const isDisabled = isSaving && true;
 
     return (
