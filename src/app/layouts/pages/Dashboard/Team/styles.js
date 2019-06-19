@@ -7,6 +7,11 @@ const styles = css`
     min-height: 100vh; /* so that we don't see a jump on load of tabs data */
   }
 
+  .circular-progress-container {
+    text-align: center;
+    margin-top: ${rhythm.vt * 2}px;
+  }
+
   .header-container {
     display: flex;
     justify-content: space-between;

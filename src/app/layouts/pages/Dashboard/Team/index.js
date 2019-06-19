@@ -242,8 +242,15 @@ export class TeamContainer extends React.Component {
         })
       : [];
 
+    /*
+     * Pass a hasTeams prop so that we can render blank state
+     * while the teams are being created
+     */
+    const hasTeams = teams.length && true;
+
     return (
       <Team
+        hasTeams={hasTeams}
         selectProps={selectProps}
         teamMembers={teamMembers}
         handleAddTeamMember={this.onAddTeamMember}

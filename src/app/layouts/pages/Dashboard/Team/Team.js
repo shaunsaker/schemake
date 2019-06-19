@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import styles from './styles';
 
+import Typography from '../../../../components/Typography';
+import CircularProgress from '../../../../components/CircularProgress';
 import Select from '../../../../components/Select';
 import PrimaryButton from '../../../../components/PrimaryButton';
 import DashboardListItem from '../../../../components/DashboardListItem';
@@ -10,7 +12,31 @@ import AddButton from '../../../../components/AddButton';
 
 const addButtonText = 'ADD TEAM MEMBER';
 
-const Team = ({ selectProps, teamMembers, handleAddTeamMember }) => {
+const Team = ({ hasTeams, selectProps, teamMembers, handleAddTeamMember }) => {
+  /*
+   * Blank state
+   */
+  if (!hasTeams) {
+    return (
+      <div className="container">
+        <Typography type="heading" gutterBottom>
+          Uno Momento...
+        </Typography>
+
+        <Typography type="paragraph">
+          If you&apos;re seeing this, we&apos;re still busy creating your team. Don&apos;t fret,
+          this should only take a moment.
+        </Typography>
+
+        <div className="circular-progress-container">
+          <CircularProgress />
+        </div>
+
+        <style jsx>{styles}</style>
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <div className="header-container">
@@ -40,6 +66,7 @@ const Team = ({ selectProps, teamMembers, handleAddTeamMember }) => {
 };
 
 Team.propTypes = {
+  hasTeams: PropTypes.bool,
   selectProps: PropTypes.shape({}),
   teamMembers: PropTypes.arrayOf(
     PropTypes.shape({
