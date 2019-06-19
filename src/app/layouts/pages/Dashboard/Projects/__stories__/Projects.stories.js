@@ -9,11 +9,7 @@ const items = [
     title: 'Schemake',
     description: 'Last updated by USERNAME on DATE (TIME ago)',
     menu: {
-      items: [
-        { name: 'Open Project' },
-        { name: 'Edit Project Details' },
-        { name: 'Delete Project' },
-      ],
+      items: [{ name: 'Edit Project Details' }, { name: 'Delete Project' }],
     },
   },
   {
@@ -21,11 +17,7 @@ const items = [
     title: 'Testy',
     description: 'Last updated by USERNAME on DATE (TIME ago)',
     menu: {
-      items: [
-        { name: 'Open Project' },
-        { name: 'Edit Project Details' },
-        { name: 'Delete Project' },
-      ],
+      items: [{ name: 'Edit Project Details' }, { name: 'Delete Project' }],
     },
   },
   {
@@ -33,11 +25,7 @@ const items = [
     title: 'Changey',
     description: 'Last updated by USERNAME on DATE (TIME ago)',
     menu: {
-      items: [
-        { name: 'Open Project' },
-        { name: 'Edit Project Details' },
-        { name: 'Delete Project' },
-      ],
+      items: [{ name: 'Edit Project Details' }, { name: 'Delete Project' }],
     },
   },
 ];
