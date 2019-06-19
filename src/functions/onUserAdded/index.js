@@ -6,6 +6,11 @@ const autoId = require('./autoId');
 const db = admin.firestore();
 
 const onUserAdded = functions.firestore.document('users/{uid}').onCreate(async (snapshot) => {
+  /*
+   * When a user is added, we want to create teams for them
+   * If the user was invited, add them to the invitee's team
+   * In both cases, create a new team for the user
+   */
   const { id: uid } = snapshot;
   const values = snapshot.data();
   const { email } = values;
@@ -37,11 +42,8 @@ const onUserAdded = functions.firestore.document('users/{uid}').onCreate(async (
     await teamRef.update({ users: admin.firestore.FieldValue.arrayUnion(uid) });
 
     console.log('User added to existing team successfully.', { uid, teamId });
-
-    return;
   }
   /*
-   * New user with no invite
    * Create the team name using the user's name
    * Add a new field, teams with the teamId, to the user's document
    */
