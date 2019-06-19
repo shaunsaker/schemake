@@ -27,7 +27,7 @@ const ActionPanel = ({ actions, color }) => {
           <Link key={action.href} href={action.href}>
             <div>
               <PrimaryButton text small>
-                <Typography type="link" color="white" style={{ textDecorationLine: 'none' }}>
+                <Typography type="link" color={color} style={{ textDecorationLine: 'none' }}>
                   {action.text}
                 </Typography>
               </PrimaryButton>
@@ -76,6 +76,7 @@ ActionPanel.propTypes = {
 };
 ActionPanel.defaultProps = {
   actions: [],
+  color: 'white',
 };
 
 export default ActionPanel;
