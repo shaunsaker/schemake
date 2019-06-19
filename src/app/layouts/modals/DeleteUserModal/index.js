@@ -16,15 +16,12 @@ export class DeleteUserModalContainer extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onClose = this.onClose.bind(this);
     this.saveDeleteUser = this.saveDeleteUser.bind(this);
-    this.setIsSuccessful = this.setIsSuccessful.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.cancelSync = this.cancelSync.bind(this);
     this.signOut = this.signOut.bind(this);
     this.redirectToPage = this.redirectToPage.bind(this);
 
-    this.state = {
-      isSuccessful: false,
-    };
+    this.state = {};
   }
 
   static propTypes = {
@@ -50,25 +47,14 @@ export class DeleteUserModalContainer extends React.Component {
 
   static defaultProps = {};
 
-  componentDidUpdate(prevProps) {
-    /*
-     * On success
-     */
-    const { hasSuccess } = this.props;
-
-    if (hasSuccess && !prevProps.hasSuccess) {
-      this.setIsSuccessful(true);
-    }
-  }
-
   onSubmit() {
     this.saveDeleteUser();
   }
 
   onClose() {
-    const { isSuccessful } = this.state;
+    const { hasSuccess } = this.props;
 
-    if (isSuccessful) {
+    if (hasSuccess) {
       /*
        * Cancel sync
        * Sign user out
@@ -106,12 +92,6 @@ export class DeleteUserModalContainer extends React.Component {
     });
   }
 
-  setIsSuccessful(isSuccessful) {
-    this.setState({
-      isSuccessful,
-    });
-  }
-
   closeModal() {
     const { handleClose } = this.props;
 
@@ -142,8 +122,7 @@ export class DeleteUserModalContainer extends React.Component {
   }
 
   render() {
-    const { isSuccessful: hasSuccess } = this.state;
-    const { isOpen, isSaving } = this.props;
+    const { isOpen, isSaving, hasSuccess } = this.props;
     const isDisabled = isSaving && true;
 
     return (
