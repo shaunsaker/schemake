@@ -6,7 +6,6 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
 import Typography from '../Typography';
-import TextLoading from '../TextLoading';
 
 const muiStyles = {
   input: {
@@ -15,12 +14,6 @@ const muiStyles = {
 };
 
 const SelectComponent = ({ classes, selectedOptionIndex, options, handleChange }) => {
-  /*
-   * If there are no options
-   * === loading state
-   */
-  const loadingComponent = !options.length && <TextLoading />;
-
   return (
     <div className="container">
       <TextField
@@ -41,8 +34,6 @@ const SelectComponent = ({ classes, selectedOptionIndex, options, handleChange }
           );
         })}
       </TextField>
-
-      {loadingComponent}
 
       <style jsx>{styles}</style>
     </div>
