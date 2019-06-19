@@ -7,7 +7,7 @@ import teamUserData from './teamUserData';
 import user from './user';
 import userData from './userData';
 
-const reducers = combineReducers({
+const appReducer = combineReducers({
   appState,
   modals,
   teams,
@@ -16,4 +16,14 @@ const reducers = combineReducers({
   userData,
 });
 
-export default reducers;
+const rootReducer = (state, action) => {
+  let newState = state;
+
+  if (action.type === 'PURGE_STORE') {
+    newState = undefined;
+  }
+
+  return appReducer(newState, action);
+};
+
+export default rootReducer;
