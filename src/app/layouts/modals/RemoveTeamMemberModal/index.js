@@ -33,9 +33,11 @@ export class RemoveTeamMemberModalContainer extends React.Component {
     teamUserData: PropTypes.shape({
       name: PropTypes.string,
     }),
-    teams: PropTypes.shape({
-      users: PropTypes.arrayOf(PropTypes.string),
-    }),
+    teams: PropTypes.arrayOf(
+      PropTypes.shape({
+        users: PropTypes.arrayOf(PropTypes.string),
+      }),
+    ),
 
     /*
      * withSaveDocument
@@ -57,13 +59,13 @@ export class RemoveTeamMemberModalContainer extends React.Component {
 
   saveTeam() {
     const { uid, teamId, saveDocument } = this.props;
-    const url = `team/${teamId}`;
+    const url = `teams/${teamId}`;
 
     /*
      * Filter out the user's uid from the team users array
      */
     const { teams } = this.props;
-    const team = teams.filter((item) => item.teamId === teamId)[0];
+    const team = teams.filter((item) => item.id === teamId)[0];
     const { users: oldUsers } = team;
     const newUsers = oldUsers.filter((item) => item !== uid);
     const document = {
