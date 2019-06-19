@@ -52,7 +52,6 @@ export class SignUpContainer extends React.Component {
     const { isLoading, uid } = this.props;
 
     if (isLoading && uid && !prevProps.uid) {
-      this.setIsLoading(false);
       this.saveUser();
     }
 
@@ -107,6 +106,19 @@ export class SignUpContainer extends React.Component {
       payload: {
         email,
         password,
+      },
+      meta: {
+        nextActions: [
+          {
+            type: 'SIGN_IN_USER',
+          },
+          {
+            type: 'SET_IS_LOADING',
+            payload: {
+              isLoading: false,
+            },
+          },
+        ],
       },
     });
   }
