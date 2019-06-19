@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createUID } from 'js-simple-utils';
 
-import fields from './fields';
-
 import AddTeamMemberModal from './AddTeamMemberModal';
 
 import withSaveDocument from '../../../enhancers/withSaveDocument';

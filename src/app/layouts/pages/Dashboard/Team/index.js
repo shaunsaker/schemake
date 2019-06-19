@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { cloneObject } from 'js-simple-utils';
 
 import { modals } from '../../../../config';
 
@@ -23,7 +22,7 @@ export class TeamContainer extends React.Component {
     this.syncTeamUserData = this.syncTeamUserData.bind(this);
     this.getSelectedTeam = this.getSelectedTeam.bind(this);
     this.openAddTeamMemberModal = this.openAddTeamMemberModal.bind(this);
-    this.saveTeam = this.saveTeam.bind(this);
+    this.openRemoveTeamMemberModal = this.openRemoveTeamMemberModal.bind(this);
 
     this.state = {};
   }
@@ -50,11 +49,6 @@ export class TeamContainer extends React.Component {
      * withSyncData
      */
     syncData: PropTypes.func,
-
-    /*
-     * withSaveDocument
-     */
-    saveDocument: PropTypes.func,
   };
 
   static defaultProps = {};
@@ -107,7 +101,7 @@ export class TeamContainer extends React.Component {
   }
 
   onRemoveTeamMember({ uid, teamId }) {
-    this.saveTeam({ uid, teamId });
+    this.openRemoveTeamMemberModal({ uid, teamId });
   }
 
   syncTeams() {
@@ -174,36 +168,22 @@ export class TeamContainer extends React.Component {
     });
   }
 
-  saveTeam({ uid, teamId }) {
+  openRemoveTeamMemberModal({ uid, teamId }) {
     /*
-     * Remove this uid from the users field of the team
+     * Dispatch the action
      */
-    const { selectedTeamIndex, teams } = this.props;
-    const team = teams[selectedTeamIndex];
-    const { users } = team;
-    const userIndex = users.findIndex((item) => item === uid);
-    const newUsers = cloneObject(users);
+    const { dispatch } = this.props;
 
-    newUsers.splice(userIndex);
-
-    const document = {
-      ...team,
-      users: newUsers,
-    };
-
-    const { saveDocument } = this.props;
-    const url = `teams/${teamId}`;
-    const nextActions = [
-      {
-        type: 'SET_SYSTEM_MESSAGE',
-        payload: {
-          message: 'Team member removed from team successfully.',
-          variant: 'success',
+    dispatch({
+      type: 'TOGGLE_MODAL',
+      payload: {
+        key: modals.removeTeamMemberModal.key,
+        props: {
+          uid,
+          teamId,
         },
       },
-    ];
-
-    saveDocument({ url, document, nextActions });
+    });
   }
 
   render() {

@@ -14,6 +14,9 @@ const modals = {
   forgotPasswordModal: {
     key: 'forgotPasswordModal',
   },
+  removeTeamMemberModal: {
+    key: 'removeTeamMemberModal',
+  },
 };
 
 export default modals;
