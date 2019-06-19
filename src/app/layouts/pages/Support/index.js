@@ -12,11 +12,8 @@ export class SupportContainer extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onReset = this.onReset.bind(this);
     this.saveSupport = this.saveSupport.bind(this);
-    this.setIsSuccessful = this.setIsSuccessful.bind(this);
 
-    this.state = {
-      isSuccessful: false,
-    };
+    this.state = {};
   }
 
   static propTypes = {
@@ -29,17 +26,6 @@ export class SupportContainer extends React.Component {
   };
 
   static defaultProps = {};
-
-  componentDidUpdate(prevProps) {
-    /*
-     * On success
-     */
-    const { hasSuccess } = this.props;
-
-    if (hasSuccess && !prevProps.hasSuccess) {
-      this.setIsSuccessful(true);
-    }
-  }
 
   onSubmit(form) {
     this.saveSupport(form);
@@ -60,15 +46,8 @@ export class SupportContainer extends React.Component {
     saveDocument({ url, document });
   }
 
-  setIsSuccessful(isSuccessful) {
-    this.setState({
-      isSuccessful,
-    });
-  }
-
   render() {
-    const { isSuccessful: hasSuccess } = this.state;
-    const { isSaving } = this.props;
+    const { isSaving, hasSuccess } = this.props;
     const isDisabled = isSaving && true;
 
     return (
