@@ -7,7 +7,6 @@ import PrimaryButton from '../../../../components/PrimaryButton';
 import ProfileListItem from '../../../../components/ProfileListItem';
 
 const General = ({ name, organisation, email, handleEditProfileClick }) => {
-  console.log({ name, organisation, email });
   const profileListItems = [
     {
       label: 'NAME',
