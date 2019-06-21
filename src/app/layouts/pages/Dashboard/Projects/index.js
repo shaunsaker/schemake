@@ -142,12 +142,6 @@ export class ProjectsContainer extends React.Component {
 
   render() {
     /*
-      TODO: Filter projects by Team
-      TODO: Blank data state
-      TODO: Sync on all of the user's team's projects each time the team is selected
-    */
-
-    /*
      * Grab selectedTeamIndex and teams from store
      * Create the select's props
      */
@@ -159,9 +153,11 @@ export class ProjectsContainer extends React.Component {
     };
 
     /*
+     * Filter the projects based on the current selected team
      * Shape the projects into the expected items
      */
-    const { projects } = this.props;
+    const { projects: allProjects, teamId } = this.props;
+    const projects = allProjects.filter((item) => item.teamId === teamId);
     const items = projects.map((item) => {
       const avatarText = item.name.slice(0, 1);
       const title = item.name;
