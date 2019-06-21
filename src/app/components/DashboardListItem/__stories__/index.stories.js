@@ -8,10 +8,5 @@ const title = 'PROJECT NAME';
 const description = 'Last updated by USERNAME on DATE (TIME ago)';
 
 storiesOf('Components|DashboardListItem', module).add('default', () => (
-  <DashboardListItem
-    avatarText={avatarText}
-    title={title}
-    description={description}
-    handleMenuButtonClick={null}
-  />
+  <DashboardListItem avatarText={avatarText} title={title} description={description} />
 ));

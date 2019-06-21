@@ -21,6 +21,12 @@ export class ActionProjectModalContainer extends React.Component {
 
   static propTypes = {
     /*
+     * Store
+     */
+    uid: PropTypes.string,
+    teamId: PropTypes.string,
+
+    /*
      * Parent
      */
     isOpen: PropTypes.bool,
@@ -57,7 +63,7 @@ export class ActionProjectModalContainer extends React.Component {
   }
 
   saveProject({ name }) {
-    const { saveDocument, projectId } = this.props;
+    const { saveDocument, projectId, uid } = this.props;
     const now = Date.now();
     const document = {
       name,
@@ -67,8 +73,12 @@ export class ActionProjectModalContainer extends React.Component {
     if (projectId) {
       projectDocumentId = projectId;
       document.dateModified = now;
+      document.modifiedBy = uid;
     } else {
       projectDocumentId = createUID();
+      const { teamId } = this.props;
+      document.createdBy = uid;
+      document.teamId = teamId;
       document.dateCreated = now;
     }
 
@@ -92,6 +102,9 @@ export class ActionProjectModalContainer extends React.Component {
   }
 
   render() {
+    /*
+     * TODO: Success state
+     */
     const { isOpen, projectId, isSaving } = this.props;
     const isDisabled = isSaving;
     const isEditing = projectId && true;
@@ -109,7 +122,21 @@ export class ActionProjectModalContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  const { user } = state;
+  const { uid } = user;
+
+  /*
+   * Get the current teamId based on the selectedTeamIndex
+   */
+  const { appState } = state;
+  const { selectedTeamIndex } = appState;
+  const { teams } = state;
+  const { id: teamId } = teams[selectedTeamIndex];
+
+  return {
+    uid,
+    teamId,
+  };
 };
 
 export default withSaveDocument(connect(mapStateToProps)(ActionProjectModalContainer));

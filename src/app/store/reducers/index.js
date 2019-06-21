@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import appState from './appState';
 import modals from './modals';
+import projects from './projects';
 import teams from './teams';
 import teamUserData from './teamUserData';
 import user from './user';
@@ -10,6 +11,7 @@ import userData from './userData';
 const appReducer = combineReducers({
   appState,
   modals,
+  projects,
   teams,
   teamUserData,
   user,

@@ -9,23 +9,23 @@ import AddButton from '../../../../components/AddButton';
 
 const addButtonText = 'ADD PROJECT';
 
-const Projects = ({ items, handleAddButtonClick, handleProjectClick }) => {
+const Projects = ({ items, handleAddProjectClick }) => {
   return (
     <div className="container">
       <div className="button-container">
-        <PrimaryButton handleClick={handleAddButtonClick}>{addButtonText}</PrimaryButton>
+        <PrimaryButton handleClick={handleAddProjectClick}>{addButtonText}</PrimaryButton>
       </div>
 
       <div className="items-container">
         {items &&
           items.map((item) => (
             <div key={item.id} className="item-container">
-              <DashboardListItem {...item} handleClick={() => handleProjectClick(item)} />
+              <DashboardListItem {...item} />
             </div>
           ))}
 
         <div className="item-container">
-          <AddButton handleClick={handleAddButtonClick}>{addButtonText}</AddButton>
+          <AddButton handleClick={handleAddProjectClick}>{addButtonText}</AddButton>
         </div>
       </div>
 
@@ -40,8 +40,7 @@ Projects.propTypes = {
       id: PropTypes.string,
     }),
   ),
-  handleProjectClick: PropTypes.func,
-  handleAddButtonClick: PropTypes.func,
+  handleAddProjectClick: PropTypes.func,
 };
 Projects.defaultProps = {};
 

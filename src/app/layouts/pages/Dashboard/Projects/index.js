@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { sortArrayOfObjectsByKey } from 'js-simple-utils';
 
 import { modals } from '../../../../config';
+import { getDateTime } from '../../../../utils';
 
 import Projects from './Projects';
 
@@ -13,7 +15,10 @@ export class ProjectsContainer extends React.Component {
     super(props);
 
     this.onAddProjectClick = this.onAddProjectClick.bind(this);
-    this.syncProjects = this.syncProjects.bind(this);
+    this.onOpenProject = this.onOpenProject.bind(this);
+    this.onEditProjectDetails = this.onEditProjectDetails.bind(this);
+    this.onDeleteProject = this.onDeleteProject.bind(this);
+    this.syncData = this.syncData.bind(this);
     this.openAddProjectModal = this.openAddProjectModal.bind(this);
 
     this.state = {};
@@ -24,8 +29,9 @@ export class ProjectsContainer extends React.Component {
      * Store
      */
     dispatch: PropTypes.func,
-    projects: PropTypes.shape({}),
-    uid: PropTypes.string,
+    projects: PropTypes.arrayOf(PropTypes.shape({})),
+    teamId: PropTypes.string,
+    teamUserData: PropTypes.shape({}),
 
     /*
      * withSyncData
@@ -36,22 +42,36 @@ export class ProjectsContainer extends React.Component {
   static defaultProps = {};
 
   componentDidMount() {
-    this.syncProjects();
+    this.syncData();
   }
 
   onAddProjectClick() {
     this.openAddProjectModal();
   }
 
-  syncProjects() {
-    // const { uid, syncData } = this.props;
-    // const url = `users/${uid}`;
-    // const nextActions = [{ type: 'SET_USER_DATA' }];
-    // syncData({
-    //   url,
-    //   nextActions,
-    // });
-    // TODO:
+  onOpenProject(project) {
+    console.log({ project });
+  }
+
+  onEditProjectDetails(project) {
+    console.log({ project });
+  }
+
+  onDeleteProject(project) {
+    console.log({ project });
+  }
+
+  syncData() {
+    const { teamId, syncData } = this.props;
+
+    /*
+     * Sync on the teams projects
+     */
+    syncData({
+      url: 'projects',
+      queries: [['teamId', '==', teamId]],
+      nextActions: [{ type: 'SET_PROJECTS' }],
+    });
   }
 
   openAddProjectModal() {
@@ -69,22 +89,86 @@ export class ProjectsContainer extends React.Component {
     const { projects } = this.props;
 
     /*
-      TODO: avatarText, title, description, menu, handleMenuButtonClick
+      TODO: Wrong menu opening
+      TODO: Filter projects by Team
+      TODO: Blank data state
+      TODO: Sync on all of the user's team's projects each time the team is selected
     */
-    // TODO: Sort projects by dateModified?
-    // TODO: Sync projects
 
-    return <Projects items={projects} handleAddProjectClick={this.onAddProjectClick} />;
+    /*
+     * Shape the projects into the expected items
+     */
+    const items = projects.map((item) => {
+      const avatarText = item.name.slice(0, 1);
+      const title = item.name;
+
+      /*
+       * To get the user's name that the project was modified by
+       */
+      const { teamUserData } = this.props;
+      const { name: modifiedBy } = teamUserData[item.modifiedBy || item.createdBy];
+
+      /*
+       * To get the date text, use the dateModified if it is present
+       * else just use the dateCreated
+       */
+      const dateModified = getDateTime(item.dateModified || item.dateCreated);
+      const description = `Last updated by ${modifiedBy} on ${dateModified}`;
+
+      return {
+        id: title,
+        avatarText,
+        title,
+        description,
+        menu: {
+          items: [
+            {
+              name: 'Open Project',
+              handleClick: () => this.onOpenProject(item),
+            },
+            {
+              name: 'Edit Project Details',
+              handleClick: () => this.onEditProjectDetails(item),
+            },
+            {
+              name: 'Delete Project',
+              handleClick: () => this.onDeleteProject(item),
+            },
+          ],
+        },
+        handleClick: () => this.onOpenProject(item),
+      };
+    });
+
+    return <Projects items={items} handleAddProjectClick={this.onAddProjectClick} />;
   }
 }
 
 function mapStateToProps(state) {
-  const { projects, user } = state;
-  const { uid } = user;
+  /*
+   * Get and sort the projects by dateCreated and dateModified
+   */
+  const { projects } = state;
+  const sortedProjectsByDateCreated = sortArrayOfObjectsByKey(projects, 'dateCreated');
+  const sortedProjectsByDateModified = sortArrayOfObjectsByKey(
+    sortedProjectsByDateCreated,
+    'dateModified',
+  );
+
+  /*
+   * Get the current teamId based on the selectedTeamIndex
+   */
+  const { appState } = state;
+  const { selectedTeamIndex } = appState;
+  const { teams } = state;
+  const { id: teamId } = teams[selectedTeamIndex];
+
+  const { teamUserData } = state;
 
   return {
-    projects,
-    uid,
+    projects: sortedProjectsByDateModified,
+    teamId,
+    teamUserData,
   };
 }
 

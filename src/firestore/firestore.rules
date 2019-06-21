@@ -6,7 +6,7 @@ service cloud.firestore {
     
     match /users/{userId} {
     	allow get: if request.auth.uid != null; // only get if authed
-      allow list: if request.auth.uid != null; // TODO:
+      allow list: if request.auth.uid != null; 
       allow create, update: if request.auth.uid == userId; // only allow a write on a user's own document
     }
     
@@ -16,11 +16,12 @@ service cloud.firestore {
     
     match /projects/{projectId} {
       allow create: if request.resource.data.createdBy == request.auth.uid; // only allow if the requesting user's uid is attached as createdBy
+      allow list: if request.auth.uid != null; 
     }
     
     match /teams/{teamId} {
       allow create, update: if request.resource.data.createdBy == request.auth.uid; // only allow if the requesting user's uid is attached as createdBy
-      allow list: if request.auth.uid != null; // TODO:
+      allow list: if request.auth.uid != null; 
     }
     
     match /invites/{inviteId} {
