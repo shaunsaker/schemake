@@ -17,6 +17,21 @@ const styles = css`
   .text-container {
     flex: 1;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .value-text-container {
+    flex: 1;
+
+    /* TextLoading */
+    position: relative;
+    min-height: 21px;
+  }
+
+  .text-spacer {
+    height: ${rhythm.vt / 4}px;
   }
 
   .menu-button-container {

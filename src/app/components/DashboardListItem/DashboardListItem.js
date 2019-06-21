@@ -8,6 +8,7 @@ import TextAvatar from '../TextAvatar';
 import Typography from '../Typography';
 import IconButton from '../IconButton';
 import Menu from '../Menu';
+import TextLoading from '../TextLoading';
 
 const DashboardListItem = ({
   id,
@@ -31,6 +32,9 @@ const DashboardListItem = ({
     </div>
   );
 
+  const titleLoadingComponent = !title && <TextLoading />;
+  const descriptionLoadingComponent = !description && <TextLoading />;
+
   return (
     <Card style={{ width: '100%', position: 'relative' }}>
       <ButtonBase onClick={handleClick} disabled={!handleClick} style={{ width: '100%' }}>
@@ -40,13 +44,23 @@ const DashboardListItem = ({
           </div>
 
           <div className="text-container">
-            <Typography type="paragraph" bold gutterBottom>
-              {title}
-            </Typography>
+            <div className="value-text-container">
+              <Typography type="paragraph" bold>
+                {title}
+              </Typography>
 
-            <Typography type="paragraph" secondary>
-              {description}
-            </Typography>
+              {titleLoadingComponent}
+            </div>
+
+            <div className="text-spacer" />
+
+            <div className="value-text-container">
+              <Typography type="paragraph" secondary>
+                {description}
+              </Typography>
+
+              {descriptionLoadingComponent}
+            </div>
           </div>
         </div>
       </ButtonBase>
