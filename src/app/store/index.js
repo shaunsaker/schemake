@@ -24,7 +24,7 @@ middleware.push(sagaMiddleware);
 const isDev = !process.env.REACT_APP_ENV || process.env.REACT_APP_ENV === 'dev';
 
 if (isDev) {
-  // middleware.push(loggerMiddleware);
+  middleware.push(loggerMiddleware);
 }
 
 function configureStore(initialState) {

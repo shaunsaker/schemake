@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './styles';
 
+import NoTeamBlankState from '../NoTeamBlankState';
 import Select from '../../../../components/Select';
 import PrimaryButton from '../../../../components/PrimaryButton';
 import DashboardListItem from '../../../../components/DashboardListItem';
@@ -10,7 +11,14 @@ import AddButton from '../../../../components/AddButton';
 
 const addButtonText = 'ADD PROJECT';
 
-const Projects = ({ selectProps, items, handleAddProject }) => {
+const Projects = ({ hasTeams, selectProps, items, handleAddProject }) => {
+  /*
+   * Blank state
+   */
+  if (!hasTeams) {
+    return <NoTeamBlankState />;
+  }
+
   return (
     <div className="container">
       <div className="header-container">
@@ -38,6 +46,7 @@ const Projects = ({ selectProps, items, handleAddProject }) => {
 };
 
 Projects.propTypes = {
+  hasTeams: PropTypes.bool,
   selectProps: PropTypes.shape({}),
   items: PropTypes.arrayOf(
     PropTypes.shape({
