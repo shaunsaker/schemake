@@ -77,6 +77,15 @@ export class TeamContainer extends React.Component {
     if (teams.length && !prevProps.teams.length) {
       this.handleSyncTeamUserData();
     }
+
+    /*
+     * If the user changed teams, get the user data for that new team
+     */
+    const { selectedTeamIndex } = this.props;
+
+    if (selectedTeamIndex !== prevProps.selectedTeamIndex) {
+      this.handleSyncTeamUserData();
+    }
   }
 
   onChangeTeam(event) {
