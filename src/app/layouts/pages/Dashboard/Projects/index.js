@@ -18,7 +18,7 @@ export class ProjectsContainer extends React.Component {
     this.onOpenProject = this.onOpenProject.bind(this);
     this.onEditProjectDetails = this.onEditProjectDetails.bind(this);
     this.onDeleteProject = this.onDeleteProject.bind(this);
-    this.syncData = this.syncData.bind(this);
+    this.syncProjects = this.syncProjects.bind(this);
     this.openAddProjectModal = this.openAddProjectModal.bind(this);
 
     this.state = {};
@@ -49,7 +49,27 @@ export class ProjectsContainer extends React.Component {
   static defaultProps = {};
 
   componentDidMount() {
-    this.syncData();
+    /*
+     * If we have teams data
+     * Get the teams projects
+     */
+    const { teams } = this.props;
+
+    if (teams.length) {
+      this.syncProjects();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    /*
+     * If we just received teams data
+     * Get the teams projects
+     */
+    const { teams } = this.props;
+
+    if (teams.length && !prevProps.teams.length) {
+      this.syncProjects();
+    }
   }
 
   onAddProjectClick() {
@@ -68,7 +88,7 @@ export class ProjectsContainer extends React.Component {
     console.log({ project });
   }
 
-  syncData() {
+  syncProjects() {
     const { teamId, syncData } = this.props;
 
     /*
