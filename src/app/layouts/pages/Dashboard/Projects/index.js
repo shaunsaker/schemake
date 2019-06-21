@@ -72,6 +72,15 @@ export class ProjectsContainer extends React.Component {
     if (teams.length && !prevProps.teams.length) {
       this.syncProjects();
     }
+
+    /*
+     * If the user changed teams, get the projects data for that new team
+     */
+    const { selectedTeamIndex } = this.props;
+
+    if (selectedTeamIndex !== prevProps.selectedTeamIndex) {
+      this.syncProjects();
+    }
   }
 
   onChangeTeam(event) {
