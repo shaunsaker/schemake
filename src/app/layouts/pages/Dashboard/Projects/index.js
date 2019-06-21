@@ -178,7 +178,7 @@ function mapStateToProps(state) {
   const { appState } = state;
   const { selectedTeamIndex } = appState;
   const { teams } = state;
-  const { id: teamId } = teams[selectedTeamIndex];
+  const { id: teamId } = teams[selectedTeamIndex] || {};
 
   const { teamUserData } = state;
 
