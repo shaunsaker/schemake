@@ -29,6 +29,13 @@ export class ProjectsContainer extends React.Component {
      * Store
      */
     dispatch: PropTypes.func,
+    selectedTeamIndex: PropTypes.number,
+    teams: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        users: PropTypes.arrayOf(PropTypes.string),
+      }),
+    ),
     projects: PropTypes.arrayOf(PropTypes.shape({})),
     teamId: PropTypes.string,
     teamUserData: PropTypes.shape({}),
@@ -86,18 +93,26 @@ export class ProjectsContainer extends React.Component {
   }
 
   render() {
-    const { projects } = this.props;
-
     /*
-      TODO: Wrong menu opening
       TODO: Filter projects by Team
       TODO: Blank data state
       TODO: Sync on all of the user's team's projects each time the team is selected
     */
 
     /*
+     * Grab selectedTeamIndex and teams from store
+     * Create the select's props
+     */
+    const { selectedTeamIndex, teams } = this.props;
+    const selectProps = {
+      selectedOptionIndex: selectedTeamIndex,
+      options: teams,
+    };
+
+    /*
      * Shape the projects into the expected items
      */
+    const { projects } = this.props;
     const items = projects.map((item) => {
       const avatarText = item.name.slice(0, 1);
       const title = item.name;
@@ -140,7 +155,9 @@ export class ProjectsContainer extends React.Component {
       };
     });
 
-    return <Projects items={items} handleAddProjectClick={this.onAddProjectClick} />;
+    return (
+      <Projects selectProps={selectProps} items={items} handleAddProject={this.onAddProjectClick} />
+    );
   }
 }
 
@@ -166,6 +183,8 @@ function mapStateToProps(state) {
   const { teamUserData } = state;
 
   return {
+    selectedTeamIndex,
+    teams,
     projects: sortedProjectsByDateModified,
     teamId,
     teamUserData,

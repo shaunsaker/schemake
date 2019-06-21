@@ -3,17 +3,20 @@ import PropTypes from 'prop-types';
 
 import styles from './styles';
 
+import Select from '../../../../components/Select';
 import PrimaryButton from '../../../../components/PrimaryButton';
 import DashboardListItem from '../../../../components/DashboardListItem';
 import AddButton from '../../../../components/AddButton';
 
 const addButtonText = 'ADD PROJECT';
 
-const Projects = ({ items, handleAddProjectClick }) => {
+const Projects = ({ selectProps, items, handleAddProject }) => {
   return (
     <div className="container">
-      <div className="button-container">
-        <PrimaryButton handleClick={handleAddProjectClick}>{addButtonText}</PrimaryButton>
+      <div className="header-container">
+        <Select {...selectProps} />
+
+        <PrimaryButton handleClick={handleAddProject}>{addButtonText}</PrimaryButton>
       </div>
 
       <div className="items-container">
@@ -25,7 +28,7 @@ const Projects = ({ items, handleAddProjectClick }) => {
           ))}
 
         <div className="item-container">
-          <AddButton handleClick={handleAddProjectClick}>{addButtonText}</AddButton>
+          <AddButton handleClick={handleAddProject}>{addButtonText}</AddButton>
         </div>
       </div>
 
@@ -35,12 +38,13 @@ const Projects = ({ items, handleAddProjectClick }) => {
 };
 
 Projects.propTypes = {
+  selectProps: PropTypes.shape({}),
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
     }),
   ),
-  handleAddProjectClick: PropTypes.func,
+  handleAddProject: PropTypes.func,
 };
 Projects.defaultProps = {};
 

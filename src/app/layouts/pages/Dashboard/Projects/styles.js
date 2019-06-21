@@ -7,9 +7,10 @@ const styles = css`
     min-height: 100vh; /* so that we don't see a jump on load of tabs data */
   }
 
-  .button-container {
+  .header-container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
     margin-bottom: ${rhythm.vt * 2}px;
   }
 
