@@ -10,6 +10,7 @@ import IconButton from '../IconButton';
 import Menu from '../Menu';
 
 const DashboardListItem = ({
+  id,
   avatarText,
   title,
   description,
@@ -17,14 +18,14 @@ const DashboardListItem = ({
   handleClick,
   handleMenuButtonClick,
 }) => {
-  const menuAnchorElId = 'menu-button';
+  const menuAnchorElId = `menu-button-${id}`;
   const menuComponent = menu && (
     <div className="menu-button-container">
       <div id={menuAnchorElId}>
         <IconButton iconName="menu" tooltip="Toggle menu" handleClick={handleMenuButtonClick} />
       </div>
 
-      <Menu {...menu} anchorElId="menu-button" />
+      <Menu {...menu} anchorElId={menuAnchorElId} />
 
       <style jsx>{styles}</style>
     </div>
@@ -58,6 +59,7 @@ const DashboardListItem = ({
 };
 
 DashboardListItem.propTypes = {
+  id: PropTypes.string,
   avatarText: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
