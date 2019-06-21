@@ -14,11 +14,13 @@ export class ProjectsContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onChangeTeam = this.onChangeTeam.bind(this);
     this.onAddProjectClick = this.onAddProjectClick.bind(this);
     this.onOpenProject = this.onOpenProject.bind(this);
     this.onEditProjectDetails = this.onEditProjectDetails.bind(this);
     this.onDeleteProject = this.onDeleteProject.bind(this);
     this.syncProjects = this.syncProjects.bind(this);
+    this.setSelectedTeamIndex = this.setSelectedTeamIndex.bind(this);
     this.openAddProjectModal = this.openAddProjectModal.bind(this);
 
     this.state = {};
@@ -72,6 +74,12 @@ export class ProjectsContainer extends React.Component {
     }
   }
 
+  onChangeTeam(event) {
+    const index = event.target.value;
+
+    this.setSelectedTeamIndex(index);
+  }
+
   onAddProjectClick() {
     this.openAddProjectModal();
   }
@@ -101,6 +109,17 @@ export class ProjectsContainer extends React.Component {
     });
   }
 
+  setSelectedTeamIndex(selectedTeamIndex) {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'SET_SELECTED_TEAM_INDEX',
+      payload: {
+        selectedTeamIndex,
+      },
+    });
+  }
+
   openAddProjectModal() {
     const { dispatch } = this.props;
 
@@ -127,6 +146,7 @@ export class ProjectsContainer extends React.Component {
     const selectProps = {
       selectedOptionIndex: selectedTeamIndex,
       options: teams,
+      handleChange: this.onChangeTeam,
     };
 
     /*

@@ -14,13 +14,13 @@ export class TeamContainer extends React.Component {
     super(props);
 
     this.onChangeTeam = this.onChangeTeam.bind(this);
-    this.setSelectedTeamIndex = this.setSelectedTeamIndex.bind(this);
     this.onAddTeamMember = this.onAddTeamMember.bind(this);
     this.onRemoveTeamMember = this.onRemoveTeamMember.bind(this);
     this.syncTeams = this.syncTeams.bind(this);
     this.handleSyncTeamUserData = this.handleSyncTeamUserData.bind(this);
     this.syncTeamUserData = this.syncTeamUserData.bind(this);
     this.getSelectedTeam = this.getSelectedTeam.bind(this);
+    this.setSelectedTeamIndex = this.setSelectedTeamIndex.bind(this);
     this.openAddTeamMemberModal = this.openAddTeamMemberModal.bind(this);
     this.openRemoveTeamMemberModal = this.openRemoveTeamMemberModal.bind(this);
 
@@ -85,17 +85,6 @@ export class TeamContainer extends React.Component {
     this.setSelectedTeamIndex(index);
   }
 
-  setSelectedTeamIndex(selectedTeamIndex) {
-    const { dispatch } = this.props;
-
-    dispatch({
-      type: 'SET_SELECTED_TEAM_INDEX',
-      payload: {
-        selectedTeamIndex,
-      },
-    });
-  }
-
   onAddTeamMember() {
     this.openAddTeamMemberModal();
   }
@@ -143,6 +132,17 @@ export class TeamContainer extends React.Component {
     const selectedTeam = teams[selectedTeamIndex];
 
     return selectedTeam;
+  }
+
+  setSelectedTeamIndex(selectedTeamIndex) {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'SET_SELECTED_TEAM_INDEX',
+      payload: {
+        selectedTeamIndex,
+      },
+    });
   }
 
   openAddTeamMemberModal() {
@@ -195,6 +195,7 @@ export class TeamContainer extends React.Component {
     const selectProps = {
       selectedOptionIndex: selectedTeamIndex,
       options: teams,
+      handleChange: this.onChangeTeam,
     };
 
     /*
