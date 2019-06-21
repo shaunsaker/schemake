@@ -8,4 +8,5 @@ const value = 'Shaun Saker';
 
 storiesOf('Components|ProfileListItem', module)
   .add('default', () => <ProfileListItem label={label} value={value} />)
-  .add('with Bg', () => <ProfileListItem label={label} value={value} hasBg />);
+  .add('with Bg', () => <ProfileListItem label={label} value={value} hasBg />)
+  .add('loading', () => <ProfileListItem label={label} />);

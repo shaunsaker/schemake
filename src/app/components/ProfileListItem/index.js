@@ -8,13 +8,7 @@ import TextLoading from '../TextLoading';
 
 const ProfileListItem = ({ label, value, hasBg }) => {
   const labelText = `${label}:`;
-  const valueTextComponent = value ? (
-    <Typography type="paragraph" bold>
-      {value}
-    </Typography>
-  ) : (
-    <TextLoading />
-  );
+  const valueLoadingComponent = !value && <TextLoading />;
 
   return (
     <div className={`container ${hasBg ? 'bg' : ''}`}>
@@ -22,7 +16,13 @@ const ProfileListItem = ({ label, value, hasBg }) => {
         <Typography type="paragraph">{labelText}</Typography>
       </div>
 
-      <div className="value-text-container">{valueTextComponent}</div>
+      <div className="value-text-container">
+        <Typography type="paragraph" bold>
+          {value}
+        </Typography>
+
+        {valueLoadingComponent}
+      </div>
 
       <style jsx>{styles}</style>
     </div>
