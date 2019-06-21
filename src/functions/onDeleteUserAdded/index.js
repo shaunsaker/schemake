@@ -28,12 +28,12 @@ const onDeleteUserAdded = functions.firestore
     /*
      * Delete the user's teams data
      */
-    const teamsDocs = await db
+    const usersTeamsDocs = await db
       .collection('teams')
       .where('createdBy', '==', uid)
       .get();
 
-    teamsDocs.forEach(async (teamDoc) => {
+    usersTeamsDocs.forEach(async (teamDoc) => {
       const { id } = teamDoc;
 
       await db
@@ -62,6 +62,20 @@ const onDeleteUserAdded = functions.firestore
     });
 
     console.log('Successfully deleted projects data', { uid });
+
+    /*
+     * Remove the user from any teams that they are apart of
+     */
+    const teamsDocs = await db.collection('teams').where('users', 'array-contains', uid);
+
+    teamsDocs.forEach(async (teamsDoc) => {
+      const { id } = teamsDoc;
+
+      await db
+        .collection('teams')
+        .doc(id)
+        .update({ users: admin.firestore.FieldValue.arrayRemove(uid) });
+    });
   });
 
 module.exports = onDeleteUserAdded;
