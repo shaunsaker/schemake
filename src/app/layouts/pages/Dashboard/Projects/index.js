@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { convertObjectToArray, sortArrayOfObjectsByKey } from 'js-simple-utils';
+import Router from 'next/router';
 
-import { modals } from '../../../../config';
+import { modals, routes } from '../../../../config';
 import { getDateTime } from '../../../../utils';
 
 import Projects from './Projects';
@@ -95,7 +96,14 @@ export class ProjectsContainer extends React.Component {
   }
 
   onOpenProject(project) {
-    console.log({ project });
+    const { id } = project;
+
+    Router.push({
+      pathname: routes.editor.href,
+      query: {
+        projectId: id,
+      },
+    });
   }
 
   onEditProjectDetails(project) {

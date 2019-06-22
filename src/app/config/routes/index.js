@@ -33,6 +33,11 @@ const routes = {
     description: SEO.description,
     href: '/profile?tabId=general',
   },
+  editor: {
+    title: getTitle('Editor'),
+    description: SEO.description,
+    href: '/editor',
+  },
 };
 
 export default routes;
