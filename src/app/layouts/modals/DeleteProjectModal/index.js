@@ -1,32 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Router from 'next/router';
-
-import { routes } from '../../../config';
 
 import DeleteProjectModal from './DeleteProjectModal';
 
-import withSaveDocument from '../../../enhancers/withSaveDocument';
-
-/*
- * TODO:
- */
 export class DeleteProjectModalContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onClose = this.onClose.bind(this);
-    this.setIsLoading = this.setIsLoading.bind(this);
     this.deleteProject = this.deleteProject.bind(this);
-    this.saveUser = this.saveUser.bind(this);
+    this.setHasSuccess = this.setHasSuccess.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.cancelSync = this.cancelSync.bind(this);
-    this.signOut = this.signOut.bind(this);
-    this.redirectToPage = this.redirectToPage.bind(this);
 
-    this.state = {};
+    this.state = {
+      hasSuccess: false,
+    };
   }
 
   static propTypes = {
@@ -40,64 +30,40 @@ export class DeleteProjectModalContainer extends React.Component {
      * Store
      */
     dispatch: PropTypes.func,
-    uid: PropTypes.string,
+    project: PropTypes.shape({}),
     isLoading: PropTypes.bool,
-    hasPendingTransactions: PropTypes.bool,
     hasError: PropTypes.bool,
-
-    /*
-     * withSaveDocument
-     */
-    saveDocument: PropTypes.func,
-    isSaving: PropTypes.bool,
-    hasSuccess: PropTypes.bool,
   };
 
   static defaultProps = {};
 
   componentDidUpdate(prevProps) {
-    const { isLoading } = this.props;
-
     /*
-     * If loading and error
+     * If there is an error, reset loading
      */
     const { hasError } = this.props;
 
-    if (isLoading && hasError && !prevProps.hasError) {
+    if (hasError && !prevProps.hasError) {
       this.setIsLoading(false);
     }
 
     /*
-     * If loading and no more pending transactions
+     * If loading is finished without error
+     * Great success
      */
-    const { hasPendingTransactions } = this.props;
+    const { isLoading } = this.props;
 
-    if (isLoading && !hasPendingTransactions && prevProps.hasPendingTransactions) {
-      this.setIsLoading(false);
-      this.saveUser();
+    if (!isLoading && prevProps.isLoading && !prevProps.hasError) {
+      this.setHasSuccess(true);
     }
   }
 
   onSubmit() {
     this.setIsLoading(true);
     this.deleteProject();
-    this.saveUser();
   }
 
   onClose() {
-    const { hasSuccess } = this.props;
-
-    if (hasSuccess) {
-      /*
-       * Cancel sync
-       * Sign user out
-       * Redirect to sign up page
-       */
-      this.cancelSync();
-      this.signOut();
-      this.redirectToPage('signUp');
-    }
-
     this.closeModal();
   }
 
@@ -113,30 +79,31 @@ export class DeleteProjectModalContainer extends React.Component {
   }
 
   deleteProject() {
-    /*
-     * Delete user data
-     */
-    const { dispatch, uid } = this.props;
-    const url = `users/${uid}`;
+    const { dispatch, project } = this.props;
+    const { id } = project;
+    const url = `projects/${id}`;
 
     dispatch({
       type: 'deleteDocument',
       payload: {
         url,
       },
+      meta: {
+        nextActions: [
+          {
+            type: 'SET_IS_LOADING',
+            payload: {
+              isLoading: false,
+            },
+          },
+        ],
+      },
     });
   }
 
-  saveUser() {
-    const { saveDocument, uid } = this.props;
-    const url = `deleteUsers/${uid}`;
-    const document = {
-      dateCreated: Date.now(),
-    };
-
-    saveDocument({
-      url,
-      document,
+  setHasSuccess(hasSuccess) {
+    this.setState({
+      hasSuccess,
     });
   }
 
@@ -146,36 +113,16 @@ export class DeleteProjectModalContainer extends React.Component {
     handleClose();
   }
 
-  cancelSync() {
-    const { dispatch } = this.props;
-
-    dispatch({
-      type: 'CANCEL_SYNC',
-    });
-  }
-
-  signOut() {
-    const { dispatch } = this.props;
-
-    dispatch({
-      type: 'signOut',
-      meta: {
-        nextActions: [{ type: 'SIGN_IN_USER' }],
-      },
-    });
-  }
-
-  redirectToPage(pageKey) {
-    Router.push(routes[pageKey].href);
-  }
-
   render() {
-    const { isOpen, isLoading, isSaving, hasSuccess } = this.props;
-    const isDisabled = (isLoading || isSaving) && true;
+    const { hasSuccess } = this.state;
+    const { isOpen, isLoading, project } = this.props;
+    const { name } = project;
+    const isDisabled = isLoading;
 
     return (
       <DeleteProjectModal
         isOpen={isOpen}
+        name={name}
         hasSuccess={hasSuccess}
         isDisabled={isDisabled}
         handleClose={this.onClose}
@@ -186,18 +133,16 @@ export class DeleteProjectModalContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { user, appState } = state;
-  const { uid } = user;
-  const { isLoading, pendingTransactions, systemMessage } = appState;
-  const hasPendingTransactions = pendingTransactions.length ? true : false;
-  const hasError = systemMessage.variant === 'error' ? true : false;
+  const { appState, modals } = state;
+  const { project } = modals.props;
+  const { isLoading } = appState;
+  const hasError = appState.systemMessage.variant === 'error' ? true : false;
 
   return {
-    uid,
+    project,
     isLoading,
-    hasPendingTransactions,
     hasError,
   };
 };
 
-export default withSaveDocument(connect(mapStateToProps)(DeleteProjectModalContainer));
+export default connect(mapStateToProps)(DeleteProjectModalContainer);

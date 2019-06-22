@@ -3,8 +3,15 @@ import PropTypes from 'prop-types';
 
 import Modal from '../../../components/Modal';
 
-const DeleteProjectModal = ({ isOpen, hasSuccess, isDisabled, handleClose, handleSubmit }) => {
-  let title = 'Are you sure you want to delete this project?';
+const DeleteProjectModal = ({
+  isOpen,
+  name,
+  hasSuccess,
+  isDisabled,
+  handleClose,
+  handleSubmit,
+}) => {
+  let title = `Are you sure you want to delete the project, ${name}?`;
   let description = 'This action cannot be reversed. Please be certain.';
   let form = {
     fields: [],
@@ -14,7 +21,7 @@ const DeleteProjectModal = ({ isOpen, hasSuccess, isDisabled, handleClose, handl
 
   if (hasSuccess) {
     title = 'Great Success.';
-    description = 'Your project has successfully been deleted.';
+    description = `Your project, ${name}, has successfully been deleted.`;
     form = null;
   }
 
@@ -32,6 +39,7 @@ const DeleteProjectModal = ({ isOpen, hasSuccess, isDisabled, handleClose, handl
 
 DeleteProjectModal.propTypes = {
   isOpen: PropTypes.bool,
+  name: PropTypes.string,
   hasSuccess: PropTypes.bool,
   isDisabled: PropTypes.bool,
   handleClose: PropTypes.func,

@@ -5,6 +5,9 @@ const modals = {
   addTeamMemberModal: {
     key: 'addTeamMemberModal',
   },
+  deleteProjectModal: {
+    key: 'deleteProjectModal',
+  },
   deleteUserModal: {
     key: 'deleteUserModal',
   },
