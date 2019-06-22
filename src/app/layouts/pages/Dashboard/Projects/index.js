@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { sortArrayOfObjectsByKey } from 'js-simple-utils';
+import { convertObjectToArray, sortArrayOfObjectsByKey } from 'js-simple-utils';
 
 import { modals } from '../../../../config';
 import { getDateTime } from '../../../../utils';
@@ -181,14 +181,14 @@ export class ProjectsContainer extends React.Component {
        * To get the user's name that the project was modified by
        */
       const { teamUserData } = this.props;
-      const { name: modifiedBy } = teamUserData[item.modifiedBy || item.createdBy];
+      const { name: modifiedBy } = teamUserData[item.modifiedBy || item.createdBy] || {};
 
       /*
        * To get the date text, use the dateModified if it is present
        * else just use the dateCreated
        */
       const dateModified = getDateTime(item.dateModified || item.dateCreated);
-      const description = `Last updated by ${modifiedBy} on ${dateModified}`;
+      const description = modifiedBy && `Last updated by ${modifiedBy} on ${dateModified}`;
 
       return {
         id: title,
@@ -237,7 +237,8 @@ function mapStateToProps(state) {
    * Get and sort the projects by dateCreated and dateModified
    */
   const { projects } = state;
-  const sortedProjectsByDateCreated = sortArrayOfObjectsByKey(projects, 'dateCreated');
+  const projectsArray = convertObjectToArray(projects);
+  const sortedProjectsByDateCreated = sortArrayOfObjectsByKey(projectsArray, 'dateCreated');
   const sortedProjectsByDateModified = sortArrayOfObjectsByKey(
     sortedProjectsByDateCreated,
     'dateModified',

@@ -8,7 +8,16 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case 'SET_PROJECTS':
       newState = cloneObject(state);
-      newState = cloneObject(action.payload.data);
+
+      /*
+       * Add new projects keyed by ids
+       */
+      action.payload.data.forEach((project) => {
+        const { id } = project;
+
+        newState[id] = project;
+      });
+
       return newState;
 
     default:
