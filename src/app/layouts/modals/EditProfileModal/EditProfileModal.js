@@ -5,7 +5,7 @@ import fields from './fields';
 
 import Modal from '../../../components/Modal';
 
-const SendFeedbackModal = ({
+const EditProfileModal = ({
   isOpen,
   newFields,
   hasSuccess,
@@ -42,7 +42,7 @@ const SendFeedbackModal = ({
   );
 };
 
-SendFeedbackModal.propTypes = {
+EditProfileModal.propTypes = {
   isOpen: PropTypes.bool,
   newFields: PropTypes.arrayOf(PropTypes.shape({})),
   hasSuccess: PropTypes.bool,
@@ -51,6 +51,6 @@ SendFeedbackModal.propTypes = {
   handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
 };
-SendFeedbackModal.defaultProps = {};
+EditProfileModal.defaultProps = {};
 
-export default SendFeedbackModal;
+export default EditProfileModal;
