@@ -2,6 +2,7 @@ import React from 'react';
 
 import { modals as modalsConfig } from '../../config';
 
+import AddProjectModal from '../../layouts/modals/AddProjectModal';
 import AddTeamMemberModal from '../../layouts/modals/AddTeamMemberModal';
 import DeleteProjectModal from '../../layouts/modals/DeleteProjectModal';
 import DeleteUserModal from '../../layouts/modals/DeleteUserModal';
@@ -10,6 +11,10 @@ import ForgotPasswordModal from '../../layouts/modals/ForgotPasswordModal';
 import RemoveTeamMemberModal from '../../layouts/modals/RemoveTeamMemberModal';
 
 const modals = [
+  {
+    key: modalsConfig.addProjectModal.key,
+    component: (props) => <AddProjectModal {...props} />,
+  },
   {
     key: modalsConfig.addTeamMemberModal.key,
     component: (props) => <AddTeamMemberModal {...props} />,
