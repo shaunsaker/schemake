@@ -1,7 +1,4 @@
 const modals = {
-  actionProjectModal: {
-    key: 'actionProjectModal',
-  },
   addTeamMemberModal: {
     key: 'addTeamMemberModal',
   },
