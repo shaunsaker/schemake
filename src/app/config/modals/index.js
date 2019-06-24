@@ -11,6 +11,9 @@ const modals = {
   deleteUserModal: {
     key: 'deleteUserModal',
   },
+  editProjectModal: {
+    key: 'editProjectModal',
+  },
   editProfileModal: {
     key: 'editProfileModal',
   },

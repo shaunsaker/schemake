@@ -6,6 +6,7 @@ import AddProjectModal from '../../layouts/modals/AddProjectModal';
 import AddTeamMemberModal from '../../layouts/modals/AddTeamMemberModal';
 import DeleteProjectModal from '../../layouts/modals/DeleteProjectModal';
 import DeleteUserModal from '../../layouts/modals/DeleteUserModal';
+import EditProjectModal from '../../layouts/modals/EditProjectModal';
 import EditProfileModal from '../../layouts/modals/EditProfileModal';
 import ForgotPasswordModal from '../../layouts/modals/ForgotPasswordModal';
 import RemoveTeamMemberModal from '../../layouts/modals/RemoveTeamMemberModal';
@@ -26,6 +27,10 @@ const modals = [
   {
     key: modalsConfig.deleteUserModal.key,
     component: (props) => <DeleteUserModal {...props} />,
+  },
+  {
+    key: modalsConfig.editProjectModal.key,
+    component: (props) => <EditProjectModal {...props} />,
   },
   {
     key: modalsConfig.editProfileModal.key,

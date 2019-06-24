@@ -23,6 +23,7 @@ export class ProjectsContainer extends React.Component {
     this.syncProjects = this.syncProjects.bind(this);
     this.setSelectedTeamIndex = this.setSelectedTeamIndex.bind(this);
     this.openAddProjectModal = this.openAddProjectModal.bind(this);
+    this.openEditProjectModal = this.openEditProjectModal.bind(this);
     this.openDeleteProjectModal = this.openDeleteProjectModal.bind(this);
 
     this.state = {};
@@ -107,7 +108,7 @@ export class ProjectsContainer extends React.Component {
   }
 
   onEditProjectDetails(project) {
-    // TODO:
+    this.openEditProjectModal(project);
   }
 
   onDeleteProject(project) {
@@ -138,13 +139,24 @@ export class ProjectsContainer extends React.Component {
     });
   }
 
-  openAddProjectModal(project) {
+  openAddProjectModal() {
     const { dispatch } = this.props;
 
     dispatch({
       type: 'TOGGLE_MODAL',
       payload: {
         key: modals.addProjectModal.key,
+      },
+    });
+  }
+
+  openEditProjectModal(project) {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'TOGGLE_MODAL',
+      payload: {
+        key: modals.editProjectModal.key,
         props: {
           project,
         },

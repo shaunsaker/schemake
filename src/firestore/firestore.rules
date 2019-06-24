@@ -15,7 +15,7 @@ service cloud.firestore {
     }
     
     match /projects/{projectId} {
-      allow create: if request.resource.data.createdBy == request.auth.uid; // only allow if the requesting user's uid is attached as createdBy
+      allow create, update: if request.resource.data.createdBy == request.auth.uid; // only allow if the requesting user's uid is attached as createdBy
       allow list: if request.auth.uid != null; 
       allow delete: if request.auth.uid == resource.data.createdBy; // only allow users to delete projects that they created
     }
