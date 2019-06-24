@@ -109,8 +109,9 @@ export class EditProfileModalContainer extends React.Component {
     return (
       <EditProfileModal
         isOpen={isOpen}
-        fields={newFields}
-        disabled={isDisabled}
+        newFields={newFields}
+        hasSuccess={hasSuccess}
+        isDisabled={isDisabled}
         handleClose={this.onClose}
         handleChange={this.onChange}
         handleSubmit={this.onSubmit}
