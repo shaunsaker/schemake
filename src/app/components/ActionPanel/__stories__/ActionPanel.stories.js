@@ -13,6 +13,4 @@ const actions = [
   },
 ];
 
-storiesOf('Components|ActionPanel', module).add('default', () => (
-  <ActionPanel actions={actions} color="black" />
-));
+storiesOf('Components|ActionPanel', module).add('default', () => <ActionPanel actions={actions} />);

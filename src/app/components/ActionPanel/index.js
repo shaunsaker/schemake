@@ -76,7 +76,6 @@ ActionPanel.propTypes = {
 };
 ActionPanel.defaultProps = {
   actions: [],
-  color: 'white',
 };
 
 export default ActionPanel;
