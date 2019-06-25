@@ -44,6 +44,7 @@ export class ProjectsContainer extends React.Component {
     projects: PropTypes.arrayOf(PropTypes.shape({})),
     teamId: PropTypes.string,
     teamUserData: PropTypes.shape({}),
+    uid: PropTypes.string,
 
     /*
      * withSyncData
@@ -212,6 +213,32 @@ export class ProjectsContainer extends React.Component {
        */
       const dateModified = getDateTime(item.dateModified || item.dateCreated);
       const description = modifiedBy && `Last updated by ${modifiedBy} on ${dateModified}`;
+      const menuItems = [
+        {
+          name: 'Open Project',
+          handleClick: () => this.onOpenProject(item),
+        },
+      ];
+
+      /*
+       * If the user created the project, aka they are admin
+       * Attach the following menu items
+       */
+      const { uid } = this.props;
+      const isAdmin = item.createdBy === uid;
+
+      if (isAdmin) {
+        menuItems.push(
+          {
+            name: 'Edit Project Details',
+            handleClick: () => this.onEditProjectDetails(item),
+          },
+          {
+            name: 'Delete Project',
+            handleClick: () => this.onDeleteProject(item),
+          },
+        );
+      }
 
       return {
         id: title,
@@ -219,20 +246,7 @@ export class ProjectsContainer extends React.Component {
         title,
         description,
         menu: {
-          items: [
-            {
-              name: 'Open Project',
-              handleClick: () => this.onOpenProject(item),
-            },
-            {
-              name: 'Edit Project Details',
-              handleClick: () => this.onEditProjectDetails(item),
-            },
-            {
-              name: 'Delete Project',
-              handleClick: () => this.onDeleteProject(item),
-            },
-          ],
+          items: menuItems,
         },
         handleClick: () => this.onOpenProject(item),
       };
@@ -275,7 +289,8 @@ function mapStateToProps(state) {
   const { teams } = state;
   const { id: teamId } = teams[selectedTeamIndex] || {};
 
-  const { teamUserData } = state;
+  const { teamUserData, user } = state;
+  const { uid } = user;
 
   return {
     selectedTeamIndex,
@@ -283,6 +298,7 @@ function mapStateToProps(state) {
     projects: sortedProjectsByDateModified,
     teamId,
     teamUserData,
+    uid,
   };
 }
 
