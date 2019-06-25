@@ -1,16 +1,18 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
+import { colors } from '../../../static/styles/styleConstants';
+
 import Panel from '..';
 
 const title = 'users';
 const actions = [
   {
-    iconName: 'add',
-    tooltip: 'Add something',
+    iconName: 'menu',
+    tooltip: 'Toggle Menu',
   },
 ];
-const children = <div style={{ width: '100%', height: 200, backgroundColor: 'lightgray' }} />;
+const children = <div style={{ width: '100%', height: 200 }} />;
 
 storiesOf('Components|Panel', module)
   .add('default', () => (
@@ -19,7 +21,7 @@ storiesOf('Components|Panel', module)
     </Panel>
   ))
   .add('with BackgroundColor', () => (
-    <Panel title={title} actions={actions} backgroundColor="red">
+    <Panel title={title} actions={actions} backgroundColor={colors.lightGrey}>
       {children}
     </Panel>
   ));
