@@ -2,23 +2,10 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import HeaderBar from '../HeaderBar';
+import actions from '../../../layouts/pages/Editor/headerBarActions';
 
-/*
- * TODO: Move to page where it's being used when ready
- */
-const actions = [
-  {
-    iconName: 'add',
-    tooltip: 'Add new collection',
-  },
-  {
-    iconName: 'sort',
-    tooltip: 'Sort mode (collapse collections)',
-  },
-  {
-    iconName: 'share',
-    tooltip: 'Share this project',
-  },
+const newActions = [
+  ...actions,
   {
     iconName: 'account-circle',
     tooltip: 'Toggle the account menu',
@@ -30,7 +17,7 @@ const actions = [
 ];
 
 storiesOf('Components|HeaderBar', module)
-  .add('default', () => <HeaderBar text="PROJECT NAME" actions={actions} />)
+  .add('default', () => <HeaderBar text="PROJECT NAME" actions={newActions} />)
   .add('with Logo only', () => <HeaderBar />)
   .add('with Actions only', () => <HeaderBar actions={actions} />)
   .add('with Text only', () => <HeaderBar text="PROJECT NAME" />);

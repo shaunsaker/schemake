@@ -29,6 +29,7 @@ const styles = css`
     flex: 1;
     display: flex;
     justify-content: flex-end;
+    margin-left: ${rhythm.hz}px;
   }
 `;
 

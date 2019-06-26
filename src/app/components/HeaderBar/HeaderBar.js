@@ -13,7 +13,7 @@ import ActionPanel from '../ActionPanel';
 
 const HeaderBar = ({ text, actions }) => {
   const textComponent = text && (
-    <Typography type="paragraph" color="white" bold>
+    <Typography type="paragraph" color="white" bold style={{ fontSize: '1rem' }}>
       {text}
 
       <style jsx>{styles}</style>

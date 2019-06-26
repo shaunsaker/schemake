@@ -30,6 +30,7 @@ export class HeaderBarContainer extends React.Component {
      * Parent
      */
     text: PropTypes.string,
+    actions: PropTypes.arrayOf(PropTypes.shape({})),
 
     /*
      * Store
@@ -92,9 +93,9 @@ export class HeaderBarContainer extends React.Component {
 
   render() {
     const { isUserMenuOpen } = this.state;
-    const { text, shouldShowUserIcon } = this.props;
+    const { text, actions: additionalActions, shouldShowUserIcon } = this.props;
     const isLoginPage = window.location.pathname.indexOf('login') > -1;
-    const actions = [];
+    const actions = [...additionalActions];
 
     if (shouldShowUserIcon) {
       actions.push({
