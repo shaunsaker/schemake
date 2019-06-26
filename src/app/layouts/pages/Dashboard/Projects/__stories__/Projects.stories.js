@@ -3,6 +3,15 @@ import { storiesOf } from '@storybook/react';
 
 import Projects from '../Projects';
 
+const selectProps = {
+  selectedOptionIndex: 0,
+  options: [
+    {
+      name: "Shaun's team",
+    },
+  ],
+};
+
 const items = [
   {
     avatarText: 'S',
@@ -31,5 +40,7 @@ const items = [
 ];
 
 storiesOf('Layouts|Projects', module)
-  .add('default', () => <Projects items={items} handleProjectClick={console.log} />)
+  .add('default', () => (
+    <Projects selectProps={selectProps} items={items} hasTeams handleProjectClick={console.log} />
+  ))
   .add('blank state', () => <Projects />);

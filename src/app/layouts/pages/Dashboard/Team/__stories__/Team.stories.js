@@ -40,5 +40,5 @@ const teamMembers = [
 ];
 
 storiesOf('Layouts|Team', module)
-  .add('default', () => <Team selectProps={selectProps} teamMembers={teamMembers} />)
+  .add('default', () => <Team selectProps={selectProps} hasTeams teamMembers={teamMembers} />)
   .add('blank state', () => <Team selectProps={{ selectedOptionIndex: 0, options: [] }} />);
