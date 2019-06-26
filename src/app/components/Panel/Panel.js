@@ -17,7 +17,11 @@ const Panel = ({
   children,
 }) => {
   // FIXME: Remove cursor on ExpansionPanel
-  const containerStyles = { ...(backgroundColor && { backgroundColor }) };
+  const containerStyles = {
+    ...(backgroundColor && { backgroundColor }),
+    width: '100%',
+    marginTop: 0,
+  };
   const toggleButtonStyles = { transform: `rotate(${isCollapsed ? 0 : 180}deg)` };
   const toggleButtonTooltipText = isCollapsed ? 'Expand' : 'Collapse';
 
@@ -43,7 +47,7 @@ const Panel = ({
         </div>
       </ExpansionPanelSummary>
 
-      <ExpansionPanelDetails>{children}</ExpansionPanelDetails>
+      <ExpansionPanelDetails style={{ flexDirection: 'column' }}>{children}</ExpansionPanelDetails>
 
       <style jsx>{styles}</style>
     </ExpansionPanel>

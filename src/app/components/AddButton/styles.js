@@ -8,6 +8,7 @@ const styles = css`
     padding: ${rhythm.vt}px ${rhythm.hz}px;
     border: 1px dashed ${colors.grey};
     border-radius: ${sizes.borderRadius}px;
+    background-color: white;
   }
 
   .icon-container {

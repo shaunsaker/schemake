@@ -11,11 +11,12 @@ export class EditorPanelContainer extends React.Component {
     this.setIsCollapsed = this.setIsCollapsed.bind(this);
 
     this.state = {
-      isCollapsed: true,
+      isCollapsed: props.isExpanded ? false : true,
     };
   }
 
   static propTypes = {
+    isExpanded: PropTypes.bool,
     children: PropTypes.node,
   };
 
