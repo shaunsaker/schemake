@@ -4,12 +4,19 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 
 import Layout from '../../../components/Layout';
+import AddButton from '../../../components/AddButton';
 
-const Editor = () => {
+const Editor = ({ headerBarProps, collections, handleAddCollection }) => {
   return (
-    <Layout>
+    <Layout headerBarProps={headerBarProps}>
       <div className="container">
-        <div />
+        {collections.map((collection) => {
+          // TODO:
+
+          return null;
+        })}
+
+        <AddButton handleClick={handleAddCollection}>ADD COLLECTION</AddButton>
       </div>
 
       <style jsx>{styles}</style>
@@ -17,7 +24,13 @@ const Editor = () => {
   );
 };
 
-Editor.propTypes = {};
-Editor.defaultProps = {};
+Editor.propTypes = {
+  headerBarProps: PropTypes.shape({}),
+  collections: PropTypes.arrayOf(PropTypes.shape({})),
+  handleAddCollection: PropTypes.func,
+};
+Editor.defaultProps = {
+  projectName: 'Test',
+};
 
 export default Editor;
