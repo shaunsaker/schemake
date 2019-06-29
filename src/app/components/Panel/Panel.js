@@ -8,19 +8,12 @@ import Typography from '../Typography';
 import IconButton from '../IconButton';
 import ActionPanel from '../ActionPanel';
 
-const Panel = ({
-  title,
-  actions,
-  backgroundColor,
-  isCollapsed,
-  handleToggleCollapse,
-  children,
-}) => {
+const Panel = ({ title, actions, isCollapsed, handleToggleCollapse, children, style }) => {
   // FIXME: Remove cursor on ExpansionPanel
   const containerStyles = {
-    ...(backgroundColor && { backgroundColor }),
     width: '100%',
     marginTop: 0,
+    ...style,
   };
   const toggleButtonStyles = { transform: `rotate(${isCollapsed ? 0 : 180}deg)` };
   const toggleButtonTooltipText = isCollapsed ? 'Expand' : 'Collapse';
@@ -57,8 +50,8 @@ const Panel = ({
 Panel.propTypes = {
   title: PropTypes.string,
   actions: PropTypes.arrayOf(PropTypes.shape({})),
-  backgroundColor: PropTypes.string,
   isCollapsed: PropTypes.bool,
+  style: PropTypes.shape({}),
   handleToggleCollapse: PropTypes.func,
   children: PropTypes.node,
 };

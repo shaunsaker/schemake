@@ -14,18 +14,18 @@ const collections = [
     name: 'users',
     documents: [],
   },
-  {
-    id: '2',
-    name: 'projects',
-    documents: [
-      {
-        id: '1',
-        name: 'uid',
-        fields: [],
-        collections: [],
-      },
-    ],
-  },
+  // {
+  //   id: '2',
+  //   name: 'projects',
+  //   documents: [
+  //     {
+  //       id: '1',
+  //       name: 'uid',
+  //       fields: [],
+  //       collections: [],
+  //     },
+  //   ],
+  // },
 ];
 
 storiesOf('Layouts|Editor', module)

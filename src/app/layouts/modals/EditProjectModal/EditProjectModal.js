@@ -30,8 +30,6 @@ const EditProjectModal = ({
     form.fields = newFields;
   }
 
-  console.log({ form, newFields });
-
   return (
     <Modal
       title={title}

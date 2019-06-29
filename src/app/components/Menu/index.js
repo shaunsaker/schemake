@@ -45,7 +45,6 @@ export class MenuContainer extends React.Component {
 
   render() {
     const { isOpen } = this.state;
-    console.log(this.props);
 
     return (
       <Menu

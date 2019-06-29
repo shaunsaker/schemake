@@ -54,7 +54,7 @@ const Editor = ({
           ];
 
           /*
-           * If there are documents, display them
+           * TODO: If there are documents, display them
            * Else, display the add document button
            */
           const documentsComponent = collection.documents.length ? (

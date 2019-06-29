@@ -14,8 +14,9 @@ const ActionPanel = ({ actions, color }) => {
     <div className="container">
       {actions.map((action) => {
         const id = `action-${action.iconName}`;
-        const menuComponent = action.menu && <Menu anchorElId={id} {...action.menu} />;
-        const actionComponent = action.text ? (
+        const actionComponent = action.menu ? (
+          <Menu anchorElId={id} {...action.menu} />
+        ) : action.text ? (
           <Link key={action.href} href={action.href}>
             <div>
               <PrimaryButton text small>
@@ -38,8 +39,6 @@ const ActionPanel = ({ actions, color }) => {
         return (
           <div key={id} className="action-container">
             {actionComponent}
-
-            {menuComponent}
           </div>
         );
       })}
