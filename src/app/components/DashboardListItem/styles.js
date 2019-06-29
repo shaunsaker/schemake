@@ -34,7 +34,7 @@ const styles = css`
     height: ${rhythm.vt / 4}px;
   }
 
-  .menu-button-container {
+  .menu-container {
     position: absolute;
     top: 0;
     right: ${rhythm.hz / 2}px;

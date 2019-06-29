@@ -6,9 +6,15 @@ import styles from './styles';
 
 import TextAvatar from '../TextAvatar';
 import Typography from '../Typography';
-import IconButton from '../IconButton';
+import Menu from '../Menu';
 
-const Note = ({ avatarText, username, dateText, noteText, handleMenuButtonClick }) => {
+const Note = ({ avatarText, username, dateText, noteText, menu }) => {
+  const menuComponent = menu && (
+    <div className="menu-button-container">
+      <Menu {...menu} />
+    </div>
+  );
+
   return (
     <Card>
       <div className="container">
@@ -25,9 +31,7 @@ const Note = ({ avatarText, username, dateText, noteText, handleMenuButtonClick 
             <Typography type="small">{dateText}</Typography>
           </div>
 
-          <div className="menu-button-container">
-            <IconButton iconName="menu" tooltip="Toggle Menu" handleClick={handleMenuButtonClick} />
-          </div>
+          {menuComponent}
         </div>
 
         <div className="note-text-container">
@@ -45,7 +49,7 @@ Note.propTypes = {
   username: PropTypes.string,
   dateText: PropTypes.string,
   noteText: PropTypes.string,
-  handleMenuButtonClick: PropTypes.func,
+  menu: PropTypes.shape({}),
 };
 Note.defaultProps = {};
 

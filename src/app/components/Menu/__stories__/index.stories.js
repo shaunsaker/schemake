@@ -3,8 +3,9 @@ import { storiesOf } from '@storybook/react';
 
 import Menu from '..';
 
-const items = [{ name: 'Profile' }, { name: 'Sign Out' }];
+const items = [
+  { name: 'Profile', handleClick: console.log },
+  { name: 'Sign Out', handleClick: console.log },
+];
 
-storiesOf('Components|Menu', module).add('default', () => (
-  <Menu items={items} isOpen handleClick={null} handleClose={null} />
-));
+storiesOf('Components|Menu', module).add('default', () => <Menu items={items} />);

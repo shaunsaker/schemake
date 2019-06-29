@@ -1,58 +1,67 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Card, ButtonBase } from '@material-ui/core';
 
-import DashboardListItem from './DashboardListItem';
+import styles from './styles';
 
-export class DashboardListItemCOntainer extends React.Component {
-  constructor(props) {
-    super(props);
+import TextAvatar from '../TextAvatar';
+import Typography from '../Typography';
+import Menu from '../Menu';
+import TextLoading from '../TextLoading';
 
-    this.onMenuButtonClick = this.onMenuButtonClick.bind(this);
-    this.onCloseMenu = this.onCloseMenu.bind(this);
-    this.setIsMenuOpen = this.setIsMenuOpen.bind(this);
+const DashboardListItem = ({ id, avatarText, title, description, menu, handleClick }) => {
+  const menuAnchorElId = `menu-button-${id}`;
+  const titleLoadingComponent = !title && <TextLoading />;
+  const descriptionLoadingComponent = !description && <TextLoading />;
 
-    this.state = {
-      isMenuOpen: false,
-    };
-  }
+  return (
+    <Card style={{ width: '100%', position: 'relative' }}>
+      <ButtonBase onClick={handleClick} disabled={!handleClick} style={{ width: '100%' }}>
+        <div className="container">
+          <div className="avatar-container">
+            <TextAvatar>{avatarText}</TextAvatar>
+          </div>
 
-  static propTypes = {
-    menu: PropTypes.shape({}),
-  };
+          <div className="text-container">
+            <div className="value-text-container">
+              <Typography type="paragraph" bold>
+                {title}
+              </Typography>
 
-  static defaultProps = {};
+              {titleLoadingComponent}
+            </div>
 
-  onMenuButtonClick() {
-    this.setIsMenuOpen(true);
-  }
+            <div className="text-spacer" />
 
-  onCloseMenu() {
-    this.setIsMenuOpen(false);
-  }
+            <div className="value-text-container">
+              <Typography type="paragraph" secondary>
+                {description}
+              </Typography>
 
-  setIsMenuOpen(isMenuOpen) {
-    this.setState({
-      isMenuOpen,
-    });
-  }
+              {descriptionLoadingComponent}
+            </div>
+          </div>
+        </div>
+      </ButtonBase>
 
-  render() {
-    const { isMenuOpen } = this.state;
-    const { menu } = this.props;
+      <div className="menu-container">
+        <Menu {...menu} anchorElId={menuAnchorElId} />
+      </div>
 
-    if (menu) {
-      menu.isOpen = isMenuOpen;
-      menu.handleClose = this.onCloseMenu;
-    }
+      <style jsx>{styles}</style>
+    </Card>
+  );
+};
 
-    return (
-      <DashboardListItem
-        {...this.props}
-        menu={menu}
-        handleMenuButtonClick={this.onMenuButtonClick}
-      />
-    );
-  }
-}
+DashboardListItem.propTypes = {
+  id: PropTypes.string,
+  avatarText: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  menu: PropTypes.shape({}),
+  handleClick: PropTypes.func,
+  handleMenuButtonClick: PropTypes.func,
+};
+DashboardListItem.defaultProps = {};
 
-export default DashboardListItemCOntainer;
+export default DashboardListItem;
