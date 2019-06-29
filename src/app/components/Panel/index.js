@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Panel from './Panel';
 
-export class EditorPanelContainer extends React.Component {
+export class PanelContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -46,4 +46,4 @@ export class EditorPanelContainer extends React.Component {
   }
 }
 
-export default EditorPanelContainer;
+export default PanelContainer;

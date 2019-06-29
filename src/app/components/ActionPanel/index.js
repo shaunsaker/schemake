@@ -14,15 +14,7 @@ const ActionPanel = ({ actions, color }) => {
     <div className="container">
       {actions.map((action) => {
         const id = `action-${action.iconName}`;
-        const menuComponent = action.menu && (
-          <Menu
-            items={action.menu.items}
-            anchorElId={id}
-            isOpen={action.menu.isOpen}
-            handleClick={action.menu.handleClick}
-            handleClose={action.menu.handleClose}
-          />
-        );
+        const menuComponent = action.menu && <Menu anchorElId={id} {...action.menu} />;
         const actionComponent = action.text ? (
           <Link key={action.href} href={action.href}>
             <div>
@@ -64,12 +56,7 @@ ActionPanel.propTypes = {
       iconName: PropTypes.string,
       tooltip: PropTypes.string,
       handleClick: PropTypes.func,
-      menu: PropTypes.shape({
-        items: PropTypes.arrayOf(PropTypes.shape({})),
-        isOpen: PropTypes.bool.isRequired,
-        handleClick: PropTypes.func,
-        handleClose: PropTypes.func,
-      }),
+      menu: PropTypes.shape({}),
     }),
   ),
   color: PropTypes.string,
