@@ -33,19 +33,17 @@ storiesOf('Layouts|Editor', module)
     <Editor
       headerBarProps={headerBarProps}
       collections={collections}
-      handleAddCollection={console.log}
+      handleAddItem={console.log}
       handleEditItem={console.log}
       handleDeleteItem={console.log}
-      handleAddItem={console.log}
     />
   ))
   .add('blank state', () => (
     <Editor
       headerBarProps={headerBarProps}
       collections={[]}
-      handleAddCollection={console.log}
+      handleAddItem={console.log}
       handleEditItem={console.log}
       handleDeleteItem={console.log}
-      handleAddItem={console.log}
     />
   ));

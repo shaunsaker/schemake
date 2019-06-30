@@ -13,6 +13,14 @@ const colors = {
   transWhite: 'rgba(255, 255, 255, 0.67)',
   green: '#4caf50',
   red: '#f44336',
+
+  /*
+   * App-specific colors
+   */
+  collection: '#8EDD00',
+  document: '#0087DD',
+  object: '#DD3F00',
+  array: '#DDA500',
 };
 
 export default colors;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './styles';
+import styles, { getStyles } from './styles';
 
 import Layout from '../../../components/Layout';
 import AddButton from '../../../components/AddButton';
@@ -15,64 +15,84 @@ import Panel from '../../../components/Panel';
  * Everything should have add buttons accept fields that aren't objects or arrays
  * Everything should have menus with edit and delete options
  */
+const types = {
+  collection: {
+    name: 'Collection',
+    isExpanded: true,
+  },
+};
+
+const renderItem = ({ item, type, handleAddItem, handleEditItem, handleDeleteItem }) => {
+  const { id, name, data } = item;
+  const { name: typeName, isExpanded } = types[type];
+  const editItemText = `Edit ${typeName}`;
+  const deleteItemText = `Delete ${typeName}`;
+  const actions = [
+    {
+      iconName: 'menu',
+      tooltip: 'Toggle menu',
+      menu: {
+        items: [
+          {
+            name: editItemText,
+            handleClick: () => handleEditItem(item),
+          },
+          {
+            name: deleteItemText,
+            handleClick: () => handleDeleteItem(item),
+          },
+        ],
+      },
+    },
+  ];
+  const containerStyle = getStyles(type);
+
+  /*
+   * TODO: Convert to class
+   * TODO: Render the data recursively
+   */
+  // const documentsComponent = item.data.length ? (
+  //   <div />
+  // ) : (
+  //   <AddButton handleClick={() => handleAddItem({ item, type })}>ADD DOCUMENT</AddButton>
+  // );
+
+  return (
+    <div key={id} className="item-container">
+      <Panel title={name} actions={actions} isExpanded={isExpanded} style={containerStyle}>
+        {/* {documentsComponent} */}
+      </Panel>
+
+      <style jsx>{styles}</style>
+    </div>
+  );
+};
+
 const Editor = ({
   headerBarProps,
   collections,
-  handleAddCollection,
+  handleAddItem,
   handleEditItem,
   handleDeleteItem,
-  handleAddItem,
 }) => {
+  const type = 'collection';
+  const typeName = types[type].name;
+  const addButtonText = `ADD ${typeName.toUpperCase()}`;
+
   return (
     <Layout headerBarProps={headerBarProps}>
       <div className="container">
-        {collections.map((collection) => {
-          /*
-           * TODO: We will need to do some recursive mapping whenever we see collections
-           */
-
-          /*
-           * TODO: Should these actions come from the parent?
-           */
-          const actions = [
-            {
-              iconName: 'menu',
-              tooltip: 'Toggle menu',
-              menu: {
-                items: [
-                  {
-                    name: 'Edit Project',
-                    handleClick: () => handleEditItem(collection),
-                  },
-                  {
-                    name: 'Delete Project',
-                    handleClick: () => handleDeleteItem(collection),
-                  },
-                ],
-              },
-            },
-          ];
-
-          /*
-           * TODO: If there are documents, display them
-           * Else, display the add document button
-           */
-          const documentsComponent = collection.documents.length ? (
-            <div />
-          ) : (
-            <AddButton handleClick={() => handleAddItem(collection)}>ADD DOCUMENT</AddButton>
-          );
-
-          return (
-            <div key={collection.id} className="collection-container">
-              <Panel title={collection.name} actions={actions} isExpanded>
-                {documentsComponent}
-              </Panel>
-            </div>
-          );
+        {collections.map((item) => {
+          return renderItem({
+            item,
+            type,
+            handleAddItem,
+            handleEditItem,
+            handleDeleteItem,
+          });
         })}
 
-        <AddButton handleClick={handleAddCollection}>ADD COLLECTION</AddButton>
+        <AddButton handleClick={handleAddItem}>{addButtonText}</AddButton>
       </div>
 
       <style jsx>{styles}</style>
@@ -82,11 +102,20 @@ const Editor = ({
 
 Editor.propTypes = {
   headerBarProps: PropTypes.shape({}),
-  collections: PropTypes.arrayOf(PropTypes.shape({})),
-  handleAddCollection: PropTypes.func,
+  collections: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          // THIS
+        }),
+      ),
+    }),
+  ),
+  handleAddItem: PropTypes.func,
   handleEditItem: PropTypes.func,
   handleDeleteItem: PropTypes.func,
-  handleAddItem: PropTypes.func,
 };
 Editor.defaultProps = {};
 
