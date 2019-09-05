@@ -95,7 +95,11 @@ export class HeaderBarContainer extends React.Component {
     const { isUserMenuOpen } = this.state;
     const { text, actions: additionalActions, shouldShowUserIcon } = this.props;
     const isLoginPage = window.location.pathname.indexOf('login') > -1;
-    const actions = [...additionalActions];
+    let actions = [];
+
+    if (additionalActions) {
+      actions = [...additionalActions];
+    }
 
     if (shouldShowUserIcon) {
       actions.push({
