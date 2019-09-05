@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, ButtonBase } from '@material-ui/core';
 
 import styles from './styles';
+import { colors, sizes } from '../../static/styles/styleConstants';
 
 import TextAvatar from '../TextAvatar';
 import Typography from '../Typography';
@@ -15,7 +16,15 @@ const DashboardListItem = ({ id, avatarText, title, description, menu, handleCli
   const descriptionLoadingComponent = !description && <TextLoading />;
 
   return (
-    <Card style={{ width: '100%', position: 'relative' }}>
+    <Card
+      style={{
+        width: '100%',
+        position: 'relative',
+        boxShadow: 'none',
+        border: `1px solid ${colors.lightGrey}`,
+        borderRadius: sizes.borderRadius,
+      }}
+    >
       <ButtonBase onClick={handleClick} disabled={!handleClick} style={{ width: '100%' }}>
         <div className="container">
           <div className="avatar-container">
