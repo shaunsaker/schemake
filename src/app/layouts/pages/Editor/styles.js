@@ -16,7 +16,7 @@ const getStyles = (type) => {
   const color = colors[type];
 
   return {
-    border: `2px solid ${color}`,
+    borderColor: color,
   };
 };
 
