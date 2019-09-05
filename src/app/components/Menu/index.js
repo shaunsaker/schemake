@@ -48,10 +48,10 @@ export class MenuContainer extends React.Component {
 
     return (
       <Menu
-        isOpen={isOpen}
         handleMenuButtonClick={this.onMenuButtonClick}
         handleClose={this.onCloseMenu}
         {...this.props}
+        isOpen={isOpen}
       />
     );
   }

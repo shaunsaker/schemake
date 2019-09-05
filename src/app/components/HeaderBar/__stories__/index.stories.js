@@ -9,8 +9,18 @@ const newActions = [
   {
     iconName: 'account-circle',
     tooltip: 'Toggle the account menu',
+    color: 'white',
     menu: {
-      items: [],
+      items: [
+        {
+          name: 'Edit Profile',
+          handleClick: () => {},
+        },
+        {
+          name: 'Logout',
+          handleClick: () => {},
+        },
+      ],
       isOpen: false,
     },
   },

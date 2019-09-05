@@ -15,7 +15,7 @@ const ActionPanel = ({ actions, color }) => {
       {actions.map((action) => {
         const id = `action-${action.iconName}`;
         const actionComponent = action.menu ? (
-          <Menu anchorElId={id} {...action.menu} />
+          <Menu anchorElId={id} iconButtonProps={{ ...action, color }} {...action.menu} />
         ) : action.text ? (
           <Link key={action.href} href={action.href}>
             <div>

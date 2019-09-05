@@ -8,13 +8,25 @@ import styles from './styles';
 import IconButton from '../IconButton';
 import Typography from '../Typography';
 
-const MenuComponent = ({ items, anchorElId, isOpen, handleMenuButtonClick, handleClose }) => {
+const MenuComponent = ({
+  items,
+  anchorElId,
+  isOpen,
+  iconButtonProps,
+  handleMenuButtonClick,
+  handleClose,
+}) => {
   const anchorEl = document.getElementById(anchorElId);
 
   return (
     <div className="menu-button-container">
       <div id={anchorElId}>
-        <IconButton iconName="menu" tooltip="Toggle menu" handleClick={handleMenuButtonClick} />
+        <IconButton
+          iconName="menu"
+          tooltip="Toggle menu"
+          {...iconButtonProps}
+          handleClick={handleMenuButtonClick}
+        />
       </div>
 
       <Menu anchorEl={anchorEl} open={isOpen} onClose={handleClose}>
@@ -50,6 +62,7 @@ MenuComponent.propTypes = {
   ),
   anchorElId: PropTypes.string,
   isOpen: PropTypes.bool,
+  iconButtonProps: PropTypes.shape({}),
   handleMenuButtonClick: PropTypes.func,
   handleClose: PropTypes.func.isRequired,
 };
