@@ -22,101 +22,111 @@ const types = {
   },
 };
 
-const renderItem = ({ item, type, handleAddItem, handleEditItem, handleDeleteItem }) => {
-  const { id, name, data } = item;
-  const { name: typeName, isExpanded } = types[type];
-  const editItemText = `Edit ${typeName}`;
-  const deleteItemText = `Delete ${typeName}`;
-  const actions = [
-    {
-      iconName: 'menu',
-      tooltip: 'Toggle menu',
-      menu: {
-        items: [
-          {
-            name: editItemText,
-            handleClick: () => handleEditItem(item),
-          },
-          {
-            name: deleteItemText,
-            handleClick: () => handleDeleteItem(item),
-          },
-        ],
+export class Editor extends React.Component() {
+  constructor(props) {
+    super(props);
+
+    this.renderItem = this.renderItem.bind(this);
+
+    this.state = {};
+  }
+
+  static propTypes = {
+    headerBarProps: PropTypes.shape({}),
+    collections: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
+        data: PropTypes.arrayOf(
+          PropTypes.shape({
+            // THIS
+          }),
+        ),
+      }),
+    ),
+    handleAddItem: PropTypes.func,
+    handleEditItem: PropTypes.func,
+    handleDeleteItem: PropTypes.func,
+  };
+
+  renderItem({ item, type, handleAddItem, handleEditItem, handleDeleteItem }) {
+    const { id, name, data } = item;
+    const { name: typeName, isExpanded } = types[type];
+    const editItemText = `Edit ${typeName}`;
+    const deleteItemText = `Delete ${typeName}`;
+    const actions = [
+      {
+        iconName: 'menu',
+        tooltip: 'Toggle menu',
+        menu: {
+          items: [
+            {
+              name: editItemText,
+              handleClick: () => handleEditItem(item),
+            },
+            {
+              name: deleteItemText,
+              handleClick: () => handleDeleteItem(item),
+            },
+          ],
+        },
       },
-    },
-  ];
-  const containerStyle = getStyles(type);
+    ];
+    const containerStyle = getStyles(type);
 
-  /*
-   * TODO: Convert to class
-   * TODO: Render the data recursively
-   */
-  // const documentsComponent = item.data.length ? (
-  //   <div />
-  // ) : (
-  //   <AddButton handleClick={() => handleAddItem({ item, type })}>ADD DOCUMENT</AddButton>
-  // );
+    /*
+     * TODO: Convert to class
+     * TODO: Render the data recursively
+     */
+    // const documentsComponent = item.data.length ? (
+    //   <div />
+    // ) : (
+    //   <AddButton handleClick={() => handleAddItem({ item, type })}>ADD DOCUMENT</AddButton>
+    // );
 
-  return (
-    <div key={id} className="item-container">
-      <Panel title={name} actions={actions} isExpanded={isExpanded} style={containerStyle}>
-        {/* {documentsComponent} */}
-      </Panel>
+    return (
+      <div key={id} className="item-container">
+        <Panel title={name} actions={actions} isExpanded={isExpanded} style={containerStyle}>
+          {/* {documentsComponent} */}
+        </Panel>
 
-      <style jsx>{styles}</style>
-    </div>
-  );
-};
-
-const Editor = ({
-  headerBarProps,
-  collections,
-  handleAddItem,
-  handleEditItem,
-  handleDeleteItem,
-}) => {
-  const type = 'collection';
-  const typeName = types[type].name;
-  const addButtonText = `ADD ${typeName.toUpperCase()}`;
-
-  return (
-    <Layout headerBarProps={headerBarProps}>
-      <div className="container">
-        {collections.map((item) => {
-          return renderItem({
-            item,
-            type,
-            handleAddItem,
-            handleEditItem,
-            handleDeleteItem,
-          });
-        })}
-
-        <AddButton handleClick={handleAddItem}>{addButtonText}</AddButton>
+        <style jsx>{styles}</style>
       </div>
+    );
+  }
 
-      <style jsx>{styles}</style>
-    </Layout>
-  );
-};
+  render() {
+    const {
+      headerBarProps,
+      collections,
+      handleAddItem,
+      handleEditItem,
+      handleDeleteItem,
+    } = this.props;
+    const type = 'collection';
+    const typeName = types[type].name;
+    const addButtonText = `ADD ${typeName.toUpperCase()}`;
 
-Editor.propTypes = {
-  headerBarProps: PropTypes.shape({}),
-  collections: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      data: PropTypes.arrayOf(
-        PropTypes.shape({
-          // THIS
-        }),
-      ),
-    }),
-  ),
-  handleAddItem: PropTypes.func,
-  handleEditItem: PropTypes.func,
-  handleDeleteItem: PropTypes.func,
-};
-Editor.defaultProps = {};
+    return (
+      <Layout headerBarProps={headerBarProps}>
+        <div className="container">
+          {collections.map((item) => {
+            return this.renderItem({
+              item,
+              type,
+              handleAddItem,
+              handleEditItem,
+              handleDeleteItem,
+            });
+          })}
+
+          <AddButton handleClick={handleAddItem}>{addButtonText}</AddButton>
+        </div>
+
+        <style jsx>{styles}</style>
+      </Layout>
+    );
+  }
+}
 
 export default Editor;

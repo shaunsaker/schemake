@@ -13,7 +13,7 @@ const styles = css`
   }
 
   .bg {
-    background-color: ${colors.lightGrey};
+    background-color: ${colors.veryLightGrey};
   }
 
   .label-text-container {

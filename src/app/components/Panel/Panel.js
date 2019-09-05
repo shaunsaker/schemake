@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
 
 import styles from './styles';
+import { colors, sizes } from '../../static/styles/styleConstants';
 
 import Typography from '../Typography';
 import IconButton from '../IconButton';
@@ -13,6 +14,9 @@ const Panel = ({ title, actions, isCollapsed, handleToggleCollapse, children, st
   const containerStyles = {
     width: '100%',
     marginTop: 0,
+    boxShadow: 'none',
+    border: `1px solid ${colors.lightGrey}`,
+    borderRadius: sizes.borderRadius,
     ...style,
   };
   const toggleButtonStyles = { transform: `rotate(${isCollapsed ? 0 : 180}deg)` };

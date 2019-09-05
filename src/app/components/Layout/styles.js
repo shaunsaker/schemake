@@ -9,7 +9,7 @@ const styles = css`
     display: flex;
     flex-direction: column;
     padding: 64px 0 0; /* Header height */
-    background-color: ${colors.lightGrey};
+    background-color: ${colors.veryLightGrey};
   }
 
   .content-container {

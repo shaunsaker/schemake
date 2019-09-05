@@ -9,7 +9,7 @@ const TabBar = ({ currentTabIndex, tabs, handleClick }) => {
     <AppBar
       position="static"
       color="inherit"
-      style={{ boxShadow: 'none', backgroundColor: colors.lightGrey }}
+      style={{ boxShadow: 'none', backgroundColor: colors.veryLightGrey }}
     >
       <Tabs
         value={currentTabIndex}
