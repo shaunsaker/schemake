@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
 
 import styles, { inlineStyles } from './styles';
+import { colors } from '../../../static/styles/styleConstants';
 
 import Typography from '../../Typography';
 import IconButton from '../../IconButton';
@@ -14,6 +15,7 @@ const Panel = ({
   borderColor,
   addButtonText,
   actions,
+  hasBg,
   isCollapsed,
   isExpandable,
   showAddCollectionButton,
@@ -54,10 +56,12 @@ const Panel = ({
     </div>
   ) : null;
 
+  const backgroundColor = hasBg && colors.veryLightGrey;
+
   return (
     <ExpansionPanel
       expanded={!isCollapsed}
-      style={{ ...inlineStyles.expansionPanel, ...style, borderColor }}
+      style={{ ...inlineStyles.expansionPanel, ...style, borderColor, backgroundColor }}
     >
       <ExpansionPanelSummary style={inlineStyles.expansionPanelSummary}>
         <div className="header-container">
@@ -91,6 +95,7 @@ Panel.propTypes = {
   borderColor: PropTypes.string,
   addButtonText: PropTypes.string,
   actions: PropTypes.arrayOf(PropTypes.shape({})),
+  hasBg: PropTypes.bool,
   isCollapsed: PropTypes.bool,
   isExpandable: PropTypes.bool,
   showAddCollectionButton: PropTypes.bool,

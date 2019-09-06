@@ -5,18 +5,31 @@ import styles from './styles';
 
 import Panel from './Panel';
 
-const renderPanel = (item, handleAdd, handleEdit, handleDelete) => {
+const renderPanel = ({ item, level, handleAdd, handleEdit, handleDelete }) => {
   const { name, items } = item;
+  const hasBg = level % 2 !== 0 ? true : false;
 
   return (
     <div key={name} className="item-container">
       <Panel
         {...item}
+        hasBg={hasBg}
         handleAdd={() => handleAdd(item)}
         handleEdit={() => handleEdit(item)}
         handleDelete={() => handleDelete(item)}
       >
-        {items && items.map((item2) => renderPanel(item2, handleAdd, handleEdit, handleDelete))}
+        {items &&
+          items.map((item2) => {
+            const newLevel = level + 1;
+
+            return renderPanel({
+              item: item2,
+              level: newLevel,
+              handleAdd,
+              handleEdit,
+              handleDelete,
+            });
+          })}
       </Panel>
 
       <style jsx>{styles}</style>
@@ -27,7 +40,10 @@ const renderPanel = (item, handleAdd, handleEdit, handleDelete) => {
 const Panels = ({ items, handleAdd, handleEdit, handleDelete }) => {
   return (
     <div className="container">
-      {items && items.map((item) => renderPanel(item, handleAdd, handleEdit, handleDelete))}
+      {items &&
+        items.map((item, index) =>
+          renderPanel({ item, index, level: 0, handleAdd, handleEdit, handleDelete }),
+        )}
 
       <style jsx>{styles}</style>
     </div>
