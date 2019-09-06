@@ -55,9 +55,9 @@ const Panel = ({
           </Typography>
 
           <div className="actions-container">
-            <ActionPanel actions={actions} />
-
             {toggleButtonComponent}
+
+            <ActionPanel actions={actions} />
           </div>
         </div>
       </ExpansionPanelSummary>

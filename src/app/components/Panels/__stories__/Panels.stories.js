@@ -59,5 +59,10 @@ const items = [
     ],
   },
 ];
+const handleAdd = (item) => console.log('Add', item);
+const handleEdit = (item) => console.log('Edit', item);
+const handleDelete = (item) => console.log('Delete', item);
 
-storiesOf('Components|Panels', module).add('default', () => <Panels items={items} />);
+storiesOf('Components|Panels', module).add('default', () => (
+  <Panels items={items} handleAdd={handleAdd} handleEdit={handleEdit} handleDelete={handleDelete} />
+));

@@ -22,6 +22,7 @@ export class PanelContainer extends React.Component {
     name: PropTypes.string,
     children: PropTypes.node,
     handleAdd: PropTypes.func,
+    handleEdit: PropTypes.func,
     handleDelete: PropTypes.func,
   };
 
@@ -40,6 +41,7 @@ export class PanelContainer extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     const { isCollapsed: isCollapsedState } = this.state;
     const { children } = this.props;
 
@@ -54,15 +56,12 @@ export class PanelContainer extends React.Component {
      * A collection should not have an add button if it already has children
      * A document should never be expandable and should always be expanded
      */
-    const actions = [];
     let isExpandable;
     let isCollapsed = isCollapsedState;
     let addButtonText;
     const hasChildren = children && children.length;
 
     if (type !== 'field') {
-      const { handleAdd } = this.props;
-
       /*
        * Change the childType based on the type
        */
@@ -88,12 +87,6 @@ export class PanelContainer extends React.Component {
        * Add the add action lol
        */
       if (childType) {
-        actions.push({
-          iconName: 'add',
-          tooltip: `Add ${childType}`,
-          handleClick: handleAdd,
-        });
-
         addButtonText = childType;
       }
     } else {
@@ -104,15 +97,29 @@ export class PanelContainer extends React.Component {
     }
 
     /*
-     * All types have the delete action
+     * Create the actions
+     * All types have the edit and delete action
      */
-    const { name, handleDelete } = this.props;
-
-    actions.push({
-      iconName: 'delete',
-      tooltip: `Delete ${name}`,
-      handleClick: handleDelete,
-    });
+    const { name, handleEdit, handleDelete } = this.props;
+    const actions = [
+      {
+        id: name,
+        iconName: 'menu',
+        tooltip: 'Toggle Menu',
+        menu: {
+          items: [
+            {
+              name: `Edit ${name}`,
+              handleClick: handleEdit,
+            },
+            {
+              name: `Delete ${name}`,
+              handleClick: handleDelete,
+            },
+          ],
+        },
+      },
+    ];
 
     return (
       <Panel

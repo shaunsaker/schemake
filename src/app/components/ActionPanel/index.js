@@ -13,7 +13,7 @@ const ActionPanel = ({ actions, color }) => {
   return (
     <div className="container">
       {actions.map((action) => {
-        const id = `action-${action.iconName}`;
+        const { id } = action;
         const actionComponent = action.menu ? (
           <Menu anchorElId={id} iconButtonProps={{ ...action, color }} {...action.menu} />
         ) : action.text ? (
