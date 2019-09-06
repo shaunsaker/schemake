@@ -13,6 +13,8 @@ import AddButton from '../../AddButton';
 const Panel = ({
   name,
   borderColor,
+  typeText,
+  typeTextColor,
   addButtonText,
   actions,
   hasBg,
@@ -63,9 +65,17 @@ const Panel = ({
     >
       <ExpansionPanelSummary style={inlineStyles.expansionPanelSummary}>
         <div className="header-container">
-          <Typography type="paragraph" bold>
-            {name}
-          </Typography>
+          <div className="header-text-container">
+            <Typography type="paragraph" bold>
+              {name}
+            </Typography>
+
+            <div className="field-type-container">
+              <Typography type="small" color={typeTextColor}>
+                {typeText}
+              </Typography>
+            </div>
+          </div>
 
           <div className="actions-container">
             {toggleButtonComponent}
@@ -91,6 +101,8 @@ const Panel = ({
 Panel.propTypes = {
   name: PropTypes.string,
   borderColor: PropTypes.string,
+  typeText: PropTypes.string,
+  typeTextColor: PropTypes.string,
   addButtonText: PropTypes.string,
   actions: PropTypes.arrayOf(PropTypes.shape({})),
   hasBg: PropTypes.bool,

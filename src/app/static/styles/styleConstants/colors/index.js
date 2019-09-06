@@ -14,6 +14,16 @@ const colors = {
   transWhite: 'rgba(255, 255, 255, 0.67)',
   green: '#4caf50',
   red: '#f44336',
+
+  collection: '#009688', // darkgreen
+  document: '#2196f3', // blue
+  object: '#9C27B0', // purple
+  array: '#ff9800', // orange
+  field: 'rgba(38, 50, 56, 0.33)', // black
+  string: '#607d8b', // teal
+  boolean: '#FF5722', // red
+  number: '#e91e63', // pink
+  date: '#4caf50', // green
 };
 
 export default colors;

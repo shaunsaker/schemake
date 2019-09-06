@@ -15,14 +15,22 @@ const items = [
           {
             name: 'name',
             type: 'field',
+            fieldType: 'string',
           },
           {
-            name: 'email',
+            name: 'isAdmin',
             type: 'field',
+            fieldType: 'boolean',
           },
           {
             name: 'age',
             type: 'field',
+            fieldType: 'number',
+          },
+          {
+            name: 'dateJoined',
+            type: 'field',
+            fieldType: 'date',
           },
           {
             name: 'meta',
@@ -31,6 +39,7 @@ const items = [
               {
                 name: 'uid',
                 type: 'field',
+                fieldType: 'string',
               },
             ],
           },
@@ -46,6 +55,7 @@ const items = [
               {
                 name: 'uid',
                 type: 'field',
+                fieldType: 'string',
               },
             ],
           },

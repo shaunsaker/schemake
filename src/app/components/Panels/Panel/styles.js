@@ -29,6 +29,14 @@ const styles = css`
   .addCollectionButtonContainer {
     margin-top: ${rhythm.vt}px;
   }
+
+  .header-text-container {
+    display: flex;
+    align-items: flex-end;
+  }
+  .field-type-container {
+    margin-left: ${rhythm.hz / 4}px;
+  }
 `;
 
 const inlineStyles = {

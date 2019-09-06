@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import colors from './colors';
+import { colors } from '../../../static/styles/styleConstants';
 
 import Panel from './Panel';
 
@@ -19,6 +19,7 @@ export class PanelContainer extends React.Component {
 
   static propTypes = {
     type: PropTypes.string,
+    fieldType: PropTypes.string,
     name: PropTypes.string,
     children: PropTypes.node,
     handleAdd: PropTypes.func,
@@ -45,11 +46,13 @@ export class PanelContainer extends React.Component {
     const { children } = this.props;
 
     /*
-     * Get the border color based on type
+     * Get the borderColor based on type
      */
     const { type } = this.props;
     const borderColor = colors[type];
-
+    const { fieldType } = this.props;
+    const typeText = fieldType || type;
+    const typeTextColor = colors[fieldType || type];
     /*
      * All types beside the field have the add action and are expandable and should have an add button
      * A collection should not have an add button if it already has children
@@ -126,6 +129,8 @@ export class PanelContainer extends React.Component {
       <Panel
         {...this.props}
         borderColor={borderColor}
+        typeText={typeText}
+        typeTextColor={typeTextColor}
         addButtonText={addButtonText}
         actions={actions}
         isCollapsed={isCollapsed}
