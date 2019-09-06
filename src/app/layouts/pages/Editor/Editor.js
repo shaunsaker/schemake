@@ -5,7 +5,7 @@ import styles, { getStyles } from './styles';
 
 import Layout from '../../../components/Layout';
 import AddButton from '../../../components/AddButton';
-import Panel from '../../../components/Panel';
+// import Panel from '../../../components/Panel';
 
 /*
  * NOTES:
@@ -59,10 +59,6 @@ const renderItem = ({ item, type, handleAddItem, handleEditItem, handleDeleteIte
 
   return (
     <div key={id} className="item-container">
-      <Panel title={name} actions={actions} isExpanded={isExpanded} style={containerStyle}>
-        {/* {documentsComponent} */}
-      </Panel>
-
       <style jsx>{styles}</style>
     </div>
   );

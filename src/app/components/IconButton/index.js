@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { IconButton, Tooltip } from '@material-ui/core';
 
+import { colors } from '../../static/styles/styleConstants';
+
 import Icon from '../Icon';
 
 const IconButtonComponent = ({ iconName, tooltip, color, id, handleClick }) => {
@@ -21,6 +23,8 @@ IconButtonComponent.propTypes = {
   id: PropTypes.string,
   handleClick: PropTypes.func,
 };
-IconButtonComponent.defaultProps = {};
+IconButtonComponent.defaultProps = {
+  color: colors.grey,
+};
 
 export default IconButtonComponent;

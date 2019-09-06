@@ -1,6 +1,6 @@
 import css from 'styled-jsx/css'; // eslint-disable-line
 
-import { animation, rhythm } from '../../static/styles/styleConstants';
+import { animation, colors, rhythm, sizes } from '../../../static/styles/styleConstants';
 
 const styles = css`
   .header-container {
@@ -26,5 +26,23 @@ const styles = css`
     transition: max-height ${animation.transition};
   }
 `;
+
+const inlineStyles = {
+  expansionPanel: {
+    width: '100%',
+    marginTop: 0,
+    boxShadow: 'none',
+    border: `1px solid ${colors.lightGrey}`,
+    borderRadius: sizes.borderRadius,
+  },
+  expansionPanelSummary: {
+    cursor: 'default',
+  },
+  expansionPanelDetails: {
+    flexDirection: 'column',
+  },
+};
+
+export { inlineStyles };
 
 export default styles;
