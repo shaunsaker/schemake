@@ -16,6 +16,7 @@ const Panel = ({
   actions,
   isCollapsed,
   isExpandable,
+  showAddCollectionButton,
   children,
   style,
   handleAdd,
@@ -33,13 +34,21 @@ const Panel = ({
           tooltip={toggleButtonTooltipText}
           handleClick={handleToggleCollapse}
         />
+
+        <style jsx>{styles}</style>
       </div>
     );
   }
 
   const addButtonComponent = addButtonText ? (
-    <div className="addButtonContainer">
-      <AddButton handleClick={handleAdd}>{`ADD ${addButtonText.toUpperCase()}`}</AddButton>
+    <AddButton handleClick={handleAdd}>{`ADD ${addButtonText.toUpperCase()}`}</AddButton>
+  ) : null;
+
+  const addCollectionButtonComponent = showAddCollectionButton ? (
+    <div className="addCollectionButtonContainer">
+      <AddButton handleClick={handleAdd}>ADD COLLECTION</AddButton>
+
+      <style jsx>{styles}</style>
     </div>
   ) : null;
 
@@ -66,6 +75,8 @@ const Panel = ({
         {children}
 
         {addButtonComponent}
+
+        {addCollectionButtonComponent}
       </ExpansionPanelDetails>
 
       <style jsx>{styles}</style>
@@ -80,6 +91,7 @@ Panel.propTypes = {
   actions: PropTypes.arrayOf(PropTypes.shape({})),
   isCollapsed: PropTypes.bool,
   isExpandable: PropTypes.bool,
+  showAddCollectionButton: PropTypes.bool,
   style: PropTypes.shape({}),
   children: PropTypes.node,
   handleAdd: PropTypes.func,

@@ -25,6 +25,10 @@ const styles = css`
   .content-container {
     transition: max-height ${animation.transition};
   }
+
+  .addCollectionButtonContainer {
+    margin-top: ${rhythm.vt}px;
+  }
 `;
 
 const inlineStyles = {

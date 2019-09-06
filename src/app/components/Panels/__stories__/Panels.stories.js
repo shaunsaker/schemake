@@ -54,6 +54,11 @@ const items = [
             type: 'array',
             items: [],
           },
+          {
+            name: 'posts',
+            type: 'collection',
+            items: [],
+          },
         ],
       },
     ],

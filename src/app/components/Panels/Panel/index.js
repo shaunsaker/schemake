@@ -41,7 +41,6 @@ export class PanelContainer extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     const { isCollapsed: isCollapsedState } = this.state;
     const { children } = this.props;
 
@@ -60,6 +59,7 @@ export class PanelContainer extends React.Component {
     let isCollapsed = isCollapsedState;
     let addButtonText;
     const hasChildren = children && children.length;
+    let showAddCollectionButton;
 
     if (type !== 'field') {
       /*
@@ -72,6 +72,7 @@ export class PanelContainer extends React.Component {
         childType = 'Document';
       } else if (type === 'document') {
         childType = 'Field';
+        showAddCollectionButton = true;
 
         /*
          * Documents are not collapsible
@@ -125,10 +126,11 @@ export class PanelContainer extends React.Component {
       <Panel
         {...this.props}
         borderColor={borderColor}
+        addButtonText={addButtonText}
         actions={actions}
         isCollapsed={isCollapsed}
         isExpandable={isExpandable}
-        addButtonText={addButtonText}
+        showAddCollectionButton={showAddCollectionButton}
         handleToggleCollapse={this.onToggleCollapse}
       >
         {children}
