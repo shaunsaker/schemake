@@ -43,14 +43,12 @@ const Panel = ({
   }
 
   const addButtonComponent = addButtonText ? (
-    <AddButton primary handleClick={handleAdd}>{`ADD ${addButtonText.toUpperCase()}`}</AddButton>
+    <AddButton handleClick={handleAdd}>{`ADD ${addButtonText.toUpperCase()}`}</AddButton>
   ) : null;
 
   const addCollectionButtonComponent = showAddCollectionButton ? (
     <div className="addCollectionButtonContainer">
-      <AddButton primary handleClick={handleAdd}>
-        ADD COLLECTION
-      </AddButton>
+      <AddButton handleClick={handleAdd}>ADD COLLECTION</AddButton>
 
       <style jsx>{styles}</style>
     </div>

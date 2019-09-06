@@ -10,10 +10,6 @@ const styles = css`
     border-radius: ${sizes.borderRadius}px;
     background-color: white;
   }
-  .primary-container {
-    background-color: ${colors.lightSecondary};
-    border: none;
-  }
 
   .icon-container {
     margin-top: -2px; /* remove line height */

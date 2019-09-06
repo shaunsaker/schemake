@@ -8,17 +8,15 @@ import { colors } from '../../static/styles/styleConstants';
 import Icon from '../Icon';
 import Typography from '../Typography';
 
-const AddButton = ({ primary, children, handleClick }) => {
-  const color = primary ? 'white' : colors.secondaryText;
-
+const AddButton = ({ children, handleClick }) => {
   return (
     <ButtonBase onClick={handleClick} style={{ width: '100%' }}>
-      <div className={`container${primary ? ' primary-container' : ''}`}>
+      <div className="container">
         <div className="icon-container">
-          <Icon name="add" color={color} />
+          <Icon name="add" color={colors.secondaryText} />
         </div>
 
-        <Typography type="paragraph" bold color={color}>
+        <Typography type="paragraph" bold color={colors.secondaryText}>
           {children}
         </Typography>
       </div>
@@ -29,7 +27,6 @@ const AddButton = ({ primary, children, handleClick }) => {
 };
 
 AddButton.propTypes = {
-  primary: PropTypes.bool,
   children: PropTypes.node,
   handleClick: PropTypes.func,
 };
