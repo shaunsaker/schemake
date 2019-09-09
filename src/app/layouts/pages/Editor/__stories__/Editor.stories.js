@@ -10,12 +10,22 @@ const headerBarProps = {
   actions: headerBarActions,
 };
 
-storiesOf('Layouts|Editor', module).add('default', () => (
-  <Editor
-    headerBarProps={headerBarProps}
-    items={items}
-    handleAddItem={console.log}
-    handleEditItem={console.log}
-    handleDeleteItem={console.log}
-  />
-));
+storiesOf('Layouts|Editor', module)
+  .add('default', () => (
+    <Editor
+      headerBarProps={headerBarProps}
+      items={items}
+      handleAddItem={console.log}
+      handleEditItem={console.log}
+      handleDeleteItem={console.log}
+    />
+  ))
+  .add('blank state', () => (
+    <Editor
+      headerBarProps={headerBarProps}
+      items={[]}
+      handleAddItem={console.log}
+      handleEditItem={console.log}
+      handleDeleteItem={console.log}
+    />
+  ));

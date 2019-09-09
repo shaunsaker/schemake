@@ -8,7 +8,7 @@ const styles = css`
   }
 
   .add-button-container {
-    margin-top: ${rhythm.vt * 2}px;
+    margin-top: ${rhythm.vt}px;
   }
 `;
 

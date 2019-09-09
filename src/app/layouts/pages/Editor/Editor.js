@@ -15,6 +15,8 @@ const Editor = ({
   handleEdit,
   handleDelete,
 }) => {
+  const hasItems = items.length;
+
   return (
     <Layout headerBarProps={headerBarProps}>
       <div className="container">
@@ -25,7 +27,7 @@ const Editor = ({
           handleDelete={handleDelete}
         />
 
-        <div className="add-button-container">
+        <div className={hasItems ? 'add-button-container' : ''}>
           <AddButton handleClick={handleAddCollection}>ADD COLLECTION</AddButton>
         </div>
       </div>
