@@ -13,7 +13,7 @@ const AddButton = ({ children, handleClick }) => {
     <ButtonBase onClick={handleClick} style={{ width: '100%' }}>
       <div className="container">
         <div className="icon-container">
-          <Icon name="add" color={colors.primary} />
+          <Icon name="add" color={colors.primaryText} />
         </div>
 
         <Typography type="paragraph" bold color={colors.secondaryText}>

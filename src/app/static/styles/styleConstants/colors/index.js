@@ -15,12 +15,12 @@ const colors = {
   green: '#4caf50',
   red: '#f44336',
 
-  collection: '#009688', // darkgreen
+  collection: '#009688', // dark green
   document: '#2196f3', // blue
   object: '#9C27B0', // purple
   array: '#ff9800', // orange
   field: 'rgba(38, 50, 56, 0.33)', // black
-  string: '#607d8b', // teal
+  string: '#3f51b5', // dark blue
   boolean: '#FF5722', // red
   number: '#e91e63', // pink
   date: '#4caf50', // green

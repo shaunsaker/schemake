@@ -3,47 +3,19 @@ import { storiesOf } from '@storybook/react';
 
 import Editor from '../Editor';
 import headerBarActions from '../headerBarActions';
+import items from '../../../../components/Panels/__stories__/items';
 
 const headerBarProps = {
-  text: 'SCHEMAKE',
+  text: 'PROJECT TITLE',
   actions: headerBarActions,
 };
-const collections = [
-  {
-    id: '1',
-    name: 'users',
-    documents: [],
-  },
-  // {
-  //   id: '2',
-  //   name: 'projects',
-  //   documents: [
-  //     {
-  //       id: '1',
-  //       name: 'uid',
-  //       fields: [],
-  //       collections: [],
-  //     },
-  //   ],
-  // },
-];
 
-storiesOf('Layouts|Editor', module)
-  .add('default', () => (
-    <Editor
-      headerBarProps={headerBarProps}
-      collections={collections}
-      handleAddItem={console.log}
-      handleEditItem={console.log}
-      handleDeleteItem={console.log}
-    />
-  ))
-  .add('blank state', () => (
-    <Editor
-      headerBarProps={headerBarProps}
-      collections={[]}
-      handleAddItem={console.log}
-      handleEditItem={console.log}
-      handleDeleteItem={console.log}
-    />
-  ));
+storiesOf('Layouts|Editor', module).add('default', () => (
+  <Editor
+    headerBarProps={headerBarProps}
+    items={items}
+    handleAddItem={console.log}
+    handleEditItem={console.log}
+    handleDeleteItem={console.log}
+  />
+));

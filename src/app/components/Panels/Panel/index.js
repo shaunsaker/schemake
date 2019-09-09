@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { colors } from '../../../static/styles/styleConstants';
+import types from './types';
 
 import Panel from './Panel';
 
@@ -19,7 +20,6 @@ export class PanelContainer extends React.Component {
 
   static propTypes = {
     type: PropTypes.string,
-    fieldType: PropTypes.string,
     name: PropTypes.string,
     children: PropTypes.node,
     handleAdd: PropTypes.func,
@@ -46,59 +46,35 @@ export class PanelContainer extends React.Component {
     const { children } = this.props;
 
     /*
-     * Get the borderColor based on type
+     * Get the type's details
      */
     const { type } = this.props;
-    const borderColor = colors[type];
-    const { fieldType } = this.props;
-    const typeText = fieldType || type;
-    const typeTextColor = colors[fieldType || type];
+    const typeColor = colors[type];
+    const typeText = type;
+    const typeInfo = types[type];
+    const { isExpandable, isCollapsedByDefault } = typeInfo;
+    const isCollapsed = isCollapsedByDefault || isCollapsedState;
+
     /*
-     * All types beside the field have the add action and are expandable and should have an add button
-     * A collection should not have an add button if it already has children
-     * A document should never be expandable and should always be expanded
+     * If there are validChildrenTypes, create buttons to render
      */
-    let isExpandable;
-    let isCollapsed = isCollapsedState;
-    let addButtonText;
     const hasChildren = children && children.length;
-    let showAddCollectionButton;
+    const { validChildrenTypes } = typeInfo;
+    const addButtons = validChildrenTypes
+      .map((item) => {
+        const { name, showAddButtonWithChildren } = item;
 
-    if (type !== 'field') {
-      /*
-       * Change the childType based on the type
-       */
-      let childType;
-      isExpandable = true;
+        if (!hasChildren || (hasChildren && showAddButtonWithChildren)) {
+          const text = `ADD ${name.toUpperCase()}`;
 
-      if (type === 'collection' && !hasChildren) {
-        childType = 'Document';
-      } else if (type === 'document') {
-        childType = 'Field';
-        showAddCollectionButton = true;
+          return {
+            text,
+          };
+        }
 
-        /*
-         * Documents are not collapsible
-         */
-        isExpandable = false;
-      } else if (type === 'object') {
-        childType = 'Field';
-      } else if (type === 'array' && !hasChildren) {
-        childType = 'Field';
-      }
-
-      /*
-       * Add the add action lol
-       */
-      if (childType) {
-        addButtonText = childType;
-      }
-    } else {
-      /*
-       * Fields are always collapsed
-       */
-      isCollapsed = true;
-    }
+        return null;
+      })
+      .filter((item) => item);
 
     /*
      * Create the actions
@@ -128,14 +104,12 @@ export class PanelContainer extends React.Component {
     return (
       <Panel
         {...this.props}
-        borderColor={borderColor}
         typeText={typeText}
-        typeTextColor={typeTextColor}
-        addButtonText={addButtonText}
+        typeColor={typeColor}
+        addButtons={addButtons}
         actions={actions}
         isCollapsed={isCollapsed}
         isExpandable={isExpandable}
-        showAddCollectionButton={showAddCollectionButton}
         handleToggleCollapse={this.onToggleCollapse}
       >
         {children}

@@ -26,7 +26,7 @@ const styles = css`
     transition: max-height ${animation.transition};
   }
 
-  .addCollectionButtonContainer {
+  .add-button-container {
     margin-top: ${rhythm.vt}px;
   }
 
@@ -34,8 +34,9 @@ const styles = css`
     display: flex;
     align-items: flex-end;
   }
+
   .field-type-container {
-    margin-left: ${rhythm.hz / 4}px;
+    margin-left: ${rhythm.hz / 2}px;
   }
 `;
 

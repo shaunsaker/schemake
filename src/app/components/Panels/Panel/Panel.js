@@ -12,15 +12,13 @@ import AddButton from '../../AddButton';
 
 const Panel = ({
   name,
-  borderColor,
   typeText,
-  typeTextColor,
-  addButtonText,
+  typeColor,
+  addButtons,
   actions,
   hasBg,
   isCollapsed,
   isExpandable,
-  showAddCollectionButton,
   children,
   style,
   handleAdd,
@@ -44,24 +42,28 @@ const Panel = ({
     );
   }
 
-  const addButtonComponent = addButtonText ? (
-    <AddButton handleClick={handleAdd}>{`ADD ${addButtonText.toUpperCase()}`}</AddButton>
-  ) : null;
+  const addButtonsComponent =
+    addButtons && addButtons.length
+      ? addButtons.map((item, index) => {
+          const { text } = item;
+          const isNotFirstItem = index !== 0;
 
-  const addCollectionButtonComponent = showAddCollectionButton ? (
-    <div className="addCollectionButtonContainer">
-      <AddButton handleClick={handleAdd}>ADD COLLECTION</AddButton>
+          return (
+            <div id={text} className={isNotFirstItem ? 'add-button-container' : ''}>
+              <AddButton handleClick={handleAdd}>{text}</AddButton>
 
-      <style jsx>{styles}</style>
-    </div>
-  ) : null;
+              <style jsx>{styles}</style>
+            </div>
+          );
+        })
+      : null;
 
   const backgroundColor = hasBg && colors.veryLightGrey;
 
   return (
     <ExpansionPanel
       expanded={!isCollapsed}
-      style={{ ...inlineStyles.expansionPanel, ...style, borderColor, backgroundColor }}
+      style={{ ...inlineStyles.expansionPanel, ...style, borderColor: typeColor, backgroundColor }}
     >
       <ExpansionPanelSummary style={inlineStyles.expansionPanelSummary}>
         <div className="header-container">
@@ -71,7 +73,7 @@ const Panel = ({
             </Typography>
 
             <div className="field-type-container">
-              <Typography type="small" color={typeTextColor}>
+              <Typography type="small" color={typeColor}>
                 {typeText}
               </Typography>
             </div>
@@ -88,9 +90,7 @@ const Panel = ({
       <ExpansionPanelDetails style={inlineStyles.expansionPanelDetails}>
         {children}
 
-        {addButtonComponent}
-
-        {addCollectionButtonComponent}
+        {addButtonsComponent}
       </ExpansionPanelDetails>
 
       <style jsx>{styles}</style>
@@ -100,15 +100,17 @@ const Panel = ({
 
 Panel.propTypes = {
   name: PropTypes.string,
-  borderColor: PropTypes.string,
   typeText: PropTypes.string,
-  typeTextColor: PropTypes.string,
-  addButtonText: PropTypes.string,
+  typeColor: PropTypes.string,
+  addButtons: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string,
+    }),
+  ),
   actions: PropTypes.arrayOf(PropTypes.shape({})),
   hasBg: PropTypes.bool,
   isCollapsed: PropTypes.bool,
   isExpandable: PropTypes.bool,
-  showAddCollectionButton: PropTypes.bool,
   style: PropTypes.shape({}),
   children: PropTypes.node,
   handleAdd: PropTypes.func,
