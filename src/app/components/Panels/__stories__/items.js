@@ -62,6 +62,16 @@ const items = [
       },
     ],
   },
+  {
+    name: 'posts',
+    type: 'collection',
+    items: [],
+  },
+  {
+    name: 'groups',
+    type: 'collection',
+    items: [],
+  },
 ];
 
 export default items;
