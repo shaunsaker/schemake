@@ -2,7 +2,7 @@ import css from 'styled-jsx/css';
 
 import { rhythm } from '../../static/styles/styleConstants';
 
-const logoWidth = 175;
+const logoWidth = 136;
 
 const styles = css`
   .logo-image-container {
