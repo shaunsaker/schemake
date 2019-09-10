@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './styles';
 
-import NoTeamBlankState from '../NoTeamBlankState';
+import BlankState from '../BlankState';
 import Select from '../../../../components/Select';
 import PrimaryButton from '../../../../components/PrimaryButton';
 import DashboardListItem from '../../../../components/DashboardListItem';
@@ -16,7 +16,7 @@ const Team = ({ hasTeams, selectProps, teamMembers, handleAddTeamMember }) => {
    * Blank state
    */
   if (!hasTeams) {
-    return <NoTeamBlankState />;
+    return <BlankState />;
   }
 
   return (

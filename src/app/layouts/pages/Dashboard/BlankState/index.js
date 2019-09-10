@@ -5,17 +5,14 @@ import styles from './styles';
 import Typography from '../../../../components/Typography';
 import CircularProgress from '../../../../components/CircularProgress';
 
-const NoTeamBlankState = () => {
+const BlankState = () => {
   return (
     <div className="container">
       <Typography type="heading" gutterBottom>
-        Uno Momento...
+        Uno Momento
       </Typography>
 
-      <Typography type="paragraph">
-        If you&apos;re seeing this, we&apos;re still busy creating your team. Don&apos;t fret, this
-        should only take a moment.
-      </Typography>
+      <Typography type="paragraph">Getting things ready for you...</Typography>
 
       <div className="circular-progress-container">
         <CircularProgress />
@@ -26,7 +23,7 @@ const NoTeamBlankState = () => {
   );
 };
 
-NoTeamBlankState.propTypes = {};
-NoTeamBlankState.defaultProps = {};
+BlankState.propTypes = {};
+BlankState.defaultProps = {};
 
-export default NoTeamBlankState;
+export default BlankState;
