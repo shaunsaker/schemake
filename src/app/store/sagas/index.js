@@ -1,6 +1,5 @@
 import { takeEvery } from 'redux-saga/effects';
 
-import { logEvent } from '../../services/analytics';
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -33,9 +32,6 @@ import eventChannelSaga from './eventChannelSaga';
 import genericSaga from './genericSaga';
 
 export default function* sagas() {
-  // Analytics
-  yield takeEvery('logEvent', genericSaga, { service: logEvent });
-
   // Auth
   yield takeEvery('createUserWithEmailAndPassword', genericSaga, {
     service: createUserWithEmailAndPassword,
