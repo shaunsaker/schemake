@@ -10,6 +10,7 @@ import EditProjectModal from '../../layouts/modals/EditProjectModal';
 import EditProfileModal from '../../layouts/modals/EditProfileModal';
 import ForgotPasswordModal from '../../layouts/modals/ForgotPasswordModal';
 import RemoveTeamMemberModal from '../../layouts/modals/RemoveTeamMemberModal';
+import ShareProjectModal from '../../layouts/modals/ShareProjectModal';
 
 const modals = [
   {
@@ -51,6 +52,10 @@ const modals = [
   {
     key: 'removeTeamMemberModal',
     component: (props) => <RemoveTeamMemberModal {...props} />,
+  },
+  {
+    key: 'shareProjectModal',
+    component: (props) => <ShareProjectModal {...props} />,
   },
 ];
 

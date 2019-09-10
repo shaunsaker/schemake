@@ -24,6 +24,7 @@ export class EditorContainer extends React.Component {
     /*
      * Store
      */
+    dispatch: PropTypes.func,
     projects: PropTypes.shape({
       name: PropTypes.string,
     }),
@@ -31,7 +32,22 @@ export class EditorContainer extends React.Component {
 
   static defaultProps = {};
 
-  onShare() {}
+  onShare() {
+    const { dispatch } = this.props;
+    const { name } = this.getProject();
+    const url = window.location.href;
+
+    dispatch({
+      type: 'TOGGLE_MODAL',
+      payload: {
+        key: 'shareProjectModal',
+        props: {
+          name,
+          url,
+        },
+      },
+    });
+  }
 
   onAddCollection() {}
 

@@ -1,19 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createUID } from 'js-simple-utils';
 
 import ShareProjectModal from './ShareProjectModal';
-
-import withSaveDocument from '../../../enhancers/withSaveDocument';
 
 export class ShareProjectModalContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onCopyLink = this.onCopyLink.bind(this);
     this.onClose = this.onClose.bind(this);
-    this.saveProject = this.saveProject.bind(this);
+    this.copyLink = this.copyLink.bind(this);
+    this.setSystemMessage = this.setSystemMessage.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
     this.state = {};
@@ -23,47 +21,58 @@ export class ShareProjectModalContainer extends React.Component {
     /*
      * Store
      */
-    uid: PropTypes.string,
-    teamId: PropTypes.string,
+    dispatch: PropTypes.func,
 
     /*
      * Parent
      */
+    name: PropTypes.string,
+    url: PropTypes.string,
     isOpen: PropTypes.bool,
     handleClose: PropTypes.func.isRequired,
-
-    /*
-     * withSaveDocument
-     */
-    saveDocument: PropTypes.func,
-    isSaving: PropTypes.bool,
-    hasSuccess: PropTypes.bool,
   };
 
   static defaultProps = {};
 
-  onSubmit(form) {
-    this.saveProject(form);
+  onCopyLink() {
+    this.copyLink();
   }
 
   onClose() {
     this.closeModal();
   }
 
-  saveProject(form) {
-    const { saveDocument, uid, teamId } = this.props;
-    const document = {
-      ...form,
-      createdBy: uid,
-      teamId,
-      dateCreated: Date.now(),
-    };
-    const projectDocumentId = createUID();
-    const url = `projects/${projectDocumentId}`;
+  copyLink() {
+    const { url } = this.props;
 
-    saveDocument({
-      url,
-      document,
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        const message = 'Link copied to clipboard successfully.';
+
+        this.setSystemMessage({
+          message,
+          variant: 'success',
+        });
+      })
+      .catch((error) => {
+        const { message } = error;
+
+        this.setSystemMessage({
+          message,
+          variant: 'error',
+        });
+      });
+  }
+
+  setSystemMessage(systemMessage) {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'SET_SYSTEM_MESSAGE',
+      payload: {
+        systemMessage,
+      },
     });
   }
 
@@ -74,37 +83,18 @@ export class ShareProjectModalContainer extends React.Component {
   }
 
   render() {
-    const { isOpen, isSaving, hasSuccess } = this.props;
-    const isDisabled = isSaving && true;
+    const { name, url, isOpen } = this.props;
 
     return (
       <ShareProjectModal
+        name={name}
+        url={url}
         isOpen={isOpen}
-        hasSuccess={hasSuccess}
-        isDisabled={isDisabled}
+        handleCopyLink={this.onCopyLink}
         handleClose={this.onClose}
-        handleSubmit={this.onSubmit}
       />
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  const { user } = state;
-  const { uid } = user;
-
-  /*
-   * Get the current teamId based on the selectedTeamIndex
-   */
-  const { appState } = state;
-  const { selectedTeamIndex } = appState;
-  const { teams } = state;
-  const { id: teamId } = teams[selectedTeamIndex];
-
-  return {
-    uid,
-    teamId,
-  };
-};
-
-export default withSaveDocument(connect(mapStateToProps)(ShareProjectModalContainer));
+export default connect()(ShareProjectModalContainer);
