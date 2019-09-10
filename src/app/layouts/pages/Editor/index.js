@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { createUID } from 'js-simple-utils';
 
 import { getQueryStringParams } from '../../../utils';
 
@@ -49,7 +50,24 @@ export class EditorContainer extends React.Component {
     });
   }
 
-  onAddCollection() {}
+  onAddCollection() {
+    const { dispatch } = this.props;
+    const id = createUID();
+    const { projectId } = getQueryStringParams(window.location.search);
+
+    dispatch({
+      type: 'TOGGLE_MODAL',
+      payload: {
+        key: 'addTypeModal',
+        props: {
+          type: 'collection',
+          id,
+          projectId,
+          parentId: null,
+        },
+      },
+    });
+  }
 
   onAdd(what) {}
 

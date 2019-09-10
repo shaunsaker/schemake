@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createUID } from 'js-simple-utils';
+import { firstCharToUpperCase } from 'js-simple-utils';
 
 import AddTypeModal from './AddTypeModal';
 
 import withSaveDocument from '../../../enhancers/withSaveDocument';
 
-export class AddProjectModalContainer extends React.Component {
+export class AddTypeModalContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onClose = this.onClose.bind(this);
-    this.saveProject = this.saveProject.bind(this);
+    this.saveType = this.saveType.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
     this.state = {};
@@ -23,12 +23,14 @@ export class AddProjectModalContainer extends React.Component {
     /*
      * Store
      */
-    uid: PropTypes.string,
-    teamId: PropTypes.string,
 
     /*
      * Parent
      */
+    type: PropTypes.string,
+    id: PropTypes.string,
+    projectId: PropTypes.string,
+    parentId: PropTypes.string,
     isOpen: PropTypes.bool,
     handleClose: PropTypes.func.isRequired,
 
@@ -42,28 +44,36 @@ export class AddProjectModalContainer extends React.Component {
 
   static defaultProps = {};
 
+  componentDidUpdate(prevProps) {
+    const { hasSuccess } = this.props;
+
+    if (hasSuccess && !prevProps.hasSuccess) {
+      this.closeModal();
+    }
+  }
+
   onSubmit(form) {
-    this.saveProject(form);
+    this.saveType(form);
   }
 
   onClose() {
     this.closeModal();
   }
 
-  saveProject(form) {
-    const { saveDocument, uid, teamId } = this.props;
+  saveType(form) {
+    const { saveDocument, type, id, projectId, parentId } = this.props;
+    const url = `projects/${projectId}/data/${id}`;
     const document = {
       ...form,
-      createdBy: uid,
-      teamId,
-      dateCreated: Date.now(),
+      type,
+      parentId,
     };
-    const projectDocumentId = createUID();
-    const url = `projects/${projectDocumentId}`;
+    const nextActions = [];
 
     saveDocument({
       url,
       document,
+      nextActions,
     });
   }
 
@@ -74,13 +84,14 @@ export class AddProjectModalContainer extends React.Component {
   }
 
   render() {
-    const { isOpen, isSaving, hasSuccess } = this.props;
-    const isDisabled = isSaving && true;
+    const { type, isOpen, isSaving } = this.props;
+    const formattedType = firstCharToUpperCase(type);
+    const isDisabled = isSaving;
 
     return (
       <AddTypeModal
+        type={formattedType}
         isOpen={isOpen}
-        hasSuccess={hasSuccess}
         isDisabled={isDisabled}
         handleClose={this.onClose}
         handleSubmit={this.onSubmit}
@@ -90,21 +101,49 @@ export class AddProjectModalContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { user } = state;
-  const { uid } = user;
-
-  /*
-   * Get the current teamId based on the selectedTeamIndex
-   */
-  const { appState } = state;
-  const { selectedTeamIndex } = appState;
-  const { teams } = state;
-  const { id: teamId } = teams[selectedTeamIndex];
+  const { projects } = state;
 
   return {
-    uid,
-    teamId,
+    projects,
   };
 };
 
-export default withSaveDocument(connect(mapStateToProps)(AddProjectModalContainer));
+/*
+ * /1
+ *
+ * /1/2/4
+//  */
+// const project = {
+//   data: {
+//     1: {
+//       type: 'collection',
+//       name: 'users',
+//       children: {
+//         2: {
+//           type: 'document',
+//           name: 'uid',
+//           children: {
+//             3: {
+//               type: 'string',
+//               name: 'name',
+//             },
+//             4: {
+//               type: 'string',
+//               name: 'email',
+//             },
+//             5: {
+//               type: 'collection',
+//               name: 'friends',
+//             },
+//           },
+//         },
+//       },
+//     },
+//     6: {
+//       type: 'collection',
+//       name: 'posts',
+//     },
+//   },
+// };
+
+export default withSaveDocument(connect(mapStateToProps)(AddTypeModalContainer));

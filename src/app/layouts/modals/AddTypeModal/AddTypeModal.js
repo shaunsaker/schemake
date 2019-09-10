@@ -13,15 +13,7 @@ const AddTypeModal = ({ type, isOpen, isDisabled, handleClose, handleSubmit }) =
     handleSubmit,
   };
 
-  return (
-    <Modal
-      title={title}
-      form={form}
-      isOpen={isOpen}
-      disabled={isDisabled}
-      handleClose={handleClose}
-    />
-  );
+  return <Modal title={title} form={form} isOpen={isOpen} handleClose={handleClose} />;
 };
 
 AddTypeModal.propTypes = {

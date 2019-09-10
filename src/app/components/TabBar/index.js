@@ -2,14 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AppBar, Tabs, Tab } from '@material-ui/core';
 
-import { colors } from '../../static/styles/styleConstants';
+import { colors, sizes } from '../../static/styles/styleConstants';
 
 const TabBar = ({ currentTabIndex, tabs, handleClick }) => {
   return (
     <AppBar
       position="static"
       color="inherit"
-      style={{ boxShadow: 'none', backgroundColor: colors.veryLightGrey }}
+      style={{
+        boxShadow: 'none',
+        backgroundColor: colors.veryLightGrey,
+        borderRadius: sizes.borderRadius,
+      }}
     >
       <Tabs
         value={currentTabIndex}
