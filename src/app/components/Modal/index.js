@@ -8,7 +8,7 @@ import Typography from '../Typography';
 import Form from '../Form';
 import PrimaryButton from '../PrimaryButton';
 
-const ModalComponent = ({ title, description, form, isOpen, disabled, handleClose }) => {
+const ModalComponent = ({ title, description, form, isOpen, disabled, children, handleClose }) => {
   const descriptionComponent = description && (
     <Typography type="paragraph" center>
       {description}
@@ -49,6 +49,8 @@ const ModalComponent = ({ title, description, form, isOpen, disabled, handleClos
 
               {formComponent}
 
+              {children}
+
               {closeButtonComponent}
             </div>
           </Card>
@@ -66,6 +68,7 @@ ModalComponent.propTypes = {
   form: PropTypes.shape({}),
   isOpen: PropTypes.bool,
   disabled: PropTypes.bool,
+  children: PropTypes.node,
   handleClose: PropTypes.func,
 };
 ModalComponent.defaultProps = {};

@@ -21,8 +21,8 @@ const TypographyComponent = ({
 }) => {
   const variant = types[type];
   const allStyles = {
-    ...(type === 'link' && styles.link),
     ...(color && { color }),
+    ...(type === 'link' && styles.link),
     ...(secondary && { color: colors.secondaryText }),
     ...(center && styles.center),
     ...((bold || boldText.includes(type)) && styles.bold),

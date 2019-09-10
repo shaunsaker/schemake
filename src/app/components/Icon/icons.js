@@ -1,9 +1,19 @@
 import React from 'react';
-import { AccountCircle, Add, Delete, ExpandMore, MoreVert, Share, Sort } from '@material-ui/icons';
+import {
+  AccountCircle,
+  Add,
+  FileCopy,
+  Delete,
+  ExpandMore,
+  MoreVert,
+  Share,
+  Sort,
+} from '@material-ui/icons';
 
 const icons = {
   'account-circle': (props) => <AccountCircle {...props} />,
   add: (props) => <Add {...props} />,
+  copy: (props) => <FileCopy {...props} />,
   delete: (props) => <Delete {...props} />,
   'expand-more': (props) => <ExpandMore {...props} />,
   menu: (props) => <MoreVert {...props} />,

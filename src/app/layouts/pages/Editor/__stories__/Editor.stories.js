@@ -2,12 +2,16 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Editor from '../Editor';
-import headerBarActions from '../headerBarActions';
 import items from '../../../../components/Panels/__stories__/items';
 
 const headerBarProps = {
   text: 'PROJECT TITLE',
-  actions: headerBarActions,
+  actions: [
+    {
+      iconName: 'share',
+      tooltip: 'Share this project',
+    },
+  ],
 };
 
 storiesOf('Layouts|Editor', module)

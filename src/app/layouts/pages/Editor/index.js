@@ -10,6 +10,7 @@ export class EditorContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onShare = this.onShare.bind(this);
     this.onAddCollection = this.onAddCollection.bind(this);
     this.onAdd = this.onAdd.bind(this);
     this.onEdit = this.onEdit.bind(this);
@@ -29,6 +30,8 @@ export class EditorContainer extends React.Component {
   };
 
   static defaultProps = {};
+
+  onShare() {}
 
   onAddCollection() {}
 
@@ -54,8 +57,17 @@ export class EditorContainer extends React.Component {
      * Create the header bar props
      */
     const { name } = this.getProject();
+    const shareTooltip = `Share ${name}`;
     const headerBarProps = {
       text: name.toUpperCase(),
+      actions: [
+        {
+          id: 'share',
+          iconName: 'share',
+          tooltip: shareTooltip,
+          handleClick: this.onShare,
+        },
+      ],
     };
     const items = [];
 

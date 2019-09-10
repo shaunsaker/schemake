@@ -5,10 +5,12 @@ import ActionPanel from '..';
 
 const actions = [
   {
+    id: 'account',
     iconName: 'account-circle',
     tooltip: 'Toggle Profile Menu',
   },
   {
+    id: 'login',
     text: 'Login',
   },
 ];
