@@ -20,6 +20,7 @@ const styles = css`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-right: 48px; /* clear icon button */
   }
 
   .value-text-container {
