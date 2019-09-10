@@ -11,9 +11,15 @@ import Menu from '../Menu';
 import TextLoading from '../TextLoading';
 
 const DashboardListItem = ({ id, avatarText, title, description, menu, handleClick }) => {
-  const menuAnchorElId = `menu-button-${id}`;
   const titleLoadingComponent = !title && <TextLoading />;
   const descriptionLoadingComponent = !description && <TextLoading />;
+  const menuComponent = menu ? (
+    <div className="menu-container">
+      <Menu {...menu} anchorElId={`menu-button-${id}`} />
+
+      <style jsx>{styles}</style>
+    </div>
+  ) : null;
 
   return (
     <Card
@@ -53,9 +59,7 @@ const DashboardListItem = ({ id, avatarText, title, description, menu, handleCli
         </div>
       </ButtonBase>
 
-      <div className="menu-container">
-        <Menu {...menu} anchorElId={menuAnchorElId} />
-      </div>
+      {menuComponent}
 
       <style jsx>{styles}</style>
     </Card>
