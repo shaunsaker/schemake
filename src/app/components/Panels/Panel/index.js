@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { colors } from '../../../static/styles/styleConstants';
-import types from './types';
+import { types } from '../../../config';
 
 import Panel from './Panel';
 

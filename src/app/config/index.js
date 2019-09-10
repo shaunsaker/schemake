@@ -5,9 +5,10 @@ import modals from './modals';
 import routes from './routes';
 import SEO from './SEO';
 import snackbar from './snackbar';
+import types from './types';
 import version from './version';
 
-export { analytics, app, firebase, modals, routes, SEO, snackbar, version };
+export { analytics, app, firebase, modals, routes, SEO, snackbar, types, version };
 
 export default {
   analytics,
@@ -17,5 +18,6 @@ export default {
   routes,
   SEO,
   snackbar,
+  types,
   version,
 };

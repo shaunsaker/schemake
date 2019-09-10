@@ -5,4 +5,4 @@ import AddTypeModal from '../AddTypeModal';
 
 storiesOf('Modals|AddTypeModal', module)
   .add('default', () => <AddTypeModal isOpen type="Collection" />)
-  .add('disabled', () => <AddTypeModal isOpe isDisabled type="Collection" />);
+  .add('disabled', () => <AddTypeModal isOpen isDisabled type="Collection" />);
