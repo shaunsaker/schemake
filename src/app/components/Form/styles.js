@@ -32,7 +32,7 @@ const styles = css`
   }
 
   .secondary-button-container {
-    margin-left: ${rhythm.hz / 2}px;
+    margin-right: ${rhythm.hz / 2}px;
   }
 `;
 

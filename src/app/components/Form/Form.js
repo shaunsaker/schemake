@@ -90,11 +90,11 @@ const Form = ({
       {footerComponent}
 
       <div className="buttons-container">
+        {secondaryButtonComponent}
+
         <PrimaryButton type="submit" disabled={disabled}>
           {submitButtonText}
         </PrimaryButton>
-
-        {secondaryButtonComponent}
       </div>
 
       {children}
