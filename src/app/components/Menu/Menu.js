@@ -30,21 +30,22 @@ const MenuComponent = ({
       </div>
 
       <Menu anchorEl={anchorEl} open={isOpen} onClose={handleClose}>
-        {items.map((item) => {
-          return (
-            <MenuItem
-              key={item.name}
-              disabled={item.disabled}
-              onClick={() => {
-                item.handleClick();
-                handleClose();
-              }}
-              style={muiStyles.menuItem}
-            >
-              <Typography type="paragraph">{item.name}</Typography>
-            </MenuItem>
-          );
-        })}
+        {items &&
+          items.map((item) => {
+            return (
+              <MenuItem
+                key={item.name}
+                disabled={item.disabled}
+                onClick={() => {
+                  item.handleClick();
+                  handleClose();
+                }}
+                style={muiStyles.menuItem}
+              >
+                <Typography type="paragraph">{item.name}</Typography>
+              </MenuItem>
+            );
+          })}
       </Menu>
 
       <style jsx>{styles}</style>
