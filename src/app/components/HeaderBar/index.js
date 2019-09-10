@@ -103,6 +103,7 @@ export class HeaderBarContainer extends React.Component {
 
     if (shouldShowUserIcon) {
       actions.push({
+        id: 'account',
         iconName: 'account-circle',
         tooltip: 'Toggle user menu',
         handleClick: this.onOpenUserMenu,
@@ -117,6 +118,7 @@ export class HeaderBarContainer extends React.Component {
       });
     } else if (!isLoginPage) {
       actions.push({
+        id: 'login',
         text: 'Login',
         href: routes.login.href,
       });
