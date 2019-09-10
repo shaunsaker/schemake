@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { convertObjectToArray, sortArrayOfObjectsByKey } from 'js-simple-utils';
 import Router from 'next/router';
 
-import { modals, routes } from '../../../../config';
+import { routes } from '../../../../config';
 import { getDateTime } from '../../../../utils';
 
 import Projects from './Projects';
@@ -146,7 +146,7 @@ export class ProjectsContainer extends React.Component {
     dispatch({
       type: 'TOGGLE_MODAL',
       payload: {
-        key: modals.addProjectModal.key,
+        key: 'addProjectModal',
       },
     });
   }
@@ -157,7 +157,7 @@ export class ProjectsContainer extends React.Component {
     dispatch({
       type: 'TOGGLE_MODAL',
       payload: {
-        key: modals.editProjectModal.key,
+        key: 'editProjectModal',
         props: {
           project,
         },

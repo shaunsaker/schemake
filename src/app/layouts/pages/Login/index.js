@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Router from 'next/router';
 
-import { modals, routes } from '../../../config';
+import { routes } from '../../../config';
 
 import Login from './Login';
 
@@ -58,7 +58,7 @@ export class LoginContainer extends React.Component {
     dispatch({
       type: 'TOGGLE_MODAL',
       payload: {
-        key: modals.forgotPasswordModal.key,
+        key: 'forgotPasswordModal',
       },
     });
   }

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { modals as modalsConfig } from '../../config';
-
+import ActionFieldModal from '../../layouts/modals/ActionFieldModal';
 import AddProjectModal from '../../layouts/modals/AddProjectModal';
 import AddTeamMemberModal from '../../layouts/modals/AddTeamMemberModal';
+import AddTypeModal from '../../layouts/modals/AddTypeModal';
 import DeleteProjectModal from '../../layouts/modals/DeleteProjectModal';
 import DeleteUserModal from '../../layouts/modals/DeleteUserModal';
 import EditProjectModal from '../../layouts/modals/EditProjectModal';
@@ -13,35 +13,43 @@ import RemoveTeamMemberModal from '../../layouts/modals/RemoveTeamMemberModal';
 
 const modals = [
   {
-    key: modalsConfig.addProjectModal.key,
+    key: 'actionFieldModal',
+    component: (props) => <ActionFieldModal {...props} />,
+  },
+  {
+    key: 'addProjectModal',
     component: (props) => <AddProjectModal {...props} />,
   },
   {
-    key: modalsConfig.addTeamMemberModal.key,
+    key: 'addTeamMemberModal',
     component: (props) => <AddTeamMemberModal {...props} />,
   },
   {
-    key: modalsConfig.deleteProjectModal.key,
+    key: 'addTypeModal',
+    component: (props) => <AddTypeModal {...props} />,
+  },
+  {
+    key: 'deleteProjectModal',
     component: (props) => <DeleteProjectModal {...props} />,
   },
   {
-    key: modalsConfig.deleteUserModal.key,
+    key: 'deleteUserModal',
     component: (props) => <DeleteUserModal {...props} />,
   },
   {
-    key: modalsConfig.editProjectModal.key,
+    key: 'editProjectModal',
     component: (props) => <EditProjectModal {...props} />,
   },
   {
-    key: modalsConfig.editProfileModal.key,
+    key: 'editProfileModal',
     component: (props) => <EditProfileModal {...props} />,
   },
   {
-    key: modalsConfig.forgotPasswordModal.key,
+    key: 'forgotPasswordModal',
     component: (props) => <ForgotPasswordModal {...props} />,
   },
   {
-    key: modalsConfig.removeTeamMemberModal.key,
+    key: 'removeTeamMemberModal',
     component: (props) => <RemoveTeamMemberModal {...props} />,
   },
 ];

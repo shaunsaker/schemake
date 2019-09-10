@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { modals } from '../../../../config';
-
 import General from './General';
 
 import withSyncData from '../../../../enhancers/withSyncData';
@@ -60,7 +58,7 @@ export class GeneralContainer extends React.Component {
     dispatch({
       type: 'TOGGLE_MODAL',
       payload: {
-        key: modals.editProfileModal.key,
+        key: 'editProfileModal',
       },
     });
   }

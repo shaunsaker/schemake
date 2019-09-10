@@ -15,7 +15,7 @@ const Editor = ({
   handleEdit,
   handleDelete,
 }) => {
-  const hasItems = items.length;
+  const hasItems = items && items.length;
 
   return (
     <Layout headerBarProps={headerBarProps}>

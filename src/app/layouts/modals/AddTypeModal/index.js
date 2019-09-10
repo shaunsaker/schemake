@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createUID } from 'js-simple-utils';
 
-import AddProjectModal from './AddProjectModal';
+import AddTypeModal from './AddTypeModal';
 
 import withSaveDocument from '../../../enhancers/withSaveDocument';
 
@@ -78,7 +78,7 @@ export class AddProjectModalContainer extends React.Component {
     const isDisabled = isSaving && true;
 
     return (
-      <AddProjectModal
+      <AddTypeModal
         isOpen={isOpen}
         hasSuccess={hasSuccess}
         isDisabled={isDisabled}

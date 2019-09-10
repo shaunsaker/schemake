@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { modals } from '../../../../config';
-
 import Team from './Team';
 
 import withSyncData from '../../../../enhancers/withSyncData';
@@ -169,7 +167,7 @@ export class TeamContainer extends React.Component {
     dispatch({
       type: 'TOGGLE_MODAL',
       payload: {
-        key: modals.addTeamMemberModal.key,
+        key: 'addTeamMemberModal',
         props: {
           teamId,
         },
@@ -186,7 +184,7 @@ export class TeamContainer extends React.Component {
     dispatch({
       type: 'TOGGLE_MODAL',
       payload: {
-        key: modals.removeTeamMemberModal.key,
+        key: 'removeTeamMemberModal',
         props: {
           uid,
           teamId,
