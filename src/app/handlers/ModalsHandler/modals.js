@@ -1,9 +1,9 @@
 import React from 'react';
 
 import ActionFieldModal from '../../layouts/modals/ActionFieldModal';
+import ActionTypeModal from '../../layouts/modals/ActionTypeModal';
 import AddProjectModal from '../../layouts/modals/AddProjectModal';
 import AddTeamMemberModal from '../../layouts/modals/AddTeamMemberModal';
-import AddTypeModal from '../../layouts/modals/AddTypeModal';
 import DeleteProjectModal from '../../layouts/modals/DeleteProjectModal';
 import DeleteUserModal from '../../layouts/modals/DeleteUserModal';
 import EditProjectModal from '../../layouts/modals/EditProjectModal';
@@ -18,16 +18,16 @@ const modals = [
     component: (props) => <ActionFieldModal {...props} />,
   },
   {
+    key: 'actionTypeModal',
+    component: (props) => <ActionTypeModal {...props} />,
+  },
+  {
     key: 'addProjectModal',
     component: (props) => <AddProjectModal {...props} />,
   },
   {
     key: 'addTeamMemberModal',
     component: (props) => <AddTeamMemberModal {...props} />,
-  },
-  {
-    key: 'addTypeModal',
-    component: (props) => <AddTypeModal {...props} />,
   },
   {
     key: 'deleteProjectModal',

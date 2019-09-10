@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { firstCharToUpperCase } from 'js-simple-utils';
 
-import AddTypeModal from './AddTypeModal';
+import ActionTypeModal from './ActionTypeModal';
 
 import withSaveDocument from '../../../enhancers/withSaveDocument';
 
-export class AddTypeModalContainer extends React.Component {
+export class ActionTypeModalContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -89,7 +89,7 @@ export class AddTypeModalContainer extends React.Component {
     const isDisabled = isSaving;
 
     return (
-      <AddTypeModal
+      <ActionTypeModal
         type={formattedType}
         isOpen={isOpen}
         isDisabled={isDisabled}
@@ -146,4 +146,4 @@ const mapStateToProps = (state) => {
 //   },
 // };
 
-export default withSaveDocument(connect(mapStateToProps)(AddTypeModalContainer));
+export default withSaveDocument(connect(mapStateToProps)(ActionTypeModalContainer));
