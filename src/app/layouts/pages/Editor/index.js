@@ -58,12 +58,14 @@ export class EditorContainer extends React.Component {
     dispatch({
       type: 'TOGGLE_MODAL',
       payload: {
-        key: 'addTypeModal',
+        key: 'actionTypeModal',
         props: {
           type: 'collection',
           id,
           projectId,
-          parentId: null,
+          originalTypeData: {
+            name: 'Test',
+          },
         },
       },
     });

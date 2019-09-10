@@ -5,11 +5,19 @@ import fields from './fields';
 
 import Modal from '../../../components/Modal';
 
-const ActionTypeModal = ({ type, isOpen, isDisabled, handleClose, handleSubmit }) => {
-  const title = `Add ${type}`;
+const ActionTypeModal = ({
+  title,
+  newFields,
+  isOpen,
+  isDisabled,
+  handleClose,
+  handleChange,
+  handleSubmit,
+}) => {
   const form = {
-    fields,
+    fields: newFields || fields,
     disabled: isDisabled,
+    handleChange,
     handleSubmit,
   };
 
@@ -17,10 +25,12 @@ const ActionTypeModal = ({ type, isOpen, isDisabled, handleClose, handleSubmit }
 };
 
 ActionTypeModal.propTypes = {
-  type: PropTypes.string,
+  title: PropTypes.string,
+  newFields: PropTypes.arrayOf(PropTypes.shape({})),
   isOpen: PropTypes.bool,
   isDisabled: PropTypes.bool,
   handleClose: PropTypes.func,
+  handleChange: PropTypes.func,
   handleSubmit: PropTypes.func,
 };
 ActionTypeModal.defaultProps = {};
