@@ -1,0 +1,17 @@
+{
+  "name": { "value": "Array", "type": "string" },
+  "color": { "value": "#ff9800", "type": "string" },
+  "isField": { "value": true, "type": "boolean" },
+  "validChildrenTypes": {
+    "value": [
+      {
+        "value": {
+          "allowMultipleOfSameType": { "value": true, "type": "boolean" },
+          "typeId": { "value": "field", "type": "string" }
+        },
+        "type": "object"
+      }
+    ],
+    "type": "array"
+  }
+}

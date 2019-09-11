@@ -1,0 +1,23 @@
+{
+  "name": { "value": "Collection", "type": "string" },
+  "color": { "value": "#009688", "type": "string" },
+  "validChildrenTypes": {
+    "value": [
+      {
+        "value": {
+          "allowMultipleOfSameType": { "value": false, "type": "boolean" },
+          "typeId": { "value": "document", "type": "string" }
+        },
+        "type": "object"
+      },
+      {
+        "value": {
+          "allowMultipleOfSameType": { "value": true, "type": "boolean" },
+          "typeId": { "value": "field", "type": "string" }
+        },
+        "type": "object"
+      }
+    ],
+    "type": "array"
+  }
+}

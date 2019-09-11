@@ -20,6 +20,12 @@ export default function reducer(state = initialState, action = {}) {
 
       return newState;
 
+    case 'SET_PROJECT_DATA':
+      newState = cloneObject(state);
+      newState[action.payload.projectId].data = action.payload.data;
+
+      return newState;
+
     default:
       return state;
   }

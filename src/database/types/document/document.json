@@ -1,0 +1,23 @@
+{
+  "name": { "value": "Document", "type": "string" },
+  "color": { "value": "#2196f3", "type": "string" },
+  "validChildrenTypes": {
+    "value": [
+      {
+        "value": {
+          "allowMultipleOfSameType": { "value": true, "type": "boolean" },
+          "typeId": { "value": "collection", "type": "string" }
+        },
+        "type": "object"
+      },
+      {
+        "value": {
+          "allowMultipleOfSameType": { "value": true, "type": "boolean" },
+          "typeId": { "value": "field", "type": "string" }
+        },
+        "type": "object"
+      }
+    ],
+    "type": "array"
+  }
+}

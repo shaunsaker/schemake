@@ -1,0 +1,9 @@
+{
+  "name": { "value": "Date", "type": "string" },
+  "color": { "value": "#4caf50", "type": "string" },
+  "isField": { "value": true, "type": "boolean" },
+  "validChildrenTypes": {
+    "value": [],
+    "type": "array"
+  }
+}
