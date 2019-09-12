@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { firstCharToUpperCase } from 'js-simple-utils';
+import { connect } from 'react-redux';
 
 import fields from './fields';
 
@@ -19,19 +19,24 @@ export class ActionTypeModalContainer extends React.Component {
     this.closeModal = this.closeModal.bind(this);
 
     this.state = {
-      values: props.originalTypeData,
+      values: props.originalData || {},
     };
   }
 
   static propTypes = {
     /*
+     * Store
+     */
+    types: PropTypes.shape({}),
+
+    /*
      * Parent
      */
-    type: PropTypes.string,
-    id: PropTypes.string,
-    projectId: PropTypes.string,
+    dataId: PropTypes.string,
+    typeId: PropTypes.string,
     parentId: PropTypes.string,
-    originalTypeData: PropTypes.shape({}),
+    originalData: PropTypes.shape({}),
+    projectId: PropTypes.string,
     isOpen: PropTypes.bool,
     handleClose: PropTypes.func.isRequired,
 
@@ -75,20 +80,26 @@ export class ActionTypeModalContainer extends React.Component {
   }
 
   saveType(form) {
-    const { saveDocument, type, id, projectId, parentId, originalTypeData } = this.props;
-    const url = `projects/${projectId}/data/${id}`;
+    const { saveDocument, typeId, dataId, projectId, parentId, originalData } = this.props;
+    const url = `projects/${projectId}/data/${dataId}`;
     const document = {
-      ...originalTypeData,
+      ...originalData,
       ...form,
-      type,
-      parentId,
+      typeId,
     };
-    const nextActions = [];
+
+    /*
+     * parentId will be undefined with shallow types
+     */
+    if (parentId) {
+      document.parentId = parentId;
+    }
+
+    // console.log({ url, document });
 
     saveDocument({
       url,
       document,
-      nextActions,
     });
   }
 
@@ -100,8 +111,11 @@ export class ActionTypeModalContainer extends React.Component {
 
   render() {
     const { values } = this.state;
-    const { type, isOpen, isSaving } = this.props;
-    const title = `${values ? 'Edit' : 'Add'} ${firstCharToUpperCase(type)}`;
+    const { typeId, types, isOpen, isSaving } = this.props;
+    const type = types[typeId];
+    const { name } = type || {};
+    const isEditing = Object.keys(values).length;
+    const title = `${isEditing ? 'Edit' : 'Add'} ${name}`;
     const isDisabled = isSaving;
     let newFields;
 
@@ -132,4 +146,12 @@ export class ActionTypeModalContainer extends React.Component {
   }
 }
 
-export default withSaveDocument(ActionTypeModalContainer);
+const mapStateToProps = (state) => {
+  const { types } = state;
+
+  return {
+    types,
+  };
+};
+
+export default connect(mapStateToProps)(withSaveDocument(ActionTypeModalContainer));

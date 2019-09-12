@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { createUID } from 'js-simple-utils';
 
 import { getQueryStringParams } from '../../../utils';
+import getItemsFromData from './helpers/getItemsFromData';
 
 import Editor from './Editor';
 
@@ -16,7 +17,12 @@ export class EditorContainer extends React.Component {
     this.onAdd = this.onAdd.bind(this);
     this.onEdit = this.onEdit.bind(this);
     this.onDelete = this.onDelete.bind(this);
+    this.syncProjectData = this.syncProjectData.bind(this);
+    this.syncTypes = this.syncTypes.bind(this);
     this.getProject = this.getProject.bind(this);
+
+    const { projectId } = getQueryStringParams(window.location.search);
+    this.projectId = projectId;
 
     this.state = {};
   }
@@ -29,9 +35,15 @@ export class EditorContainer extends React.Component {
     projects: PropTypes.shape({
       name: PropTypes.string,
     }),
+    types: PropTypes.shape({}),
   };
 
   static defaultProps = {};
+
+  componentDidMount() {
+    this.syncProjectData(this.projectId);
+    this.syncTypes();
+  }
 
   onShare() {
     const { dispatch } = this.props;
@@ -52,38 +64,102 @@ export class EditorContainer extends React.Component {
 
   onAddCollection() {
     const { dispatch } = this.props;
-    const id = createUID();
-    const { projectId } = getQueryStringParams(window.location.search);
+    const dataId = createUID();
+    const typeId = 'collection';
 
     dispatch({
       type: 'TOGGLE_MODAL',
       payload: {
         key: 'actionTypeModal',
         props: {
-          type: 'collection',
-          id,
-          projectId,
-          originalTypeData: {
-            name: 'Test',
-          },
+          dataId,
+          typeId,
+          projectId: this.projectId,
         },
       },
     });
   }
 
-  onAdd(what) {}
+  onAdd({ typeId, item }) {
+    /*
+     * Add what (typeId) to who (item)
+     */
+    const { dispatch } = this.props;
+    const key = typeId === 'field' ? 'actionFieldModal' : 'actionTypeModal';
+    const dataId = createUID();
+    const { parentId } = item;
+    const { projectId } = this;
+    console.log({ typeId, item });
 
-  onEdit(what) {}
+    dispatch({
+      type: 'TOGGLE_MODAL',
+      payload: {
+        key,
+        props: {
+          typeId,
+          dataId,
+          parentId,
+          projectId,
+        },
+      },
+    });
+  }
 
-  onDelete(what) {}
+  onEdit({ item }) {
+    // TODO:
+  }
+
+  onDelete({ item }) {
+    // TODO:
+  }
+
+  syncProjectData(projectId) {
+    const { dispatch } = this.props;
+    const url = `projects/${projectId}/data`;
+
+    dispatch({
+      type: 'sync',
+      payload: {
+        url,
+      },
+      meta: {
+        nextActions: [
+          {
+            type: 'SET_PROJECT_DATA',
+            payload: {
+              projectId,
+            },
+          },
+        ],
+      },
+    });
+  }
+
+  syncTypes() {
+    const { dispatch } = this.props;
+    const url = 'types';
+
+    dispatch({
+      type: 'sync',
+      payload: {
+        url,
+      },
+      meta: {
+        nextActions: [
+          {
+            type: 'SET_TYPES',
+          },
+        ],
+      },
+    });
+  }
 
   getProject() {
     /*
      * Get the projectId from the query params
      */
-    const { projectId } = getQueryStringParams(window.location.search);
     const { projects } = this.props;
-    const project = projects[projectId];
+    const project = projects[this.projectId];
 
     return project;
   }
@@ -92,7 +168,8 @@ export class EditorContainer extends React.Component {
     /*
      * Create the header bar props
      */
-    const { name } = this.getProject();
+    const project = this.getProject();
+    const { name } = project;
     const shareTooltip = `Share ${name}`;
     const headerBarProps = {
       text: name.toUpperCase(),
@@ -105,11 +182,22 @@ export class EditorContainer extends React.Component {
         },
       ],
     };
-    const items = [];
+
+    /*
+     * Get the types
+     */
+    const { types } = this.props;
+
+    /*
+     * Create the items
+     */
+    const { data } = project;
+    const items = data ? getItemsFromData(data) : [];
 
     return (
       <Editor
         headerBarProps={headerBarProps}
+        types={types}
         items={items}
         handleAddCollection={this.onAddCollection}
         handleAdd={this.onAdd}
@@ -121,10 +209,11 @@ export class EditorContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { projects } = state;
+  const { projects, types } = state;
 
   return {
     projects,
+    types,
   };
 }
 

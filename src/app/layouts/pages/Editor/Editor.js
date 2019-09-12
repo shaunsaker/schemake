@@ -9,6 +9,7 @@ import Panels from '../../../components/Panels';
 
 const Editor = ({
   headerBarProps,
+  types,
   items,
   handleAddCollection,
   handleAdd,
@@ -21,6 +22,7 @@ const Editor = ({
     <Layout headerBarProps={headerBarProps}>
       <div className="container">
         <Panels
+          types={types}
           items={items}
           handleAdd={handleAdd}
           handleEdit={handleEdit}
@@ -39,6 +41,7 @@ const Editor = ({
 
 Editor.propTypes = {
   headerBarProps: PropTypes.shape({}),
+  types: PropTypes.shape({}),
   items: PropTypes.arrayOf(PropTypes.shape({})),
   handleAddCollection: PropTypes.func,
   handleAdd: PropTypes.func,

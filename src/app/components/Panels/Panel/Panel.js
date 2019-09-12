@@ -21,7 +21,6 @@ const Panel = ({
   isExpandable,
   children,
   style,
-  handleAdd,
   handleToggleCollapse,
 }) => {
   let toggleButtonComponent;
@@ -45,12 +44,12 @@ const Panel = ({
   const addButtonsComponent =
     addButtons && addButtons.length
       ? addButtons.map((item, index) => {
-          const { text } = item;
+          const { text, handleClick } = item;
           const isNotFirstItem = index !== 0;
 
           return (
             <div id={text} className={isNotFirstItem ? 'add-button-container' : ''}>
-              <AddButton handleClick={handleAdd}>{text}</AddButton>
+              <AddButton handleClick={handleClick}>{text}</AddButton>
 
               <style jsx>{styles}</style>
             </div>
@@ -113,7 +112,6 @@ Panel.propTypes = {
   isExpandable: PropTypes.bool,
   style: PropTypes.shape({}),
   children: PropTypes.node,
-  handleAdd: PropTypes.func,
   handleToggleCollapse: PropTypes.func,
 };
 Panel.defaultProps = {};

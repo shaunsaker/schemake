@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { colors } from '../../../static/styles/styleConstants';
-import { types } from '../../../config';
-
 import Panel from './Panel';
 
 export class PanelContainer extends React.Component {
@@ -19,7 +16,12 @@ export class PanelContainer extends React.Component {
   }
 
   static propTypes = {
-    type: PropTypes.string,
+    /*
+     * Parent
+     */
+    types: PropTypes.shape({}),
+    typeId: PropTypes.string,
+    parentId: PropTypes.string,
     name: PropTypes.string,
     children: PropTypes.node,
     handleAdd: PropTypes.func,
@@ -48,33 +50,38 @@ export class PanelContainer extends React.Component {
     /*
      * Get the type's details
      */
-    const { type } = this.props;
-    const typeColor = colors[type];
-    const typeText = type;
-    const typeInfo = types[type];
-    const { isExpandable, isCollapsedByDefault } = typeInfo;
-    const isCollapsed = isCollapsedByDefault || isCollapsedState;
+    const { typeId, types } = this.props;
+    const type = types[typeId];
+    const { name: typeText, color: typeColor, validChildrenTypes } = type || {};
+    const isExpandable = Boolean(validChildrenTypes.length);
+    const isCollapsed = !isExpandable || isCollapsedState;
 
     /*
      * If there are validChildrenTypes, create buttons to render
      */
     const hasChildren = children && children.length;
-    const { validChildrenTypes } = typeInfo;
-    const addButtons = validChildrenTypes
-      .map((item) => {
-        const { name, showAddButtonWithChildren } = item;
+    const addButtons =
+      validChildrenTypes &&
+      validChildrenTypes.length &&
+      validChildrenTypes
+        .map((item) => {
+          const { typeId: childTypeId, allowMultipleOfSameType } = item;
+          const childType = types[childTypeId];
+          const { name } = childType || {};
 
-        if (!hasChildren || (hasChildren && showAddButtonWithChildren)) {
-          const text = `ADD ${name.toUpperCase()}`;
+          if (!hasChildren || (hasChildren && allowMultipleOfSameType)) {
+            const text = `ADD ${name ? name.toUpperCase() : 'FIELD'}`; // defaults to field
+            const { handleAdd } = this.props;
 
-          return {
-            text,
-          };
-        }
+            return {
+              text,
+              handleClick: () => handleAdd({ typeId: childTypeId }),
+            };
+          }
 
-        return null;
-      })
-      .filter((item) => item);
+          return null;
+        })
+        .filter((item) => item);
 
     /*
      * Create the actions

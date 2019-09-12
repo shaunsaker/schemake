@@ -37,7 +37,6 @@ const MenuComponent = ({
                 key={item.name}
                 disabled={item.disabled}
                 onClick={() => {
-                  console.log('CLICK');
                   item.handleClick();
                   handleClose();
                 }}

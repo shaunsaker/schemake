@@ -6,7 +6,7 @@ export default function reducer(state = initialState, action = {}) {
   let newState;
 
   switch (action.type) {
-    case 'SET_PROJECTS':
+    case 'SET_TYPES':
       newState = cloneObject(state);
 
       /*
@@ -17,12 +17,6 @@ export default function reducer(state = initialState, action = {}) {
 
         newState[id] = item;
       });
-
-      return newState;
-
-    case 'SET_PROJECT_DATA':
-      newState = cloneObject(state);
-      newState[action.payload.projectId].data = action.payload.data;
 
       return newState;
 

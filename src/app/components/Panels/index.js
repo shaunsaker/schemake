@@ -5,7 +5,7 @@ import styles from './styles';
 
 import Panel from './Panel';
 
-const renderPanel = ({ item, level, handleAdd, handleEdit, handleDelete }) => {
+const renderPanel = ({ item, level, types, handleAdd, handleEdit, handleDelete }) => {
   const { name, items } = item;
   const hasBg = level % 2 !== 0 ? true : false;
 
@@ -13,10 +13,11 @@ const renderPanel = ({ item, level, handleAdd, handleEdit, handleDelete }) => {
     <div key={name} className="item-container">
       <Panel
         {...item}
+        types={types}
         hasBg={hasBg}
-        handleAdd={() => handleAdd(item)}
-        handleEdit={() => handleEdit(item)}
-        handleDelete={() => handleDelete(item)}
+        handleAdd={({ typeId }) => handleAdd({ typeId, item })}
+        handleEdit={() => handleEdit({ item })}
+        handleDelete={() => handleDelete({ item })}
       >
         {items &&
           items.map((item2) => {
@@ -25,6 +26,7 @@ const renderPanel = ({ item, level, handleAdd, handleEdit, handleDelete }) => {
             return renderPanel({
               item: item2,
               level: newLevel,
+              types,
               handleAdd,
               handleEdit,
               handleDelete,
@@ -37,12 +39,12 @@ const renderPanel = ({ item, level, handleAdd, handleEdit, handleDelete }) => {
   );
 };
 
-const Panels = ({ items, handleAdd, handleEdit, handleDelete }) => {
+const Panels = ({ items, types, handleAdd, handleEdit, handleDelete }) => {
   return (
     <div className="container">
       {items &&
         items.map((item, index) =>
-          renderPanel({ item, index, level: 0, handleAdd, handleEdit, handleDelete }),
+          renderPanel({ item, index, level: 0, types, handleAdd, handleEdit, handleDelete }),
         )}
 
       <style jsx>{styles}</style>
@@ -57,6 +59,7 @@ Panels.propTypes = {
       items: PropTypes.arrayOf(PropTypes.shape({})),
     }),
   ),
+  types: PropTypes.shape({}),
   handleAdd: PropTypes.func,
   handleEdit: PropTypes.func,
   handleDelete: PropTypes.func,
