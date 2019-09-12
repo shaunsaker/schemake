@@ -64,7 +64,7 @@ export class EditorContainer extends React.Component {
 
   onAddCollection() {
     const { dispatch } = this.props;
-    const dataId = createUID();
+    const dataId = createUID(); // adding = create a new data id
     const typeId = 'collection';
 
     dispatch({
@@ -86,10 +86,9 @@ export class EditorContainer extends React.Component {
      */
     const { dispatch } = this.props;
     const key = typeId === 'field' ? 'actionFieldModal' : 'actionTypeModal';
-    const dataId = createUID();
-    const { parentId } = item;
+    const dataId = createUID(); // adding = create a new data id
+    const { id: parentId } = item;
     const { projectId } = this;
-    console.log({ typeId, item });
 
     dispatch({
       type: 'TOGGLE_MODAL',

@@ -95,7 +95,7 @@ export class ActionTypeModalContainer extends React.Component {
       document.parentId = parentId;
     }
 
-    // console.log({ url, document });
+    console.log({ url, document });
 
     saveDocument({
       url,
