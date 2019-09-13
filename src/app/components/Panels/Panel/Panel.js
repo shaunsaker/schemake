@@ -48,7 +48,7 @@ const Panel = ({
           const isNotFirstItem = index !== 0;
 
           return (
-            <div id={text} className={isNotFirstItem ? 'add-button-container' : ''}>
+            <div key={text} className={isNotFirstItem ? 'add-button-container' : ''}>
               <AddButton handleClick={handleClick}>{text}</AddButton>
 
               <style jsx>{styles}</style>
