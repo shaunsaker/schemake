@@ -16,7 +16,7 @@ const ShareProjectModal = ({ name, url, isOpen, handleCopyLink, handleClose }) =
     <Modal title={title} description={description} isOpen={isOpen} handleClose={handleClose}>
       <div className="link-container">
         <div className="link-text-container">
-          <Typography type="paragraph" color={colors.accent}>
+          <Typography type="paragraph" bold color={colors.accent}>
             {url}
           </Typography>
         </div>
