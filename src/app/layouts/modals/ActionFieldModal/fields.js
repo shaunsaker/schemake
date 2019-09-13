@@ -7,7 +7,7 @@ const fields = [
   },
   {
     type: 'select',
-    name: 'type',
+    name: 'fieldTypeId',
     label: 'Field Type',
     required: true,
     options: [], // attached in index.js

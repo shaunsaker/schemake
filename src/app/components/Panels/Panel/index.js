@@ -21,6 +21,7 @@ export class PanelContainer extends React.Component {
      */
     types: PropTypes.shape({}),
     typeId: PropTypes.string,
+    fieldTypeId: PropTypes.string,
     parentId: PropTypes.string,
     name: PropTypes.string,
     children: PropTypes.node,
@@ -50,10 +51,11 @@ export class PanelContainer extends React.Component {
     /*
      * Get the type's details
      */
-    const { typeId, types } = this.props;
-    const type = types[typeId];
+    const { typeId, fieldTypeId, types } = this.props;
+    const typeIdToUse = typeId !== 'field' ? typeId : fieldTypeId;
+    const type = types[typeIdToUse];
     const { name: typeText, color: typeColor, validChildrenTypes } = type || {};
-    const isExpandable = Boolean(validChildrenTypes.length);
+    const isExpandable = Boolean(validChildrenTypes && validChildrenTypes.length);
     const isCollapsed = !isExpandable || isCollapsedState;
 
     /*
