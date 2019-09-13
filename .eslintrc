@@ -1,6 +1,7 @@
 {
   "extends": "aux",
   "rules": {
-    "no-case-declarations": "off"
+    "no-case-declarations": "off",
+    "no-restricted-syntax": "off"
   }
 }
