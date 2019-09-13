@@ -134,7 +134,7 @@ export class ActionFieldModalContainer extends React.Component {
         label,
       };
     });
-    newFields[0].options = fieldTypeOptions;
+    newFields[1].options = fieldTypeOptions; // FIXME: Could make this declarative in case we want to add more fields
 
     if (values) {
       newFields = fields.map((item) => {
