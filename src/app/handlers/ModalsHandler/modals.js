@@ -5,6 +5,7 @@ import ActionTypeModal from '../../layouts/modals/ActionTypeModal';
 import AddProjectModal from '../../layouts/modals/AddProjectModal';
 import AddTeamMemberModal from '../../layouts/modals/AddTeamMemberModal';
 import DeleteProjectModal from '../../layouts/modals/DeleteProjectModal';
+import DeleteTypeModal from '../../layouts/modals/DeleteTypeModal';
 import DeleteUserModal from '../../layouts/modals/DeleteUserModal';
 import EditProjectModal from '../../layouts/modals/EditProjectModal';
 import EditProfileModal from '../../layouts/modals/EditProfileModal';
@@ -32,6 +33,10 @@ const modals = [
   {
     key: 'deleteProjectModal',
     component: (props) => <DeleteProjectModal {...props} />,
+  },
+  {
+    key: 'deleteTypeModal',
+    component: (props) => <DeleteTypeModal {...props} />,
   },
   {
     key: 'deleteUserModal',

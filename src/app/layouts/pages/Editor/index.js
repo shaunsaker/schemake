@@ -129,7 +129,23 @@ export class EditorContainer extends React.Component {
   }
 
   onDelete({ item }) {
-    // TODO:
+    const { typeId, fieldTypeId, id: dataId, name } = item;
+    const { dispatch } = this.props;
+    const { projectId } = this;
+    const typeIdToUse = fieldTypeId || typeId;
+
+    dispatch({
+      type: 'TOGGLE_MODAL',
+      payload: {
+        key: 'deleteTypeModal',
+        props: {
+          dataId,
+          name,
+          typeId: typeIdToUse,
+          projectId,
+        },
+      },
+    });
   }
 
   syncProjectData(projectId) {
