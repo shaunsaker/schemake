@@ -107,7 +107,25 @@ export class EditorContainer extends React.Component {
   }
 
   onEdit({ item }) {
-    // TODO:
+    const { typeId, id: dataId, refs } = item;
+    const { dispatch } = this.props;
+    const key = typeId === 'field' ? 'actionFieldModal' : 'actionTypeModal';
+    const { projectId } = this;
+    const originalData = item;
+
+    dispatch({
+      type: 'TOGGLE_MODAL',
+      payload: {
+        key,
+        props: {
+          typeId,
+          dataId,
+          refs,
+          projectId,
+          originalData,
+        },
+      },
+    });
   }
 
   onDelete({ item }) {
