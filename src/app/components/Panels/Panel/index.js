@@ -19,6 +19,7 @@ export class PanelContainer extends React.Component {
     /*
      * Parent
      */
+    id: PropTypes.string,
     types: PropTypes.shape({}),
     typeId: PropTypes.string,
     fieldTypeId: PropTypes.string,
@@ -89,10 +90,10 @@ export class PanelContainer extends React.Component {
      * Create the actions
      * All types have the edit and delete action
      */
-    const { name, handleEdit, handleDelete } = this.props;
+    const { id, name, handleEdit, handleDelete } = this.props;
     const actions = [
       {
-        id: name,
+        id,
         iconName: 'menu',
         tooltip: 'Toggle Menu',
         menu: {
