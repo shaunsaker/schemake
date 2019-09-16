@@ -34,7 +34,7 @@ export class ActionTypeModalContainer extends React.Component {
      */
     dataId: PropTypes.string,
     typeId: PropTypes.string,
-    parentId: PropTypes.string,
+    refs: PropTypes.arrayOf(PropTypes.string),
     originalData: PropTypes.shape({}),
     projectId: PropTypes.string,
     isOpen: PropTypes.bool,
@@ -80,22 +80,14 @@ export class ActionTypeModalContainer extends React.Component {
   }
 
   saveType(form) {
-    const { saveDocument, typeId, dataId, projectId, parentId, originalData } = this.props;
+    const { saveDocument, typeId, dataId, projectId, refs, originalData } = this.props;
     const url = `projects/${projectId}/data/${dataId}`;
     const document = {
       ...originalData,
       ...form,
       typeId,
+      refs,
     };
-
-    /*
-     * parentId will be undefined with shallow types
-     */
-    if (parentId) {
-      document.parentId = parentId;
-    }
-
-    console.log({ url, document });
 
     saveDocument({
       url,

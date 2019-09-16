@@ -15,7 +15,7 @@ const renderPanel = ({ item, level, types, handleAdd, handleEdit, handleDelete }
         {...item}
         types={types}
         hasBg={hasBg}
-        handleAdd={({ typeId }) => handleAdd({ typeId, item })}
+        handleAdd={({ typeId }) => handleAdd({ typeId, parent: item })}
         handleEdit={() => handleEdit({ item })}
         handleDelete={() => handleDelete({ item })}
       >
@@ -43,8 +43,15 @@ const Panels = ({ items, types, handleAdd, handleEdit, handleDelete }) => {
   return (
     <div className="container">
       {items &&
-        items.map((item, index) =>
-          renderPanel({ item, index, level: 0, types, handleAdd, handleEdit, handleDelete }),
+        items.map((item) =>
+          renderPanel({
+            item,
+            level: 0,
+            types,
+            handleAdd,
+            handleEdit,
+            handleDelete,
+          }),
         )}
 
       <style jsx>{styles}</style>

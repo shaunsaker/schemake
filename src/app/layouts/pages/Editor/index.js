@@ -75,20 +75,22 @@ export class EditorContainer extends React.Component {
           dataId,
           typeId,
           projectId: this.projectId,
+          refs: [], // it's shallow, there are no refs
         },
       },
     });
   }
 
-  onAdd({ typeId, item }) {
+  onAdd({ typeId, parent }) {
     /*
      * Add what (typeId) to who (item)
      */
     const { dispatch } = this.props;
     const key = typeId === 'field' ? 'actionFieldModal' : 'actionTypeModal';
     const dataId = createUID(); // adding = create a new data id
-    const { id: parentId } = item;
     const { projectId } = this;
+    const { refs, id } = parent;
+    const newRefs = [...refs, id];
 
     dispatch({
       type: 'TOGGLE_MODAL',
@@ -97,7 +99,7 @@ export class EditorContainer extends React.Component {
         props: {
           typeId,
           dataId,
-          parentId,
+          refs: newRefs,
           projectId,
         },
       },
