@@ -1,4 +1,4 @@
-import { cloneObject } from 'js-simple-utils';
+import { cloneObject, sortArrayOfObjectsByKey } from 'js-simple-utils';
 
 /*
  * Takes an array of type data objects
@@ -67,11 +67,17 @@ const attachItemToItems = ({ items, item, level = 0 }) => {
         newItemItems.push(item);
 
         /*
+         * Sort the items A => Z
+         */
+        const clonedNewItemItems = cloneObject(newItemItems);
+        let sortedNewItemsItems = sortArrayOfObjectsByKey(clonedNewItemItems, 'name');
+
+        /*
          * Sort the items so that the fields are always first
          * FIXME: Eventually we'll use an order prop
          */
-        const clonedNewItemItems = cloneObject(newItemItems);
-        const sortedNewItemsItems = clonedNewItemItems.sort((a, b) => {
+
+        sortedNewItemsItems = sortedNewItemsItems.sort((a, b) => {
           if (a.fieldTypeId && !b.fieldTypeId) {
             return -1;
           }
