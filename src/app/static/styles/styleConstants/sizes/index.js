@@ -1,7 +1,7 @@
 import rhythm from '../rhythm';
 
 const sizes = {
-  maxContentWidth: 750,
+  maxContentWidth: 960,
   maxModalWidth: 480,
   borderRadius: rhythm.vt / 4,
 };
