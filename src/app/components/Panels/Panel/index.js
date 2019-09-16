@@ -64,27 +64,27 @@ export class PanelContainer extends React.Component {
      */
     const hasChildren = children && children.length;
     const addButtons =
-      validChildrenTypes &&
-      validChildrenTypes.length &&
-      validChildrenTypes
-        .map((item) => {
-          const { typeId: childTypeId, allowMultipleOfSameType } = item;
-          const childType = types[childTypeId];
-          const { name } = childType || {};
+      validChildrenTypes && validChildrenTypes.length
+        ? validChildrenTypes
+            .map((item) => {
+              const { typeId: childTypeId, allowMultipleOfSameType } = item;
+              const childType = types[childTypeId];
+              const { name } = childType || {};
 
-          if (!hasChildren || (hasChildren && allowMultipleOfSameType)) {
-            const text = `ADD ${name ? name.toUpperCase() : 'FIELD'}`; // defaults to field
-            const { handleAdd } = this.props;
+              if (!hasChildren || (hasChildren && allowMultipleOfSameType)) {
+                const text = `ADD ${name ? name.toUpperCase() : 'FIELD'}`; // defaults to field
+                const { handleAdd } = this.props;
 
-            return {
-              text,
-              handleClick: () => handleAdd({ typeId: childTypeId }),
-            };
-          }
+                return {
+                  text,
+                  handleClick: () => handleAdd({ typeId: childTypeId }),
+                };
+              }
 
-          return null;
-        })
-        .filter((item) => item);
+              return null;
+            })
+            .filter((item) => item)
+        : [];
 
     /*
      * Create the actions
