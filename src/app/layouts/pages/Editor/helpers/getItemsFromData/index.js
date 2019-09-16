@@ -1,3 +1,5 @@
+import { cloneObject } from 'js-simple-utils';
+
 /*
  * Takes an array of type data objects
  *
@@ -61,8 +63,27 @@ const attachItemToItems = ({ items, item, level = 0 }) => {
         const newItemItems = newItem.items;
         newItem.items = attachItemToItems({ items: newItemItems, item, level: nextLevel });
       } else {
-        newItem.items.push(item);
-        newItems[index] = newItem;
+        const newItemItems = newItem.items;
+        newItemItems.push(item);
+
+        /*
+         * Sort the items so that the fields are always first
+         * FIXME: Eventually we'll use an order prop
+         */
+        const clonedNewItemItems = cloneObject(newItemItems);
+        const sortedNewItemsItems = clonedNewItemItems.sort((a, b) => {
+          if (a.fieldTypeId && !b.fieldTypeId) {
+            return -1;
+          }
+
+          if (!a.fieldTypeId && b.fieldTypeId) {
+            return 1;
+          }
+
+          return 0;
+        });
+
+        newItem.items = sortedNewItemsItems;
       }
 
       newItems[index] = newItem;
