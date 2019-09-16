@@ -88,6 +88,7 @@ export class ActionFieldModalContainer extends React.Component {
       ...form,
       typeId,
       refs,
+      dateModified: Date.now(),
     };
 
     const nextActions = [];
