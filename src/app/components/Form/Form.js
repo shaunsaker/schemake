@@ -73,6 +73,7 @@ const Form = ({
                 pattern,
               }}
               variant="outlined"
+              InputLabelProps={{ shrink: type === 'select' ? true : undefined }}
             >
               {options &&
                 options.map((option) => {
