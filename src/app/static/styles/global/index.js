@@ -45,6 +45,10 @@ const styles = css.global`
   button:disabled, button:disabled > .clickable {
     cursor: not-allowed;
   }
+
+  :focus {
+    outline: 3px solid ${colors.accent};
+  }
 `;
 
 export default styles;
