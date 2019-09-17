@@ -21,7 +21,7 @@ const styles = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: ${rhythm.vt * 2}px ${rhythm.hz}px;
+    padding: ${rhythm.vt * 4}px ${rhythm.hz}px;
     background-color: white;
     align-items: stretch;
   }
@@ -36,9 +36,9 @@ const styles = css`
     z-index: 2;
   }
 
-  @media (min-width: ${sizes.maxContentWidth}px) {
+  @media (max-width: ${sizes.responsiveWidth}px) {
     .content-container {
-      padding: ${rhythm.vt * 4}px ${rhythm.hz * 2}px;
+      padding: ${rhythm.vt * 2}px ${rhythm.hz / 2}px;
     }
   }
 `;

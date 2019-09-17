@@ -5,24 +5,25 @@ import { rhythm } from '../../static/styles/styleConstants';
 const logoWidth = 136;
 
 const styles = css`
-  .logo-image-container {
+  .logo-image-wrapper {
     flex: 1;
-    display: flex;
-    align-items: center;
+    justify-content: flex-start;
     margin-right: ${rhythm.hz}px;
     padding: ${rhythm.vt / 2}px 0;
-    position: relative;
+    display: flex; /* to align items to start */
   }
-
+  .logo-image-container {
+    position: relative;
+    align-self: flex-start;
+  }
   .logo-image {
     width: ${logoWidth}px;
     cursor: pointer;
   }
-
   .alpha-text-container {
     position: absolute;
-    bottom: ${rhythm.vt / 8}px;
-    left: ${logoWidth - 43}px; /* - width of the text */
+    bottom: -4px;
+    right: 0;
   }
 
   .action-panel-container {
@@ -30,6 +31,12 @@ const styles = css`
     display: flex;
     justify-content: flex-end;
     margin-left: ${rhythm.hz}px;
+  }
+
+  @media (max-width: 767px) {
+    .text-container {
+      display: none;
+    }
   }
 `;
 

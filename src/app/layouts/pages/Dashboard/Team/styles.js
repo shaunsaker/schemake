@@ -13,6 +13,9 @@ const styles = css`
     flex-wrap: wrap;
     margin-bottom: ${rhythm.vt * 2}px;
   }
+  .header-item-container {
+    margin-top: ${rhythm.vt}px;
+  }
 
   .items-container {
   }

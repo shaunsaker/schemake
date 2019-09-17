@@ -13,25 +13,29 @@ import ActionPanel from '../ActionPanel';
 
 const HeaderBar = ({ text, actions }) => {
   const textComponent = text && (
-    <Typography type="paragraph" color="white" bold style={{ fontSize: '1rem' }}>
-      {text}
+    <div className="text-container">
+      <Typography type="paragraph" color="white" bold center>
+        {text}
+      </Typography>
 
       <style jsx>{styles}</style>
-    </Typography>
+    </div>
   );
 
   return (
     <AppBar position="fixed" style={muiStyles.wrapper}>
       <ToolBar style={muiStyles.container}>
-        <div className="logo-image-container">
-          <Link href={routes.dashboard.href}>
-            <img src="/static/images/logo.png" alt="Pep Logo" className="logo-image" />
-          </Link>
+        <div className="logo-image-wrapper">
+          <div className="logo-image-container">
+            <Link href={routes.dashboard.href}>
+              <img src="/static/images/logo.png" alt="Pep Logo" className="logo-image" />
+            </Link>
 
-          <div className="alpha-text-container">
-            <Typography type="small" color={colors.transWhite}>
-              ALPHA
-            </Typography>
+            <div className="alpha-text-container">
+              <Typography type="small" color={colors.transWhite}>
+                ALPHA
+              </Typography>
+            </div>
           </div>
         </div>
 

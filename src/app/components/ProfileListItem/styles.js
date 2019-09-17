@@ -2,7 +2,6 @@ import css from 'styled-jsx/css'; // eslint-disable-line
 
 import { colors, rhythm, sizes } from '../../static/styles/styleConstants';
 
-// FIXME: Could use work on mobile
 const styles = css`
   .container {
     display: flex;
@@ -18,6 +17,7 @@ const styles = css`
 
   .label-text-container {
     width: 160px;
+    margin-right: ${rhythm.hz}px;
   }
 
   .value-text-container {
@@ -26,6 +26,12 @@ const styles = css`
     /* TextLoading */
     position: relative;
     min-height: 21px;
+  }
+
+  @media (max-width: ${sizes.responsiveWidth}px) {
+    .label-text-container {
+      width: 120px;
+    }
   }
 `;
 

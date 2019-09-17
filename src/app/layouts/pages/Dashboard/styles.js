@@ -11,7 +11,7 @@ const styles = css`
   }
 
   .tab-bar-container {
-    margin-bottom: ${rhythm.vt * 2}px;
+    margin-bottom: ${rhythm.vt}px;
   }
 `;
 

@@ -23,6 +23,10 @@ const styles = css`
   .close-button-container {
     text-align: center;
   }
+
+  .content-container {
+    padding: ${rhythm.vt * 2}px ${rhythm.hz / 2}px;
+  }
 `;
 
 export default styles;

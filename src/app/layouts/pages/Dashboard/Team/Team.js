@@ -22,9 +22,13 @@ const Team = ({ hasTeams, selectProps, teamMembers, handleAddTeamMember }) => {
   return (
     <div className="container">
       <div className="header-container">
-        <Select {...selectProps} />
+        <div className="header-item-container">
+          <Select {...selectProps} />
+        </div>
 
-        <PrimaryButton handleClick={handleAddTeamMember}>{addButtonText}</PrimaryButton>
+        <div className="header-item-container">
+          <PrimaryButton handleClick={handleAddTeamMember}>{addButtonText}</PrimaryButton>
+        </div>
       </div>
 
       <div className="items-container">

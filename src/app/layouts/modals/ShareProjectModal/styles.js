@@ -4,6 +4,7 @@ import { colors, rhythm, sizes } from '../../../static/styles/styleConstants';
 
 const styles = css`
   .link-container {
+    width: 100%;
     display: flex;
     margin-bottom: ${rhythm.vt}px;
     background-color: ${colors.veryLightGrey};
@@ -13,8 +14,17 @@ const styles = css`
   }
 
   .link-text-container {
-    flex: 1;
     margin-right: ${rhythm.hz / 2}px;
+  }
+
+  .copy-button-container {
+    flex: 1;
+  }
+
+  @media (max-width: ${sizes.responsiveWidth}px) {
+    .link-container {
+      padding: ${rhythm.vt}px ${rhythm.hz / 2}px;
+    }
   }
 `;
 

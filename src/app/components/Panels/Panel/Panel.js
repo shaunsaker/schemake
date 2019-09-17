@@ -87,9 +87,11 @@ const Panel = ({
       </ExpansionPanelSummary>
 
       <ExpansionPanelDetails style={inlineStyles.expansionPanelDetails}>
-        {children}
+        <div className="details-container">
+          {children}
 
-        {addButtonsComponent}
+          {addButtonsComponent}
+        </div>
       </ExpansionPanelDetails>
 
       <style jsx>{styles}</style>

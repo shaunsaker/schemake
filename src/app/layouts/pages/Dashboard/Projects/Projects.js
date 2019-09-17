@@ -22,9 +22,13 @@ const Projects = ({ hasTeams, selectProps, items, handleAddProject }) => {
   return (
     <div className="container">
       <div className="header-container">
-        <Select {...selectProps} />
+        <div className="header-item-container">
+          <Select {...selectProps} />
+        </div>
 
-        <PrimaryButton handleClick={handleAddProject}>{addButtonText}</PrimaryButton>
+        <div className="header-item-container">
+          <PrimaryButton handleClick={handleAddProject}>{addButtonText}</PrimaryButton>
+        </div>
       </div>
 
       <div className="items-container">

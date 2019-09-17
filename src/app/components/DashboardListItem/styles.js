@@ -1,11 +1,11 @@
 import css from 'styled-jsx/css'; // eslint-disable-line
 
-import { rhythm } from '../../static/styles/styleConstants';
+import { rhythm, sizes } from '../../static/styles/styleConstants';
 
 const styles = css`
   .container {
     width: 100%;
-    padding: ${rhythm.vt}px ${rhythm.hz}px;
+    padding: ${rhythm.vt}px ${rhythm.hz / 2}px;
     display: flex;
     align-items: center;
   }
@@ -42,6 +42,12 @@ const styles = css`
     bottom: 0;
     display: flex;
     align-items: center;
+  }
+
+  @media (max-width: ${sizes.responsiveWidth}px) {
+    .container {
+      padding: ${rhythm.vt}px ${rhythm.hz}px;
+    }
   }
 `;
 
