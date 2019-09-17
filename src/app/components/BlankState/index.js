@@ -8,7 +8,7 @@ import CircularProgress from '../CircularProgress';
 const BlankState = () => {
   return (
     <div className="container">
-      <Typography type="heading" gutterBottom>
+      <Typography type="title" gutterBottom>
         Uno Momento
       </Typography>
 

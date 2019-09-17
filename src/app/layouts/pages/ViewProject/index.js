@@ -158,6 +158,7 @@ export class ViewProjectContainer extends React.Component {
     let types;
     let items = [];
     let isLoading = true;
+    let projectDoesNotExist = false;
 
     /*
      * May not have loaded the project yet
@@ -166,32 +167,42 @@ export class ViewProjectContainer extends React.Component {
       isLoading = false;
 
       /*
-       * Create the header bar props
+       * If the project has been fetched
+       * but we do not have details, it means it does not exist
        */
       const { name } = project;
-      const shareTooltip = `Share ${name}`;
-      headerBarProps = {
-        text: name && name.toUpperCase(),
-        actions: [
-          {
-            id: 'share',
-            iconName: 'share',
-            tooltip: shareTooltip,
-            handleClick: this.onShare,
-          },
-        ],
-      };
 
-      /*
-       * Get the types
-       */
-      types = this.props.types; // eslint-disable-line
+      if (!name) {
+        projectDoesNotExist = true;
+      } else {
+        /*
+         * Create the header bar props
+         */
 
-      /*
-       * Create the items
-       */
-      const { data } = project;
-      items = data ? getItemsFromData(data) : [];
+        const shareTooltip = `Share ${name}`;
+        headerBarProps = {
+          text: name && name.toUpperCase(),
+          actions: [
+            {
+              id: 'share',
+              iconName: 'share',
+              tooltip: shareTooltip,
+              handleClick: this.onShare,
+            },
+          ],
+        };
+
+        /*
+         * Get the types
+         */
+        types = this.props.types; // eslint-disable-line
+
+        /*
+         * Create the items
+         */
+        const { data } = project;
+        items = data ? getItemsFromData(data) : [];
+      }
     }
 
     return (
@@ -200,6 +211,7 @@ export class ViewProjectContainer extends React.Component {
         types={types}
         items={items}
         isLoading={isLoading}
+        projectDoesNotExist={projectDoesNotExist}
       />
     );
   }

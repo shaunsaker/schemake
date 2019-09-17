@@ -18,6 +18,5 @@ const headerBarProps = {
 
 storiesOf('Layouts|ViewProject', module)
   .add('default', () => <ViewProject headerBarProps={headerBarProps} types={types} items={items} />)
-  .add('blank state', () => (
-    <ViewProject isLoading headerBarProps={headerBarProps} types={types} items={[]} />
-  ));
+  .add('blank state', () => <ViewProject isLoading />)
+  .add('project does not exist', () => <ViewProject projectDoesNotExist />);

@@ -20,11 +20,19 @@ export default function reducer(state = initialState, action = {}) {
 
       return newState;
 
+    case 'SET_PROJECT':
+      newState = cloneObject(state);
+      let project = newState[action.payload.projectId] || {};
+      project = action.payload.data;
+      newState[action.payload.projectId] = project;
+
+      return newState;
+
     case 'SET_PROJECT_DATA':
       newState = cloneObject(state);
-      const project = newState[action.payload.projectId] || {};
-      project.data = action.payload.data;
-      newState[action.payload.projectId] = project;
+      const project2 = newState[action.payload.projectId] || {};
+      project2.data = action.payload.data;
+      newState[action.payload.projectId] = project2;
 
       return newState;
 
