@@ -2,8 +2,8 @@ import React from 'react';
 
 import styles from './styles';
 
-import Typography from '../../../../components/Typography';
-import CircularProgress from '../../../../components/CircularProgress';
+import Typography from '../Typography';
+import CircularProgress from '../CircularProgress';
 
 const BlankState = () => {
   return (

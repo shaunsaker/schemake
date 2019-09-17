@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './styles';
 
-import BlankState from '../BlankState';
+import BlankState from '../../../../components/BlankState';
 import Select from '../../../../components/Select';
 import PrimaryButton from '../../../../components/PrimaryButton';
 import DashboardListItem from '../../../../components/DashboardListItem';
