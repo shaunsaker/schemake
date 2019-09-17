@@ -60,7 +60,7 @@ export class RedirectHandler extends React.Component {
      * OR if the user is authenticated
      */
     const { authenticated } = this.props;
-    const allowedPages = ['login', 'signup', 'support'];
+    const allowedPages = ['login', 'signup', 'support', 'viewProject'];
     const isAllowedPage = allowedPages.filter((item) => route.indexOf(item) > -1).length && true;
     let isRouteAllowed = false;
 
