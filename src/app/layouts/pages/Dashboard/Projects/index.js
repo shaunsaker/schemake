@@ -171,7 +171,7 @@ export class ProjectsContainer extends React.Component {
     dispatch({
       type: 'TOGGLE_MODAL',
       payload: {
-        key: modals.deleteProjectModal.key,
+        key: 'deleteProjectModal',
         props: {
           project,
         },
@@ -205,14 +205,14 @@ export class ProjectsContainer extends React.Component {
        * To get the user's name that the project was modified by
        */
       const { teamUserData } = this.props;
-      const { name: modifiedBy } = teamUserData[item.modifiedBy || item.createdBy] || {};
+      const { name: lastModifiedBy } = teamUserData[item.lastModifiedBy || item.createdBy] || {};
 
       /*
        * To get the date text, use the dateModified if it is present
        * else just use the dateCreated
        */
       const dateModified = getDateTime(item.dateModified || item.dateCreated);
-      const description = modifiedBy && `Last updated by ${modifiedBy} on ${dateModified}`;
+      const description = lastModifiedBy && `Last updated by ${lastModifiedBy} on ${dateModified}`;
       const menuItems = [
         {
           name: 'Open Project',

@@ -81,14 +81,13 @@ export class ActionFieldModalContainer extends React.Component {
   }
 
   saveType(form) {
-    const { saveDocument, typeId, dataId, projectId, refs, originalData } = this.props;
+    const { saveDocument, typeId, dataId, projectId, refs, originalData, uid } = this.props;
     const url = `projects/${projectId}/data/${dataId}`;
     const document = {
       ...originalData,
       ...form,
       typeId,
       refs,
-      dateModified: Date.now(),
     };
 
     const nextActions = [];

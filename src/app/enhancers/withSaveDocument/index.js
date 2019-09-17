@@ -30,6 +30,7 @@ export default (ComposedComponent) => {
        * Store
        */
       dispatch: PropTypes.func,
+      uid: PropTypes.string,
       hasPendingTransactions: PropTypes.bool,
       hasStoreError: PropTypes.bool,
     };
@@ -88,9 +89,13 @@ export default (ComposedComponent) => {
     }
 
     saveDocument({ url, document, nextActions }) {
-      const { dispatch } = this.props;
+      const { dispatch, uid } = this.props;
       const newDocument = {
         ...document,
+
+        // Add meta data here
+        dateModified: Date.now(),
+        lastModifiedBy: uid,
       };
 
       dispatch({
@@ -121,12 +126,13 @@ export default (ComposedComponent) => {
   }
 
   function mapStateToProps(state) {
-    const { appState } = state;
+    const { appState, user } = state;
     const { pendingTransactions, systemMessage } = appState;
     const hasPendingTransactions = pendingTransactions.length ? true : false;
     const hasStoreError = systemMessage.variant === 'error' ? true : false;
+    const { uid } = user;
 
-    return { hasPendingTransactions, hasStoreError };
+    return { hasPendingTransactions, hasStoreError, uid };
   }
 
   return connect(mapStateToProps)(withSaveDocument);

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import fields from './fields';
 
@@ -37,11 +36,6 @@ export class EditProjectModalContainer extends React.Component {
     saveDocument: PropTypes.func,
     isSaving: PropTypes.bool,
     hasSuccess: PropTypes.bool,
-
-    /*
-     * Store
-     */
-    uid: PropTypes.string,
   };
 
   static defaultProps = {};
@@ -68,14 +62,12 @@ export class EditProjectModalContainer extends React.Component {
   }
 
   saveProject(form) {
-    const { saveDocument, uid, project } = this.props;
+    const { saveDocument, project } = this.props;
     const { id } = project;
     const url = `projects/${id}`;
     const document = {
       ...project,
       ...form,
-      dateModified: Date.now(),
-      modifiedBy: uid,
     };
 
     saveDocument({ url, document });
@@ -123,13 +115,4 @@ export class EditProjectModalContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { user } = state;
-  const { uid } = user;
-
-  return {
-    uid,
-  };
-};
-
-export default withSaveDocument(connect(mapStateToProps)(EditProjectModalContainer));
+export default withSaveDocument(EditProjectModalContainer);
