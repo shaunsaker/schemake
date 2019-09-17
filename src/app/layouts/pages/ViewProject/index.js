@@ -12,7 +12,7 @@ export class ViewProjectContainer extends React.Component {
 
     this.onShare = this.onShare.bind(this);
     this.signInAnonymously = this.signInAnonymously.bind(this);
-    this.syncProjectData = this.syncProjectData.bind(this);
+    this.syncProject = this.syncProject.bind(this);
     this.syncTypes = this.syncTypes.bind(this);
     this.getProject = this.getProject.bind(this);
 
@@ -40,7 +40,7 @@ export class ViewProjectContainer extends React.Component {
     const { isAuthenticated } = this.props;
 
     if (isAuthenticated) {
-      this.syncProjectData(this.projectId);
+      this.syncProject(this.projectId);
       this.syncTypes();
     } else {
       this.signInAnonymously();
@@ -51,7 +51,7 @@ export class ViewProjectContainer extends React.Component {
     const { isAuthenticated } = this.props;
 
     if (isAuthenticated && !prevProps.isAuthenticated) {
-      this.syncProjectData(this.projectId);
+      this.syncProject(this.projectId);
       this.syncTypes();
     }
   }
@@ -81,10 +81,14 @@ export class ViewProjectContainer extends React.Component {
     });
   }
 
-  syncProjectData(projectId) {
+  syncProject(projectId) {
     const { dispatch } = this.props;
-    const url = `projects/${projectId}/data`;
+    const url = `projects/${projectId}`;
 
+    /*
+     * Sync the project
+     * then get the project's data
+     */
     dispatch({
       type: 'sync',
       payload: {
@@ -93,9 +97,25 @@ export class ViewProjectContainer extends React.Component {
       meta: {
         nextActions: [
           {
-            type: 'SET_PROJECT_DATA',
+            type: 'SET_PROJECT',
             payload: {
               projectId,
+            },
+          },
+          {
+            type: 'sync',
+            payload: {
+              url: `${url}/data`,
+            },
+            meta: {
+              nextActions: [
+                {
+                  type: 'SET_PROJECT_DATA',
+                  payload: {
+                    projectId,
+                  },
+                },
+              ],
             },
           },
         ],
@@ -151,7 +171,7 @@ export class ViewProjectContainer extends React.Component {
       const { name } = project;
       const shareTooltip = `Share ${name}`;
       headerBarProps = {
-        text: name.toUpperCase(),
+        text: name && name.toUpperCase(),
         actions: [
           {
             id: 'share',

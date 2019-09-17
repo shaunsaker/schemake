@@ -22,7 +22,9 @@ export default function reducer(state = initialState, action = {}) {
 
     case 'SET_PROJECT_DATA':
       newState = cloneObject(state);
-      newState[action.payload.projectId].data = action.payload.data;
+      const project = newState[action.payload.projectId] || {};
+      project.data = action.payload.data;
+      newState[action.payload.projectId] = project;
 
       return newState;
 
