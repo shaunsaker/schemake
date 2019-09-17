@@ -5,7 +5,7 @@ import { rhythm, sizes } from '../../static/styles/styleConstants';
 const styles = css`
   .container {
     width: 100%;
-    padding: ${rhythm.vt}px ${rhythm.hz / 2}px;
+    padding: ${rhythm.vt}px ${rhythm.hz}px;
     display: flex;
     align-items: center;
   }
@@ -46,7 +46,7 @@ const styles = css`
 
   @media (max-width: ${sizes.responsiveWidth}px) {
     .container {
-      padding: ${rhythm.vt}px ${rhythm.hz}px;
+      padding: ${rhythm.vt}px ${rhythm.hz / 2}px;
     }
   }
 `;
