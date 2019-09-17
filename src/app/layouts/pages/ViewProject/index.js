@@ -42,7 +42,7 @@ export class ViewProjectContainer extends React.Component {
   onShare() {
     const { dispatch } = this.props;
     const { name } = this.getProject();
-    const url = window.location.href;
+    const url = `${origin}/viewProject?projectId=${this.projectId}`;
 
     dispatch({
       type: 'TOGGLE_MODAL',

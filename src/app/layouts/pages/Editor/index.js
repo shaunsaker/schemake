@@ -47,7 +47,8 @@ export class EditorContainer extends React.Component {
   onShare() {
     const { dispatch } = this.props;
     const { name } = this.getProject();
-    const url = window.location.href;
+    const { origin } = window.location;
+    const url = `${origin}/viewProject?projectId=${this.projectId}`;
 
     dispatch({
       type: 'TOGGLE_MODAL',
