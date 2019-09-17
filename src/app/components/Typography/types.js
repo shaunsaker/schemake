@@ -2,7 +2,7 @@
  * These types directly relate to MUI Typography variants
  */
 const types = {
-  title: 'h2',
+  title: 'h3',
   heading: 'h5',
   paragraph: 'body1',
   small: 'caption',
