@@ -11,6 +11,7 @@ export class ViewProjectContainer extends React.Component {
     super(props);
 
     this.onShare = this.onShare.bind(this);
+    this.signInAnonymously = this.signInAnonymously.bind(this);
     this.syncProjectData = this.syncProjectData.bind(this);
     this.syncTypes = this.syncTypes.bind(this);
     this.getProject = this.getProject.bind(this);
@@ -30,13 +31,29 @@ export class ViewProjectContainer extends React.Component {
       name: PropTypes.string,
     }),
     types: PropTypes.shape({}),
+    isAuthenticated: PropTypes.bool,
   };
 
   static defaultProps = {};
 
   componentDidMount() {
-    this.syncProjectData(this.projectId);
-    this.syncTypes();
+    const { isAuthenticated } = this.props;
+
+    if (isAuthenticated) {
+      this.syncProjectData(this.projectId);
+      this.syncTypes();
+    } else {
+      this.signInAnonymously();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { isAuthenticated } = this.props;
+
+    if (isAuthenticated && !prevProps.isAuthenticated) {
+      this.syncProjectData(this.projectId);
+      this.syncTypes();
+    }
   }
 
   onShare() {
@@ -53,6 +70,14 @@ export class ViewProjectContainer extends React.Component {
           url,
         },
       },
+    });
+  }
+
+  signInAnonymously() {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'signInAnonymously',
     });
   }
 
@@ -108,45 +133,67 @@ export class ViewProjectContainer extends React.Component {
   }
 
   render() {
-    /*
-     * Create the header bar props
-     */
     const project = this.getProject();
-    const { name } = project;
-    const shareTooltip = `Share ${name}`;
-    const headerBarProps = {
-      text: name.toUpperCase(),
-      actions: [
-        {
-          id: 'share',
-          iconName: 'share',
-          tooltip: shareTooltip,
-          handleClick: this.onShare,
-        },
-      ],
-    };
+    let headerBarProps;
+    let types;
+    let items = [];
+    let isLoading = true;
 
     /*
-     * Get the types
+     * May not have loaded the project yet
      */
-    const { types } = this.props;
+    if (project) {
+      isLoading = false;
 
-    /*
-     * Create the items
-     */
-    const { data } = project;
-    const items = data ? getItemsFromData(data) : [];
+      /*
+       * Create the header bar props
+       */
+      const { name } = project;
+      const shareTooltip = `Share ${name}`;
+      headerBarProps = {
+        text: name.toUpperCase(),
+        actions: [
+          {
+            id: 'share',
+            iconName: 'share',
+            tooltip: shareTooltip,
+            handleClick: this.onShare,
+          },
+        ],
+      };
 
-    return <ViewProject headerBarProps={headerBarProps} types={types} items={items} />;
+      /*
+       * Get the types
+       */
+      types = this.props.types; // eslint-disable-line
+
+      /*
+       * Create the items
+       */
+      const { data } = project;
+      items = data ? getItemsFromData(data) : [];
+    }
+
+    return (
+      <ViewProject
+        headerBarProps={headerBarProps}
+        types={types}
+        items={items}
+        isLoading={isLoading}
+      />
+    );
   }
 }
 
 function mapStateToProps(state) {
-  const { projects, types } = state;
+  const { user, projects, types } = state;
+  const { uid } = user;
+  const isAuthenticated = Boolean(uid);
 
   return {
     projects,
     types,
+    isAuthenticated,
   };
 }
 

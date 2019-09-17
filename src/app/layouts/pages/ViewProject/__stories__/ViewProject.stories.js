@@ -19,5 +19,5 @@ const headerBarProps = {
 storiesOf('Layouts|ViewProject', module)
   .add('default', () => <ViewProject headerBarProps={headerBarProps} types={types} items={items} />)
   .add('blank state', () => (
-    <ViewProject headerBarProps={headerBarProps} types={types} items={[]} />
+    <ViewProject isLoading headerBarProps={headerBarProps} types={types} items={[]} />
   ));
