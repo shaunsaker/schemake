@@ -49,7 +49,7 @@ const DashboardListItem = ({ id, avatarText, title, description, menu, handleCli
             <div className="text-spacer" />
 
             <div className="value-text-container">
-              <Typography type="paragraph" secondary>
+              <Typography type="small" secondary>
                 {description}
               </Typography>
 
