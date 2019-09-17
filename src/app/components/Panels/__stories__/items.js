@@ -1,61 +1,79 @@
 const items = [
   {
+    id: 'users',
     name: 'users',
-    type: 'collection',
+    typeId: 'collection',
     items: [
       {
+        id: 'uid',
         name: 'uid',
-        type: 'document',
+        typeId: 'document',
         items: [
           {
+            id: 'name',
             name: 'name',
-            type: 'string',
+            typeId: 'field',
+            fieldTypeId: 'string',
           },
           {
+            id: 'isAdmin',
             name: 'isAdmin',
-            type: 'boolean',
+            typeId: 'field',
+            fieldTypeId: 'boolean',
           },
           {
+            id: 'age',
             name: 'age',
-            type: 'number',
+            typeId: 'field',
+            fieldTypeId: 'number',
           },
           {
+            id: 'dateJoined',
             name: 'dateJoined',
-            type: 'date',
+            typeId: 'field',
+            fieldTypeId: 'date',
           },
           {
+            id: 'meta',
             name: 'meta',
-            type: 'object',
+            typeId: 'object',
             items: [
               {
+                id: 'uid2',
                 name: 'uid',
-                type: 'string',
+                typeId: 'field',
+                fieldTypeId: 'string',
               },
             ],
           },
           {
+            id: 'other',
             name: 'other',
-            type: 'object',
+            typeId: 'object',
             items: [],
           },
           {
+            id: 'friends',
             name: 'friends',
-            type: 'array',
+            typeId: 'array',
             items: [
               {
+                id: 'uid3',
                 name: 'uid',
-                type: 'string',
+                typeId: 'field',
               },
             ],
           },
           {
+            id: 'likes',
             name: 'likes',
-            type: 'array',
+            typeId: 'array',
             items: [],
           },
           {
+            id: 'posts',
             name: 'posts',
-            type: 'collection',
+            typeId: 'collection',
             items: [],
           },
         ],
@@ -63,13 +81,15 @@ const items = [
     ],
   },
   {
+    id: 'posts2',
     name: 'posts',
-    type: 'collection',
+    typeId: 'collection',
     items: [],
   },
   {
+    id: 'groups',
     name: 'groups',
-    type: 'collection',
+    typeId: 'collection',
     items: [],
   },
 ];

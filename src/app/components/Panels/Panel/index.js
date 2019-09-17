@@ -19,11 +19,10 @@ export class PanelContainer extends React.Component {
     /*
      * Parent
      */
-    id: PropTypes.string,
     types: PropTypes.shape({}),
+    id: PropTypes.string,
     typeId: PropTypes.string,
     fieldTypeId: PropTypes.string,
-    parentId: PropTypes.string,
     name: PropTypes.string,
     children: PropTypes.node,
     handleAdd: PropTypes.func,
@@ -60,56 +59,67 @@ export class PanelContainer extends React.Component {
     const isCollapsed = !isExpandable || isCollapsedState;
 
     /*
+     * If handleAdd is provided
      * If there are validChildrenTypes, create buttons to render
      */
-    const hasChildren = children && children.length;
-    const addButtons =
-      validChildrenTypes && validChildrenTypes.length
-        ? validChildrenTypes
-            .map((item) => {
-              const { typeId: childTypeId, allowMultipleOfSameType } = item;
-              const childType = types[childTypeId];
-              const { name } = childType || {};
+    let addButtons;
+    const { handleAdd } = this.props;
 
-              if (!hasChildren || (hasChildren && allowMultipleOfSameType)) {
-                const text = `ADD ${name ? name.toUpperCase() : 'FIELD'}`; // defaults to field
-                const { handleAdd } = this.props;
+    if (handleAdd) {
+      const hasChildren = children && children.length;
+      addButtons =
+        validChildrenTypes && validChildrenTypes.length
+          ? validChildrenTypes
+              .map((item) => {
+                const { typeId: childTypeId, allowMultipleOfSameType } = item;
+                const childType = types[childTypeId];
+                const { name } = childType || {};
 
-                return {
-                  text,
-                  handleClick: () => handleAdd({ typeId: childTypeId }),
-                };
-              }
+                if (!hasChildren || (hasChildren && allowMultipleOfSameType)) {
+                  const text = `ADD ${name ? name.toUpperCase() : 'FIELD'}`; // defaults to field
 
-              return null;
-            })
-            .filter((item) => item)
-        : [];
+                  return {
+                    text,
+                    handleClick: () => handleAdd({ typeId: childTypeId }),
+                  };
+                }
+
+                return null;
+              })
+              .filter((item) => item)
+          : [];
+    }
 
     /*
-     * Create the actions
+     * Create the actions if handleEdit and handleDelete were provided
      * All types have the edit and delete action
      */
-    const { id, name, handleEdit, handleDelete } = this.props;
-    const actions = [
-      {
-        id,
-        iconName: 'menu',
-        tooltip: 'Toggle Menu',
-        menu: {
-          items: [
-            {
-              name: `Edit ${name}`,
-              handleClick: handleEdit,
-            },
-            {
-              name: `Delete ${name}`,
-              handleClick: handleDelete,
-            },
-          ],
+    const { handleEdit, handleDelete } = this.props;
+    let actions;
+
+    if (handleEdit && handleDelete) {
+      const { id, name } = this.props;
+
+      actions = [
+        {
+          id,
+          iconName: 'menu',
+          tooltip: 'Toggle Menu',
+          menu: {
+            items: [
+              {
+                name: `Edit ${name}`,
+                handleClick: handleEdit,
+              },
+              {
+                name: `Delete ${name}`,
+                handleClick: handleDelete,
+              },
+            ],
+          },
         },
-      },
-    ];
+      ];
+    }
 
     return (
       <Panel

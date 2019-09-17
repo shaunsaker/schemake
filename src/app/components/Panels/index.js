@@ -5,9 +5,24 @@ import styles from './styles';
 
 import Panel from './Panel';
 
-const renderPanel = ({ item, level, types, handleAdd, handleEdit, handleDelete }) => {
+const renderPanel = ({ types, item, level, handleAdd, handleEdit, handleDelete }) => {
   const { name, items } = item;
   const hasBg = level % 2 !== 0 ? true : false;
+  let handleAddFunc;
+  let handleEditFunc;
+  let handleDeleteFunc;
+
+  if (handleAdd) {
+    handleAddFunc = ({ typeId }) => handleAdd({ typeId, parent: item });
+  }
+
+  if (handleEdit) {
+    handleEditFunc = () => handleEdit({ item });
+  }
+
+  if (handleDelete) {
+    handleDeleteFunc = () => handleDelete({ item });
+  }
 
   return (
     <div key={name} className="item-container">
@@ -15,18 +30,18 @@ const renderPanel = ({ item, level, types, handleAdd, handleEdit, handleDelete }
         {...item}
         types={types}
         hasBg={hasBg}
-        handleAdd={({ typeId }) => handleAdd({ typeId, parent: item })}
-        handleEdit={() => handleEdit({ item })}
-        handleDelete={() => handleDelete({ item })}
+        handleAdd={handleAddFunc}
+        handleEdit={handleEditFunc}
+        handleDelete={handleDeleteFunc}
       >
         {items &&
           items.map((item2) => {
             const newLevel = level + 1;
 
             return renderPanel({
+              types,
               item: item2,
               level: newLevel,
-              types,
               handleAdd,
               handleEdit,
               handleDelete,
@@ -39,15 +54,15 @@ const renderPanel = ({ item, level, types, handleAdd, handleEdit, handleDelete }
   );
 };
 
-const Panels = ({ items, types, handleAdd, handleEdit, handleDelete }) => {
+const Panels = ({ types, items, handleAdd, handleEdit, handleDelete }) => {
   return (
     <div className="container">
       {items &&
         items.map((item) =>
           renderPanel({
+            types,
             item,
             level: 0,
-            types,
             handleAdd,
             handleEdit,
             handleDelete,
@@ -60,13 +75,13 @@ const Panels = ({ items, types, handleAdd, handleEdit, handleDelete }) => {
 };
 
 Panels.propTypes = {
+  types: PropTypes.shape({}),
   items: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
       items: PropTypes.arrayOf(PropTypes.shape({})),
     }),
   ),
-  types: PropTypes.shape({}),
   handleAdd: PropTypes.func,
   handleEdit: PropTypes.func,
   handleDelete: PropTypes.func,

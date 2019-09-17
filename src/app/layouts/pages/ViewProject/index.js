@@ -1,21 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createUID } from 'js-simple-utils';
 
 import { getItemsFromData, getQueryStringParams } from '../../../utils';
 
-import Editor from './Editor';
+import ViewProject from './ViewProject';
 
-export class EditorContainer extends React.Component {
+export class ViewProjectContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.onShare = this.onShare.bind(this);
-    this.onAddCollection = this.onAddCollection.bind(this);
-    this.onAdd = this.onAdd.bind(this);
-    this.onEdit = this.onEdit.bind(this);
-    this.onDelete = this.onDelete.bind(this);
     this.syncProjectData = this.syncProjectData.bind(this);
     this.syncTypes = this.syncTypes.bind(this);
     this.getProject = this.getProject.bind(this);
@@ -56,92 +51,6 @@ export class EditorContainer extends React.Component {
         props: {
           name,
           url,
-        },
-      },
-    });
-  }
-
-  onAddCollection() {
-    const { dispatch } = this.props;
-    const dataId = createUID(); // adding = create a new data id
-    const typeId = 'collection';
-
-    dispatch({
-      type: 'TOGGLE_MODAL',
-      payload: {
-        key: 'actionTypeModal',
-        props: {
-          dataId,
-          typeId,
-          projectId: this.projectId,
-          refs: [], // it's shallow, there are no refs
-        },
-      },
-    });
-  }
-
-  onAdd({ typeId, parent }) {
-    /*
-     * Add what (typeId) to who (item)
-     */
-    const { dispatch } = this.props;
-    const key = typeId === 'field' ? 'actionFieldModal' : 'actionTypeModal';
-    const dataId = createUID(); // adding = create a new data id
-    const { projectId } = this;
-    const { refs, id } = parent;
-    const newRefs = [...refs, id];
-
-    dispatch({
-      type: 'TOGGLE_MODAL',
-      payload: {
-        key,
-        props: {
-          typeId,
-          dataId,
-          refs: newRefs,
-          projectId,
-        },
-      },
-    });
-  }
-
-  onEdit({ item }) {
-    const { typeId, id: dataId, refs } = item;
-    const { dispatch } = this.props;
-    const key = typeId === 'field' ? 'actionFieldModal' : 'actionTypeModal';
-    const { projectId } = this;
-    const originalData = item;
-
-    dispatch({
-      type: 'TOGGLE_MODAL',
-      payload: {
-        key,
-        props: {
-          typeId,
-          dataId,
-          refs,
-          projectId,
-          originalData,
-        },
-      },
-    });
-  }
-
-  onDelete({ item }) {
-    const { typeId, fieldTypeId, id: dataId, name } = item;
-    const { dispatch } = this.props;
-    const { projectId } = this;
-    const typeIdToUse = fieldTypeId || typeId;
-
-    dispatch({
-      type: 'TOGGLE_MODAL',
-      payload: {
-        key: 'deleteTypeModal',
-        props: {
-          dataId,
-          name,
-          typeId: typeIdToUse,
-          projectId,
         },
       },
     });
@@ -221,23 +130,14 @@ export class EditorContainer extends React.Component {
      * Get the types
      */
     const { types } = this.props;
+
     /*
      * Create the items
      */
     const { data } = project;
     const items = data ? getItemsFromData(data) : [];
 
-    return (
-      <Editor
-        headerBarProps={headerBarProps}
-        types={types}
-        items={items}
-        handleAddCollection={this.onAddCollection}
-        handleAdd={this.onAdd}
-        handleEdit={this.onEdit}
-        handleDelete={this.onDelete}
-      />
-    );
+    return <ViewProject headerBarProps={headerBarProps} types={types} items={items} />;
   }
 }
 
@@ -250,4 +150,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(EditorContainer);
+export default connect(mapStateToProps)(ViewProjectContainer);
