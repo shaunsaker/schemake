@@ -5,6 +5,8 @@ import Router from 'next/router';
 
 import { routes } from '../../config';
 
+import Splash from '../../components/Splash';
+
 export default (ComposedComponent) => {
   class withRouteProtection extends React.Component {
     constructor(props) {
@@ -52,7 +54,7 @@ export default (ComposedComponent) => {
         return <ComposedComponent {...this.props} />;
       }
 
-      return null; // TODO: Show splash
+      return <Splash />;
     }
   }
 
