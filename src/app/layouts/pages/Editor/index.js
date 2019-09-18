@@ -7,6 +7,7 @@ import Router from 'next/router';
 import { getItemsFromData, getQueryStringParams } from '../../../utils';
 
 import Editor from './Editor';
+import withRouteProtection from '../../../enhancers/withRouteProtection';
 
 export class EditorContainer extends React.Component {
   constructor(props) {
@@ -258,4 +259,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(EditorContainer);
+export default withRouteProtection(connect(mapStateToProps)(EditorContainer));

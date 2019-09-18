@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Router from 'next/router';
 
@@ -7,6 +6,7 @@ import tabs from './tabs';
 import { getQueryStringParams } from '../../../utils';
 
 import Dashboard from './Dashboard';
+import withRouteProtection from '../../../enhancers/withRouteProtection';
 
 export class DashboardContainer extends React.Component {
   constructor(props) {
@@ -95,4 +95,4 @@ function mapStateToProps() {
   return {};
 }
 
-export default connect(mapStateToProps)(DashboardContainer);
+export default withRouteProtection(connect(mapStateToProps)(DashboardContainer));

@@ -7,6 +7,7 @@ import tabs from './tabs';
 import { getDateTime, getQueryStringParams } from '../../../utils';
 
 import Profile from './Profile';
+import withRouteProtection from '../../../enhancers/withRouteProtection';
 
 export class ProfileContainer extends React.Component {
   constructor(props) {
@@ -121,4 +122,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(ProfileContainer);
+export default withRouteProtection(connect(mapStateToProps)(ProfileContainer));
