@@ -6,6 +6,7 @@ import tabs from './tabs';
 import { getQueryStringParams } from '../../../utils';
 
 import Dashboard from './Dashboard';
+import withScrollToTop from '../../../enhancers/withScrollToTop';
 import withRouteProtection from '../../../enhancers/withRouteProtection';
 
 export class DashboardContainer extends React.Component {
@@ -95,4 +96,4 @@ function mapStateToProps() {
   return {};
 }
 
-export default withRouteProtection(connect(mapStateToProps)(DashboardContainer));
+export default withRouteProtection(connect(mapStateToProps)(withScrollToTop(DashboardContainer)));

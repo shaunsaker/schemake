@@ -7,6 +7,7 @@ import Router from 'next/router';
 import { getItemsFromData, getQueryStringParams } from '../../../utils';
 
 import Editor from './Editor';
+import withScrollToTop from '../../../enhancers/withScrollToTop';
 import withRouteProtection from '../../../enhancers/withRouteProtection';
 
 export class EditorContainer extends React.Component {
@@ -259,4 +260,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouteProtection(connect(mapStateToProps)(EditorContainer));
+export default withRouteProtection(connect(mapStateToProps)(withScrollToTop(EditorContainer)));

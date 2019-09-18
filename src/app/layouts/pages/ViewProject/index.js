@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getItemsFromData, getQueryStringParams } from '../../../utils';
 
 import ViewProject from './ViewProject';
+import withScrollToTop from '../../../enhancers/withScrollToTop';
 
 export class ViewProjectContainer extends React.Component {
   constructor(props) {
@@ -229,4 +230,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(ViewProjectContainer);
+export default connect(mapStateToProps)(withScrollToTop(ViewProjectContainer));
