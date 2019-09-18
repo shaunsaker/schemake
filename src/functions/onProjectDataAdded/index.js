@@ -6,12 +6,12 @@ const db = admin.firestore();
 
 const onProjectDataAdded = functions.firestore
   .document('projects/{projectId}/data/{dataId}')
-  .onWrite(async (snapshot, context) => {
+  .onWrite(async (change, context) => {
     /*
      * Update dateModified and lastModifiedBy of the project
      */
     const { projectId } = context.params;
-    const { dateModified, lastModifiedBy } = snapshot.data();
+    const { dateModified, lastModifiedBy } = change.after.data();
 
     await db
       .collection('projects')
