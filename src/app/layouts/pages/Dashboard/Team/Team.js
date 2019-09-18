@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
@@ -63,4 +63,4 @@ Team.propTypes = {
 };
 Team.defaultProps = {};
 
-export default Team;
+export default memo(Team);

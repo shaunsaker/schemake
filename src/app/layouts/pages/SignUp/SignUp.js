@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 
@@ -56,4 +56,4 @@ SignUp.propTypes = {
 };
 SignUp.defaultProps = {};
 
-export default SignUp;
+export default memo(SignUp);

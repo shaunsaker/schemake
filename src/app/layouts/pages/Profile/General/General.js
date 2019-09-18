@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
@@ -52,4 +52,4 @@ General.propTypes = {
 };
 General.defaultProps = {};
 
-export default General;
+export default memo(General);

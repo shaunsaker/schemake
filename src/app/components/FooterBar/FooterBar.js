@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 
@@ -41,4 +41,4 @@ FooterBar.propTypes = {
 };
 FooterBar.defaultProps = {};
 
-export default FooterBar;
+export default memo(FooterBar);

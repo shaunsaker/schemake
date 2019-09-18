@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Menu, MenuItem } from '@material-ui/core';
 
@@ -71,4 +71,4 @@ MenuComponent.defaultProps = {
   anchorElId: 'menu',
 };
 
-export default MenuComponent;
+export default memo(MenuComponent);

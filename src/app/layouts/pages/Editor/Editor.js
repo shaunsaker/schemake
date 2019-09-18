@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
@@ -51,4 +51,4 @@ Editor.propTypes = {
 
 Editor.defaultProps = {};
 
-export default Editor;
+export default memo(Editor);

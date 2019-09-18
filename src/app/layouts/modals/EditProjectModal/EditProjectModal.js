@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import fields from './fields';
@@ -53,4 +53,4 @@ EditProjectModal.propTypes = {
 };
 EditProjectModal.defaultProps = {};
 
-export default EditProjectModal;
+export default memo(EditProjectModal);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
@@ -36,4 +36,4 @@ ProfileListItem.propTypes = {
 };
 ProfileListItem.defaultProps = {};
 
-export default ProfileListItem;
+export default memo(ProfileListItem);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import fields from './fields';
@@ -42,4 +42,4 @@ ActionFieldModal.propTypes = {
 };
 ActionFieldModal.defaultProps = {};
 
-export default ActionFieldModal;
+export default memo(ActionFieldModal);

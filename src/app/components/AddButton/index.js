@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { ButtonBase } from '@material-ui/core';
 
@@ -32,4 +32,4 @@ AddButton.propTypes = {
 };
 AddButton.defaultProps = {};
 
-export default AddButton;
+export default memo(AddButton);

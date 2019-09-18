@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
@@ -88,4 +88,4 @@ Panels.propTypes = {
 };
 Panels.defaultProps = {};
 
-export default Panels;
+export default memo(Panels);

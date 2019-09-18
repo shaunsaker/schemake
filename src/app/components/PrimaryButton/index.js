@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, memo } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Button } from '@material-ui/core';
@@ -71,4 +71,4 @@ PrimaryButton.propTypes = {
 };
 PrimaryButton.defaultProps = {};
 
-export default PrimaryButton;
+export default memo(PrimaryButton);

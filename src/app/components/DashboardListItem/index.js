@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Card, ButtonBase } from '@material-ui/core';
 
@@ -77,4 +77,4 @@ DashboardListItem.propTypes = {
 };
 DashboardListItem.defaultProps = {};
 
-export default DashboardListItem;
+export default memo(DashboardListItem);

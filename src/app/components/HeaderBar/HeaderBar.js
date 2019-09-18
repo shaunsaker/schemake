@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { AppBar, Toolbar as ToolBar } from '@material-ui/core';
 import Link from 'next/link';
@@ -69,4 +69,4 @@ HeaderBar.propTypes = {
 };
 HeaderBar.defaultProps = {};
 
-export default HeaderBar;
+export default memo(HeaderBar);

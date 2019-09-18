@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, MenuItem } from '@material-ui/core';
 
@@ -155,4 +155,4 @@ Form.propTypes = {
 };
 Form.defaultProps = {};
 
-export default Form;
+export default memo(Form);

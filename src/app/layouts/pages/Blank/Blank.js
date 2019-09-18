@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
@@ -20,4 +20,4 @@ const Blank = () => {
 Blank.propTypes = {};
 Blank.defaultProps = {};
 
-export default Blank;
+export default memo(Blank);

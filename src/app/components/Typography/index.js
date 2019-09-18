@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
 
@@ -52,4 +52,4 @@ TypographyComponent.defaultProps = {
   color: colors.primaryText,
 };
 
-export default TypographyComponent;
+export default memo(TypographyComponent);

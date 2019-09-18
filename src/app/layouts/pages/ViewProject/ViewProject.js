@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, memo } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
@@ -48,4 +48,4 @@ ViewProject.propTypes = {
 
 ViewProject.defaultProps = {};
 
-export default ViewProject;
+export default memo(ViewProject);

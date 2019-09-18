@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import { colors } from '../../../static/styles/styleConstants';
@@ -40,4 +40,4 @@ ShareProjectModal.propTypes = {
 };
 ShareProjectModal.defaultProps = {};
 
-export default ShareProjectModal;
+export default memo(ShareProjectModal);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import Modal from '../../../components/Modal';
@@ -47,4 +47,4 @@ RemoveTeamMemberModal.propTypes = {
 };
 RemoveTeamMemberModal.defaultProps = {};
 
-export default RemoveTeamMemberModal;
+export default memo(RemoveTeamMemberModal);

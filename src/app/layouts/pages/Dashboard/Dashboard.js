@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 
@@ -46,8 +46,7 @@ Dashboard.propTypes = {
   currentTabIndex: PropTypes.number,
   tabs: PropTypes.arrayOf(PropTypes.shape({})),
   handleTabClick: PropTypes.func,
-  handleEditProfileClick: PropTypes.func,
 };
 Dashboard.defaultProps = {};
 
-export default Dashboard;
+export default memo(Dashboard);

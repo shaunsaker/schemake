@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
@@ -33,4 +33,4 @@ Layout.propTypes = {
 };
 Layout.defaultProps = {};
 
-export default Layout;
+export default memo(Layout);

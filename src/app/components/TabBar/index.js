@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { AppBar, Tabs, Tab } from '@material-ui/core';
 
@@ -43,4 +43,4 @@ TabBar.propTypes = {
 };
 TabBar.defaultProps = {};
 
-export default TabBar;
+export default memo(TabBar);
