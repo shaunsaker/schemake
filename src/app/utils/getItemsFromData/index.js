@@ -142,7 +142,12 @@ const getItemsFromData = (data = []) => {
     }
   });
 
-  return items;
+  /*
+   * Sort the items A => Z
+   */
+  const sortedItems = sortArrayOfObjectsByKey(items, 'name');
+
+  return sortedItems;
 };
 
 export default getItemsFromData;
