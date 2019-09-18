@@ -10,13 +10,8 @@ export class PanelContainer extends React.Component {
     this.onToggleCollapse = this.onToggleCollapse.bind(this);
     this.setIsCollapsed = this.setIsCollapsed.bind(this);
 
-    const { typeId, fieldTypeId, types } = this.props;
-    const typeIdToUse = typeId !== 'field' ? typeId : fieldTypeId;
-    const type = types[typeIdToUse];
-    const { isCollapsedByDefault } = type || {};
-
     this.state = {
-      isCollapsed: isCollapsedByDefault,
+      isCollapsed: true,
     };
   }
 
