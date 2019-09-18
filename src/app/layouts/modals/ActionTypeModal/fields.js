@@ -4,6 +4,7 @@ const fields = [
     name: 'name',
     label: 'Name',
     required: true,
+    autoComplete: 'off',
   },
 ];
 

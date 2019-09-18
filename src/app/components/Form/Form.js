@@ -49,6 +49,7 @@ const Form = ({
           max,
           pattern,
           multiline,
+          autoComplete,
         } = field;
 
         return (
@@ -74,6 +75,7 @@ const Form = ({
               }}
               variant="outlined"
               InputLabelProps={{ shrink: type === 'select' ? true : undefined }}
+              autoComplete={autoComplete}
             >
               {options &&
                 options.map((option) => {
@@ -138,6 +140,7 @@ Form.propTypes = {
       max: PropTypes.string,
       pattern: PropTypes.string,
       multiline: PropTypes.bool,
+      autoComplete: PropTypes.string,
     }),
   ).isRequired,
   footerComponent: PropTypes.node,
