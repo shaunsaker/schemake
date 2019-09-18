@@ -3,7 +3,7 @@
     "source": "./src/functions"
   },
   "hosting": {
-    "public": "dist/app",
+    "public": "dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   },
   "firestore": {
