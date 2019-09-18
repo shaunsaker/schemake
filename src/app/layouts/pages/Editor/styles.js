@@ -7,6 +7,10 @@ const styles = css`
     min-height: 100vh;
   }
 
+  .text-container {
+    margin-bottom: ${rhythm.vt * 2}px;
+  }
+
   .add-button-container {
     margin-top: ${rhythm.vt}px;
   }

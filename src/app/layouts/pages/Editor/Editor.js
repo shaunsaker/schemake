@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 
 import Layout from '../../../components/Layout';
+import Typography from '../../../components/Typography';
 import AddButton from '../../../components/AddButton';
 import Panels from '../../../components/Panels';
 
 const Editor = ({
   headerBarProps,
+  projectName,
   types,
   items,
   handleAddCollection,
@@ -21,6 +23,12 @@ const Editor = ({
   return (
     <Layout headerBarProps={headerBarProps}>
       <div className="container">
+        <div className="text-container">
+          <Typography type="title" gutterBottom>
+            {projectName}
+          </Typography>
+        </div>
+
         <Panels
           types={types}
           items={items}
@@ -41,6 +49,7 @@ const Editor = ({
 
 Editor.propTypes = {
   headerBarProps: PropTypes.shape({}),
+  projectName: PropTypes.string,
   types: PropTypes.shape({}),
   items: PropTypes.arrayOf(PropTypes.shape({})),
   handleAddCollection: PropTypes.func,

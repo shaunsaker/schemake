@@ -6,7 +6,6 @@ import items from '../../../../components/Panels/__stories__/items';
 import types from '../../../../components/Panels/__stories__/types';
 
 const headerBarProps = {
-  text: 'PROJECT TITLE',
   actions: [
     {
       id: 'share',
@@ -16,11 +15,13 @@ const headerBarProps = {
     },
   ],
 };
+const projectName = 'PROJECT TITLE';
 
 storiesOf('Layouts|Editor', module)
   .add('default', () => (
     <Editor
       headerBarProps={headerBarProps}
+      projectName={projectName}
       types={types}
       items={items}
       handleAddItem={console.log}

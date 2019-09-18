@@ -204,10 +204,9 @@ export class EditorContainer extends React.Component {
      * Create the header bar props
      */
     const project = this.getProject();
-    const { name } = project;
-    const shareTooltip = `Share ${name}`;
+    const { name: projectName } = project;
+    const shareTooltip = `Share ${projectName}`;
     const headerBarProps = {
-      text: name.toUpperCase(),
       actions: [
         {
           id: 'share',
@@ -231,6 +230,7 @@ export class EditorContainer extends React.Component {
     return (
       <Editor
         headerBarProps={headerBarProps}
+        projectName={projectName}
         types={types}
         items={items}
         handleAddCollection={this.onAddCollection}
