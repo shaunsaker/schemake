@@ -12,6 +12,7 @@ export class ProfileContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onBackClick = this.onBackClick.bind(this);
     this.onTabClick = this.onTabClick.bind(this);
     this.getCurrentTabIndex = this.getCurrentTabIndex.bind(this);
     this.handleRouteChange = this.handleRouteChange.bind(this);
@@ -38,6 +39,10 @@ export class ProfileContainer extends React.Component {
 
   componentWillUnmount() {
     Router.events.off('routeChangeComplete', this.handleRouteChange);
+  }
+
+  onBackClick() {
+    Router.back();
   }
 
   onTabClick(tabIndex) {
@@ -96,6 +101,7 @@ export class ProfileContainer extends React.Component {
         dateText={dateText}
         currentTabIndex={currentTabIndex}
         tabs={tabs}
+        handleBackClick={this.onBackClick}
         handleTabClick={this.onTabClick}
       />
     );

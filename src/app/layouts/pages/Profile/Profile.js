@@ -6,19 +6,30 @@ import { app } from '../../../config';
 import styles from './styles';
 
 import Layout from '../../../components/Layout';
+import IconButton from '../../../components/IconButton';
 import Typography from '../../../components/Typography';
 import TabBar from '../../../components/TabBar';
 import General from './General';
 import DangerZone from './DangerZone';
 
-const Profile = ({ dateText, currentTabIndex, tabs, handleTabClick }) => {
+const Profile = ({ dateText, currentTabIndex, tabs, handleBackClick, handleTabClick }) => {
   return (
     <Layout>
       <div className="container">
         <div className="text-container">
-          <Typography type="title" gutterBottom>
-            Profile
-          </Typography>
+          <div className="title-container">
+            <div className="back-button-container">
+              <IconButton
+                iconName="chevron-left"
+                tooltip="Back to Dashboard"
+                handleClick={handleBackClick}
+              />
+            </div>
+
+            <Typography type="title" gutterBottom>
+              Profile
+            </Typography>
+          </div>
 
           <Typography type="paragraph">
             Joined <b>{app.name}</b> {dateText}
@@ -51,6 +62,7 @@ Profile.propTypes = {
   dateText: PropTypes.string,
   currentTabIndex: PropTypes.number,
   tabs: PropTypes.arrayOf(PropTypes.shape({})),
+  handleBackClick: PropTypes.func,
   handleTabClick: PropTypes.func,
 };
 Profile.defaultProps = {};

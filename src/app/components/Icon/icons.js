@@ -2,6 +2,7 @@ import React from 'react';
 import {
   AccountCircle,
   Add,
+  ChevronLeft,
   FileCopy,
   Delete,
   ExpandMore,
@@ -13,6 +14,7 @@ import {
 const icons = {
   'account-circle': (props) => <AccountCircle {...props} />,
   add: (props) => <Add {...props} />,
+  'chevron-left': (props) => <ChevronLeft {...props} />,
   copy: (props) => <FileCopy {...props} />,
   delete: (props) => <Delete {...props} />,
   'expand-more': (props) => <ExpandMore {...props} />,
