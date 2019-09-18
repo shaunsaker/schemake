@@ -1,5 +1,5 @@
 const app = {
-  name: 'schemake',
+  name: 'Schemake',
   url: 'https://schemake.com',
   contactDetails: {
     email: 'shaun@schemake.com',
