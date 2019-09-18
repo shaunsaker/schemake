@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createUID } from 'js-simple-utils';
+import Router from 'next/router';
 
 import { getItemsFromData, getQueryStringParams } from '../../../utils';
 
@@ -11,6 +12,7 @@ export class EditorContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onBackClick = this.onBackClick.bind(this);
     this.onShare = this.onShare.bind(this);
     this.onAddCollection = this.onAddCollection.bind(this);
     this.onAdd = this.onAdd.bind(this);
@@ -42,6 +44,10 @@ export class EditorContainer extends React.Component {
   componentDidMount() {
     this.syncProjectData(this.projectId);
     this.syncTypes();
+  }
+
+  onBackClick() {
+    Router.back();
   }
 
   onShare() {
@@ -233,6 +239,7 @@ export class EditorContainer extends React.Component {
         projectName={projectName}
         types={types}
         items={items}
+        handleBackClick={this.onBackClick}
         handleAddCollection={this.onAddCollection}
         handleAdd={this.onAdd}
         handleEdit={this.onEdit}
