@@ -8,7 +8,14 @@ import Modal from '../../../components/Modal';
 import Typography from '../../../components/Typography';
 import IconButton from '../../../components/IconButton';
 
-const ShareProjectModal = ({ name, url, isOpen, handleCopyLink, handleClose }) => {
+const ShareProjectModal = ({
+  name,
+  url,
+  isOpen,
+  handleOpenInNewTab,
+  handleCopyLink,
+  handleClose,
+}) => {
   const title = `Share ${name}`;
   const description = 'Anyone can view this project using this link.';
 
@@ -21,8 +28,18 @@ const ShareProjectModal = ({ name, url, isOpen, handleCopyLink, handleClose }) =
           </Typography>
         </div>
 
-        <div className="copy-button-container">
-          <IconButton iconName="copy" tooltip="Copy link" handleClick={handleCopyLink} />
+        <div className="icon-buttons-container">
+          <div className="icon-button-container">
+            <IconButton
+              iconName="open-in-new"
+              tooltip="Open in New Tab"
+              handleClick={handleOpenInNewTab}
+            />
+          </div>
+
+          <div className="icon-button-container">
+            <IconButton iconName="copy" tooltip="Copy link" handleClick={handleCopyLink} />
+          </div>
         </div>
       </div>
 
@@ -35,6 +52,7 @@ ShareProjectModal.propTypes = {
   name: PropTypes.string,
   url: PropTypes.string,
   isOpen: PropTypes.bool,
+  handleOpenInNewTab: PropTypes.func,
   handleCopyLink: PropTypes.func,
   handleClose: PropTypes.func,
 };

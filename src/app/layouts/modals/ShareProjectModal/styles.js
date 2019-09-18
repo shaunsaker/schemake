@@ -6,6 +6,7 @@ const styles = css`
   .link-container {
     width: 100%;
     display: flex;
+    align-items: center;
     margin-bottom: ${rhythm.vt}px;
     background-color: ${colors.veryLightGrey};
     border-radius: ${sizes.borderRadius}px;
@@ -14,11 +15,12 @@ const styles = css`
   }
 
   .link-text-container {
-    margin-right: ${rhythm.hz / 2}px;
+    flex: 1;
   }
 
-  .copy-button-container {
-    flex: 1;
+  .icon-buttons-container {
+  }
+  .icon-button-container {
   }
 
   @media (max-width: ${sizes.responsiveWidth}px) {

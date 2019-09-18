@@ -7,6 +7,7 @@ import {
   Delete,
   ExpandMore,
   MoreVert,
+  OpenInNew,
   Share,
   Sort,
 } from '@material-ui/icons';
@@ -19,6 +20,7 @@ const icons = {
   delete: (props) => <Delete {...props} />,
   'expand-more': (props) => <ExpandMore {...props} />,
   menu: (props) => <MoreVert {...props} />,
+  'open-in-new': (props) => <OpenInNew {...props} />,
   share: (props) => <Share {...props} />,
   sort: (props) => <Sort {...props} />,
 };

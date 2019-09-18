@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import copy from 'copy-to-clipboard';
 
 import ShareProjectModal from './ShareProjectModal';
 
@@ -8,6 +9,7 @@ export class ShareProjectModalContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onOpenInNewTab = this.onOpenInNewTab.bind(this);
     this.onCopyLink = this.onCopyLink.bind(this);
     this.onClose = this.onClose.bind(this);
     this.copyLink = this.copyLink.bind(this);
@@ -34,6 +36,12 @@ export class ShareProjectModalContainer extends React.Component {
 
   static defaultProps = {};
 
+  onOpenInNewTab() {
+    const { url } = this.props;
+
+    window.open(url, '_blank');
+  }
+
   onCopyLink() {
     this.copyLink();
   }
@@ -44,25 +52,25 @@ export class ShareProjectModalContainer extends React.Component {
 
   copyLink() {
     const { url } = this.props;
+    const hasSuccess = copy(url, {
+      message: 'TEST',
+    });
 
-    navigator.clipboard
-      .writeText(url)
-      .then(() => {
-        const message = 'Link copied to clipboard successfully.';
+    if (hasSuccess) {
+      const message = 'Link copied to clipboard successfully.';
 
-        this.setSystemMessage({
-          message,
-          variant: 'success',
-        });
-      })
-      .catch((error) => {
-        const { message } = error;
-
-        this.setSystemMessage({
-          message,
-          variant: 'error',
-        });
+      this.setSystemMessage({
+        message,
+        variant: 'success',
       });
+    } else {
+      const message = 'Copying to clipboard is not supported on this device.';
+
+      this.setSystemMessage({
+        message,
+        variant: 'error',
+      });
+    }
   }
 
   setSystemMessage(systemMessage) {
@@ -90,6 +98,7 @@ export class ShareProjectModalContainer extends React.Component {
         name={name}
         url={url}
         isOpen={isOpen}
+        handleOpenInNewTab={this.onOpenInNewTab}
         handleCopyLink={this.onCopyLink}
         handleClose={this.onClose}
       />
