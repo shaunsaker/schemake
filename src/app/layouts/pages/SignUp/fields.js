@@ -6,12 +6,6 @@ const fields = [
     required: true,
   },
   {
-    name: 'organisation',
-    type: 'text',
-    label: 'Organisation',
-    required: true,
-  },
-  {
     name: 'email',
     type: 'email',
     label: 'Email Address',
@@ -21,6 +15,12 @@ const fields = [
     name: 'password',
     type: 'password',
     label: 'Password',
+    required: true,
+  },
+  {
+    name: 'gdprConsent',
+    type: 'checkbox',
+    label: 'I consent to having Schemake store my submitted information',
     required: true,
   },
 ];

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TextField, MenuItem } from '@material-ui/core';
+import { TextField, MenuItem, FormControlLabel, Checkbox } from '@material-ui/core';
 
 import styles from './styles';
 
@@ -51,6 +51,17 @@ const Form = ({
           multiline,
           autoComplete,
         } = field;
+
+        if (type === 'checkbox') {
+          return (
+            <div key={name} className="input-container">
+              <FormControlLabel
+                control={<Checkbox name={name} value={value} required={required} />}
+                label={label}
+              />
+            </div>
+          );
+        }
 
         return (
           <div key={name} className="input-container">
@@ -120,6 +131,7 @@ Form.propTypes = {
         'tel',
         'file',
         'select',
+        'checkbox',
       ]),
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       label: PropTypes.string,

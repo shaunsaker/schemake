@@ -75,9 +75,12 @@ export class SignUpContainer extends React.Component {
     }
   }
 
-  onSubmit({ name, organisation, email, password }) {
+  onSubmit(form) {
     this.setIsLoading(true);
-    this.setUserData({ name, organisation, email });
+    this.setUserData(form);
+
+    const { email, password } = form;
+
     this.createUserWithEmailAndPassword({ email, password });
   }
 
