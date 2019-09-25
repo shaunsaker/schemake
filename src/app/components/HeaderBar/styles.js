@@ -18,6 +18,7 @@ const styles = css`
   }
   .logo-image {
     width: ${logoWidth}px;
+    height: 37px;
     cursor: pointer;
   }
   .alpha-text-container {
