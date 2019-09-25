@@ -1,35 +1,39 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import Router from 'next/router';
 
-import styles from './styles';
+import { routes } from '../../../config';
 
-import Layout from '../../../components/Layout';
-import Typography from '../../../components/Typography';
+import Error from './Error';
 
-const Error = ({ errorMessage }) => {
-  return (
-    <Layout>
-      <div className="container">
-        <Typography type="title" center gutterBottom>
-          Houston, we have a problem.
-        </Typography>
+export default class ErrorContainer extends React.Component {
+  constructor(props) {
+    super(props);
 
-        <Typography type="paragraph" center>
-          {errorMessage}
-        </Typography>
-      </div>
+    this.onGoHomeClick = this.onGoHomeClick.bind(this);
+    this.onContactSupportClick = this.onContactSupportClick.bind(this);
 
-      <style jsx>{styles}</style>
-    </Layout>
-  );
-};
+    this.state = {};
+  }
 
-Error.propTypes = {
-  errorMessage: PropTypes.string,
-};
-Error.defaultProps = {
-  errorMessage:
-    "The page you're searching for doesn't exist. It has either been moved or the link is broken.",
-};
+  static propTypes = {};
 
-export default Error;
+  static defaultProps = {};
+
+  onGoHomeClick() {
+    Router.push(routes.home.href);
+  }
+
+  onContactSupportClick() {
+    Router.push(routes.support.href);
+  }
+
+  render() {
+    return (
+      <Error
+        {...this.props}
+        handleGoHomeClick={this.onGoHomeClick}
+        handleContactSupportClick={this.onContactSupportClick}
+      />
+    );
+  }
+}
