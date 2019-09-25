@@ -11,7 +11,7 @@ import { routes } from '../../config';
 import Typography from '../Typography';
 import ActionPanel from '../ActionPanel';
 
-const HeaderBar = ({ text, actions }) => {
+const HeaderBar = ({ text, actions, hideShadow }) => {
   const textComponent = text && (
     <div className="text-container">
       <Typography type="paragraph" color="white" bold center>
@@ -23,7 +23,10 @@ const HeaderBar = ({ text, actions }) => {
   );
 
   return (
-    <AppBar position="fixed" style={muiStyles.wrapper}>
+    <AppBar
+      position="fixed"
+      style={{ ...muiStyles.wrapper, ...(hideShadow && { boxShadow: 'none' }) }}
+    >
       <ToolBar style={muiStyles.container}>
         <div className="logo-image-wrapper">
           <div className="logo-image-container">
@@ -66,6 +69,7 @@ HeaderBar.propTypes = {
       }),
     }),
   ),
+  hideShadow: PropTypes.bool,
 };
 HeaderBar.defaultProps = {};
 

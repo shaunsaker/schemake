@@ -16,7 +16,13 @@ const Projects = ({ hasTeams, selectProps, items, handleAddProject }) => {
    * Blank state
    */
   if (!hasTeams) {
-    return <BlankState />;
+    return (
+      <div className="blank-state-container">
+        <BlankState />
+
+        <style jsx>{styles}</style>
+      </div>
+    );
   }
 
   return (

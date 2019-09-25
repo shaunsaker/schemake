@@ -18,7 +18,7 @@ const ActionPanel = ({ actions, color }) => {
           <Menu anchorElId={id} iconButtonProps={{ ...action, color }} {...action.menu} />
         ) : action.text ? (
           <Link key={action.href} href={action.href}>
-            <div>
+            <div className="text-container">
               <PrimaryButton text small>
                 <Typography type="link" color={color} style={{ textDecorationLine: 'none' }}>
                   {action.text}

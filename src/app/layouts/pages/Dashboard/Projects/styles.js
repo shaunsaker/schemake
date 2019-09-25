@@ -24,6 +24,10 @@ const styles = css`
     margin: 2px; /* allow box-shadow to come through */
     margin-bottom: ${rhythm.vt}px;
   }
+
+  .blank-state-container {
+    margin-top: ${rhythm.vt}px;
+  }
 `;
 
 export default styles;

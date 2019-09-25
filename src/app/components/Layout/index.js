@@ -7,12 +7,12 @@ import HeaderBar from '../HeaderBar';
 import FooterBar from '../FooterBar';
 import DevInfo from '../DevInfo';
 
-const Layout = ({ headerBarProps, children }) => {
+const Layout = ({ headerBarProps, noChildrenStyles, children }) => {
   return (
     <div className="container">
       <HeaderBar {...headerBarProps} />
 
-      <div className="content-container">{children}</div>
+      <div className={noChildrenStyles ? '' : 'content-container'}>{children}</div>
 
       <div className="footer-container">
         <FooterBar />
@@ -29,6 +29,7 @@ const Layout = ({ headerBarProps, children }) => {
 
 Layout.propTypes = {
   headerBarProps: PropTypes.shape({}),
+  noChildrenStyles: PropTypes.bool,
   children: PropTypes.node,
 };
 Layout.defaultProps = {};

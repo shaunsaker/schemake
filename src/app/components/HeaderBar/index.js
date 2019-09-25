@@ -29,7 +29,6 @@ export class HeaderBarContainer extends React.Component {
     /*
      * Parent
      */
-    text: PropTypes.string,
     actions: PropTypes.arrayOf(PropTypes.shape({})),
 
     /*
@@ -93,8 +92,8 @@ export class HeaderBarContainer extends React.Component {
 
   render() {
     const { isUserMenuOpen } = this.state;
-    const { text, actions: additionalActions, shouldShowUserIcon } = this.props;
-    const isLoginPage = window.location.pathname.indexOf('login') > -1;
+    const { actions: additionalActions, shouldShowUserIcon } = this.props;
+    const isSignUpPage = window.location.pathname.indexOf('signup') > -1;
     let actions = [];
 
     if (additionalActions) {
@@ -116,15 +115,15 @@ export class HeaderBarContainer extends React.Component {
           handleClose: this.onCloseUserMenu,
         },
       });
-    } else if (!isLoginPage) {
+    } else if (!isSignUpPage) {
       actions.push({
-        id: 'login',
-        text: 'Login',
-        href: routes.login.href,
+        id: 'signup',
+        text: 'Signup',
+        href: routes.signUp.href,
       });
     }
 
-    return <HeaderBar text={text} actions={actions} />;
+    return <HeaderBar {...this.props} actions={actions} />;
   }
 }
 
