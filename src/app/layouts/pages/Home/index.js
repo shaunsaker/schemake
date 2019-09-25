@@ -83,7 +83,8 @@ export class HomeContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { uid } = state;
+  const { user } = state;
+  const { uid } = user;
   const isAuthenticated = Boolean(uid);
 
   return {
