@@ -13,13 +13,12 @@ const styles = css`
   }
 
   .content-container {
+    min-height: 100vh;
     max-width: ${sizes.maxContentWidth}px;
     width: 100%;
     margin: 0 auto;
-    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     padding: ${rhythm.vt * 4}px ${rhythm.hz}px;
     background-color: white;

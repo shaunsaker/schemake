@@ -5,12 +5,12 @@ import { colors, rhythm, sizes } from '../../../static/styles/styleConstants';
 const styles = css`
   .container {
     height: 100vh;
+    margin-top: -64px; /* Header height */
     background-color: ${colors.secondary};
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: -64px;
     padding: 0 ${rhythm.hz}px;
   }
 
