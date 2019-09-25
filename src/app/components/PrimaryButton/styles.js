@@ -1,4 +1,4 @@
-import { rhythm } from '../../static/styles/styleConstants';
+import { colors, rhythm } from '../../static/styles/styleConstants';
 
 const styles = {
   container: {
@@ -9,6 +9,18 @@ const styles = {
 
   spacer: {
     width: rhythm.hz / 2,
+  },
+
+  loadingContainer: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.secondary,
   },
 };
 

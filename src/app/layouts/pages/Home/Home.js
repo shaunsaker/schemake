@@ -7,7 +7,7 @@ import Layout from '../../../components/Layout';
 import Typography from '../../../components/Typography';
 import PrimaryButton from '../../../components/PrimaryButton';
 
-const Home = ({ headerBarProps }) => {
+const Home = ({ headerBarProps, isExampleLoading, handleSignUpClick, handleExampleClick }) => {
   return (
     <Layout headerBarProps={headerBarProps} noChildrenStyles>
       <div className="container">
@@ -28,7 +28,7 @@ const Home = ({ headerBarProps }) => {
 
             <div className="buttons-container">
               <div className="button-container">
-                <PrimaryButton primary>
+                <PrimaryButton primary handleClick={handleSignUpClick}>
                   <Typography type="paragraph" color="white" bold>
                     SIGN UP FOR FREE
                   </Typography>
@@ -36,7 +36,7 @@ const Home = ({ headerBarProps }) => {
               </div>
 
               <div className="button-container">
-                <PrimaryButton text>
+                <PrimaryButton text loading={isExampleLoading} handleClick={handleExampleClick}>
                   <Typography type="paragraph" color="white" bold>
                     SEE EXAMPLE
                   </Typography>
@@ -54,6 +54,8 @@ const Home = ({ headerBarProps }) => {
 
 Home.propTypes = {
   headerBarProps: PropTypes.shape({}),
+  handleSignUpClick: PropTypes.func,
+  handleExampleClick: PropTypes.func,
 };
 Home.defaultProps = {};
 

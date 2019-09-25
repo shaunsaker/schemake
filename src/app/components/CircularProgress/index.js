@@ -5,12 +5,13 @@ import { withStyles } from '@material-ui/core/styles';
 
 import styles from './styles';
 
-const CircularProgressComponent = ({ classes }) => {
-  return <CircularProgress classes={{ colorPrimary: classes.container }} />;
+const CircularProgressComponent = ({ classes, small }) => {
+  return <CircularProgress classes={{ colorPrimary: classes.container }} size={small && 24} />;
 };
 
 CircularProgressComponent.propTypes = {
   classes: PropTypes.shape({}),
+  small: PropTypes.bool,
 };
 CircularProgressComponent.defaultProps = {};
 

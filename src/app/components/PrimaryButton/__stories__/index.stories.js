@@ -10,4 +10,5 @@ storiesOf('Components|PrimaryButton', module)
   .add('small', () => <PrimaryButton small>SMALL</PrimaryButton>)
   .add('ghost', () => <PrimaryButton ghost>GHOST</PrimaryButton>)
   .add('text', () => <PrimaryButton text>TEXT</PrimaryButton>)
+  .add('loading', () => <PrimaryButton loading>LOADING</PrimaryButton>)
   .add('disabled', () => <PrimaryButton disabled>DISABLED</PrimaryButton>);

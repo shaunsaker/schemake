@@ -7,6 +7,7 @@ import styles from './styles';
 import { colors } from '../../static/styles/styleConstants';
 
 import Icon from '../Icon';
+import CircularProgress from '../CircularProgress';
 
 const PrimaryButton = ({
   type,
@@ -18,6 +19,7 @@ const PrimaryButton = ({
   ghost,
   text,
   children,
+  loading,
   disabled,
   handleClick,
 }) => {
@@ -33,6 +35,12 @@ const PrimaryButton = ({
     </Fragment>
   );
 
+  const loadingComponent = loading && (
+    <div style={styles.loadingContainer}>
+      <CircularProgress small />
+    </div>
+  );
+
   const buttonComponent = (
     <Button
       type={type}
@@ -46,6 +54,8 @@ const PrimaryButton = ({
       {iconComponent}
 
       {children}
+
+      {loadingComponent}
     </Button>
   );
 
@@ -66,6 +76,7 @@ PrimaryButton.propTypes = {
   ghost: PropTypes.bool,
   text: PropTypes.bool,
   children: PropTypes.node,
+  loading: PropTypes.bool,
   disabled: PropTypes.bool,
   handleClick: PropTypes.func,
 };

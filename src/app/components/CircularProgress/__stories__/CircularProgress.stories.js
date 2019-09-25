@@ -3,4 +3,6 @@ import { storiesOf } from '@storybook/react';
 
 import CircularProgress from '..';
 
-storiesOf('Components|CircularProgress', module).add('default', () => <CircularProgress />);
+storiesOf('Components|CircularProgress', module)
+  .add('default', () => <CircularProgress />)
+  .add('small', () => <CircularProgress small />);
