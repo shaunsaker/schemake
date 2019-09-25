@@ -171,6 +171,7 @@ export class ViewProjectContainer extends React.Component {
     let items = [];
     let isLoading = true;
     let projectDoesNotExist = false;
+    let projectName;
 
     /*
      * May not have loaded the project yet
@@ -190,10 +191,9 @@ export class ViewProjectContainer extends React.Component {
         /*
          * Create the header bar props
          */
-
-        const shareTooltip = `Share ${name}`;
+        projectName = name;
+        const shareTooltip = `Share ${projectName}`;
         headerBarProps = {
-          text: name && name.toUpperCase(),
           actions: [
             {
               id: 'share',
@@ -220,6 +220,7 @@ export class ViewProjectContainer extends React.Component {
     return (
       <ViewProject
         headerBarProps={headerBarProps}
+        projectName={projectName}
         types={types}
         items={items}
         isLoading={isLoading}
