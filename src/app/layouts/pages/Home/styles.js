@@ -10,7 +10,7 @@ const styles = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: -64px 0 -106px 0;
+    margin-top: -64px;
     padding: 0 ${rhythm.hz}px;
   }
 
