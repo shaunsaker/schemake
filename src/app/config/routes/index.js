@@ -8,6 +8,11 @@ const getTitle = (page) => {
 };
 
 const routes = {
+  home: {
+    title: getTitle('Home'),
+    description: SEO.description,
+    href: '/',
+  },
   login: {
     title: getTitle('Login'),
     description: SEO.description,

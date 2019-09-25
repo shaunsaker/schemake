@@ -30,7 +30,7 @@ const HeaderBar = ({ text, actions, hideShadow }) => {
       <ToolBar style={muiStyles.container}>
         <div className="logo-image-wrapper">
           <div className="logo-image-container">
-            <Link href={routes.dashboard.href}>
+            <Link href={routes.home.href}>
               <img src="/static/images/logo.png" alt="Pep Logo" className="logo-image" />
             </Link>
 
