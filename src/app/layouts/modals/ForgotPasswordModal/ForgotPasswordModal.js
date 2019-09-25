@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import fields from './fields';
@@ -31,10 +31,11 @@ const ForgotPasswordModal = ({ isOpen, hasSuccess, isDisabled, handleClose, hand
 ForgotPasswordModal.propTypes = {
   isOpen: PropTypes.bool,
   hasSuccess: PropTypes.bool,
+  email: PropTypes.string,
   isDisabled: PropTypes.bool,
   handleClose: PropTypes.func,
   handleSubmit: PropTypes.func,
 };
 ForgotPasswordModal.defaultProps = {};
 
-export default memo(ForgotPasswordModal);
+export default ForgotPasswordModal;

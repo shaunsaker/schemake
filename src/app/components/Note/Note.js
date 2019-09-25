@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from '@material-ui/core';
 
@@ -53,4 +53,4 @@ Note.propTypes = {
 };
 Note.defaultProps = {};
 
-export default memo(Note);
+export default Note;

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import fields from './fields';
@@ -50,4 +50,4 @@ AddTeamMemberModal.propTypes = {
 };
 AddTeamMemberModal.defaultProps = {};
 
-export default memo(AddTeamMemberModal);
+export default AddTeamMemberModal;

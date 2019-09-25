@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 
@@ -67,4 +67,4 @@ Profile.propTypes = {
 };
 Profile.defaultProps = {};
 
-export default memo(Profile);
+export default Profile;

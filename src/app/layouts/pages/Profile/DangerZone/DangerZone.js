@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
@@ -34,4 +34,4 @@ DangerZone.propTypes = {
 };
 DangerZone.defaultProps = {};
 
-export default memo(DangerZone);
+export default DangerZone;

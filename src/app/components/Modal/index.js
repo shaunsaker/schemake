@@ -1,4 +1,4 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Card } from '@material-ui/core';
 
@@ -73,4 +73,4 @@ ModalComponent.propTypes = {
 };
 ModalComponent.defaultProps = {};
 
-export default memo(ModalComponent);
+export default ModalComponent;

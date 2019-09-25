@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import fields from './fields';
@@ -55,4 +55,4 @@ Support.propTypes = {
 };
 Support.defaultProps = {};
 
-export default memo(Support);
+export default Support;

@@ -1,4 +1,4 @@
-import React, { Fragment, memo } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import icons from './icons';
@@ -28,4 +28,4 @@ IconComponent.propTypes = {
 };
 IconComponent.defaultProps = {};
 
-export default memo(IconComponent);
+export default IconComponent;

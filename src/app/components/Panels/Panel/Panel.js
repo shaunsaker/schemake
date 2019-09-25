@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
 
@@ -118,4 +118,4 @@ Panel.propTypes = {
 };
 Panel.defaultProps = {};
 
-export default memo(Panel);
+export default Panel;

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
@@ -32,4 +32,4 @@ Error.defaultProps = {
     "The page you're searching for doesn't exist. It has either been moved or the link is broken.",
 };
 
-export default memo(Error);
+export default Error;

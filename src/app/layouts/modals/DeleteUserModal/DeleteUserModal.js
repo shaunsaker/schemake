@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Modal from '../../../components/Modal';
@@ -41,4 +41,4 @@ DeleteUserModal.propTypes = {
 };
 DeleteUserModal.defaultProps = {};
 
-export default memo(DeleteUserModal);
+export default DeleteUserModal;

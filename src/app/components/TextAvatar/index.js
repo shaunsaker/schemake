@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from '@material-ui/core';
 
@@ -19,4 +19,4 @@ TextAvatar.propTypes = {
 };
 TextAvatar.defaultProps = {};
 
-export default memo(TextAvatar);
+export default TextAvatar;

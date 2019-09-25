@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { TextField, MenuItem } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -48,4 +48,4 @@ SelectComponent.propTypes = {
 };
 SelectComponent.defaultProps = {};
 
-export default withStyles(muiStyles)(memo(SelectComponent));
+export default withStyles(muiStyles)(SelectComponent);
