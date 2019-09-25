@@ -47,7 +47,7 @@ export class HomeContainer extends React.Component {
       url,
       queries,
     });
-    const { id: projectId } = exampleProjects[0];
+    const { id: projectId } = exampleProjects[0] || {};
 
     this.setIsExampleLoading(false);
 
