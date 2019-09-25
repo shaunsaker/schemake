@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Router from 'next/router';
 
 import { getItemsFromData, getQueryStringParams } from '../../../utils';
+import { routes } from '../../../config';
 
 import ViewProject from './ViewProject';
 import withScrollToTop from '../../../enhancers/withScrollToTop';
@@ -38,22 +40,31 @@ export class ViewProjectContainer extends React.Component {
   static defaultProps = {};
 
   componentDidMount() {
-    const { isAuthenticated } = this.props;
+    if (this.projectId) {
+      const { isAuthenticated } = this.props;
 
-    if (isAuthenticated) {
-      this.syncProject(this.projectId);
-      this.syncTypes();
+      if (isAuthenticated) {
+        this.syncProject(this.projectId);
+        this.syncTypes();
+      } else {
+        this.signInAnonymously();
+      }
     } else {
-      this.signInAnonymously();
+      /*
+       * Error state when no projectId in query params
+       */
+      Router.push(routes.error.href);
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { isAuthenticated } = this.props;
+    if (this.projectId) {
+      const { isAuthenticated } = this.props;
 
-    if (isAuthenticated && !prevProps.isAuthenticated) {
-      this.syncProject(this.projectId);
-      this.syncTypes();
+      if (isAuthenticated && !prevProps.isAuthenticated) {
+        this.syncProject(this.projectId);
+        this.syncTypes();
+      }
     }
   }
 

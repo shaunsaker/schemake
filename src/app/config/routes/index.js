@@ -48,6 +48,11 @@ const routes = {
     description: SEO.description,
     href: '/viewProject',
   },
+  error: {
+    title: getTitle('Error'),
+    description: SEO.description,
+    href: '/error',
+  },
 };
 
 export default routes;
