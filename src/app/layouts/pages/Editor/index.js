@@ -5,6 +5,7 @@ import { createUID } from 'js-simple-utils';
 import Router from 'next/router';
 
 import { getItemsFromData, getQueryStringParams } from '../../../utils';
+import { routes } from '../../../config';
 
 import Editor from './Editor';
 import withScrollToTop from '../../../enhancers/withScrollToTop';
@@ -44,12 +45,23 @@ export class EditorContainer extends React.Component {
   static defaultProps = {};
 
   componentDidMount() {
-    this.syncProjectData(this.projectId);
-    this.syncTypes();
+    /*
+     * If the project does not exist in the store
+     * The user should not have access to it
+     * Redirect them to the Dashboard
+     */
+    const project = this.getProject();
+
+    if (!project) {
+      Router.push(routes.dashboard.href);
+    } else {
+      this.syncProjectData(this.projectId);
+      this.syncTypes();
+    }
   }
 
   onBackClick() {
-    Router.back();
+    Router.push(routes.dashboard.href);
   }
 
   onShare() {
@@ -212,7 +224,7 @@ export class EditorContainer extends React.Component {
      * Create the header bar props
      */
     const project = this.getProject();
-    const { name: projectName } = project;
+    const { name: projectName } = project || {};
     const shareTooltip = `Share ${projectName}`;
     const headerBarProps = {
       actions: [
@@ -232,7 +244,7 @@ export class EditorContainer extends React.Component {
     /*
      * Create the items
      */
-    const { data } = project;
+    const { data } = project || {};
     const items = data ? getItemsFromData(data) : [];
 
     return (
