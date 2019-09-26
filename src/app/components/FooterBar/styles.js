@@ -16,10 +16,15 @@ const styles = css`
     max-width: ${sizes.maxContentWidth}px;
     width: 100%;
     display: flex;
+    align-items: center;
   }
 
   .link-container {
     margin-right: ${rhythm.hz}px;
+  }
+
+  .link {
+    text-decoration: none;
   }
 `;
 

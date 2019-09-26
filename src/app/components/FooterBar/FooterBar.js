@@ -12,15 +12,35 @@ const FooterBar = ({ links }) => {
     <div className="container">
       <div className="content-container">
         {links.map((link) => {
+          const buttonComponent = (
+            <div className="link-container">
+              <PrimaryButton text small>
+                <Typography type="link" color="white" style={{ textDecorationLine: 'none' }}>
+                  {link.name}
+                </Typography>
+              </PrimaryButton>
+            </div>
+          );
+
+          if (link.isExternal) {
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link"
+              >
+                <Typography type="link" color="white" style={{ textDecorationLine: 'none' }}>
+                  {link.name}
+                </Typography>
+              </a>
+            );
+          }
+
           return (
             <Link key={link.href} href={link.href}>
-              <div className="link-container">
-                <PrimaryButton text small>
-                  <Typography type="link" color="white" style={{ textDecorationLine: 'none' }}>
-                    {link.name}
-                  </Typography>
-                </PrimaryButton>
-              </div>
+              {buttonComponent}
             </Link>
           );
         })}
