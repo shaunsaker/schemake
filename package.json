@@ -25,7 +25,7 @@
     "publish": "yarn run update-changelog && yarn run update-tags",
     "build-development": "cp ./src/app/.env.dev ./src/app/.env && yarn run build && yarn run export && yarn run build-storybook",
     "build-production": "cp ./src/app/.env.prod ./src/app/.env && yarn run build && yarn run export",
-    "deploy": "firebase deploy",
+    "deploy": "firebase deploy --only hosting",
     "deploy-development": "firebase use development && yarn run deploy",
     "deploy-production": "firebase use production && yarn run deploy",
     "deploy-all": "yarn run build-development && yarn run deploy-development && yarn run build-production && yarn run deploy-production",
