@@ -14,7 +14,7 @@ const FooterBar = ({ links }) => {
         {links.map((link) => {
           return (
             <Link key={link.href} href={link.href}>
-              <div>
+              <div className="link-container">
                 <PrimaryButton text small>
                   <Typography type="link" color="white" style={{ textDecorationLine: 'none' }}>
                     {link.name}

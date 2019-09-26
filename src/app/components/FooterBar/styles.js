@@ -16,7 +16,10 @@ const styles = css`
     max-width: ${sizes.maxContentWidth}px;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+  }
+
+  .link-container {
+    margin-right: ${rhythm.hz}px;
   }
 `;
 
