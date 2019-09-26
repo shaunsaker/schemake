@@ -7,7 +7,7 @@ export default function reducer(state = initialState, action = {}) {
 
   switch (action.type) {
     case 'SET_PROJECTS':
-      newState = cloneObject(state);
+      newState = {};
 
       /*
        * Add items keyed by ids
