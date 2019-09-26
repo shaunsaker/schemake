@@ -271,15 +271,11 @@ export class ProjectsContainer extends React.Component {
 
 function mapStateToProps(state) {
   /*
-   * Get and sort the projects by dateCreated and dateModified
+   * Get and sort the projects by dateModified (latest to oldest)
    */
   const { projects } = state;
   const projectsArray = convertObjectToArray(projects);
-  const sortedProjectsByDateCreated = sortArrayOfObjectsByKey(projectsArray, 'dateCreated');
-  const sortedProjectsByDateModified = sortArrayOfObjectsByKey(
-    sortedProjectsByDateCreated,
-    'dateModified',
-  );
+  const sortedProjectsByDateModified = sortArrayOfObjectsByKey(projectsArray, 'dateModified', true);
 
   /*
    * Get the current teamId based on the selectedTeamIndex
