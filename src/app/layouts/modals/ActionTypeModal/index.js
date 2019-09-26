@@ -103,10 +103,10 @@ export class ActionTypeModalContainer extends React.Component {
 
   render() {
     const { values } = this.state;
-    const { typeId, types, isOpen, isSaving } = this.props;
+    const { typeId, types, originalData, isOpen, isSaving } = this.props;
     const type = types[typeId];
     const { name } = type || {};
-    const isEditing = Object.keys(values).length;
+    const isEditing = originalData;
     const title = `${isEditing ? 'Edit' : 'Add'} ${name}`;
     const isDisabled = isSaving;
     let newFields;
