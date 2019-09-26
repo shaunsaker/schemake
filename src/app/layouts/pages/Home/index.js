@@ -23,6 +23,10 @@ export class HomeContainer extends React.Component {
   }
 
   static propTypes = {
+    /*
+     * Store
+     */
+    dispatch: PropTypes.func,
     isAuthenticated: PropTypes.bool,
     isAnonymous: PropTypes.bool,
   };
@@ -51,7 +55,15 @@ export class HomeContainer extends React.Component {
     const { isAuthenticated } = this.props;
 
     if (!isAuthenticated) {
-      await signInAnonymously();
+      const { user } = await signInAnonymously();
+      const { dispatch } = this.props;
+
+      dispatch({
+        type: 'SIGN_IN_USER',
+        payload: {
+          user,
+        },
+      });
     }
 
     const url = 'projects';
