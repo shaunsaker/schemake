@@ -6,6 +6,12 @@ const fields = [
     required: true,
   },
   {
+    name: 'organisation',
+    type: 'text',
+    label: 'Organisation',
+    required: false,
+  },
+  {
     name: 'email',
     type: 'email',
     label: 'Email Address',
