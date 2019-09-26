@@ -17,7 +17,7 @@
     "build": "next build ./src/app",
     "export": "next export src/app --outdir dist",
     "postexport": "yarn run makeassets",
-    "makeassets": "node ./src/scripts/makeAssets.js",
+    "makeassets": "node ./src/scripts/makeAssets",
     "postmakeassets": "yarn run copyassets",
     "copyassets": "cp -a ./src/public/. ./dist/",
     "update-changelog": "yarn run auto-changelog && git add . && git commit -m 'Update Changelog' && git push",
