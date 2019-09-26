@@ -38,12 +38,6 @@ const sendEmail = ({ from, to, template, locals, test }) => {
       },
     },
     send: test ? false : true,
-    juiceResources: {
-      webResources: {
-        relativeTo: path.resolve(__dirname, './images'),
-        images: false,
-      },
-    },
   });
 
   /*
