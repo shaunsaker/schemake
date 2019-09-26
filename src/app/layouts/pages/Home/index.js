@@ -24,9 +24,22 @@ export class HomeContainer extends React.Component {
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
+    isAnonymous: PropTypes.bool,
   };
 
   static defaultProps = {};
+
+  componentDidMount() {
+    const { isAuthenticated, isAnonymous } = this.props;
+
+    if (isAuthenticated && !isAnonymous) {
+      /*
+       * Authed by email
+       * Redirect to Dashboard
+       */
+      Router.push(routes.dashboard.href);
+    }
+  }
 
   onSignUpClick() {
     Router.push(routes.signUp.href);
@@ -84,11 +97,12 @@ export class HomeContainer extends React.Component {
 
 function mapStateToProps(state) {
   const { user } = state;
-  const { uid } = user;
+  const { uid, isAnonymous } = user;
   const isAuthenticated = Boolean(uid);
 
   return {
     isAuthenticated,
+    isAnonymous,
   };
 }
 
