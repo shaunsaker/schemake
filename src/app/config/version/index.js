@@ -1,9 +1,8 @@
 const version = {
-  major: 0,
-  minor: 1,
+  major: 1,
+  minor: 0,
   patch: 0,
-  build: 1,
-  code: 1,
+  build: 2,
 };
 
 export default version;
