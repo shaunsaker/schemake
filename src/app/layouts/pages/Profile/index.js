@@ -5,6 +5,7 @@ import Router from 'next/router';
 
 import tabs from './tabs';
 import { getDateTime, getQueryStringParams } from '../../../utils';
+import { routes } from '../../../config';
 
 import Profile from './Profile';
 import withRouteProtection from '../../../enhancers/withRouteProtection';
@@ -43,7 +44,7 @@ export class ProfileContainer extends React.Component {
   }
 
   onBackClick() {
-    Router.back();
+    Router.push(routes.dashboard.href);
   }
 
   onTabClick(tabIndex) {
