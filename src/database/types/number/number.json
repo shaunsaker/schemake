@@ -1,9 +1,1 @@
-{
-  "name": { "value": "Number", "type": "string" },
-  "color": { "value": "#e91e63", "type": "string" },
-  "isField": { "value": true, "type": "boolean" },
-  "validChildrenTypes": {
-    "value": [],
-    "type": "array"
-  }
-}
+{"name":{"value":"Number","type":"string"},"color":{"value":"#e91e63","type":"string"},"isField":{"value":true,"type":"boolean"},"validChildrenTypes":{"value":[],"type":"array"}}
